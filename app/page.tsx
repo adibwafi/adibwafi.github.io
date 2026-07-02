@@ -165,38 +165,41 @@ function CoverSection() {
 
             {/* Massive headline */}
             <div className="flex-1 flex flex-col justify-center">
-              <div className="overflow-hidden mb-2">
-                <motion.h1
-                  initial={{ y: '105%' }}
-                  animate={{ y: 0 }}
-                  transition={{ duration: 1, ease: [0.25, 0, 0, 1], delay: 0.4 }}
-                  className="font-serif font-semibold text-stone leading-none tracking-tighter"
-                  style={{ fontSize: 'clamp(3.8rem, 9.5vw, 8.5rem)' }}
-                >
-                  Muhamad
-                </motion.h1>
-              </div>
-              <div className="overflow-hidden mb-2">
-                <motion.h1
-                  initial={{ y: '105%' }}
-                  animate={{ y: 0 }}
-                  transition={{ duration: 1, ease: [0.25, 0, 0, 1], delay: 0.52 }}
-                  className="font-serif font-semibold italic text-stone leading-none tracking-tighter"
-                  style={{ fontSize: 'clamp(3.8rem, 9.5vw, 8.5rem)' }}
-                >
-                  Adibwafi
-                </motion.h1>
-              </div>
-              <div className="overflow-hidden">
-                <motion.h1
-                  initial={{ y: '105%' }}
-                  animate={{ y: 0 }}
-                  transition={{ duration: 1, ease: [0.25, 0, 0, 1], delay: 0.64 }}
-                  className="font-serif font-semibold text-stone leading-none tracking-tighter"
-                  style={{ fontSize: 'clamp(3.8rem, 9.5vw, 8.5rem)' }}
-                >
-                  Menako.
-                </motion.h1>
+              <h1 className="sr-only">Muhamad Adibwafi Menako</h1>
+              <div aria-hidden="true" className="flex flex-col">
+                <div className="overflow-hidden mb-2">
+                  <motion.span
+                    initial={{ y: '105%' }}
+                    animate={{ y: 0 }}
+                    transition={{ duration: 1, ease: [0.25, 0, 0, 1], delay: 0.4 }}
+                    className="block font-serif font-semibold text-stone leading-none tracking-tighter"
+                    style={{ fontSize: 'clamp(3.8rem, 9.5vw, 8.5rem)' }}
+                  >
+                    Muhamad
+                  </motion.span>
+                </div>
+                <div className="overflow-hidden mb-2">
+                  <motion.span
+                    initial={{ y: '105%' }}
+                    animate={{ y: 0 }}
+                    transition={{ duration: 1, ease: [0.25, 0, 0, 1], delay: 0.52 }}
+                    className="block font-serif font-semibold italic text-stone leading-none tracking-tighter"
+                    style={{ fontSize: 'clamp(3.8rem, 9.5vw, 8.5rem)' }}
+                  >
+                    Adibwafi
+                  </motion.span>
+                </div>
+                <div className="overflow-hidden">
+                  <motion.span
+                    initial={{ y: '105%' }}
+                    animate={{ y: 0 }}
+                    transition={{ duration: 1, ease: [0.25, 0, 0, 1], delay: 0.64 }}
+                    className="block font-serif font-semibold text-stone leading-none tracking-tighter"
+                    style={{ fontSize: 'clamp(3.8rem, 9.5vw, 8.5rem)' }}
+                  >
+                    Menako.
+                  </motion.span>
+                </div>
               </div>
             </div>
 
