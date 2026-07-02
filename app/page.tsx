@@ -112,7 +112,7 @@ function Nav() {
     >
       <div className="max-w-layout mx-auto px-6 md:px-12 lg:px-20 h-16 flex items-center justify-between">
         <span className="font-sans text-xs font-semibold tracking-[0.14em] uppercase text-stone">
-          Adibwafi Menako
+          Adibwafi
         </span>
         <nav className="hidden md:flex items-center gap-10">
           {['Impact', 'Experience', 'Stack'].map((item) => (
@@ -150,7 +150,7 @@ function CoverSection() {
             >
               <span className="section-label">Portfolio — 2025</span>
               <div className="flex-1 h-px bg-border-warm max-w-[80px]" />
-              <span className="section-label text-fog">Jakarta, Indonesia</span>
+              <span className="section-label text-fog">Depok, Indonesia</span>
             </motion.div>
 
             {/* Massive headline */}
@@ -270,7 +270,7 @@ function CoverSection() {
                 className="font-sans text-clay mt-4 text-xs tracking-widest uppercase"
                 style={{ letterSpacing: '0.12em' }}
               >
-                Jakarta, 2021
+                Medan, 2021
               </p>
             </motion.div>
           </div>
@@ -322,8 +322,7 @@ function ImpactSection() {
                 textShadow: '0 2px 24px rgba(0,0,0,0.45)',
               }}
             >
-              &ldquo;Engineering, at its best, is invisible. The user never sees the optimised query
-              or the CI/CD pipeline — they only feel the result.&rdquo;
+              &ldquo;Don’t take the journey too seriously. Growth belongs to the curious. Having pivoted careers twice and dived deep each time, I’ve learned that when you embrace the transition with ease, you thrive. Never fear trying something new.&rdquo;
             </blockquote>
           </FadeItem>
         </div>
@@ -569,7 +568,7 @@ function Footer() {
 
         <div className="border-t border-border-ink mt-16 pt-6 flex flex-col sm:flex-row justify-between gap-3">
           <span className="font-sans text-xs text-cream/25">© 2025 Muhamad Adibwafi Menako</span>
-          <span className="font-sans text-xs text-cream/25">Designed & engineered with precision.</span>
+          <span className="font-sans text-xs text-cream/25">Designed & engineered with love.</span>
         </div>
       </div>
     </footer>
