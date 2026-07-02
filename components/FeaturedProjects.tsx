@@ -335,17 +335,17 @@ export function FeaturedProjects() {
         <div className="grid grid-cols-1 md:grid-cols-12 gap-x-12 gap-y-0 lg:gap-x-16 items-start">
           {/* Project 01 — spans 7 cols: the masterpiece */}
           <FadeUp delay={0} className={`${projects[0].gridClass}`}>
-            <ProjectCard project={projects[0]} delay={0} />
+            <ProjectCard project={projects[0]} />
           </FadeUp>
 
           {/* Project 02 — spans 5 cols, dropped 96px: offset product solution */}
           <FadeUp delay={0.12} className={`${projects[1].gridClass} md:mt-24`}>
-            <ProjectCard project={projects[1]} delay={0} />
+            <ProjectCard project={projects[1]} />
           </FadeUp>
 
           {/* Project 03 — spans 6 cols, col-start-4, slight offset: creative commerce */}
           <FadeUp delay={0.08} className={`${projects[2].gridClass} md:mt-10`}>
-            <ProjectCard project={projects[2]} delay={0} />
+            <ProjectCard project={projects[2]} />
           </FadeUp>
         </div>
 
