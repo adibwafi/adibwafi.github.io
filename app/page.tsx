@@ -111,7 +111,7 @@ function Nav() {
       transition={{ duration: 0.8, ease: [0.25, 0, 0, 1], delay: 0.1 }}
       className="fixed top-0 left-0 right-0 z-50 bg-alabaster/80 backdrop-blur-md border-b border-border-warm"
     >
-      <div className="max-w-layout mx-auto px-6 md:px-12 lg:px-20 h-16 flex items-center justify-between">
+      <div className="max-w-layout mx-auto px-4 md:px-12 lg:px-20 h-16 flex items-center justify-between">
         <span className="font-sans text-xs font-semibold tracking-[0.14em] uppercase text-stone">
           Adibwafi
         </span>
@@ -149,7 +149,7 @@ function CoverSection() {
         <div className="grid grid-cols-12 min-h-[calc(100vh-4rem)]">
 
           {/* Left text column: spans 7 cols */}
-          <div className="col-span-12 lg:col-span-7 flex flex-col justify-between px-6 md:px-12 lg:px-20 pt-14 pb-12">
+          <div className="col-span-12 lg:col-span-7 flex flex-col justify-between px-4 md:px-12 lg:px-20 pt-14 pb-12">
             
             {/* Issue label */}
             <motion.div
@@ -173,7 +173,7 @@ function CoverSection() {
                     animate={{ y: 0 }}
                     transition={{ duration: 1, ease: [0.25, 0, 0, 1], delay: 0.4 }}
                     className="block font-serif font-semibold text-stone leading-none tracking-tighter"
-                    style={{ fontSize: 'clamp(3.8rem, 9.5vw, 8.5rem)' }}
+                    style={{ fontSize: 'clamp(2.5rem, 9.5vw, 8.5rem)' }}
                   >
                     Muhamad
                   </motion.span>
@@ -184,7 +184,7 @@ function CoverSection() {
                     animate={{ y: 0 }}
                     transition={{ duration: 1, ease: [0.25, 0, 0, 1], delay: 0.52 }}
                     className="block font-serif font-semibold italic text-stone leading-none tracking-tighter"
-                    style={{ fontSize: 'clamp(3.8rem, 9.5vw, 8.5rem)' }}
+                    style={{ fontSize: 'clamp(2.5rem, 9.5vw, 8.5rem)' }}
                   >
                     Adibwafi
                   </motion.span>
@@ -195,7 +195,7 @@ function CoverSection() {
                     animate={{ y: 0 }}
                     transition={{ duration: 1, ease: [0.25, 0, 0, 1], delay: 0.64 }}
                     className="block font-serif font-semibold text-stone leading-none tracking-tighter"
-                    style={{ fontSize: 'clamp(3.8rem, 9.5vw, 8.5rem)' }}
+                    style={{ fontSize: 'clamp(2.5rem, 9.5vw, 8.5rem)' }}
                   >
                     Menako.
                   </motion.span>
