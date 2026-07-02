@@ -17,7 +17,7 @@ const manrope = Manrope({
 })
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://adibwafi.com'),
+  metadataBase: new URL('https://www.adibwafi.com'),
   alternates: {
     canonical: '/',
   },
@@ -38,12 +38,12 @@ export const metadata: Metadata = {
     'TypeScript',
     'Indonesia',
   ],
-  authors: [{ name: 'Muhamad Adibwafi Menako', url: 'https://adibwafi.com' }],
+  authors: [{ name: 'Muhamad Adibwafi Menako', url: 'https://www.adibwafi.com' }],
   openGraph: {
     title: 'Muhamad Adibwafi Menako — Full Stack Engineer',
     description:
       'Results-driven Full Stack Engineer bridging complex backend infrastructure and intuitive frontend design.',
-    url: 'https://adibwafi.com',
+    url: 'https://www.adibwafi.com',
     siteName: 'Adibwafi Portfolio',
     type: 'website',
   },
