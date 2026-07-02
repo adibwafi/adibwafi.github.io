@@ -3,6 +3,7 @@
 import { motion, useInView } from 'framer-motion';
 import { ArrowUpRight } from 'lucide-react';
 import { useRef } from 'react';
+import Image from 'next/image';
 
 /* ─── Animation Helpers ─────────────────────────────────────────────────── */
 
@@ -32,123 +33,7 @@ function FadeUp({
   );
 }
 
-/* ─── Geometric Placeholder Visuals ────────────────────────────────────────
-   Each project gets a unique muted-geometric composition that reads as an
-   "editorial photo" — architectural, not garish.
-──────────────────────────────────────────────────────────────────────────── */
 
-function PlaceholderLMS() {
-  // Grid of pale rectangles — evokes database schema / architecture
-  return (
-    <div className="w-full h-full bg-[#EDEAE3] flex items-center justify-center p-10 overflow-hidden">
-      <div className="w-full max-w-[380px]">
-        {/* Schema table metaphor */}
-        <div className="grid grid-cols-3 gap-3">
-          {[
-            ['courses', 'users', 'enrollments'],
-            ['modules', 'lessons', 'progress'],
-            ['quizzes', 'results', 'certs'],
-          ].map((row, ri) =>
-            row.map((label, ci) => (
-              <div
-                key={`${ri}-${ci}`}
-                className="border border-[#C8C4BB] rounded-sm px-2 py-1.5"
-                style={{
-                  opacity: 1 - (ri * 0.15 + ci * 0.05),
-                  background:
-                    ri === 0 && ci === 0
-                      ? 'rgba(90,80,65,0.07)'
-                      : 'transparent',
-                }}
-              >
-                <div
-                  className="h-1.5 rounded-full mb-1"
-                  style={{
-                    width: `${55 + ((ri * 3 + ci) * 11) % 40}%`,
-                    background: ri === 0 ? '#A09880' : '#C8C4BB',
-                  }}
-                />
-                <div
-                  className="h-1 rounded-full"
-                  style={{
-                    width: `${30 + ((ri * 3 + ci) * 7) % 35}%`,
-                    background: '#D8D4CC',
-                  }}
-                />
-              </div>
-            ))
-          )}
-        </div>
-        {/* API endpoint line */}
-        <div className="mt-4 border border-[#C8C4BB] border-dashed rounded-sm px-3 py-2">
-          <div className="flex gap-2 items-center">
-            <div className="w-6 h-1 rounded bg-[#A09880]" />
-            <div className="h-1 flex-1 rounded bg-[#D8D4CC]" />
-            <div className="w-3 h-3 rounded-sm border border-[#B0A898]" />
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-function PlaceholderFridge() {
-  // Soft circles and organic shapes — evokes food, nutrition, warmth
-  return (
-    <div className="w-full h-full bg-[#E8E3DA] flex items-center justify-center overflow-hidden">
-      <div className="relative w-48 h-48">
-        {/* Outer ring */}
-        <div className="absolute inset-0 rounded-full border border-[#C0B9AC]" />
-        {/* Middle ring */}
-        <div className="absolute inset-6 rounded-full border border-[#BEB6A7]" />
-        {/* Inner fill */}
-        <div className="absolute inset-12 rounded-full bg-[#C8BFB0]" />
-        {/* Satellite dots — ingredients */}
-        {[0, 60, 120, 180, 240, 300].map((deg, i) => (
-          <div
-            key={deg}
-            className="absolute w-4 h-4 rounded-full"
-            style={{
-              background: i % 2 === 0 ? '#B5ADA0' : '#D0C8BC',
-              top: `calc(50% + ${Math.sin((deg * Math.PI) / 180) * 72}px - 8px)`,
-              left: `calc(50% + ${Math.cos((deg * Math.PI) / 180) * 72}px - 8px)`,
-            }}
-          />
-        ))}
-        {/* Center label bars */}
-        <div className="absolute inset-0 flex flex-col items-center justify-center gap-1">
-          <div className="w-10 h-0.5 bg-[#A09880] rounded" />
-          <div className="w-6 h-0.5 bg-[#B8B0A4] rounded" />
-        </div>
-      </div>
-    </div>
-  );
-}
-
-function PlaceholderSerasa() {
-  // Bold vertical stripe composition — evokes a digital agency / brand
-  return (
-    <div className="w-full h-full bg-[#E2DDDA] flex items-end overflow-hidden">
-      <div className="w-full flex items-end gap-[3px] h-[70%] px-8 pb-0">
-        {[90, 65, 80, 50, 70, 55, 85, 45, 75, 60].map((h, i) => (
-          <div
-            key={i}
-            className="flex-1 rounded-t-sm"
-            style={{
-              height: `${h}%`,
-              background:
-                i % 3 === 0
-                  ? '#A09880'
-                  : i % 3 === 1
-                  ? '#C0B9AC'
-                  : '#D8D4CC',
-            }}
-          />
-        ))}
-      </div>
-    </div>
-  );
-}
 
 /* ─── Project Data ──────────────────────────────────────────────────────── */
 
@@ -160,10 +45,9 @@ const projects = [
     description:
       'A structural, sanitized blueprint demonstrating scalable backend architecture for high-traffic Learning Management Systems. Designed to showcase robust relational database schemas, adaptive course-tracking patterns, and efficient API design while strictly preserving proprietary business boundaries.',
     link: 'https://github.com/adibwafi/laravel-vue-lms-blueprint',
-    Visual: PlaceholderLMS,
-    // Span on 12-col grid
+    imageSrc: '/work/lms-blueprint.webp',
     gridClass: 'md:col-span-7',
-    imageHeight: 'h-72 md:h-96',
+    imageHeight: 'h-72 md:h-[460px]',
   },
   {
     index: '02',
@@ -172,9 +56,9 @@ const projects = [
     description:
       'A practical, household-focused web application engineered to solve daily parenting decision fatigue. It dynamically generates nutritional complementary baby food (MPASI) recipes based on real-time ingredient availability in the fridge, bridging smart pantry management with early childhood nutrition.',
     link: 'https://github.com/adibwafi/smart-fridge-mpasi-optimizer',
-    Visual: PlaceholderFridge,
+    imageSrc: '/work/smart-fridge-mpasi.webp',
     gridClass: 'md:col-span-5',
-    imageHeight: 'h-64 md:h-80',
+    imageHeight: 'h-64 md:h-[380px]',
   },
   {
     index: '03',
@@ -183,9 +67,10 @@ const projects = [
     description:
       'The digital storefront and operational platform for a Bintaro-based creative agency specializing in social media management, video production, and targeted advertising. The architecture is built with future scalability in mind to support the upcoming launch of their educational seminar arm, Serasa Academy.',
     link: 'https://github.com/menako-studio/serasa-kreatif',
-    Visual: PlaceholderSerasa,
+    webLink: 'https://serasakreatif.id/',
+    imageSrc: '/work/serasa-kreatif.webp',
     gridClass: 'md:col-span-6 md:col-start-4',
-    imageHeight: 'h-56 md:h-72',
+    imageHeight: 'h-56 md:h-[400px]',
   },
 ];
 
@@ -234,16 +119,23 @@ function ProjectCard({
 }: {
   project: (typeof projects)[0];
 }) {
-  const { index, title, tags, description, link, Visual, imageHeight } = project;
+  const { index, title, tags, description, link, webLink, imageSrc, imageHeight } = project;
 
   return (
     <div className="flex flex-col gap-0">
       {/* Visual placeholder — editorial "photo" */}
       <div
-        className={`w-full ${imageHeight} overflow-hidden relative group`}
+        className={`w-full ${imageHeight} overflow-hidden relative group bg-[#EDEAE3]`}
         style={{ borderRadius: '1px' }}
       >
-        <Visual />
+        <Image
+          src={imageSrc}
+          alt={title}
+          fill
+          className="object-cover object-center group-hover:scale-[1.03] transition-transform duration-700 ease-out"
+          style={{ filter: 'saturate(0.9) contrast(1.02)' }}
+          sizes="(max-width: 768px) 100vw, 50vw"
+        />
         {/* Overlay on hover — subtle darkening */}
         <div className="absolute inset-0 bg-[#1A1A1A] opacity-0 group-hover:opacity-[0.06] transition-opacity duration-500 pointer-events-none" />
       </div>
@@ -288,8 +180,13 @@ function ProjectCard({
           {description}
         </p>
 
-        {/* Editorial footnote link */}
-        <EditorialLink href={link} />
+        {/* Editorial footnote links */}
+        <div className="flex flex-wrap gap-x-6 gap-y-2">
+          <EditorialLink href={link} label="View Repository" />
+          {webLink && (
+            <EditorialLink href={webLink} label="Visit Website" />
+          )}
+        </div>
       </div>
     </div>
   );
