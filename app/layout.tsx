@@ -20,6 +20,11 @@ export const metadata: Metadata = {
   title: 'Muhamad Adibwafi Menako — Full Stack Engineer',
   description:
     'Results-driven Full Stack Engineer bridging complex backend infrastructure and intuitive frontend design. Based in Indonesia.',
+  icons: {
+    icon: '/icon.png',
+    shortcut: '/icon.png',
+    apple: '/icon.png',
+  },
   keywords: [
     'Full Stack Engineer',
     'Software Engineer',
