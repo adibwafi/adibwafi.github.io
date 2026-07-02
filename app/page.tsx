@@ -5,6 +5,7 @@ import Image from 'next/image';
 import { Mail, Linkedin, Github, ArrowUpRight, ArrowRight } from 'lucide-react';
 import { useRef } from 'react';
 import { FeaturedProjects } from '@/components/FeaturedProjects';
+import { trackEvent } from '@/lib/analytics';
 
 /* ─── Animation Helpers ─────────────────────────────────────────────────── */
 
@@ -116,12 +117,21 @@ function Nav() {
         </span>
         <nav className="hidden md:flex items-center gap-10">
           {['Impact', 'Experience', 'Stack'].map((item) => (
-            <a key={item} href={`#${item.toLowerCase()}`} className="nav-link">
+            <a
+              key={item}
+              href={`#${item.toLowerCase()}`}
+              className="nav-link"
+              onClick={() => trackEvent('click', 'Navigation Header', item)}
+            >
               {item}
             </a>
           ))}
         </nav>
-        <a href="mailto:adibwafi@gmail.com" className="btn-primary text-xs py-2.5 px-5">
+        <a
+          href="mailto:adibwafi@gmail.com"
+          className="btn-primary text-xs py-2.5 px-5"
+          onClick={() => trackEvent('click', 'CTA', 'Header Hire Me')}
+        >
           Hire Me <ArrowUpRight size={12} strokeWidth={2} />
         </a>
       </div>
@@ -222,6 +232,7 @@ function CoverSection() {
                     target={href.startsWith('mailto') ? undefined : '_blank'}
                     rel="noopener noreferrer"
                     className="flex items-center gap-1.5 font-sans text-sm font-medium text-clay hover:text-stone transition-colors duration-250"
+                    onClick={() => trackEvent('click', 'Social Link', `Hero ${label}`)}
                   >
                     <Icon size={14} strokeWidth={1.75} />
                     {label}
@@ -391,7 +402,11 @@ function ExperienceSection() {
           <div>
             {experiences.map((exp, i) => (
               <FadeItem key={i} delay={i * 0.1}>
-                <div className="exp-row">
+                <div
+                  className="exp-row"
+                  onClick={() => trackEvent('click', 'Experience Ledger', exp.company)}
+                  onMouseEnter={() => trackEvent('hover', 'Experience Ledger', exp.company)}
+                >
                   {/* Top meta row */}
                   <div className="grid grid-cols-12 gap-4 items-baseline">
                     <div className="col-span-1">
@@ -475,7 +490,11 @@ function StackSection() {
                 experience across the full product surface.
               </p>
               <div className="mt-12">
-                <a href="mailto:adibwafi@gmail.com" className="btn-outline">
+                <a
+                  href="mailto:adibwafi@gmail.com"
+                  className="btn-outline"
+                  onClick={() => trackEvent('click', 'CTA', 'Tools Lets Talk')}
+                >
                   Let&apos;s talk <ArrowRight size={13} strokeWidth={1.75} />
                 </a>
               </div>
@@ -543,7 +562,11 @@ function Footer() {
               <br />
               for work.
             </h2>
-            <a href="mailto:adibwafi@gmail.com" className="btn-outline mt-10">
+            <a
+              href="mailto:adibwafi@gmail.com"
+              className="btn-outline mt-10"
+              onClick={() => trackEvent('click', 'CTA', 'Footer Email')}
+            >
               adibwafi@gmail.com <ArrowUpRight size={13} strokeWidth={1.75} />
             </a>
           </div>
@@ -558,6 +581,7 @@ function Footer() {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center gap-2 font-sans text-sm font-medium text-cream/40 hover:text-cream transition-colors duration-250"
+                onClick={() => trackEvent('click', 'Social Link', `Footer ${label}`)}
               >
                 <Icon size={14} strokeWidth={1.75} />
                 {label}

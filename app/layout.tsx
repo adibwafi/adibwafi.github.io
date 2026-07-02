@@ -55,6 +55,8 @@ export const metadata: Metadata = {
   },
 };
 
+import Script from 'next/script';
+
 export default function RootLayout({
   children,
 }: {
@@ -67,7 +69,24 @@ export default function RootLayout({
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="theme-color" content="#FAFAFA" />
       </head>
-      <body className="bg-[#FAFAFA] text-[#27272A] font-sans antialiased selection:bg-neutral-200">{children}</body>
+      <body className="bg-[#FAFAFA] text-[#27272A] font-sans antialiased selection:bg-neutral-200">
+        {children}
+        {/* Google Analytics */}
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-V2KRNFXMEG"
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-V2KRNFXMEG', {
+              page_path: window.location.pathname,
+            });
+          `}
+        </Script>
+      </body>
     </html>
   );
 }

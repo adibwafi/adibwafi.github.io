@@ -4,6 +4,7 @@ import { motion, useInView } from 'framer-motion';
 import { ArrowUpRight } from 'lucide-react';
 import { useRef } from 'react';
 import Image from 'next/image';
+import { trackEvent } from '@/lib/analytics';
 
 /* ─── Animation Helpers ─────────────────────────────────────────────────── */
 
@@ -84,6 +85,7 @@ function EditorialLink({ href, label = 'View Repository' }: { href: string; labe
       rel="noopener noreferrer"
       className="group inline-flex items-center gap-2"
       style={{ textDecoration: 'none' }}
+      onClick={() => trackEvent('click', 'Project Link', `${label} - ${href}`)}
     >
       <span
         className="font-sans text-sm font-medium text-[#404040] relative"
