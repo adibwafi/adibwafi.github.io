@@ -1,4 +1,7 @@
-# Adibwafi Portfolio — Custom Domain Deployment
+# Muhamad Adibwafi Menako — Portfolio
+
+[![Node.js CI](https://github.com/adibwafi/adibwafi.github.io/actions/workflows/ci.yml/badge.svg)](https://github.com/adibwafi/adibwafi.github.io/actions/workflows/ci.yml)
+[![Live Site](https://img.shields.io/badge/Live%20Demo-adibwafi.com-D4A26A?style=flat-square)](https://adibwafi.com)
 
 High-end personal portfolio for **Muhamad Adibwafi Menako**, Full Stack Software Engineer. 
 
