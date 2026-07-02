@@ -45,7 +45,7 @@ const projects = [
     description:
       'A structural, sanitized blueprint demonstrating scalable backend architecture for high-traffic Learning Management Systems. Designed to showcase robust relational database schemas, adaptive course-tracking patterns, and efficient API design while strictly preserving proprietary business boundaries.',
     link: 'https://github.com/adibwafi/laravel-vue-lms-blueprint',
-    imageSrc: '/work/lms-blueprint.webp',
+    imageSrc: '/work/lms-blueprint-rev.webp',
     gridClass: 'md:col-span-7',
     imageHeight: 'h-72 md:h-[460px]',
   },

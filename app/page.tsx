@@ -292,7 +292,7 @@ function ImpactSection() {
         style={{ height: 'clamp(380px, 55vh, 640px)' }}
       >
         <Image
-          src="/alley-bg.jpg"
+          src="/alley-bg-new.webp"
           alt="Urban alley, cinematic"
           fill
           priority

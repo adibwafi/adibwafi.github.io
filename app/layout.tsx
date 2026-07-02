@@ -21,9 +21,9 @@ export const metadata: Metadata = {
   description:
     'Results-driven Full Stack Engineer bridging complex backend infrastructure and intuitive frontend design. Based in Indonesia.',
   icons: {
-    icon: '/icon.png',
-    shortcut: '/icon.png',
-    apple: '/icon.png',
+    icon: '/icon-2.png',
+    shortcut: '/icon-2.png',
+    apple: '/icon-2.png',
   },
   keywords: [
     'Full Stack Engineer',
