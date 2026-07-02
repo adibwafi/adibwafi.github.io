@@ -56,7 +56,7 @@ const projects = [
     description:
       'A practical, household-focused web application engineered to solve daily parenting decision fatigue. It dynamically generates nutritional complementary baby food (MPASI) recipes based on real-time ingredient availability in the fridge, bridging smart pantry management with early childhood nutrition.',
     link: 'https://github.com/adibwafi/smart-fridge-mpasi-optimizer',
-    imageSrc: '/work/smart-fridge-mpasi.webp',
+    imageSrc: '/work/smart-fridge-mpasi-2.webp',
     gridClass: 'md:col-span-5',
     imageHeight: 'h-64 md:h-[380px]',
   },
@@ -68,7 +68,7 @@ const projects = [
       'The digital storefront and operational platform for a Bintaro-based creative agency specializing in social media management, video production, and targeted advertising. The architecture is built with future scalability in mind to support the upcoming launch of their educational seminar arm, Serasa Academy.',
     link: 'https://github.com/menako-studio/serasa-kreatif',
     webLink: 'https://serasakreatif.id/',
-    imageSrc: '/work/serasa-kreatif.webp',
+    imageSrc: '/work/serasa-kreatif-2.webp',
     gridClass: 'md:col-span-6 md:col-start-4',
     imageHeight: 'h-56 md:h-[400px]',
   },
