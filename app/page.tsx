@@ -143,13 +143,13 @@ function Nav() {
 
 function CoverSection() {
   return (
-    <section className="bg-alabaster min-h-screen pt-16 overflow-hidden">
+    <section className="bg-alabaster min-h-fit lg:min-h-screen pt-16 lg:overflow-hidden">
       <div className="max-w-layout mx-auto">
-        {/* Supergraphic grid — 12 columns */}
-        <div className="grid grid-cols-12 min-h-[calc(100vh-4rem)]">
+        {/* Supergraphic grid */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 min-h-fit lg:min-h-[calc(100vh-4rem)]">
 
-          {/* Left text column: spans 7 cols */}
-          <div className="col-span-12 lg:col-span-7 flex flex-col justify-between px-4 md:px-12 lg:px-20 pt-14 pb-12">
+          {/* Left text column */}
+          <div className="col-span-1 lg:col-span-7 flex flex-col justify-between px-4 md:px-12 lg:px-20 pt-14 pb-12">
             
             {/* Issue label */}
             <motion.div
@@ -246,7 +246,7 @@ function CoverSection() {
           </div>
 
           {/* Right column: editorial portrait — smaller, framed, restrained */}
-          <div className="hidden lg:flex col-span-5 items-end justify-start px-12 pb-20">
+          <div className="hidden lg:flex lg:col-span-5 items-end justify-start px-12 pb-20">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -411,7 +411,7 @@ function ExperienceSection() {
                   onMouseEnter={() => trackEvent('hover', 'Experience Ledger', exp.company)}
                 >
                   {/* Top meta row */}
-                  <div className="grid grid-cols-12 gap-4 items-baseline">
+                  <div className="grid grid-cols-12 gap-x-2 gap-y-1 md:gap-4 items-baseline">
                     <div className="col-span-1">
                       <span className="font-sans text-xs text-fog tracking-wider">{exp.index}</span>
                     </div>
@@ -478,8 +478,8 @@ function StackSection() {
           </FadeItem>
 
           {/* Split: headline left, tags right */}
-          <div className="grid grid-cols-12 gap-12 lg:gap-20">
-            <FadeItem className="col-span-12 lg:col-span-4">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-y-12 lg:gap-20">
+            <FadeItem className="col-span-1 lg:col-span-4">
               <h2
                 className="font-serif font-semibold italic text-cream leading-tight tracking-tighter mb-6"
                 style={{ fontSize: 'clamp(2.5rem, 5vw, 4.2rem)' }}
@@ -503,7 +503,7 @@ function StackSection() {
               </div>
             </FadeItem>
 
-            <div className="col-span-12 lg:col-span-8">
+            <div className="col-span-1 lg:col-span-8">
               {techStack.map((group, gi) => (
                 <FadeItem key={group.category} delay={gi * 0.1}>
                   <div className="border-t border-border-ink py-8">
@@ -552,8 +552,8 @@ function Footer() {
   return (
     <footer className="bg-ink border-t border-border-ink">
       <div className="max-w-layout mx-auto px-6 md:px-12 lg:px-20 py-20">
-        <div className="grid grid-cols-12 items-end gap-10">
-          <div className="col-span-12 lg:col-span-7">
+        <div className="grid grid-cols-1 lg:grid-cols-12 items-end gap-y-10 lg:gap-10">
+          <div className="col-span-1 lg:col-span-7">
             <p className="font-sans text-xs font-medium text-cream/30 tracking-[0.15em] uppercase mb-8">
               Let&apos;s build something remarkable
             </p>
@@ -573,7 +573,7 @@ function Footer() {
               adibwafi@gmail.com <ArrowUpRight size={13} strokeWidth={1.75} />
             </a>
           </div>
-          <div className="col-span-12 lg:col-span-4 lg:col-start-9 flex flex-col items-start lg:items-end gap-4">
+          <div className="col-span-1 lg:col-span-4 lg:col-start-9 flex flex-col items-start lg:items-end gap-4">
             {[
               { href: 'https://linkedin.com/in/adibwafi', label: 'LinkedIn', icon: Linkedin },
               { href: 'https://github.com/adibwafi', label: 'GitHub', icon: Github },
