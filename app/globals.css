@@ -214,3 +214,146 @@ body {
 .stack-card:hover {
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
 }
+
+/* ─── Dark Mode Extensions (Sana Labs Aesthetic) ────────────────────────── */
+.dark body {
+  background-color: #09090B; /* zinc-950 */
+  color: #F4F4F5; /* zinc-100 */
+}
+
+.dark header {
+  background-color: rgba(9, 9, 11, 0.75) !important;
+  border-bottom-color: rgba(39, 39, 42, 0.8) !important;
+}
+
+.dark header nav button {
+  color: #A1A1AA !important;
+}
+.dark header nav button:hover {
+  color: #F4F4F5 !important;
+  background-color: #18181B !important;
+}
+.dark header nav button[aria-current="page"] {
+  color: #FFFFFF !important;
+  background-color: #27272A !important;
+}
+
+/* Mobile bottom nav on dark mode */
+.dark .md\:hidden.border-t.border-zinc-100 {
+  background-color: rgba(24, 24, 27, 0.95) !important;
+  border-top-color: #27272A !important;
+}
+
+.dark .bento-card {
+  background: #18181B; /* zinc-900 */
+  border-color: #27272A; /* zinc-800 */
+}
+
+.dark .bento-card-hover:hover {
+  border-color: #3F3F46; /* zinc-700 */
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4), 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.dark .exp-card {
+  background: #18181B;
+  border-color: #27272A;
+}
+.dark .exp-card:hover {
+  border-color: #3F3F46;
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.25);
+}
+
+.dark .stack-card {
+  background: #18181B;
+  border-color: #27272A;
+}
+.dark .stack-card:hover {
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+}
+
+.dark .tag-chip,
+.dark .tech-pill {
+  background: #27272A;
+  border-color: #3F3F46;
+  color: #A1A1AA;
+}
+.dark .tag-chip:hover,
+.dark .tech-pill:hover {
+  background: #1E3A8A; /* dark blue */
+  border-color: #3B82F6;
+  color: #EFF6FF;
+}
+
+.dark .btn-ghost {
+  border-color: #27272A;
+  color: #D4D4D8;
+}
+.dark .btn-ghost:hover {
+  background: #27272A;
+  color: #FFFFFF;
+  border-color: #3F3F46;
+}
+
+.dark .text-zinc-900 {
+  color: #FFFFFF !important;
+}
+
+.dark .text-zinc-700 {
+  color: #E4E4E7 !important;
+}
+
+.dark .text-zinc-500 {
+  color: #A1A1AA !important;
+}
+
+.dark .text-zinc-400 {
+  color: #717178 !important;
+}
+
+.dark .bg-white {
+  background-color: #09090B !important;
+}
+
+.dark .border-zinc-100 {
+  border-color: #27272A !important;
+}
+
+.dark .bg-zinc-100 {
+  background-color: #27272A !important;
+}
+
+.dark .bg-zinc-50 {
+  background-color: #18181B !important;
+}
+
+/* Subtle glowing adjustments for dark mode */
+.dark .absolute.bg-gradient-to-t.from-zinc-900\/20 {
+  background-image: linear-gradient(to top, rgba(0, 0, 0, 0.6), transparent, transparent) !important;
+}
+
+/* Selection colors in dark mode */
+.dark ::selection {
+  background: #FFFFFF;
+  color: #09090B;
+}
+
+/* ─── Shimmer Animation for Skeleton Loading ────────────────────────────── */
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.shimmer {
+  background: linear-gradient(90deg, #F4F4F5 25%, #E4E4E7 50%, #F4F4F5 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite linear;
+}
+
+.dark .shimmer {
+  background: linear-gradient(90deg, #18181B 25%, #27272A 50%, #18181B 75%);
+  background-size: 200% 100%;
+}
