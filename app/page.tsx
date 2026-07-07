@@ -11,6 +11,8 @@ import {
   ArrowRight,
   MapPin,
   ExternalLink,
+  Sun,
+  Moon,
 } from 'lucide-react';
 import { trackEvent, trackPageView } from '@/lib/analytics';
 
@@ -77,6 +79,49 @@ function FadeItem({
     <motion.div variants={fadeUp} custom={delay} className={className}>
       {children}
     </motion.div>
+  );
+}
+
+function ShimmerImage({
+  src,
+  alt,
+  fill,
+  priority,
+  className = '',
+  style,
+  sizes,
+}: {
+  src: string;
+  alt: string;
+  fill?: boolean;
+  priority?: boolean;
+  className?: string;
+  style?: React.CSSProperties;
+  sizes?: string;
+}) {
+  const [isLoaded, setIsLoaded] = useState(false);
+
+  return (
+    <div className="relative w-full h-full">
+      {!isLoaded && (
+        <div
+          className="absolute inset-0 shimmer rounded-[inherit]"
+          aria-hidden="true"
+        />
+      )}
+      <Image
+        src={src}
+        alt={alt}
+        fill={fill}
+        priority={priority}
+        className={`${className} transition-opacity duration-500 ${
+          isLoaded ? 'opacity-100' : 'opacity-0'
+        }`}
+        style={style}
+        sizes={sizes}
+        onLoad={() => setIsLoaded(true)}
+      />
+    </div>
   );
 }
 
@@ -245,7 +290,14 @@ function AmbientBackground() {
 
 /* ─── Navigation ──────────────────────────────────────────────────────────── */
 
-function Nav({ page, setPage }: { page: Page; setPage: (p: Page) => void }) {
+interface NavProps {
+  page: Page;
+  setPage: (p: Page) => void;
+  theme: 'light' | 'dark';
+  toggleTheme: () => void;
+}
+
+function Nav({ page, setPage, theme, toggleTheme }: NavProps) {
   const items: { label: string; id: Page }[] = [
     { label: 'Home', id: 'home' },
     { label: 'Experience', id: 'experience' },
@@ -291,15 +343,29 @@ function Nav({ page, setPage }: { page: Page; setPage: (p: Page) => void }) {
           ))}
         </nav>
 
-        {/* CTA */}
-        <a
-          href="mailto:adibwafi@gmail.com"
-          className="btn-primary text-xs hidden sm:inline-flex"
-          aria-label="Send an email to hire Muhamad Adibwafi Menako"
-          onClick={() => trackEvent('click', 'CTA', 'Nav Hire Me')}
-        >
-          Hire Me <ArrowUpRight size={13} strokeWidth={2} />
-        </a>
+        {/* CTA & Theme Toggle */}
+        <div className="flex items-center gap-3">
+          <button
+            onClick={toggleTheme}
+            className="p-2 rounded-full border border-zinc-200/80 hover:bg-zinc-50 dark:border-zinc-800 dark:hover:bg-zinc-900 transition-colors flex items-center justify-center"
+            aria-label={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
+          >
+            {theme === 'dark' ? (
+              <Sun size={15} className="text-zinc-400 hover:text-zinc-100" />
+            ) : (
+              <Moon size={15} className="text-zinc-500 hover:text-zinc-900" />
+            )}
+          </button>
+
+          <a
+            href="mailto:adibwafi@gmail.com"
+            className="btn-primary text-xs hidden sm:inline-flex"
+            aria-label="Send an email to hire Muhamad Adibwafi Menako"
+            onClick={() => trackEvent('click', 'CTA', 'Nav Hire Me')}
+          >
+            Hire Me <ArrowUpRight size={13} strokeWidth={2} />
+          </a>
+        </div>
       </div>
 
       {/* Mobile bottom tab bar */}
@@ -335,20 +401,25 @@ function Nav({ page, setPage }: { page: Page; setPage: (p: Page) => void }) {
    Contains: Hero · Impact Metrics · Featured Work Preview · CTA
    ════════════════════════════════════════════════════════════════════════════ */
 
-function HomePage({ setPage }: { setPage: (p: Page) => void }) {
+interface HomePageProps {
+  setPage: (p: Page) => void;
+  handleCopyEmail: (e: React.MouseEvent) => void;
+}
+
+function HomePage({ setPage, handleCopyEmail }: HomePageProps) {
   return (
     <motion.div key="home" variants={pageAnim} initial="hidden" animate="visible" exit="exit">
-      <HeroSection setPage={setPage} />
+      <HeroSection setPage={setPage} handleCopyEmail={handleCopyEmail} />
       <MetricsSection />
       <FeaturedWorkSection setPage={setPage} />
-      <CTASection />
+      <CTASection handleCopyEmail={handleCopyEmail} />
     </motion.div>
   );
 }
 
 /* ── Hero ─────────────────────────────────────────────────────────────────── */
 
-function HeroSection({ setPage }: { setPage: (p: Page) => void }) {
+function HeroSection({ setPage, handleCopyEmail }: { setPage: (p: Page) => void; handleCopyEmail: (e: React.MouseEvent) => void }) {
   return (
     <motion.section
       onViewportEnter={() => trackEvent('view', 'Section', 'Hero')}
@@ -413,7 +484,13 @@ function HeroSection({ setPage }: { setPage: (p: Page) => void }) {
                   target={href.startsWith('mailto') ? undefined : '_blank'}
                   rel="noopener noreferrer"
                   className="flex items-center gap-1.5 text-sm font-medium text-zinc-500 hover:text-zinc-900 transition-colors"
-                  onClick={() => trackEvent('click', 'Social Link', `Hero ${label}`)}
+                  onClick={(e) => {
+                    if (href.startsWith('mailto')) {
+                      handleCopyEmail(e);
+                    } else {
+                      trackEvent('click', 'Social Link', `Hero ${label}`);
+                    }
+                  }}
                 >
                   <Icon size={14} strokeWidth={1.75} />
                   {label}
@@ -431,9 +508,17 @@ function HeroSection({ setPage }: { setPage: (p: Page) => void }) {
               <a
                 href="mailto:adibwafi@gmail.com"
                 className="btn-primary"
-                onClick={() => trackEvent('click', 'CTA', 'Hero Hire Me')}
+                onClick={handleCopyEmail}
               >
                 Hire Me <ArrowUpRight size={14} strokeWidth={2} />
+              </a>
+              <a
+                href="/cv/Muhamad_Adibwafi_Menako_Resume.pdf"
+                download="Muhamad_Adibwafi_Menako_Resume.pdf"
+                className="btn-ghost"
+                onClick={() => trackEvent('click', 'CTA', 'Download CV Hero')}
+              >
+                Download CV
               </a>
               <button
                 onClick={() => {
@@ -456,7 +541,7 @@ function HeroSection({ setPage }: { setPage: (p: Page) => void }) {
               className="bento-card p-2 shadow-card w-[280px]"
             >
               <div className="relative rounded-[1.2rem] overflow-hidden aspect-[3/4]">
-                <Image
+                <ShimmerImage
                   src="/work/workspace-hero.webp"
                   alt="Workspace setup of Muhamad Adibwafi Menako"
                   fill
@@ -558,7 +643,7 @@ function FeaturedWorkSection({ setPage }: { setPage: (p: Page) => void }) {
                 >
                   {/* Thumbnail */}
                   <div className="relative overflow-hidden rounded-[1.1rem] m-2 bg-zinc-100" style={{ height: '180px' }}>
-                    <Image
+                    <ShimmerImage
                       src={p.imageSrc}
                       alt={`Thumbnail for ${p.title}`}
                       fill
@@ -596,7 +681,7 @@ function FeaturedWorkSection({ setPage }: { setPage: (p: Page) => void }) {
 
 /* ── CTA Strip ────────────────────────────────────────────────────────────── */
 
-function CTASection() {
+function CTASection({ handleCopyEmail }: { handleCopyEmail: (e: React.MouseEvent) => void }) {
   return (
     <motion.section
       onViewportEnter={() => trackEvent('view', 'Section', 'CTA Section')}
@@ -620,10 +705,18 @@ function CTASection() {
               <a
                 href="mailto:adibwafi@gmail.com"
                 className="btn-primary"
-                onClick={() => trackEvent('click', 'CTA', 'Footer Send Email')}
+                onClick={handleCopyEmail}
               >
                 <Mail size={14} strokeWidth={1.75} />
                 Send an email
+              </a>
+              <a
+                href="/cv/Muhamad_Adibwafi_Menako_Resume.pdf"
+                download="Muhamad_Adibwafi_Menako_Resume.pdf"
+                className="btn-ghost"
+                onClick={() => trackEvent('click', 'CTA', 'Download CV Footer Banner')}
+              >
+                Download CV
               </a>
               <a
                 href="https://linkedin.com/in/adibwafi"
@@ -670,7 +763,7 @@ function CTASection() {
    Contains: Career timeline · Full tech stack · Education
    ════════════════════════════════════════════════════════════════════════════ */
 
-function ExperiencePage() {
+function ExperiencePage({ handleCopyEmail }: { handleCopyEmail: (e: React.MouseEvent) => void }) {
   return (
     <motion.div
       key="experience"
@@ -830,7 +923,7 @@ function ExperiencePage() {
         </FadeSection>
       </motion.div>
 
-      <SimpleFooter />
+      <SimpleFooter handleCopyEmail={handleCopyEmail} />
     </motion.div>
   );
 }
@@ -840,7 +933,7 @@ function ExperiencePage() {
    Contains: Full project case studies · GitHub CTA
    ════════════════════════════════════════════════════════════════════════════ */
 
-function WorkPage() {
+function WorkPage({ handleCopyEmail }: { handleCopyEmail: (e: React.MouseEvent) => void }) {
   return (
     <motion.div
       key="work"
@@ -917,7 +1010,7 @@ function WorkPage() {
         </div>
       </motion.div>
 
-      <SimpleFooter />
+      <SimpleFooter handleCopyEmail={handleCopyEmail} />
     </motion.div>
   );
 }
@@ -943,7 +1036,7 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
         {/* Image */}
         <div className="lg:w-1/2 relative overflow-hidden bg-zinc-100" style={{ minHeight: '280px' }}>
           <div className={`relative w-full h-full ${isEven ? 'lg:rounded-r-[1.4rem]' : 'lg:rounded-l-[1.4rem]'} overflow-hidden`} style={{ minHeight: '280px' }}>
-            <Image
+            <ShimmerImage
               src={imageSrc}
               alt={`Mockup image of project ${title}`}
               fill
@@ -1010,7 +1103,7 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
 
 /* ─── Simple footer (Experience & Work pages) ─────────────────────────────── */
 
-function SimpleFooter() {
+function SimpleFooter({ handleCopyEmail }: { handleCopyEmail: (e: React.MouseEvent) => void }) {
   return (
     <footer className="border-t border-zinc-100 bg-white">
       <div className="max-w-layout mx-auto px-5 md:px-10 lg:px-16 py-8 flex flex-col sm:flex-row justify-between items-center gap-4">
@@ -1027,7 +1120,13 @@ function SimpleFooter() {
               target={href.startsWith('mailto') ? undefined : '_blank'}
               rel="noopener noreferrer"
               className="flex items-center gap-1.5 text-xs text-zinc-400 hover:text-zinc-700 transition-colors"
-              onClick={() => trackEvent('click', 'Social Link', `Footer Simple ${label}`)}
+              onClick={(e) => {
+                if (href.startsWith('mailto')) {
+                  handleCopyEmail(e);
+                } else {
+                  trackEvent('click', 'Social Link', `Footer Simple ${label}`);
+                }
+              }}
             >
               <Icon size={13} strokeWidth={1.75} /> {label}
             </a>
@@ -1049,7 +1148,47 @@ const pageTitles: Record<Page, string> = {
 export default function Home() {
   const [page, setPage] = useState<Page>('home');
   const [announcement, setAnnouncement] = useState('');
+  const [theme, setTheme] = useState<'light' | 'dark'>('light');
+  const [toast, setToast] = useState<string | null>(null);
   const mainRef = useRef<HTMLDivElement>(null);
+
+  // Initialize theme from storage or system preference
+  useEffect(() => {
+    const savedTheme = localStorage.getItem('theme') as 'light' | 'dark' | null;
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const activeTheme = savedTheme || (prefersDark ? 'dark' : 'light');
+    
+    setTheme(activeTheme);
+    if (activeTheme === 'dark') {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+  }, []);
+
+  const toggleTheme = () => {
+    const nextTheme = theme === 'light' ? 'dark' : 'light';
+    setTheme(nextTheme);
+    localStorage.setItem('theme', nextTheme);
+    if (nextTheme === 'dark') {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+    trackEvent('click', 'Theme Toggle', nextTheme);
+  };
+
+  const handleCopyEmail = (e: React.MouseEvent) => {
+    e.preventDefault();
+    navigator.clipboard.writeText('adibwafi@gmail.com');
+    setToast('Email copied to clipboard! 📋');
+    trackEvent('click', 'Copy Email', 'Success');
+    
+    // Auto clear toast
+    setTimeout(() => {
+      setToast(null);
+    }, 2500);
+  };
 
   useEffect(() => {
     // Dynamic page title updates
@@ -1138,18 +1277,33 @@ export default function Home() {
         {announcement}
       </div>
       <AmbientBackground />
-      <Nav page={page} setPage={setPage} />
+      <Nav page={page} setPage={setPage} theme={theme} toggleTheme={toggleTheme} />
       <main
         ref={mainRef}
         tabIndex={-1}
         className="focus:outline-none min-h-screen relative z-10"
       >
         <AnimatePresence mode="wait">
-          {page === 'home'       && <HomePage       key="home"       setPage={setPage} />}
-          {page === 'experience' && <ExperiencePage key="experience" />}
-          {page === 'work'       && <WorkPage       key="work"       />}
+          {page === 'home'       && <HomePage       key="home"       setPage={setPage} handleCopyEmail={handleCopyEmail} />}
+          {page === 'experience' && <ExperiencePage key="experience" handleCopyEmail={handleCopyEmail} />}
+          {page === 'work'       && <WorkPage       key="work"       handleCopyEmail={handleCopyEmail} />}
         </AnimatePresence>
       </main>
+
+      {/* Floating Toast Notification */}
+      <AnimatePresence>
+        {toast && (
+          <motion.div
+            initial={{ opacity: 0, y: 30, scale: 0.95 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: 20, scale: 0.95 }}
+            transition={{ duration: 0.25, ease: [0.25, 0, 0, 1] }}
+            className="fixed bottom-10 left-1/2 -translate-x-1/2 z-[100] px-5 py-3 rounded-full bg-zinc-900/90 dark:bg-zinc-100/95 text-white dark:text-zinc-900 shadow-xl border border-zinc-800 dark:border-zinc-200/80 backdrop-blur-md text-xs font-semibold tracking-wide flex items-center gap-2"
+          >
+            {toast}
+          </motion.div>
+        )}
+      </AnimatePresence>
     </>
   );
 }
