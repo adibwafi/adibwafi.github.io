@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence, useInView } from 'framer-motion';
 import Image from 'next/image';
 import {
@@ -12,7 +12,7 @@ import {
   MapPin,
   ExternalLink,
 } from 'lucide-react';
-import { trackEvent } from '@/lib/analytics';
+import { trackEvent, trackPageView } from '@/lib/analytics';
 
 /* ─── Types ───────────────────────────────────────────────────────────────── */
 
@@ -264,6 +264,7 @@ function Nav({ page, setPage }: { page: Page; setPage: (p: Page) => void }) {
         <button
           onClick={() => setPage('home')}
           className="text-sm font-semibold text-zinc-900 tracking-tight hover:text-zinc-600 transition-colors"
+          aria-label="Muhamad Adibwafi Menako Portfolio Home"
         >
           Adibwafi
         </button>
@@ -274,6 +275,7 @@ function Nav({ page, setPage }: { page: Page; setPage: (p: Page) => void }) {
             <button
               key={item.id}
               id={`nav-${item.id}`}
+              aria-current={page === item.id ? 'page' : undefined}
               onClick={() => {
                 setPage(item.id);
                 trackEvent('click', 'Navigation', item.label);
@@ -293,6 +295,7 @@ function Nav({ page, setPage }: { page: Page; setPage: (p: Page) => void }) {
         <a
           href="mailto:adibwafi@gmail.com"
           className="btn-primary text-xs hidden sm:inline-flex"
+          aria-label="Send an email to hire Muhamad Adibwafi Menako"
           onClick={() => trackEvent('click', 'CTA', 'Nav Hire Me')}
         >
           Hire Me <ArrowUpRight size={13} strokeWidth={2} />
@@ -300,11 +303,15 @@ function Nav({ page, setPage }: { page: Page; setPage: (p: Page) => void }) {
       </div>
 
       {/* Mobile bottom tab bar */}
-      <div className="md:hidden border-t border-zinc-100 bg-white/95 flex">
+      <div className="md:hidden border-t border-zinc-100 bg-white/95 flex" role="navigation" aria-label="Mobile navigation">
         {items.map((item) => (
           <button
             key={item.id}
-            onClick={() => setPage(item.id)}
+            aria-current={page === item.id ? 'page' : undefined}
+            onClick={() => {
+              setPage(item.id);
+              trackEvent('click', 'Mobile Navigation', item.label);
+            }}
             className={`flex-1 py-2.5 text-[0.7rem] font-medium tracking-wide transition-colors ${
               page === item.id ? 'text-zinc-900' : 'text-zinc-400'
             }`}
@@ -326,7 +333,6 @@ function Nav({ page, setPage }: { page: Page; setPage: (p: Page) => void }) {
 /* ════════════════════════════════════════════════════════════════════════════
    PAGE 1 — HOME
    Contains: Hero · Impact Metrics · Featured Work Preview · CTA
-   Does NOT contain: tech stack, experience timeline, full project detail
    ════════════════════════════════════════════════════════════════════════════ */
 
 function HomePage({ setPage }: { setPage: (p: Page) => void }) {
@@ -344,7 +350,11 @@ function HomePage({ setPage }: { setPage: (p: Page) => void }) {
 
 function HeroSection({ setPage }: { setPage: (p: Page) => void }) {
   return (
-    <section className="relative z-10 pt-28 md:pt-36 pb-20 px-5 md:px-10 lg:px-16">
+    <motion.section
+      onViewportEnter={() => trackEvent('view', 'Section', 'Hero')}
+      viewport={{ once: true, amount: 0.3 }}
+      className="relative z-10 pt-28 md:pt-36 pb-20 px-5 md:px-10 lg:px-16"
+    >
       <div className="max-w-layout mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
 
@@ -403,7 +413,7 @@ function HeroSection({ setPage }: { setPage: (p: Page) => void }) {
                   target={href.startsWith('mailto') ? undefined : '_blank'}
                   rel="noopener noreferrer"
                   className="flex items-center gap-1.5 text-sm font-medium text-zinc-500 hover:text-zinc-900 transition-colors"
-                  onClick={() => trackEvent('click', 'Social', label)}
+                  onClick={() => trackEvent('click', 'Social Link', `Hero ${label}`)}
                 >
                   <Icon size={14} strokeWidth={1.75} />
                   {label}
@@ -426,7 +436,10 @@ function HeroSection({ setPage }: { setPage: (p: Page) => void }) {
                 Hire Me <ArrowUpRight size={14} strokeWidth={2} />
               </a>
               <button
-                onClick={() => setPage('experience')}
+                onClick={() => {
+                  setPage('experience');
+                  trackEvent('click', 'CTA', 'Hero View Experience');
+                }}
                 className="btn-ghost"
               >
                 View Experience <ArrowRight size={14} strokeWidth={1.75} />
@@ -445,7 +458,7 @@ function HeroSection({ setPage }: { setPage: (p: Page) => void }) {
               <div className="relative rounded-[1.2rem] overflow-hidden aspect-[3/4]">
                 <Image
                   src="/portrait.jpg"
-                  alt="Muhamad Adibwafi Menako"
+                  alt="Portrait of Muhamad Adibwafi Menako"
                   fill
                   priority
                   className="object-cover object-center"
@@ -473,7 +486,7 @@ function HeroSection({ setPage }: { setPage: (p: Page) => void }) {
 
         </div>
       </div>
-    </section>
+    </motion.section>
   );
 }
 
@@ -481,11 +494,15 @@ function HeroSection({ setPage }: { setPage: (p: Page) => void }) {
 
 function MetricsSection() {
   return (
-    <section className="relative z-10 px-5 md:px-10 lg:px-16 pb-20">
+    <motion.section
+      onViewportEnter={() => trackEvent('view', 'Section', 'Metrics')}
+      viewport={{ once: true, amount: 0.3 }}
+      className="relative z-10 px-5 md:px-10 lg:px-16 pb-20"
+    >
       <div className="max-w-layout mx-auto">
         <FadeSection>
           <FadeItem className="mb-8">
-            <span className="section-label">Proof of Impact</span>
+            <h2 className="section-label">Proof of Impact</h2>
           </FadeItem>
 
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
@@ -501,7 +518,7 @@ function MetricsSection() {
           </div>
         </FadeSection>
       </div>
-    </section>
+    </motion.section>
   );
 }
 
@@ -509,13 +526,20 @@ function MetricsSection() {
 
 function FeaturedWorkSection({ setPage }: { setPage: (p: Page) => void }) {
   return (
-    <section className="relative z-10 px-5 md:px-10 lg:px-16 pb-24">
+    <motion.section
+      onViewportEnter={() => trackEvent('view', 'Section', 'Featured Work')}
+      viewport={{ once: true, amount: 0.2 }}
+      className="relative z-10 px-5 md:px-10 lg:px-16 pb-24"
+    >
       <div className="max-w-layout mx-auto">
         <FadeSection>
           <FadeItem className="flex items-center justify-between mb-8">
-            <span className="section-label">Featured Work</span>
+            <h2 className="section-label">Featured Work</h2>
             <button
-              onClick={() => setPage('work')}
+              onClick={() => {
+                setPage('work');
+                trackEvent('click', 'Navigation', 'View All Projects');
+              }}
               className="flex items-center gap-1 text-sm font-medium text-zinc-500 hover:text-zinc-900 transition-colors"
             >
               All projects <ArrowRight size={14} strokeWidth={1.75} />
@@ -536,7 +560,7 @@ function FeaturedWorkSection({ setPage }: { setPage: (p: Page) => void }) {
                   <div className="relative overflow-hidden rounded-[1.1rem] m-2 bg-zinc-100" style={{ height: '180px' }}>
                     <Image
                       src={p.imageSrc}
-                      alt={p.title}
+                      alt={`Thumbnail for ${p.title}`}
                       fill
                       className="object-cover object-center transition-transform duration-700 group-hover:scale-[1.04]"
                       style={{ filter: 'saturate(0.88) contrast(1.02)' }}
@@ -566,7 +590,7 @@ function FeaturedWorkSection({ setPage }: { setPage: (p: Page) => void }) {
           </div>
         </FadeSection>
       </div>
-    </section>
+    </motion.section>
   );
 }
 
@@ -574,7 +598,11 @@ function FeaturedWorkSection({ setPage }: { setPage: (p: Page) => void }) {
 
 function CTASection() {
   return (
-    <section className="relative z-10 border-t border-zinc-100">
+    <motion.section
+      onViewportEnter={() => trackEvent('view', 'Section', 'CTA Section')}
+      viewport={{ once: true, amount: 0.2 }}
+      className="relative z-10 border-t border-zinc-100"
+    >
       <div className="max-w-layout mx-auto px-5 md:px-10 lg:px-16 py-24">
         <FadeSection>
           <div className="bento-card p-10 md:p-14 flex flex-col md:flex-row items-start md:items-end justify-between gap-8">
@@ -592,7 +620,7 @@ function CTASection() {
               <a
                 href="mailto:adibwafi@gmail.com"
                 className="btn-primary"
-                onClick={() => trackEvent('click', 'CTA', 'Footer Email')}
+                onClick={() => trackEvent('click', 'CTA', 'Footer Send Email')}
               >
                 <Mail size={14} strokeWidth={1.75} />
                 Send an email
@@ -602,7 +630,7 @@ function CTASection() {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="btn-ghost"
-                onClick={() => trackEvent('click', 'CTA', 'Footer LinkedIn')}
+                onClick={() => trackEvent('click', 'Social Link', 'Footer LinkedIn')}
               >
                 <Linkedin size={14} strokeWidth={1.75} />
                 LinkedIn
@@ -624,6 +652,7 @@ function CTASection() {
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center gap-1.5 text-xs text-zinc-400 hover:text-zinc-700 transition-colors"
+                  onClick={() => trackEvent('click', 'Social Link', `Footer Minimal ${label}`)}
                 >
                   <Icon size={13} strokeWidth={1.75} /> {label}
                 </a>
@@ -632,14 +661,13 @@ function CTASection() {
           </div>
         </FadeSection>
       </div>
-    </section>
+    </motion.section>
   );
 }
 
 /* ════════════════════════════════════════════════════════════════════════════
    PAGE 2 — EXPERIENCE
    Contains: Career timeline · Full tech stack · Education
-   Does NOT contain: impact metrics, project cards
    ════════════════════════════════════════════════════════════════════════════ */
 
 function ExperiencePage() {
@@ -669,16 +697,23 @@ function ExperiencePage() {
       </div>
 
       {/* Career timeline */}
-      <div className="max-w-layout mx-auto px-5 md:px-10 lg:px-16 pb-20">
+      <motion.div
+        onViewportEnter={() => trackEvent('view', 'Section', 'Experience Timeline')}
+        viewport={{ once: true, amount: 0.1 }}
+        className="max-w-layout mx-auto px-5 md:px-10 lg:px-16 pb-20"
+      >
         <FadeSection>
           <FadeItem className="mb-8">
-            <span className="section-label">Work History</span>
+            <h2 className="section-label">Work History</h2>
           </FadeItem>
 
           <div className="space-y-4">
             {roles.map((exp, i) => (
               <FadeItem key={i} delay={i * 0.1}>
-                <div className={`exp-card ${exp.type === 'previous' ? 'opacity-75' : ''}`}>
+                <div
+                  className={`exp-card ${exp.type === 'previous' ? 'opacity-75' : ''}`}
+                  onClick={() => trackEvent('click', 'Experience Card', exp.company)}
+                >
                   <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3 mb-4">
                     <div>
                       {exp.type === 'previous' && (
@@ -715,10 +750,14 @@ function ExperiencePage() {
             ))}
           </div>
         </FadeSection>
-      </div>
+      </motion.div>
 
       {/* Full tech stack — ONLY on this page */}
-      <div className="bg-white border-t border-zinc-100">
+      <motion.div
+        onViewportEnter={() => trackEvent('view', 'Section', 'Tech Stack Full')}
+        viewport={{ once: true, amount: 0.2 }}
+        className="bg-white border-t border-zinc-100"
+      >
         <div className="max-w-layout mx-auto px-5 md:px-10 lg:px-16 py-20">
           <FadeSection>
             <FadeItem className="mb-10">
@@ -731,9 +770,9 @@ function ExperiencePage() {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               {techStack.map((group, gi) => (
                 <FadeItem key={group.category} delay={gi * 0.1} className="stack-card">
-                  <p className="text-xs font-semibold text-zinc-400 uppercase tracking-widest mb-4">
+                  <h3 className="text-xs font-semibold text-zinc-400 uppercase tracking-widest mb-4">
                     {group.category}
-                  </p>
+                  </h3>
                   <div className="flex flex-wrap gap-2">
                     {group.items.map((item) => (
                       <span key={item} className="tech-pill">{item}</span>
@@ -744,13 +783,17 @@ function ExperiencePage() {
             </div>
           </FadeSection>
         </div>
-      </div>
+      </motion.div>
 
       {/* Education */}
-      <div className="max-w-layout mx-auto px-5 md:px-10 lg:px-16 py-20">
+      <motion.div
+        onViewportEnter={() => trackEvent('view', 'Section', 'Education')}
+        viewport={{ once: true, amount: 0.3 }}
+        className="max-w-layout mx-auto px-5 md:px-10 lg:px-16 py-20"
+      >
         <FadeSection>
           <FadeItem className="mb-10">
-            <span className="section-label">Education</span>
+            <h2 className="section-label">Education</h2>
           </FadeItem>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -785,7 +828,7 @@ function ExperiencePage() {
             ))}
           </div>
         </FadeSection>
-      </div>
+      </motion.div>
 
       <SimpleFooter />
     </motion.div>
@@ -795,7 +838,6 @@ function ExperiencePage() {
 /* ════════════════════════════════════════════════════════════════════════════
    PAGE 3 — WORK
    Contains: Full project case studies · GitHub CTA
-   Does NOT contain: metrics, tech stack breakdown, experience timeline
    ════════════════════════════════════════════════════════════════════════════ */
 
 function WorkPage() {
@@ -825,7 +867,11 @@ function WorkPage() {
       </div>
 
       {/* Project cards */}
-      <div className="max-w-layout mx-auto px-5 md:px-10 lg:px-16 pb-24">
+      <motion.div
+        onViewportEnter={() => trackEvent('view', 'Section', 'All Projects List')}
+        viewport={{ once: true, amount: 0.1 }}
+        className="max-w-layout mx-auto px-5 md:px-10 lg:px-16 pb-24"
+      >
         <div className="space-y-6">
           {projects.map((project, i) => (
             <FadeSection key={i}>
@@ -835,18 +881,22 @@ function WorkPage() {
             </FadeSection>
           ))}
         </div>
-      </div>
+      </motion.div>
 
       {/* GitHub CTA */}
-      <div className="border-t border-zinc-100 bg-white">
+      <motion.div
+        onViewportEnter={() => trackEvent('view', 'Section', 'GitHub CTA Band')}
+        viewport={{ once: true, amount: 0.3 }}
+        className="border-t border-zinc-100 bg-white"
+      >
         <div className="max-w-layout mx-auto px-5 md:px-10 lg:px-16 py-16">
           <FadeSection>
             <FadeItem className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
               <div>
-                <p className="section-label mb-3">Open Source</p>
-                <h2 className="text-xl font-bold text-zinc-900 tracking-tight mb-1">
+                <h2 className="section-label mb-3">Open Source</h2>
+                <h3 className="text-xl font-bold text-zinc-900 tracking-tight mb-1">
                   More on GitHub
-                </h2>
+                </h3>
                 <p className="text-sm text-zinc-500 max-w-[40ch]">
                   Explore more projects, contributions, and experiments on my GitHub profile.
                 </p>
@@ -856,7 +906,7 @@ function WorkPage() {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="btn-primary flex-shrink-0"
-                onClick={() => trackEvent('click', 'CTA', 'GitHub Profile')}
+                onClick={() => trackEvent('click', 'CTA', 'GitHub Profile Link')}
               >
                 <Github size={14} strokeWidth={1.75} />
                 View GitHub Profile
@@ -865,7 +915,7 @@ function WorkPage() {
             </FadeItem>
           </FadeSection>
         </div>
-      </div>
+      </motion.div>
 
       <SimpleFooter />
     </motion.div>
@@ -895,7 +945,7 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
           <div className={`relative w-full h-full ${isEven ? 'lg:rounded-r-[1.4rem]' : 'lg:rounded-l-[1.4rem]'} overflow-hidden`} style={{ minHeight: '280px' }}>
             <Image
               src={imageSrc}
-              alt={title}
+              alt={`Mockup image of project ${title}`}
               fill
               className="object-cover object-center transition-transform duration-700 group-hover:scale-[1.03]"
               style={{ filter: 'saturate(0.9) contrast(1.02)' }}
@@ -934,7 +984,7 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
               target="_blank"
               rel="noopener noreferrer"
               className="btn-primary text-xs"
-              onClick={() => trackEvent('click', 'Project', `GitHub: ${title}`)}
+              onClick={() => trackEvent('click', 'Project Link', `GitHub: ${title}`)}
             >
               <Github size={13} strokeWidth={1.75} />
               View Repository
@@ -945,7 +995,7 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="btn-ghost text-xs"
-                onClick={() => trackEvent('click', 'Project', `Website: ${title}`)}
+                onClick={() => trackEvent('click', 'Project Link', `Website: ${title}`)}
               >
                 <ExternalLink size={13} strokeWidth={1.75} />
                 Visit Website
@@ -977,6 +1027,7 @@ function SimpleFooter() {
               target={href.startsWith('mailto') ? undefined : '_blank'}
               rel="noopener noreferrer"
               className="flex items-center gap-1.5 text-xs text-zinc-400 hover:text-zinc-700 transition-colors"
+              onClick={() => trackEvent('click', 'Social Link', `Footer Simple ${label}`)}
             >
               <Icon size={13} strokeWidth={1.75} /> {label}
             </a>
@@ -987,20 +1038,118 @@ function SimpleFooter() {
   );
 }
 
+const pageTitles: Record<Page, string> = {
+  home: 'Muhamad Adibwafi Menako — Full Stack Engineer',
+  experience: 'Experience & Stack — Muhamad Adibwafi Menako',
+  work: 'Selected Projects — Muhamad Adibwafi Menako',
+};
+
 /* ─── App Root ────────────────────────────────────────────────────────────── */
 
 export default function Home() {
   const [page, setPage] = useState<Page>('home');
+  const [announcement, setAnnouncement] = useState('');
+  const mainRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    // Dynamic page title updates
+    document.title = pageTitles[page];
+
+    // virtual path tracking
+    const pagePath = page === 'home' ? '/' : `/#${page}`;
+    trackPageView(pagePath, pageTitles[page]);
+
+    // screen-reader A11y announcement
+    const friendlyName = page === 'home' ? 'Home' : page === 'experience' ? 'Experience and Stack' : 'Selected Projects';
+    setAnnouncement(`Navigated to ${friendlyName} page`);
+
+    // programmatically shift focus to main content container
+    if (mainRef.current) {
+      mainRef.current.focus();
+    }
+  }, [page]);
+
+  // JSON-LD Structured Data Schema for Person Profile
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Muhamad Adibwafi Menako",
+    "jobTitle": "Full Stack Software Engineer",
+    "url": "https://www.adibwafi.com",
+    "image": "https://www.adibwafi.com/portrait.jpg",
+    "sameAs": [
+      "https://github.com/adibwafi",
+      "https://linkedin.com/in/adibwafi"
+    ],
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Depok",
+      "addressRegion": "West Java",
+      "addressCountry": "ID"
+    },
+    "description": "Results-driven Full Stack Engineer building scalable backend infrastructure and intuitive frontend experiences.",
+    "knowsAbout": [
+      "TypeScript",
+      "JavaScript",
+      "Python",
+      "PHP",
+      "React.js",
+      "Next.js",
+      "Node.js",
+      "FastAPI",
+      "Laravel",
+      "PostgreSQL",
+      "GCP",
+      "Docker",
+      "System Architecture"
+    ],
+    "publishingPrinciples": [
+      {
+        "@type": "CreativeWork",
+        "name": "Enterprise LMS Architecture Blueprint",
+        "description": "A structural, sanitized blueprint demonstrating scalable backend architecture for high-traffic Learning Management Systems.",
+        "programmingLanguage": "PHP",
+        "codeRepository": "https://github.com/adibwafi/laravel-vue-lms-blueprint"
+      },
+      {
+        "@type": "CreativeWork",
+        "name": "Smart Fridge MPASI Optimizer",
+        "description": "A household-focused web application that dynamically generates nutritional complementary baby food (MPASI) recipes based on real-time ingredient availability.",
+        "programmingLanguage": "TypeScript",
+        "codeRepository": "https://github.com/adibwafi/smart-fridge-mpasi-optimizer"
+      },
+      {
+        "@type": "CreativeWork",
+        "name": "Serasa Kreatif Digital Platform",
+        "description": "Digital storefront and operations platform for a Bintaro-based creative agency specialising in social media management, video production, and targeted advertising.",
+        "programmingLanguage": "JavaScript",
+        "url": "https://serasakreatif.id/"
+      }
+    ]
+  };
 
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      <div className="sr-only" aria-live="polite">
+        {announcement}
+      </div>
       <AmbientBackground />
       <Nav page={page} setPage={setPage} />
-      <AnimatePresence mode="wait">
-        {page === 'home'       && <HomePage       key="home"       setPage={setPage} />}
-        {page === 'experience' && <ExperiencePage key="experience" />}
-        {page === 'work'       && <WorkPage       key="work"       />}
-      </AnimatePresence>
+      <main
+        ref={mainRef}
+        tabIndex={-1}
+        className="focus:outline-none min-h-screen relative z-10"
+      >
+        <AnimatePresence mode="wait">
+          {page === 'home'       && <HomePage       key="home"       setPage={setPage} />}
+          {page === 'experience' && <ExperiencePage key="experience" />}
+          {page === 'work'       && <WorkPage       key="work"       />}
+        </AnimatePresence>
+      </main>
     </>
   );
 }
