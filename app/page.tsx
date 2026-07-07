@@ -107,21 +107,21 @@ const projectPreviews = [
     title: 'Enterprise LMS Architecture',
     blurb: 'Scalable backend blueprint for a 10k-user learning platform.',
     tags: ['Laravel', 'Vue.js', 'PostgreSQL'],
-    imageSrc: '/work/lms-blueprint-rev.webp',
+    imageSrc: '/work/lms-blueprint.webp',
     link: 'https://github.com/adibwafi/laravel-vue-lms-blueprint',
   },
   {
     title: 'Smart Fridge MPASI Optimizer',
     blurb: 'AI-assisted recipe generator from real-time fridge contents.',
     tags: ['Next.js', 'TypeScript', 'AI'],
-    imageSrc: '/work/smart-fridge-mpasi-2.webp',
+    imageSrc: '/work/smart-fridge-mpasi.webp',
     link: 'https://github.com/adibwafi/smart-fridge-mpasi-optimizer',
   },
   {
     title: 'Serasa Kreatif Platform',
     blurb: 'Full-stack storefront for a Bintaro creative agency.',
     tags: ['Next.js', 'CMS', 'Agency'],
-    imageSrc: '/work/serasa-kreatif-new.webp',
+    imageSrc: '/work/serasa-kreatif.webp',
     link: 'https://serasakreatif.id/',
   },
 ];
@@ -192,7 +192,7 @@ const projects = [
       'A structural, sanitized blueprint demonstrating scalable backend architecture for high-traffic Learning Management Systems. Showcases robust relational database schemas, adaptive course-tracking patterns, and efficient API design — while preserving proprietary business boundaries.',
     tags: ['Laravel', 'Vue.js', 'PostgreSQL', 'System Architecture', 'REST API'],
     link: 'https://github.com/adibwafi/laravel-vue-lms-blueprint',
-    imageSrc: '/work/lms-blueprint-rev.webp',
+    imageSrc: '/work/lms-blueprint.webp',
   },
   {
     title: 'Smart Fridge MPASI Optimizer',
@@ -200,7 +200,7 @@ const projects = [
       'A household-focused web application that dynamically generates nutritional complementary baby food (MPASI) recipes based on real-time ingredient availability, bridging smart pantry management with early childhood nutrition guidance.',
     tags: ['Next.js', 'TypeScript', 'AI-Assisted', 'Parenting Tech', 'Web App'],
     link: 'https://github.com/adibwafi/smart-fridge-mpasi-optimizer',
-    imageSrc: '/work/smart-fridge-mpasi-2.webp',
+    imageSrc: '/work/smart-fridge-mpasi.webp',
   },
   {
     title: 'Serasa Kreatif Digital Platform',
@@ -209,7 +209,7 @@ const projects = [
     tags: ['Next.js', 'Digital Agency', 'Video Production', 'CMS'],
     link: 'https://github.com/menako-studio/serasa-kreatif',
     webLink: 'https://serasakreatif.id/',
-    imageSrc: '/work/serasa-kreatif-new.webp',
+    imageSrc: '/work/serasa-kreatif.webp',
   },
 ];
 
@@ -447,7 +447,7 @@ function HeroSection({ setPage }: { setPage: (p: Page) => void }) {
             </motion.div>
           </div>
 
-          {/* Right: portrait */}
+          {/* Right: portrait / workspace */}
           <div className="hidden lg:flex lg:col-span-5 justify-end items-start">
             <motion.div
               initial={{ opacity: 0, scale: 0.96, y: 16 }}
@@ -457,8 +457,8 @@ function HeroSection({ setPage }: { setPage: (p: Page) => void }) {
             >
               <div className="relative rounded-[1.2rem] overflow-hidden aspect-[3/4]">
                 <Image
-                  src="/portrait.jpg"
-                  alt="Portrait of Muhamad Adibwafi Menako"
+                  src="/work/workspace-hero.webp"
+                  alt="Workspace setup of Muhamad Adibwafi Menako"
                   fill
                   priority
                   className="object-cover object-center"
@@ -471,7 +471,7 @@ function HeroSection({ setPage }: { setPage: (p: Page) => void }) {
               {/* Below photo */}
               <div className="p-3 flex items-center justify-between">
                 <div>
-                  <p className="text-xs font-semibold text-zinc-900">Adibwafi Menako</p>
+                  <p className="text-xs font-semibold text-zinc-900">Workspace Studio</p>
                   <p className="text-[0.7rem] text-zinc-400 flex items-center gap-1 mt-0.5">
                     <MapPin size={10} strokeWidth={2} /> Depok, Indonesia
                   </p>

@@ -52,9 +52,10 @@ adibwafi.github.io/
 │   ├── alley-bg-new.webp      # Cinematic background layer
 │   ├── icon-2.png             # Website Favicon asset
 │   └── work/
-│       ├── lms-blueprint-rev.webp
-│       ├── smart-fridge-mpasi-2.webp
-│       └── serasa-kreatif-new.webp
+│       ├── workspace-hero.webp
+│       ├── lms-blueprint.webp
+│       ├── smart-fridge-mpasi.webp
+│       └── serasa-kreatif.webp
 ├── next.config.mjs            # Next.js configurations
 └── tailwind.config.ts         # Tailwind theme & Editorial color mappings
 ```
