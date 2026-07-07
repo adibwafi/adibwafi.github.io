@@ -54,7 +54,7 @@ adibwafi.github.io/
 │   └── work/
 │       ├── lms-blueprint-rev.webp
 │       ├── smart-fridge-mpasi-2.webp
-│       └── serasa-kreatif-2.webp
+│       └── serasa-kreatif-new.webp
 ├── next.config.mjs            # Next.js configurations
 └── tailwind.config.ts         # Tailwind theme & Editorial color mappings
 ```

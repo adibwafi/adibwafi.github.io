@@ -121,7 +121,7 @@ const projectPreviews = [
     title: 'Serasa Kreatif Platform',
     blurb: 'Full-stack storefront for a Bintaro creative agency.',
     tags: ['Next.js', 'CMS', 'Agency'],
-    imageSrc: '/work/serasa-kreatif-2.webp',
+    imageSrc: '/work/serasa-kreatif-new.webp',
     link: 'https://serasakreatif.id/',
   },
 ];
@@ -209,7 +209,7 @@ const projects = [
     tags: ['Next.js', 'Digital Agency', 'Video Production', 'CMS'],
     link: 'https://github.com/menako-studio/serasa-kreatif',
     webLink: 'https://serasakreatif.id/',
-    imageSrc: '/work/serasa-kreatif-2.webp',
+    imageSrc: '/work/serasa-kreatif-new.webp',
   },
 ];
 

@@ -69,7 +69,7 @@ const projects = [
       'The digital storefront and operational platform for a Bintaro-based creative agency specializing in social media management, video production, and targeted advertising. The architecture is built with future scalability in mind to support the upcoming launch of their educational seminar arm, Serasa Academy.',
     link: 'https://github.com/menako-studio/serasa-kreatif',
     webLink: 'https://serasakreatif.id/',
-    imageSrc: '/work/serasa-kreatif-2.webp',
+    imageSrc: '/work/serasa-kreatif-new.webp',
     gridClass: 'md:col-span-6 md:col-start-4',
     imageHeight: 'h-56 md:h-[400px]',
   },
