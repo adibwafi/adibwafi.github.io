@@ -1,29 +1,20 @@
 import type { Metadata } from 'next';
-import { Cormorant_Garamond, Manrope } from 'next/font/google';
+import { Inter } from 'next/font/google';
 import './globals.css';
+import Script from 'next/script';
 
-// 1. Inisialisasi Kinfolk Serif
-const cormorant = Cormorant_Garamond({ 
+const inter = Inter({
   subsets: ['latin'],
-  weight: ['400', '500', '600'],
-  variable: '--font-cormorant', // Custom CSS variable untuk Tailwind
-})
-
-// 2. Inisialisasi Kinfolk/Uniqlo Sans
-const manrope = Manrope({ 
-  subsets: ['latin'],
-  weight: ['300', '400', '500'],
-  variable: '--font-manrope',
-})
+  variable: '--font-inter',
+  display: 'swap',
+});
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://www.adibwafi.com'),
-  alternates: {
-    canonical: '/',
-  },
+  alternates: { canonical: '/' },
   title: 'Muhamad Adibwafi Menako — Full Stack Engineer',
   description:
-    'Results-driven Full Stack Engineer bridging complex backend infrastructure and intuitive frontend design. Based in Indonesia.',
+    'Results-driven Full Stack Engineer building scalable backend infrastructure and intuitive frontend experiences. Based in Indonesia.',
   icons: {
     icon: '/icon-2.png',
     shortcut: '/icon-2.png',
@@ -42,7 +33,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Muhamad Adibwafi Menako — Full Stack Engineer',
     description:
-      'Results-driven Full Stack Engineer bridging complex backend infrastructure and intuitive frontend design.',
+      'Results-driven Full Stack Engineer building scalable backend infrastructure and intuitive frontend experiences.',
     url: 'https://www.adibwafi.com',
     siteName: 'Adibwafi Portfolio',
     type: 'website',
@@ -51,29 +42,22 @@ export const metadata: Metadata = {
     card: 'summary',
     title: 'Muhamad Adibwafi Menako — Full Stack Engineer',
     description:
-      'Results-driven Full Stack Engineer bridging complex backend infrastructure and intuitive frontend design.',
+      'Results-driven Full Stack Engineer building scalable backend infrastructure and intuitive frontend experiences.',
   },
 };
 
-import Script from 'next/script';
-
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   const gaId = process.env.NEXT_PUBLIC_GA_ID;
 
   return (
-    <html lang="en" className={`${cormorant.variable} ${manrope.variable} scroll-smooth`}>
+    <html lang="en" className={`${inter.variable} scroll-smooth`}>
       <head>
         <link rel="icon" href="/favicon.ico" sizes="any" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="theme-color" content="#FAFAFA" />
       </head>
-      <body className="bg-[#FAFAFA] text-[#27272A] font-sans antialiased selection:bg-neutral-200">
+      <body className="antialiased">
         {children}
-        {/* Google Analytics */}
         {gaId && (
           <>
             <Script
@@ -85,9 +69,7 @@ export default function RootLayout({
                 window.dataLayer = window.dataLayer || [];
                 function gtag(){dataLayer.push(arguments);}
                 gtag('js', new Date());
-                gtag('config', '${gaId}', {
-                  page_path: window.location.pathname,
-                });
+                gtag('config', '${gaId}', { page_path: window.location.pathname });
               `}
             </Script>
           </>
@@ -96,4 +78,3 @@ export default function RootLayout({
     </html>
   );
 }
-

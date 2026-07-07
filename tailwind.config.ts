@@ -9,60 +9,49 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        // ── Editorial New York Snow & Taxi Ochre Color Palette ─────────
-        'alabaster':   '#F7F7F7',
-        'parchment':   '#EAEAEA',
-        'sage':        '#F7F7F7',
-        'sage-dark':   '#DCDCDC',
-        
-        // Accent Colors
-        'taxi-ochre':  '#D4A26A',
-        'radio-blue':  '#4A5877',
-        
-        // Dark section
-        'ink':         '#1A1A1A',
-        'ink-soft':    '#2E2E2E',
-        
-        // Text
-        'stone':       '#1A1A1A',
-        'clay':        '#7F8C8D',
-        'fog':         '#7F8C8D',
-        
+        // ── Sana Labs Clean Palette ──────────────────────────────────────
+        // Backgrounds
+        'surface':        '#FFFFFF',
+        'elevated':       '#F4F4F5',
+        // Accent (blue)
+        'accent':         '#2563EB',
+        'accent-hover':   '#1D4ED8',
+        'accent-subtle':  '#EFF6FF',
+        'accent-border':  '#BFDBFE',
+        // Neutral text (mirrors zinc)
+        'ink':            '#0A0A0A',
+        'muted':          '#71717A',
+        'faint':          '#A1A1AA',
         // Borders
-        'border-warm': '#EAEAEA',
-        'border-sage': '#DCDCDC',
-        'border-ink':  '#2E2E2E',
-        
-        // Off-white text on dark
-        'cream':       '#F7F7F7',
+        'border-base':    '#E4E4E7',
+        'border-strong':  '#D4D4D8',
       },
       fontFamily: {
-        serif: ['var(--font-cormorant)', 'Georgia', 'serif'],
-        sans:  ['var(--font-manrope)', 'system-ui', 'sans-serif'],
-        mono:  ['var(--font-manrope)', 'system-ui', 'monospace'],
+        sans: ['var(--font-inter)', 'system-ui', 'sans-serif'],
+        mono: ['ui-monospace', 'SFMono-Regular', 'Menlo', 'monospace'],
       },
       fontSize: {
-        // ── Cover / Hero ───────────────────────────────────────────────
-        'cover':    ['clamp(4rem, 11vw, 9rem)',  { lineHeight: '0.93', letterSpacing: '-0.03em' }],
-        'feature':  ['clamp(2.5rem, 6vw, 5rem)', { lineHeight: '1.0',  letterSpacing: '-0.025em' }],
-        'headline': ['clamp(1.8rem, 3.5vw, 3rem)',{ lineHeight: '1.1', letterSpacing: '-0.02em' }],
-        // ── Body ───────────────────────────────────────────────────────
-        'intro':    ['clamp(1.1rem, 2vw, 1.35rem)', { lineHeight: '1.75', letterSpacing: '0.005em' }],
-        'body-lg':  ['1.125rem', { lineHeight: '1.8' }],
-        'body':     ['1rem',     { lineHeight: '1.75' }],
-        'label':    ['0.75rem',  { lineHeight: '1.5',  letterSpacing: '0.1em' }],
-        'metric':   ['clamp(4rem, 9vw, 7.5rem)', { lineHeight: '0.9', letterSpacing: '-0.04em' }],
-      },
-      spacing: {
-        'section': '7rem',
-        'col-gap': '4rem',
+        // Hero
+        'display':  ['clamp(3rem, 6.5vw, 5.5rem)', { lineHeight: '1.03', letterSpacing: '-0.03em' }],
+        'hero':     ['clamp(2rem, 4.5vw, 3.75rem)', { lineHeight: '1.1',  letterSpacing: '-0.025em' }],
+        'title':    ['clamp(1.6rem, 3vw, 2.5rem)',  { lineHeight: '1.2',  letterSpacing: '-0.02em' }],
+        'subtitle': ['1.125rem', { lineHeight: '1.7' }],
       },
       maxWidth: {
-        'layout': '1440px',
+        'layout': '1280px',
         'prose':  '68ch',
       },
       transitionTimingFunction: {
-        'editorial': 'cubic-bezier(0.25, 0, 0, 1)',
+        'smooth': 'cubic-bezier(0.25, 0, 0, 1)',
+      },
+      borderRadius: {
+        'bento': '1.5rem',   // 24px
+        'card':  '1.25rem',  // 20px
+      },
+      boxShadow: {
+        'card':  '0 1px 3px rgba(0,0,0,0.05), 0 1px 2px rgba(0,0,0,0.04)',
+        'lift':  '0 8px 32px rgba(0,0,0,0.08), 0 2px 8px rgba(0,0,0,0.04)',
+        'glow':  '0 0 40px rgba(37,99,235,0.12)',
       },
     },
   },
