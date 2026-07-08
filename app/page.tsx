@@ -1034,8 +1034,8 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
     <div className="bento-card bento-card-hover overflow-hidden">
       <div className={`flex flex-col ${isEven ? 'lg:flex-row-reverse' : 'lg:flex-row'}`}>
         {/* Image */}
-        <div className="lg:w-1/2 relative overflow-hidden bg-zinc-100" style={{ minHeight: '280px' }}>
-          <div className={`relative w-full h-full ${isEven ? 'lg:rounded-r-[1.4rem]' : 'lg:rounded-l-[1.4rem]'} overflow-hidden`} style={{ minHeight: '280px' }}>
+        <div className="w-full lg:w-1/2 h-[280px] lg:h-auto relative overflow-hidden bg-zinc-100">
+          <div className={`relative w-full h-full ${isEven ? 'lg:rounded-r-[1.4rem]' : 'lg:rounded-l-[1.4rem]'} overflow-hidden`}>
             <ShimmerImage
               src={imageSrc}
               alt={`Mockup image of project ${title}`}
