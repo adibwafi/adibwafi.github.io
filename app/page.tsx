@@ -901,7 +901,7 @@ function ExperiencePage({ handleCopyEmail }: { handleCopyEmail: (e: React.MouseE
               },
               {
                 school: 'Padjadjaran University',
-                degree: 'Bachelor of Economics',
+                degree: 'Bachelor of Economics (GPA: 3.26/4.00)',
                 period: '2012 – 2017',
                 detail:
                   'Quantitative analysis and systems thinking — skills that translate directly to data-driven architecture and product decisions.',
