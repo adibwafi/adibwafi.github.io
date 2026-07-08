@@ -424,7 +424,7 @@ function HeroSection({ setPage, handleCopyEmail }: { setPage: (p: Page) => void;
     <motion.section
       onViewportEnter={() => trackEvent('view', 'Section', 'Hero')}
       viewport={{ once: true, amount: 0.3 }}
-      className="relative z-10 pt-28 md:pt-36 pb-20 px-5 md:px-10 lg:px-16"
+      className="relative z-10 pt-36 md:pt-36 pb-20 px-5 md:px-10 lg:px-16"
     >
       <div className="max-w-layout mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
@@ -771,7 +771,7 @@ function ExperiencePage({ handleCopyEmail }: { handleCopyEmail: (e: React.MouseE
       initial="hidden"
       animate="visible"
       exit="exit"
-      className="relative z-10 pt-28 md:pt-32"
+      className="relative z-10 pt-36 md:pt-32"
     >
       {/* Page header */}
       <div className="max-w-layout mx-auto px-5 md:px-10 lg:px-16 pb-14">
@@ -941,7 +941,7 @@ function WorkPage({ handleCopyEmail }: { handleCopyEmail: (e: React.MouseEvent) 
       initial="hidden"
       animate="visible"
       exit="exit"
-      className="relative z-10 pt-28 md:pt-32"
+      className="relative z-10 pt-36 md:pt-32"
     >
       {/* Page header */}
       <div className="max-w-layout mx-auto px-5 md:px-10 lg:px-16 pb-14">
