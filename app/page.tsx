@@ -902,7 +902,7 @@ function ExperiencePage({ handleCopyEmail }: { handleCopyEmail: (e: React.MouseE
               {
                 school: 'Padjadjaran University',
                 degree: 'Bachelor of Economics',
-                period: '2014 – 2018',
+                period: '2012 – 2017',
                 detail:
                   'Quantitative analysis and systems thinking — skills that translate directly to data-driven architecture and product decisions.',
                 accent: 'bg-violet-50 border-violet-100 text-violet-700',
