@@ -1195,7 +1195,7 @@ export default function Home() {
     document.title = pageTitles[page];
 
     // virtual path tracking
-    const pagePath = page === 'home' ? '/' : `/#${page}`;
+    const pagePath = page === 'home' ? '/' : `/${page}`;
     trackPageView(pagePath, pageTitles[page]);
 
     // screen-reader A11y announcement
