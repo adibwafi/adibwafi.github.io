@@ -21,6 +21,9 @@ export const metadata: Metadata = {
     apple: '/icon-2.png',
   },
   keywords: [
+    'Muhamad Adibwafi Menako',
+    'Adibwafi Menako',
+    'Adibwafi',
     'Full Stack Engineer',
     'Software Engineer',
     'Next.js',
@@ -28,6 +31,10 @@ export const metadata: Metadata = {
     'FastAPI',
     'TypeScript',
     'Indonesia',
+    'Backend Engineer',
+    'Frontend Engineer',
+    'Menako Studio',
+    'Web Developer Portfolio',
   ],
   authors: [{ name: 'Muhamad Adibwafi Menako', url: 'https://www.adibwafi.com' }],
   openGraph: {
@@ -36,13 +43,23 @@ export const metadata: Metadata = {
       'Results-driven Full Stack Engineer building scalable backend infrastructure and intuitive frontend experiences.',
     url: 'https://www.adibwafi.com',
     siteName: 'Adibwafi Portfolio',
+    images: [
+      {
+        url: '/portrait.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'Muhamad Adibwafi Menako — Full Stack Engineer',
+      },
+    ],
+    locale: 'en_US',
     type: 'website',
   },
   twitter: {
-    card: 'summary',
+    card: 'summary_large_image',
     title: 'Muhamad Adibwafi Menako — Full Stack Engineer',
     description:
       'Results-driven Full Stack Engineer building scalable backend infrastructure and intuitive frontend experiences.',
+    images: ['/portrait.jpg'],
   },
 };
 
