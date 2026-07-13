@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { SiteContext } from '@/lib/site-context';
+import { translations } from '@/lib/translations';
 import { Nav } from '@/components/Nav';
 import { AmbientBackground } from '@/components/AmbientBackground';
 import { trackEvent } from '@/lib/analytics';
@@ -10,14 +11,16 @@ import { trackEvent } from '@/lib/analytics';
 /* ─── Client shell: provides shared context, Nav, ambient bg, toast ─────── */
 // This is rendered by layout.tsx around all page content. It manages:
 //   • theme (dark / light) persisted to localStorage
+//   • lang (en / id) persisted to localStorage
 //   • handleCopyEmail (copies email + shows toast)
 // Both are exposed via SiteContext so any child page can consume them.
 
 export default function SiteShell({ children }: { children: React.ReactNode }) {
   const [theme, setTheme]  = useState<'light' | 'dark'>('light');
+  const [lang, setLang]    = useState<'en' | 'id'>('en');
   const [toast, setToast]  = useState<string | null>(null);
 
-  /* ── Restore theme from localStorage / system preference on first paint ── */
+  /* ── Restore theme and language from localStorage on first paint ───────── */
   useEffect(() => {
     const saved       = localStorage.getItem('theme') as 'light' | 'dark' | null;
     const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
@@ -29,6 +32,11 @@ export default function SiteShell({ children }: { children: React.ReactNode }) {
     } else {
       document.documentElement.classList.remove('dark');
     }
+
+    const savedLang  = localStorage.getItem('lang') as 'en' | 'id' | null;
+    const activeLang = savedLang ?? 'en';
+    setLang(activeLang);
+    document.documentElement.setAttribute('lang', activeLang);
   }, []);
 
   /* ── Toggle between light / dark ─────────────────────────────────────── */
@@ -40,17 +48,25 @@ export default function SiteShell({ children }: { children: React.ReactNode }) {
     trackEvent('click', 'Theme Toggle', next);
   };
 
+  /* ── Change language ─────────────────────────────────────────────────── */
+  const changeLang = (nextLang: 'en' | 'id') => {
+    setLang(nextLang);
+    localStorage.setItem('lang', nextLang);
+    document.documentElement.setAttribute('lang', nextLang);
+    trackEvent('click', 'Language Switch', nextLang);
+  };
+
   /* ── Copy email to clipboard + show toast ────────────────────────────── */
   const handleCopyEmail = (e: React.MouseEvent) => {
     e.preventDefault();
     navigator.clipboard.writeText('adibwafi@gmail.com');
-    setToast('Email copied to clipboard! 📋');
+    setToast(translations[lang].toast.copied);
     trackEvent('click', 'Copy Email', 'Success');
     setTimeout(() => setToast(null), 2500);
   };
 
   return (
-    <SiteContext.Provider value={{ theme, toggleTheme, handleCopyEmail }}>
+    <SiteContext.Provider value={{ theme, toggleTheme, handleCopyEmail, lang, changeLang }}>
       <AmbientBackground />
       <Nav />
 
