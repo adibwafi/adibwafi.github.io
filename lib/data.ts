@@ -1,41 +1,99 @@
 /* ─── All static data for the portfolio ──────────────────────────────────── */
 
-export const metrics = [
+export interface Metric {
+  value: string;
+  en: {
+    label: string;
+    detail: string;
+  };
+  id: {
+    label: string;
+    detail: string;
+  };
+}
+
+export const metrics: Metric[] = [
   {
     value: '40%',
-    label: 'Faster load times',
-    detail: 'via backend query optimization at Startup Campus LMS.',
+    en: {
+      label: 'Faster load times',
+      detail: 'via backend query optimization at Startup Campus LMS.',
+    },
+    id: {
+      label: 'Waktu Muat Lebih Cepat',
+      detail: 'Hasil dari optimasi kueri database pada platform LMS Startup Campus.',
+    },
   },
   {
     value: '10k+',
-    label: 'Active learners served',
-    detail: 'at 98% uptime across the LMS platform infrastructure.',
+    en: {
+      label: 'Active learners served',
+      detail: 'at 98% uptime across the LMS platform infrastructure.',
+    },
+    id: {
+      label: 'Pengguna Aktif Terlayani',
+      detail: 'Diakses dengan tingkat uptime 98% di seluruh infrastruktur platform LMS.',
+    },
   },
   {
     value: '5k+',
-    label: 'Daily data points',
-    detail: 'processed reliably via FastAPI and Google Cloud Platform.',
+    en: {
+      label: 'Daily data points',
+      detail: 'processed reliably via FastAPI and Google Cloud Platform.',
+    },
+    id: {
+      label: 'Data Diproses Harian',
+      detail: 'Diproses secara real-time dan andal menggunakan FastAPI dan Google Cloud Platform.',
+    },
   },
 ];
 
-export const projectPreviews = [
+export interface ProjectPreview {
+  title: string;
+  en: {
+    blurb: string;
+  };
+  id: {
+    blurb: string;
+  };
+  tags: string[];
+  imageSrc: string;
+  link: string;
+}
+
+export const projectPreviews: ProjectPreview[] = [
   {
     title: 'Enterprise LMS Architecture',
-    blurb: 'Scalable backend blueprint for a 10k-user learning platform.',
+    en: {
+      blurb: 'Scalable backend blueprint for a 10k-user learning platform.',
+    },
+    id: {
+      blurb: 'Cetak biru (blueprint) backend berskala besar untuk platform pembelajaran berkapasitas 10 ribu pengguna.',
+    },
     tags: ['Laravel', 'Vue.js', 'PostgreSQL'],
     imageSrc: '/work/lms-blueprint.webp',
     link: 'https://github.com/adibwafi/laravel-vue-lms-blueprint',
   },
   {
     title: 'Smart Fridge MPASI Optimizer',
-    blurb: 'AI-assisted recipe generator from real-time fridge contents.',
+    en: {
+      blurb: 'AI-assisted recipe generator from real-time fridge contents.',
+    },
+    id: {
+      blurb: 'Aplikasi berbasis AI untuk merekomendasikan resep masakan berdasarkan bahan makanan yang tersedia di kulkas secara real-time.',
+    },
     tags: ['Next.js', 'TypeScript', 'AI'],
     imageSrc: '/work/smart-fridge-mpasi.webp',
     link: 'https://github.com/adibwafi/smart-fridge-mpasi-optimizer',
   },
   {
     title: 'Serasa Kreatif Platform',
-    blurb: 'Full-stack storefront for a Bintaro creative agency.',
+    en: {
+      blurb: 'Full-stack storefront for a Bintaro creative agency.',
+    },
+    id: {
+      blurb: 'Platform storefront full-stack yang dikembangkan khusus untuk agensi kreatif di Bintaro.',
+    },
     tags: ['Next.js', 'CMS', 'Agency'],
     imageSrc: '/work/serasa-kreatif.webp',
     link: 'https://serasakreatif.id/',
@@ -46,56 +104,96 @@ export type RoleType = 'primary' | 'previous';
 
 export interface Role {
   type: RoleType;
-  role: string;
   company: string;
   period: string;
   location: string;
   tags: string[];
-  bullets: string[];
+  en: {
+    role: string;
+    bullets: string[];
+  };
+  id: {
+    role: string;
+    bullets: string[];
+  };
 }
 
 export const roles: Role[] = [
   {
     type: 'primary',
-    role: 'Full Stack Developer',
     company: 'Startup Campus',
     period: 'Jan 2023 – Dec 2025',
     location: 'Jakarta, Indonesia',
     tags: ['FastAPI', 'GCP', 'PostgreSQL', 'React', 'Redis', 'Docker', 'CI/CD'],
-    bullets: [
-      'Scaled an interactive LMS to 10,000+ learners with adaptive video streaming and 98% uptime.',
-      'Reduced system load times by 40% through targeted database query optimization.',
-      'Accelerated feature delivery by 25% via async Agile workflows and CI/CD automation.',
-      'Built a 5,000+ daily data-point processing pipeline on GCP using FastAPI.',
-    ],
+    en: {
+      role: 'Full Stack Developer',
+      bullets: [
+        'Scaled an interactive LMS to 10,000+ learners with adaptive video streaming and 98% uptime.',
+        'Reduced system load times by 40% through targeted database query optimization.',
+        'Accelerated feature delivery by 25% via async Agile workflows and CI/CD automation.',
+        'Built a 5,000+ daily data-point processing pipeline on GCP using FastAPI.',
+      ],
+    },
+    id: {
+      role: 'Full Stack Developer',
+      bullets: [
+        'Meningkatkan skala platform LMS interaktif untuk 10.000+ pengguna aktif dengan fitur video streaming adaptif dan tingkat uptime 98%.',
+        'Mengurangi waktu muat (load time) sistem hingga 40% melalui optimasi kueri database.',
+        'Mempercepat waktu rilis fitur sebesar 25% melalui penerapan alur kerja Agile asinkron dan otomatisasi CI/CD.',
+        'Merancang pipeline pengolahan data berskala 5.000+ transaksi harian di GCP menggunakan FastAPI.',
+      ],
+    },
   },
   {
     type: 'primary',
-    role: 'Full Stack Developer',
     company: 'Politeknik Digital Indonesia',
     period: 'Jul 2025 – Dec 2025',
     location: 'Serang, Indonesia',
     tags: ['Next.js', 'TypeScript', 'Tailwind CSS', 'CMS'],
-    bullets: [
-      'Implemented a responsive News & Blog system with dynamic tagging and structured CMS.',
-      'Integrated secure content pipelines enabling independent editorial control.',
-    ],
+    en: {
+      role: 'Full Stack Developer',
+      bullets: [
+        'Implemented a responsive News & Blog system with dynamic tagging and structured CMS.',
+        'Integrated secure content pipelines enabling independent editorial control.',
+      ],
+    },
+    id: {
+      role: 'Full Stack Developer',
+      bullets: [
+        'Mengembangkan sistem portal berita & blog yang responsif dilengkapi fitur dynamic tagging dan CMS terstruktur.',
+        'Mengintegrasikan pipeline manajemen konten yang aman guna memberikan kontrol editorial penuh kepada tim redaksi.',
+      ],
+    },
   },
   {
     type: 'previous',
-    role: 'Videographer',
     company: 'Garuda Indonesia & Shopee Indonesia',
     period: 'Apr 2018 – Jan 2022',
     location: 'Indonesia',
     tags: ['Visual Storytelling', 'Digital Marketing', 'Multi-channel'],
-    bullets: [
-      'Managed high-volume visual asset delivery for two major Indonesian enterprises.',
-      'Led the #BecauseYouMatter multi-channel digital marketing campaign.',
-    ],
+    en: {
+      role: 'Videographer',
+      bullets: [
+        'Managed high-volume visual asset delivery for two major Indonesian enterprises.',
+        'Led the #BecauseYouMatter multi-channel digital marketing campaign.',
+      ],
+    },
+    id: {
+      role: 'Videografer',
+      bullets: [
+        'Mengelola produksi dan distribusi aset visual berskala besar untuk dua korporasi utama di Indonesia.',
+        'Memimpin tim kreatif dalam kampanye pemasaran digital terintegrasi (multi-channel) #BecauseYouMatter.',
+      ],
+    },
   },
 ];
 
-export const techStack = [
+export interface TechStackGroup {
+  category: 'Languages' | 'Frameworks & Libraries' | 'Infrastructure & Tools';
+  items: string[];
+}
+
+export const techStack: TechStackGroup[] = [
   {
     category: 'Languages',
     items: ['TypeScript', 'JavaScript', 'Python', 'PHP', 'SQL', 'HTML / CSS'],
@@ -112,37 +210,60 @@ export const techStack = [
 
 export interface Project {
   title: string;
-  description: string;
   tags: string[];
   link: string;
   webLink?: string;
   imageSrc: string;
+  en: {
+    description: string;
+  };
+  id: {
+    description: string;
+  };
 }
 
 export const projects: Project[] = [
   {
     title: 'Enterprise LMS Architecture Blueprint',
-    description:
-      'A structural, sanitized blueprint demonstrating scalable backend architecture for high-traffic Learning Management Systems. Showcases robust relational database schemas, adaptive course-tracking patterns, and efficient API design — while preserving proprietary business boundaries.',
     tags: ['Laravel', 'Vue.js', 'PostgreSQL', 'System Architecture', 'REST API'],
     link: 'https://github.com/adibwafi/laravel-vue-lms-blueprint',
     imageSrc: '/work/lms-blueprint.webp',
+    en: {
+      description:
+        'A structural, sanitized blueprint demonstrating scalable backend architecture for high-traffic Learning Management Systems. Showcases robust relational database schemas, adaptive course-tracking patterns, and efficient API design — while preserving proprietary business boundaries.',
+    },
+    id: {
+      description:
+        'Cetak biru (blueprint) arsitektur backend berskala besar untuk platform Learning Management System (LMS) dengan trafik tinggi. Proyek ini mendemonstrasikan skema database relasional yang tangguh, sistem pelacakan progres belajar yang adaptif, dan desain API yang efisien, dengan tetap menjaga kerahasiaan data bisnis perusahaan.',
+    },
   },
   {
     title: 'Smart Fridge MPASI Optimizer',
-    description:
-      'A household-focused web application that dynamically generates nutritional complementary baby food (MPASI) recipes based on real-time ingredient availability, bridging smart pantry management with early childhood nutrition guidance.',
     tags: ['Next.js', 'TypeScript', 'AI-Assisted', 'Parenting Tech', 'Web App'],
     link: 'https://github.com/adibwafi/smart-fridge-mpasi-optimizer',
     imageSrc: '/work/smart-fridge-mpasi.webp',
+    en: {
+      description:
+        'A household-focused web application that dynamically generates nutritional complementary baby food (MPASI) recipes based on real-time ingredient availability, bridging smart pantry management with early childhood nutrition guidance.',
+    },
+    id: {
+      description:
+        'Aplikasi web rumah tangga untuk merekomendasikan resep MPASI (Makanan Pendamping ASI) bernutrisi secara dinamis berdasarkan ketersediaan bahan di kulkas. Solusi ini menjembatani pengelolaan dapur pintar dengan pemenuhan gizi anak usia dini guna mengatasi decision fatigue pada orang tua.',
+    },
   },
   {
     title: 'Serasa Kreatif Digital Platform',
-    description:
-      'Digital storefront and operations platform for a Bintaro-based creative agency specialising in social media management, video production, and targeted advertising. Built with scalability in mind ahead of the upcoming Serasa Academy launch.',
     tags: ['Next.js', 'Digital Agency', 'Video Production', 'CMS'],
     link: 'https://github.com/menako-studio/serasa-kreatif',
     webLink: 'https://serasakreatif.id/',
     imageSrc: '/work/serasa-kreatif.webp',
+    en: {
+      description:
+        'Digital storefront and operations platform for a Bintaro-based creative agency specialising in social media management, video production, and targeted advertising. Built with scalability in mind ahead of the upcoming Serasa Academy launch.',
+    },
+    id: {
+      description:
+        'Platform storefront dan operasional digital untuk agensi kreatif asal Bintaro yang berfokus pada social media management, produksi video, dan targeting iklan. Sistem dirancang dengan arsitektur yang mudah dikembangkan (scalable) guna menyambut peluncuran Serasa Academy.',
+    },
   },
 ];
