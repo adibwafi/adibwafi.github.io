@@ -122,10 +122,10 @@ const jsonLd = {
     },
     {
       '@type':             'CreativeWork',
-      name:                'Smart Fridge MPASI Optimizer',
-      description:         'A household-focused web application that dynamically generates nutritional complementary baby food (MPASI) recipes based on real-time ingredient availability.',
+      name:                'AI Baby Meal Planner',
+      description:         'A mobile-first Progressive Web App (PWA) designed to help parents plan nutrient-dense complementary feeding (weaning) menus in seconds using fridge inventory and AI.',
       programmingLanguage: 'TypeScript',
-      codeRepository:      'https://github.com/adibwafi/smart-fridge-mpasi-optimizer',
+      codeRepository:      'https://github.com/adibwafi/ai-baby-meal-planner',
     },
     {
       '@type':             'CreativeWork',

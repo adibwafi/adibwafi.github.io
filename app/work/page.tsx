@@ -6,7 +6,7 @@ import WorkPage from '@/components/WorkPage';
 export const metadata: Metadata = {
   title:       'Projects & Work — Muhamad Adibwafi Menako',
   description:
-    'Selected engineering projects: Enterprise LMS Architecture (10k+ users), Smart Fridge MPASI Optimizer, and Serasa Kreatif Platform. Built with Laravel, Next.js, FastAPI, and GCP.',
+    'Selected engineering projects: Enterprise LMS Architecture (10k+ users), AI Baby Meal Planner, and Serasa Kreatif Platform. Built with Laravel, Next.js, FastAPI, and GCP.',
   alternates:  { canonical: '/work' },
   openGraph: {
     title:       'Projects & Work — Muhamad Adibwafi Menako',
