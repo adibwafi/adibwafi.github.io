@@ -7,6 +7,7 @@ import { Mail, Linkedin, Github, ArrowUpRight, ArrowRight, MapPin } from 'lucide
 import { FadeSection, FadeItem } from '@/components/FadeSection';
 import { ShimmerImage } from '@/components/ShimmerImage';
 import { useSite } from '@/lib/site-context';
+import { translations } from '@/lib/translations';
 import { trackEvent } from '@/lib/analytics';
 import { ease, pageAnim } from '@/lib/animations';
 import { metrics, projectPreviews } from '@/lib/data';
@@ -17,7 +18,7 @@ import { metrics, projectPreviews } from '@/lib/data';
    ════════════════════════════════════════════════════════════════════════════ */
 
 export default function HomePage() {
-  const { handleCopyEmail } = useSite();
+  const { handleCopyEmail, lang } = useSite();
 
   return (
     <motion.div
@@ -46,7 +47,7 @@ export default function HomePage() {
               >
                 <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-50 border border-blue-100 text-blue-700 text-xs font-semibold tracking-wide">
                   <span className="w-1.5 h-1.5 rounded-full bg-blue-500 animate-pulse" />
-                  Full Stack Software Engineer
+                  {translations[lang].hero.badge}
                 </span>
               </motion.div>
 
@@ -69,7 +70,11 @@ export default function HomePage() {
                 transition={{ duration: 0.6, ease, delay: 0.28 }}
                 className="flex flex-wrap items-center gap-x-3 gap-y-1.5"
               >
-                {(['3+ yrs experience', 'Startup Campus', 'FastAPI · Next.js · GCP'] as const).map(
+                {([
+                  translations[lang].hero.pitch1,
+                  translations[lang].hero.pitch2,
+                  translations[lang].hero.pitch3,
+                ] as const).map(
                   (item, i, arr) => (
                     <React.Fragment key={item}>
                       <span className="text-sm font-medium text-zinc-500">{item}</span>
@@ -88,8 +93,7 @@ export default function HomePage() {
                 transition={{ duration: 0.7, ease, delay: 0.37 }}
                 className="text-zinc-500 leading-[1.75] max-w-[52ch] text-base md:text-lg"
               >
-                Building scalable backend systems and intuitive frontend experiences.
-                Based in Depok, Indonesia — open to global remote opportunities.
+                {translations[lang].hero.desc}
               </motion.p>
 
               {/* Social links */}
@@ -136,7 +140,7 @@ export default function HomePage() {
                   className="btn-primary"
                   onClick={handleCopyEmail}
                 >
-                  Hire Me <ArrowUpRight size={14} strokeWidth={2} />
+                  {translations[lang].hero.cta.hire} <ArrowUpRight size={14} strokeWidth={2} />
                 </a>
                 <a
                   href="/cv/Muhamad_Adibwafi_Menako_Resume.pdf"
@@ -144,14 +148,14 @@ export default function HomePage() {
                   className="btn-ghost"
                   onClick={() => trackEvent('click', 'CTA', 'Download CV Hero')}
                 >
-                  Download CV
+                  {translations[lang].hero.cta.cv}
                 </a>
                 <Link
                   href="/experience"
                   className="btn-ghost"
                   onClick={() => trackEvent('click', 'CTA', 'Hero View Experience')}
                 >
-                  View Experience <ArrowRight size={14} strokeWidth={1.75} />
+                  {translations[lang].hero.cta.exp} <ArrowRight size={14} strokeWidth={1.75} />
                 </Link>
               </motion.div>
             </div>
@@ -185,7 +189,7 @@ export default function HomePage() {
                   </div>
                   <span className="inline-flex items-center gap-1 px-2 py-1 rounded-full bg-emerald-50 border border-emerald-100 text-emerald-700 text-[0.65rem] font-semibold">
                     <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
-                    Open to work
+                    {translations[lang].hero.status}
                   </span>
                 </div>
               </motion.div>
@@ -204,7 +208,7 @@ export default function HomePage() {
         <div className="max-w-layout mx-auto">
           <FadeSection>
             <FadeItem className="mb-8">
-              <h2 className="section-label">Proof of Impact</h2>
+              <h2 className="section-label">{translations[lang].metrics.title}</h2>
             </FadeItem>
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
               {metrics.map((m, i) => (
@@ -212,8 +216,8 @@ export default function HomePage() {
                   <p className="text-5xl font-extrabold text-zinc-900 tracking-tight leading-none mb-3">
                     {m.value}
                   </p>
-                  <p className="text-sm font-semibold text-zinc-700 mb-1">{m.label}</p>
-                  <p className="text-xs text-zinc-400 leading-relaxed">{m.detail}</p>
+                  <p className="text-sm font-semibold text-zinc-700 mb-1">{m[lang].label}</p>
+                  <p className="text-xs text-zinc-400 leading-relaxed">{m[lang].detail}</p>
                 </FadeItem>
               ))}
             </div>
@@ -230,13 +234,13 @@ export default function HomePage() {
         <div className="max-w-layout mx-auto">
           <FadeSection>
             <FadeItem className="flex items-center justify-between mb-8">
-              <h2 className="section-label">Featured Work</h2>
+              <h2 className="section-label">{translations[lang].featuredWork.title}</h2>
               <Link
                 href="/work"
                 onClick={() => trackEvent('click', 'Navigation', 'View All Projects')}
                 className="flex items-center gap-1 text-sm font-medium text-zinc-500 hover:text-zinc-900 transition-colors"
               >
-                All projects <ArrowRight size={14} strokeWidth={1.75} />
+                {translations[lang].featuredWork.link} <ArrowRight size={14} strokeWidth={1.75} />
               </Link>
             </FadeItem>
 
@@ -275,7 +279,7 @@ export default function HomePage() {
                       <h3 className="text-sm font-semibold text-zinc-900 leading-snug mb-1">
                         {p.title}
                       </h3>
-                      <p className="text-xs text-zinc-500 leading-relaxed">{p.blurb}</p>
+                      <p className="text-xs text-zinc-500 leading-relaxed">{p[lang].blurb}</p>
                     </div>
                   </a>
                 </FadeItem>
@@ -295,14 +299,12 @@ export default function HomePage() {
           <FadeSection>
             <div className="bento-card p-10 md:p-14 flex flex-col md:flex-row items-start md:items-end justify-between gap-8">
               <div>
-                <p className="section-label mb-4">Available for new opportunities</p>
-                <h2 className="text-hero font-extrabold text-zinc-900 tracking-tight leading-tight">
-                  Let&apos;s build<br />
-                  something great.
+                <p className="section-label mb-4">{translations[lang].ctaSection.label}</p>
+                <h2 className="text-hero font-extrabold text-zinc-900 tracking-tight leading-tight whitespace-pre-line">
+                  {translations[lang].ctaSection.title}
                 </h2>
                 <p className="text-zinc-500 mt-4 max-w-[44ch] leading-relaxed">
-                  Open to full-time roles, contract projects, and collaborations with teams that
-                  care about clean architecture and great user experience.
+                  {translations[lang].ctaSection.desc}
                 </p>
               </div>
               <div className="flex flex-col sm:flex-row gap-3 flex-shrink-0">
@@ -312,7 +314,7 @@ export default function HomePage() {
                   onClick={handleCopyEmail}
                 >
                   <Mail size={14} strokeWidth={1.75} />
-                  Send an email
+                  {translations[lang].ctaSection.email}
                 </a>
                 <a
                   href="/cv/Muhamad_Adibwafi_Menako_Resume.pdf"
@@ -320,7 +322,7 @@ export default function HomePage() {
                   className="btn-ghost"
                   onClick={() => trackEvent('click', 'CTA', 'Download CV Footer Banner')}
                 >
-                  Download CV
+                  {translations[lang].ctaSection.cv}
                 </a>
                 <a
                   href="https://linkedin.com/in/adibwafi"

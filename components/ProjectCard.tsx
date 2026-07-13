@@ -3,6 +3,8 @@
 import React from 'react';
 import { Github, ExternalLink } from 'lucide-react';
 import { ShimmerImage } from '@/components/ShimmerImage';
+import { useSite } from '@/lib/site-context';
+import { translations } from '@/lib/translations';
 import { trackEvent } from '@/lib/analytics';
 import type { Project } from '@/lib/data';
 
@@ -15,7 +17,8 @@ export function ProjectCard({
   project: Project;
   index: number;
 }) {
-  const { title, description, tags, link, webLink, imageSrc } = project;
+  const { lang } = useSite();
+  const { title, tags, link, webLink, imageSrc } = project;
   const isEven = index % 2 === 0;
 
   return (
@@ -53,7 +56,7 @@ export function ProjectCard({
               {title}
             </h3>
 
-            <p className="text-sm text-zinc-500 leading-relaxed mb-5">{description}</p>
+            <p className="text-sm text-zinc-500 leading-relaxed mb-5">{project[lang].description}</p>
 
             <div className="flex flex-wrap gap-1.5">
               {tags.map((t) => (
@@ -72,7 +75,7 @@ export function ProjectCard({
               onClick={() => trackEvent('click', 'Project Link', `GitHub: ${title}`)}
             >
               <Github size={13} strokeWidth={1.75} />
-              View Repository
+              {translations[lang].work.viewRepo}
             </a>
             {webLink && (
               <a
@@ -83,7 +86,7 @@ export function ProjectCard({
                 onClick={() => trackEvent('click', 'Project Link', `Website: ${title}`)}
               >
                 <ExternalLink size={13} strokeWidth={1.75} />
-                Visit Website
+                {translations[lang].work.visitWeb}
               </a>
             )}
           </div>

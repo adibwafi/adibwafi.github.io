@@ -6,6 +6,8 @@ import { Github, ArrowUpRight } from 'lucide-react';
 import { FadeSection, FadeItem } from '@/components/FadeSection';
 import { ProjectCard } from '@/components/ProjectCard';
 import { SimpleFooter } from '@/components/SimpleFooter';
+import { useSite } from '@/lib/site-context';
+import { translations } from '@/lib/translations';
 import { trackEvent } from '@/lib/analytics';
 import { pageAnim } from '@/lib/animations';
 import { projects } from '@/lib/data';
@@ -16,6 +18,8 @@ import { projects } from '@/lib/data';
    ════════════════════════════════════════════════════════════════════════════ */
 
 export default function WorkPage() {
+  const { lang } = useSite();
+
   return (
     <motion.div
       key="work"
@@ -28,13 +32,12 @@ export default function WorkPage() {
       <div className="max-w-layout mx-auto px-5 md:px-10 lg:px-16 pb-14">
         <FadeSection>
           <FadeItem>
-            <span className="section-label block mb-5">Selected Work</span>
+            <span className="section-label block mb-5">{translations[lang].work.label}</span>
             <h1 className="text-hero font-extrabold text-zinc-900 tracking-tight leading-[1.08] mb-4">
-              Projects &amp; Repositories
+              {translations[lang].work.title}
             </h1>
             <p className="text-zinc-500 max-w-[52ch] leading-relaxed">
-              Three repositories spanning enterprise infrastructure, consumer product engineering,
-              and creative agency platforms.
+              {translations[lang].work.desc}
             </p>
           </FadeItem>
         </FadeSection>
@@ -67,12 +70,12 @@ export default function WorkPage() {
           <FadeSection>
             <FadeItem className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
               <div>
-                <h2 className="section-label mb-3">Open Source</h2>
+                <h2 className="section-label mb-3">{translations[lang].work.openSourceLabel}</h2>
                 <h3 className="text-xl font-bold text-zinc-900 tracking-tight mb-1">
-                  More on GitHub
+                  {translations[lang].work.openSourceTitle}
                 </h3>
                 <p className="text-sm text-zinc-500 max-w-[40ch]">
-                  Explore more projects, contributions, and experiments on my GitHub profile.
+                  {translations[lang].work.openSourceDesc}
                 </p>
               </div>
               <a
@@ -83,7 +86,7 @@ export default function WorkPage() {
                 onClick={() => trackEvent('click', 'CTA', 'GitHub Profile Link')}
               >
                 <Github size={14} strokeWidth={1.75} />
-                View GitHub Profile
+                {translations[lang].work.openSourceBtn}
                 <ArrowUpRight size={13} strokeWidth={2} />
               </a>
             </FadeItem>
