@@ -52,11 +52,11 @@ const projects = [
   },
   {
     index: '02',
-    title: 'Smart Fridge MPASI Optimizer',
-    tags: ['Web App', 'AI-Assisted', 'Parenting Tech'],
+    title: 'AI Baby Meal Planner',
+    tags: ['PWA', 'AI-Assisted', 'Parenting Tech'],
     description:
-      'A practical, household-focused web application engineered to solve daily parenting decision fatigue. It dynamically generates nutritional complementary baby food (MPASI) recipes based on real-time ingredient availability in the fridge, bridging smart pantry management with early childhood nutrition.',
-    link: 'https://github.com/adibwafi/smart-fridge-mpasi-optimizer',
+      'A mobile-first Progressive Web App (PWA) designed to help parents plan nutrient-dense complementary feeding (weaning) menus in seconds using fridge inventory and AI. Built with a 100% Free-Tier Architecture for maximum cost efficiency, featuring offline database fallback, automated portion-size calculations, developmental milestone tracking, dynamic shopping list generation, and visual TikTok search integration for instant video recipes.',
+    link: 'https://github.com/adibwafi/ai-baby-meal-planner',
     imageSrc: '/work/smart-fridge-mpasi-2.webp',
     gridClass: 'md:col-span-5',
     imageHeight: 'h-64 md:h-[380px]',
