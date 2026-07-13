@@ -9,12 +9,16 @@ interface SiteContextValue {
   theme: 'light' | 'dark';
   toggleTheme: () => void;
   handleCopyEmail: (e: React.MouseEvent) => void;
+  lang: 'en' | 'id';
+  changeLang: (lang: 'en' | 'id') => void;
 }
 
 export const SiteContext = createContext<SiteContextValue>({
   theme: 'light',
   toggleTheme: () => {},
   handleCopyEmail: () => {},
+  lang: 'en',
+  changeLang: () => {},
 });
 
 export const useSite = () => useContext(SiteContext);
