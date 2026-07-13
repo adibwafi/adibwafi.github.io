@@ -75,16 +75,16 @@ export const projectPreviews: ProjectPreview[] = [
     link: 'https://github.com/adibwafi/laravel-vue-lms-blueprint',
   },
   {
-    title: 'Smart Fridge MPASI Optimizer',
+    title: 'AI Baby Meal Planner',
     en: {
-      blurb: 'AI-assisted recipe generator from real-time fridge contents.',
+      blurb: 'Mobile-first PWA for automated baby weaning menus and smart fridge inventory.',
     },
     id: {
-      blurb: 'Aplikasi berbasis AI untuk merekomendasikan resep masakan berdasarkan bahan makanan yang tersedia di kulkas secara real-time.',
+      blurb: 'PWA mobile-first untuk menyusun menu MPASI otomatis dan manajemen inventaris kulkas pintar.',
     },
-    tags: ['Next.js', 'TypeScript', 'AI'],
+    tags: ['Next.js', 'TypeScript', 'PWA', 'AI'],
     imageSrc: '/work/smart-fridge-mpasi.webp',
-    link: 'https://github.com/adibwafi/smart-fridge-mpasi-optimizer',
+    link: 'https://github.com/adibwafi/ai-baby-meal-planner',
   },
   {
     title: 'Serasa Kreatif Platform',
@@ -238,17 +238,17 @@ export const projects: Project[] = [
     },
   },
   {
-    title: 'Smart Fridge MPASI Optimizer',
-    tags: ['Next.js', 'TypeScript', 'AI-Assisted', 'Parenting Tech', 'Web App'],
-    link: 'https://github.com/adibwafi/smart-fridge-mpasi-optimizer',
+    title: 'AI Baby Meal Planner',
+    tags: ['Next.js', 'TypeScript', 'PWA', 'Parenting Tech', 'AI'],
+    link: 'https://github.com/adibwafi/ai-baby-meal-planner',
     imageSrc: '/work/smart-fridge-mpasi.webp',
     en: {
       description:
-        'A household-focused web application that dynamically generates nutritional complementary baby food (MPASI) recipes based on real-time ingredient availability, bridging smart pantry management with early childhood nutrition guidance.',
+        'A mobile-first Progressive Web App (PWA) designed to help parents plan nutrient-dense complementary feeding (weaning) menus in seconds using fridge inventory and AI. Built with a 100% Free-Tier Architecture for maximum cost efficiency, featuring offline database fallback, automated portion-size calculations, developmental milestone tracking, dynamic shopping list generation, and visual TikTok search integration for instant video recipes.',
     },
     id: {
       description:
-        'Aplikasi web rumah tangga untuk merekomendasikan resep MPASI (Makanan Pendamping ASI) bernutrisi secara dinamis berdasarkan ketersediaan bahan di kulkas. Solusi ini menjembatani pengelolaan dapur pintar dengan pemenuhan gizi anak usia dini guna mengatasi decision fatigue pada orang tua.',
+        'Progressive Web App (PWA) mobile-first yang dirancang untuk membantu orang tua menyusun menu MPASI (Makanan Pendamping ASI) bernutrisi tinggi dalam hitungan detik menggunakan inventaris kulkas dan AI. Dibangun dengan Arsitektur 100% Free-Tier untuk efisiensi biaya maksimal, dilengkapi fallback database offline, kalkulasi porsi otomatis, pelacakan milestone tumbuh kembang, pembuatan daftar belanja dinamis, dan integrasi pencarian visual TikTok.',
     },
   },
   {
