@@ -6,6 +6,7 @@ import Link from 'next/link';
 import { Sun, Moon, ArrowUpRight } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { useSite } from '@/lib/site-context';
+import { translations } from '@/lib/translations';
 import { trackEvent } from '@/lib/analytics';
 import { ease } from '@/lib/animations';
 
@@ -19,10 +20,18 @@ const navItems = [
 
 export function Nav() {
   const pathname  = usePathname();
-  const { theme, toggleTheme, handleCopyEmail } = useSite();
+  const { theme, toggleTheme, handleCopyEmail, lang, changeLang } = useSite();
 
   const isActive = (href: string) =>
     href === '/' ? pathname === '/' : pathname?.startsWith(href) ?? false;
+
+  const getNavLabel = (label: string, activeLang: 'en' | 'id') => {
+    const t = translations[activeLang].nav;
+    if (label === 'Home') return t.home;
+    if (label === 'Experience') return t.experience;
+    if (label === 'Work') return t.work;
+    return label;
+  };
 
   return (
     <motion.header
@@ -61,13 +70,37 @@ export function Nav() {
                   : 'text-zinc-500 hover:text-zinc-900 hover:bg-zinc-50'
               }`}
             >
-              {item.label}
+              {getNavLabel(item.label, lang)}
             </Link>
           ))}
         </nav>
 
         {/* CTA & Theme Toggle */}
         <div className="flex items-center gap-3">
+          {/* Language toggle pill */}
+          <div className="flex items-center rounded-full border border-zinc-200/80 p-0.5 dark:border-zinc-800 bg-white/50 dark:bg-zinc-950/50">
+            <button
+              onClick={() => changeLang('en')}
+              className={`px-2 py-0.5 rounded-full text-[10px] font-bold transition-all ${
+                lang === 'en'
+                  ? 'bg-zinc-900 text-white dark:bg-zinc-100 dark:text-zinc-900 shadow-sm'
+                  : 'text-zinc-400 hover:text-zinc-700 dark:hover:text-zinc-200'
+              }`}
+            >
+              EN
+            </button>
+            <button
+              onClick={() => changeLang('id')}
+              className={`px-2 py-0.5 rounded-full text-[10px] font-bold transition-all ${
+                lang === 'id'
+                  ? 'bg-zinc-900 text-white dark:bg-zinc-100 dark:text-zinc-900 shadow-sm'
+                  : 'text-zinc-400 hover:text-zinc-700 dark:hover:text-zinc-200'
+              }`}
+            >
+              ID
+            </button>
+          </div>
+
           <button
             onClick={toggleTheme}
             className="p-2 rounded-full border border-zinc-200/80 hover:bg-zinc-50 dark:border-zinc-800 dark:hover:bg-zinc-900 transition-colors flex items-center justify-center"
@@ -83,13 +116,13 @@ export function Nav() {
           <a
             href="mailto:adibwafi@gmail.com"
             className="btn-primary text-xs hidden sm:inline-flex"
-            aria-label="Send an email to hire Muhamad Adibwafi Menako"
+            aria-label={translations[lang].nav.hireMeAria}
             onClick={(e) => {
               handleCopyEmail(e);
               trackEvent('click', 'CTA', 'Nav Hire Me');
             }}
           >
-            Hire Me <ArrowUpRight size={13} strokeWidth={2} />
+            {translations[lang].nav.hireMe} <ArrowUpRight size={13} strokeWidth={2} />
           </a>
         </div>
       </div>
@@ -110,7 +143,7 @@ export function Nav() {
               isActive(item.href) ? 'text-zinc-900' : 'text-zinc-400'
             }`}
           >
-            {item.label}
+            {getNavLabel(item.label, lang)}
             {isActive(item.href) && (
               <motion.div
                 layoutId="mobile-tab-indicator"
