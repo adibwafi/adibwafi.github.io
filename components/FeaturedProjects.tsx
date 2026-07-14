@@ -57,6 +57,7 @@ const projects = [
     description:
       'A mobile-first Progressive Web App (PWA) designed to help parents plan nutrient-dense complementary feeding (weaning) menus in seconds using fridge inventory and AI. Built with a 100% Free-Tier Architecture for maximum cost efficiency, featuring offline database fallback, automated portion-size calculations, developmental milestone tracking, dynamic shopping list generation, and visual TikTok search integration for instant video recipes.',
     link: 'https://github.com/adibwafi/ai-baby-meal-planner',
+    webLink: 'https://ai-baby-meal-planner-beta.vercel.app/',
     imageSrc: '/work/smart-fridge-mpasi-2.webp',
     gridClass: 'md:col-span-5',
     imageHeight: 'h-64 md:h-[380px]',
