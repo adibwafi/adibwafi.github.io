@@ -126,6 +126,7 @@ const jsonLd = {
       description:         'A mobile-first Progressive Web App (PWA) designed to help parents plan nutrient-dense complementary feeding (weaning) menus in seconds using fridge inventory and AI.',
       programmingLanguage: 'TypeScript',
       codeRepository:      'https://github.com/adibwafi/ai-baby-meal-planner',
+      url:                 'https://ai-baby-meal-planner-beta.vercel.app/',
     },
     {
       '@type':             'CreativeWork',
