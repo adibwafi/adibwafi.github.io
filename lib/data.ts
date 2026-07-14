@@ -241,6 +241,7 @@ export const projects: Project[] = [
     title: 'AI Baby Meal Planner',
     tags: ['Next.js', 'TypeScript', 'PWA', 'Parenting Tech', 'AI'],
     link: 'https://github.com/adibwafi/ai-baby-meal-planner',
+    webLink: 'https://ai-baby-meal-planner-beta.vercel.app/',
     imageSrc: '/work/smart-fridge-mpasi.webp',
     en: {
       description:
