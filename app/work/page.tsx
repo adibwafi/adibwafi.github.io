@@ -6,11 +6,11 @@ import WorkPage from '@/components/WorkPage';
 export const metadata: Metadata = {
   title:       'Projects & Work — Muhamad Adibwafi Menako',
   description:
-    'Selected engineering projects: Enterprise LMS Architecture (10k+ users), AI Baby Meal Planner, and Serasa Kreatif Platform. Built with Laravel, Next.js, FastAPI, and GCP.',
+    'Selected engineering projects: Enterprise LMS Architecture (10k+ users), AI Baby Meal Planner, Serasa Kreatif Platform, and Amana Care Website. Built with Next.js, Laravel, FastAPI, Supabase, and GCP.',
   alternates:  { canonical: '/work' },
   openGraph: {
     title:       'Projects & Work — Muhamad Adibwafi Menako',
-    description: 'Three production-grade projects spanning enterprise infrastructure, consumer apps, and agency platforms.',
+    description: 'Production-grade engineering projects spanning enterprise infrastructure, consumer apps, agency platforms, and daycare websites.',
     url:         'https://www.adibwafi.com/work',
   },
 };
