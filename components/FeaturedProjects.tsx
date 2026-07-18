@@ -74,6 +74,18 @@ const projects = [
     gridClass: 'md:col-span-6 md:col-start-4',
     imageHeight: 'h-56 md:h-[400px]',
   },
+  {
+    index: '04',
+    title: 'Amana Care — Daycare & Parents\' Working Space Website',
+    tags: ['Next.js 15', 'TypeScript', 'Supabase', 'Lenis'],
+    description:
+      'A high-end profile and registration platform built for Amana Care Bintaro Sektor 7 using Next.js 15 (App Router) and TypeScript. Features 60fps Lenis smooth scroll, Embla Carousel sliders, embedded Cal.com scheduling, spring physics transitions, and serverless Supabase & Resend API endpoints.',
+    link: 'https://github.com/menako-studio/amana-care',
+    webLink: 'https://www.amanacare.id/',
+    imageSrc: '/work/amana-care.webp',
+    gridClass: 'md:col-span-6 md:col-start-4',
+    imageHeight: 'h-56 md:h-[400px]',
+  },
 ];
 
 /* ─── Editorial Link Component ──────────────────────────────────────────── */
@@ -247,6 +259,13 @@ export function FeaturedProjects() {
           <FadeUp delay={0.08} className={`${projects[2].gridClass} md:mt-10`}>
             <ProjectCard project={projects[2]} />
           </FadeUp>
+
+          {/* Project 04 — spans 6 cols, col-start-4: daycare & co-working platform */}
+          {projects[3] && (
+            <FadeUp delay={0.1} className={`${projects[3].gridClass} md:mt-10`}>
+              <ProjectCard project={projects[3]} />
+            </FadeUp>
+          )}
         </div>
 
       </div>

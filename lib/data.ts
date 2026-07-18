@@ -98,6 +98,18 @@ export const projectPreviews: ProjectPreview[] = [
     imageSrc: '/work/serasa-kreatif.webp',
     link: 'https://serasakreatif.id/',
   },
+  {
+    title: 'Amana Care Website',
+    en: {
+      blurb: 'High-end profile & booking platform for Bintaro daycare & parents working space.',
+    },
+    id: {
+      blurb: 'Platform profil & pendaftaran eksklusif untuk daycare & parents working space di Bintaro.',
+    },
+    tags: ['Next.js 15', 'TypeScript', 'Supabase', 'Lenis'],
+    imageSrc: '/work/amana-care.webp',
+    link: 'https://www.amanacare.id/',
+  },
 ];
 
 export type RoleType = 'primary' | 'previous';
@@ -265,6 +277,21 @@ export const projects: Project[] = [
     id: {
       description:
         'Platform storefront dan operasional digital untuk agensi kreatif asal Bintaro yang berfokus pada social media management, produksi video, dan targeting iklan. Sistem dirancang dengan arsitektur yang mudah dikembangkan (scalable) guna menyambut peluncuran Serasa Academy.',
+    },
+  },
+  {
+    title: 'Amana Care — Daycare & Parents\' Working Space Website',
+    tags: ['Next.js 15', 'TypeScript', 'Lenis Scroll', 'Supabase', 'Cal.com'],
+    link: 'https://github.com/menako-studio/amana-care',
+    webLink: 'https://www.amanacare.id/',
+    imageSrc: '/work/amana-care.webp',
+    en: {
+      description:
+        'A high-end profile and registration platform built for Amana Care Bintaro Sektor 7 using Next.js 15 (App Router) and TypeScript. The interface implements premium visual aesthetics, silky-smooth 60fps Lenis scroll engine, Embla Carousel testimonial sliders, embedded Cal.com site visit scheduling, spring physics transitions, and production-grade serverless Supabase & Resend API endpoints.',
+    },
+    id: {
+      description:
+        'Platform profil dan pendaftaran eksklusif yang dirancang untuk Amana Care Bintaro Sektor 7 menggunakan Next.js 15 (App Router) dan TypeScript. Antarmuka ini mengimplementasikan estetika visual premium, Lenis scroll engine 60fps yang sangat mulus, slider Embla Carousel, integrasi pemesanan kunjungan Cal.com, transisi spring physics, serta endpoint serverless Supabase & Resend API.',
     },
   },
 ];
