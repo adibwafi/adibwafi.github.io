@@ -6,13 +6,13 @@
 # Run:    docker run -p 3000:3000 --env-file .env.local adibwafi-portfolio
 # ============================================================
 
-# Stage 1: Install dependencies only
+# Stage 1: Install dependencies
 FROM node:20-alpine AS deps
 RUN apk add --no-cache libc6-compat
 WORKDIR /app
 
 COPY package.json package-lock.json* ./
-RUN npm ci --only=production --ignore-scripts
+RUN npm ci --ignore-scripts
 
 # ============================================================
 # Stage 2: Build the application
@@ -23,9 +23,6 @@ COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 
 ENV NEXT_TELEMETRY_DISABLED=1
-
-# Install all deps (including devDeps needed for TypeScript build)
-RUN npm ci --ignore-scripts
 
 # Build Next.js app (TypeScript compilation happens here)
 RUN npm run build
