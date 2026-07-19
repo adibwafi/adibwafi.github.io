@@ -5,6 +5,7 @@ import { Analytics } from '@vercel/analytics/react';
 import { SpeedInsights } from '@vercel/speed-insights/next';
 import './globals.css';
 import SiteShell from '@/components/SiteShell';
+import AnalyticsRouteTracker from '@/components/AnalyticsRouteTracker';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -147,6 +148,7 @@ const jsonLd = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   const gaId = process.env.NEXT_PUBLIC_GA_ID;
+  const gtmId = process.env.NEXT_PUBLIC_GTM_ID || 'GTM-KHMNHQN6';
 
   return (
     <html lang="en" className={`${inter.variable} scroll-smooth`}>
@@ -160,11 +162,26 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link rel="me" href="mailto:adibwafi@gmail.com" />
       </head>
       <body className="antialiased">
+        {/* Google Tag Manager (noscript) */}
+        {gtmId && (
+          <noscript>
+            <iframe
+              src={`https://www.googletagmanager.com/ns.html?id=${gtmId}`}
+              height="0"
+              width="0"
+              style={{ display: 'none', visibility: 'hidden' }}
+            />
+          </noscript>
+        )}
+
         {/* Structured data */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
+
+        {/* Client-side route change pageview tracking */}
+        <AnalyticsRouteTracker />
 
         {/* SiteShell provides Nav, theme, toast, and SiteContext to all pages */}
         <SiteShell>{children}</SiteShell>
@@ -172,6 +189,19 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         {/* Vercel Analytics & Speed Insights */}
         <Analytics />
         <SpeedInsights />
+
+        {/* Google Tag Manager */}
+        {gtmId && (
+          <Script id="google-tag-manager" strategy="afterInteractive">
+            {`
+              (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+              new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+              j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+              'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+              })(window,document,'script','dataLayer','${gtmId}');
+            `}
+          </Script>
+        )}
 
         {/* Google Analytics */}
         {gaId && (
