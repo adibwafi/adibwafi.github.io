@@ -85,6 +85,9 @@ export const metadata: Metadata = {
       'max-image-preview': 'large',
     },
   },
+  verification: {
+    google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION,
+  },
 };
 
 /* ─── JSON-LD structured data ─────────────────────────────────────────────── */
