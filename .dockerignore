@@ -1,0 +1,32 @@
+# .dockerignore — Files excluded from Docker build context
+
+# Dependencies
+node_modules
+npm-debug.log*
+
+# Next.js build output
+.next
+out
+
+# Environment files — NEVER in Docker images
+.env
+.env.*
+.env.local
+
+# Version control
+.git
+.gitignore
+
+# IDE
+.vscode
+.idea
+
+# OS
+.DS_Store
+Thumbs.db
+
+# TypeScript build info
+*.tsbuildinfo
+
+# Documentation
+*.md
