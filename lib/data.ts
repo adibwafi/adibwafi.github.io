@@ -65,12 +65,12 @@ export const projectPreviews: ProjectPreview[] = [
   {
     title: 'Enterprise LMS Architecture',
     en: {
-      blurb: 'Scalable backend blueprint for a 10k-user learning platform.',
+      blurb: 'Production-ready LMS blueprint with 40% load time reduction & live demo.',
     },
     id: {
-      blurb: 'Cetak biru (blueprint) backend berskala besar untuk platform pembelajaran berkapasitas 10 ribu pengguna.',
+      blurb: 'Cetak biru LMS skala produksi dengan optimasi load time 40% & demo langsung.',
     },
-    tags: ['Laravel', 'Vue.js', 'PostgreSQL'],
+    tags: ['Laravel 8', 'Vue.js 2', 'MySQL'],
     imageSrc: '/work/lms-blueprint.webp',
     link: 'https://github.com/adibwafi/laravel-vue-lms-blueprint',
   },
@@ -237,16 +237,17 @@ export interface Project {
 export const projects: Project[] = [
   {
     title: 'Enterprise LMS Architecture Blueprint',
-    tags: ['Laravel', 'Vue.js', 'PostgreSQL', 'System Architecture', 'REST API'],
+    tags: ['Laravel 8', 'Vue.js 2', 'MySQL', 'Redis', 'Docker', 'REST API'],
     link: 'https://github.com/adibwafi/laravel-vue-lms-blueprint',
+    webLink: 'https://laravel-vue-lms-blueprint.vercel.app/',
     imageSrc: '/work/lms-blueprint.webp',
     en: {
       description:
-        'A structural, sanitized blueprint demonstrating scalable backend architecture for high-traffic Learning Management Systems. Showcases robust relational database schemas, adaptive course-tracking patterns, and efficient API design — while preserving proprietary business boundaries.',
+        'A production-grade architecture blueprint extracted and sanitized from a real-world Learning Management System serving 10,000+ active learners with 98% uptime. Built with a Laravel 8 REST API (Sanctum JWT), Vue.js 2 (Vuetify), MySQL 8, Redis queues, and Docker. Demonstrates composite indexing and Eloquent query optimizations that reduced complex course-tracking response times by 40%.',
     },
     id: {
       description:
-        'Cetak biru (blueprint) arsitektur backend berskala besar untuk platform Learning Management System (LMS) dengan trafik tinggi. Proyek ini mendemonstrasikan skema database relasional yang tangguh, sistem pelacakan progres belajar yang adaptif, dan desain API yang efisien, dengan tetap menjaga kerahasiaan data bisnis perusahaan.',
+        'Cetak biru (blueprint) arsitektur Learning Management System (LMS) tingkat produksi yang diekstrak dan disanitasi dari sistem nyata yang melayani 10.000+ pengguna aktif dengan 98% uptime. Dibuat dengan Laravel 8 REST API (Sanctum JWT), Vue.js 2 (Vuetify), MySQL 8, Redis queues, dan Docker. Mendemonstrasikan indeks komposit serta optimasi kueri Eloquent yang memangkas load time pelacakan kursus sebesar 40%.',
     },
   },
   {
