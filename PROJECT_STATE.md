@@ -136,7 +136,7 @@ adibwafi.github.io/
 ## 4. REMAINING TASKS, TODOs & TECHNICAL DEBT
 
 ### Identified Technical Debt & Configuration Bugs
-1. **Lighthouse CI Route Mismatch**: `.lighthouserc.json` references non-existent route `http://localhost:3000/about` on line 4. Must be updated to `http://localhost:3000/experience` or `http://localhost:3000/work` to avoid 404 warnings in CI.
+1. **Lighthouse CI Route Mismatch [RESOLVED]**: `.lighthouserc.json` previously referenced non-existent route `http://localhost:3000/about`. Updated to audit valid routes `http://localhost:3000`, `http://localhost:3000/experience`, and `http://localhost:3000/work`.
 2. **Missing Unit & Component Testing Setup**: No test framework (Jest or Vitest) or test runner scripts exist in `package.json`.
 3. **No Dynamic API Routes / Backend Endpoints**: Site is currently purely static/client-rendered with static data. Form submissions relying on email copy fallback to `mailto:` protocols.
 
