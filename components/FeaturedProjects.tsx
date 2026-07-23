@@ -42,10 +42,11 @@ const projects = [
   {
     index: '01',
     title: 'Enterprise LMS Architecture Blueprint',
-    tags: ['Laravel', 'Vue.js', 'System Architecture'],
+    tags: ['Laravel 8', 'Vue.js 2', 'System Architecture'],
     description:
-      'A structural, sanitized blueprint demonstrating scalable backend architecture for high-traffic Learning Management Systems. Designed to showcase robust relational database schemas, adaptive course-tracking patterns, and efficient API design while strictly preserving proprietary business boundaries.',
+      'A production-grade architecture blueprint extracted and sanitized from a real-world Learning Management System serving 10,000+ active learners with 98% uptime. Built with a Laravel 8 REST API (Sanctum JWT), Vue.js 2 (Vuetify), MySQL 8, Redis queues, and Docker. Features Eloquent query optimizations and composite indexes that reduced course tracking load times by 40%.',
     link: 'https://github.com/adibwafi/laravel-vue-lms-blueprint',
+    webLink: 'https://laravel-vue-lms-blueprint.vercel.app/',
     imageSrc: '/work/lms-blueprint-rev.webp',
     gridClass: 'md:col-span-7',
     imageHeight: 'h-72 md:h-[460px]',
