@@ -125,6 +125,7 @@ const jsonLd = {
       description:         'A structural, sanitized blueprint demonstrating scalable backend architecture for high-traffic Learning Management Systems.',
       programmingLanguage: 'PHP',
       codeRepository:      'https://github.com/adibwafi/laravel-vue-lms-blueprint',
+      url:                 'https://laravel-vue-lms-blueprint.vercel.app/',
     },
     {
       '@type':             'CreativeWork',
