@@ -63,6 +63,18 @@ export interface ProjectPreview {
 
 export const projectPreviews: ProjectPreview[] = [
   {
+    title: 'Livecode Logic Trainer',
+    en: {
+      blurb: 'Timed web app for live-code technical interview practice under 30-min constraints.',
+    },
+    id: {
+      blurb: 'Aplikasi web interaktif berdurasi terbatas untuk simulasi wawancara live-coding.',
+    },
+    tags: ['JavaScript', 'REST API', 'Vercel'],
+    imageSrc: '/work/livecode-logic-trainer.webp',
+    link: 'https://github.com/adibwafi/livecode-logic-trainer',
+  },
+  {
     title: 'Enterprise LMS Architecture',
     en: {
       blurb: 'Production-ready LMS blueprint with 40% load time reduction & live demo.',
@@ -87,18 +99,6 @@ export const projectPreviews: ProjectPreview[] = [
     link: 'https://github.com/adibwafi/ai-baby-meal-planner',
   },
   {
-    title: 'Serasa Kreatif Platform',
-    en: {
-      blurb: 'Full-stack storefront for a Bintaro creative agency.',
-    },
-    id: {
-      blurb: 'Platform storefront full-stack yang dikembangkan khusus untuk agensi kreatif di Bintaro.',
-    },
-    tags: ['Next.js', 'CMS', 'Agency'],
-    imageSrc: '/work/serasa-kreatif.webp',
-    link: 'https://serasakreatif.id/',
-  },
-  {
     title: 'Amana Care Website',
     en: {
       blurb: 'High-end profile & booking platform for Bintaro daycare & parents working space.',
@@ -109,6 +109,18 @@ export const projectPreviews: ProjectPreview[] = [
     tags: ['Next.js 15', 'TypeScript', 'Supabase', 'Lenis'],
     imageSrc: '/work/amana-care.webp',
     link: 'https://www.amanacare.id/',
+  },
+  {
+    title: 'Serasa Kreatif Platform',
+    en: {
+      blurb: 'Full-stack storefront for a Bintaro creative agency.',
+    },
+    id: {
+      blurb: 'Platform storefront full-stack yang dikembangkan khusus untuk agensi kreatif di Bintaro.',
+    },
+    tags: ['Next.js', 'CMS', 'Agency'],
+    imageSrc: '/work/serasa-kreatif.webp',
+    link: 'https://serasakreatif.id/',
   },
 ];
 
@@ -236,6 +248,21 @@ export interface Project {
 
 export const projects: Project[] = [
   {
+    title: 'Livecode Logic Trainer',
+    tags: ['JavaScript', 'REST API', 'Technical Interview', 'Web App', 'Vercel'],
+    link: 'https://github.com/adibwafi/livecode-logic-trainer',
+    webLink: 'https://livecode-logic-trainer.vercel.app/',
+    imageSrc: '/work/livecode-logic-trainer.webp',
+    en: {
+      description:
+        'An interactive, timed web application designed for live-code technical interview preparation. Practice JavaScript REST API logic under real interview time constraints (strictly capped at 30 minutes) for Backend, Frontend, Full Stack, and QA roles across Indonesian and global tech companies.',
+    },
+    id: {
+      description:
+        'Aplikasi web interaktif berdurasi terbatas yang dirancang khusus untuk persiapan wawancara teknis live-coding. Latih logika REST API JavaScript dalam batasan waktu wawancara nyata (maksimal 30 menit) untuk posisi Backend, Frontend, Full Stack, dan QA di perusahaan teknologi Indonesia maupun global.',
+    },
+  },
+  {
     title: 'Enterprise LMS Architecture Blueprint',
     tags: ['Laravel 8', 'Vue.js 2', 'MySQL', 'Redis', 'Docker', 'REST API'],
     link: 'https://github.com/adibwafi/laravel-vue-lms-blueprint',
@@ -266,21 +293,6 @@ export const projects: Project[] = [
     },
   },
   {
-    title: 'Serasa Kreatif Digital Platform',
-    tags: ['Next.js', 'Digital Agency', 'Video Production', 'CMS'],
-    link: 'https://github.com/menako-studio/serasa-kreatif',
-    webLink: 'https://serasakreatif.id/',
-    imageSrc: '/work/serasa-kreatif.webp',
-    en: {
-      description:
-        'Digital storefront and operations platform for a Bintaro-based creative agency specialising in social media management, video production, and targeted advertising. Built with scalability in mind ahead of the upcoming Serasa Academy launch.',
-    },
-    id: {
-      description:
-        'Platform storefront dan operasional digital untuk agensi kreatif asal Bintaro yang berfokus pada social media management, produksi video, dan targeting iklan. Sistem dirancang dengan arsitektur yang mudah dikembangkan (scalable) guna menyambut peluncuran Serasa Academy.',
-    },
-  },
-  {
     title: 'Amana Care — Daycare & Parents\' Working Space Website',
     tags: ['Next.js 15', 'TypeScript', 'Lenis Scroll', 'Supabase', 'Cal.com'],
     link: 'https://github.com/menako-studio/amana-care',
@@ -293,6 +305,21 @@ export const projects: Project[] = [
     id: {
       description:
         'Platform profil dan pendaftaran eksklusif yang dirancang untuk Amana Care Bintaro Sektor 7 menggunakan Next.js 15 (App Router) dan TypeScript. Antarmuka ini mengimplementasikan estetika visual premium, Lenis scroll engine 60fps yang sangat mulus, slider Embla Carousel, integrasi pemesanan kunjungan Cal.com, transisi spring physics, serta endpoint serverless Supabase & Resend API.',
+    },
+  },
+  {
+    title: 'Serasa Kreatif Digital Platform',
+    tags: ['Next.js', 'Digital Agency', 'Video Production', 'CMS'],
+    link: 'https://github.com/menako-studio/serasa-kreatif',
+    webLink: 'https://serasakreatif.id/',
+    imageSrc: '/work/serasa-kreatif.webp',
+    en: {
+      description:
+        'Digital storefront and operations platform for a Bintaro-based creative agency specialising in social media management, video production, and targeted advertising. Built with scalability in mind ahead of the upcoming Serasa Academy launch.',
+    },
+    id: {
+      description:
+        'Platform storefront dan operasional digital untuk agensi kreatif asal Bintaro yang berfokus pada social media management, produksi video, dan targeting iklan. Sistem dirancang dengan arsitektur yang mudah dikembangkan (scalable) guna menyambut peluncuran Serasa Academy.',
     },
   },
 ];
