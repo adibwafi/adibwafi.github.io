@@ -60,7 +60,7 @@ export const translations = {
     work: {
       label: 'Selected Work',
       title: 'Projects & Repositories',
-      desc: 'Selected repositories spanning enterprise infrastructure, consumer product engineering, creative agency platforms, and premium daycare services.',
+      desc: 'Selected repositories spanning developer tooling, enterprise infrastructure, consumer product engineering, premium daycare services, and creative agency platforms.',
       openSourceLabel: 'Open Source',
       openSourceTitle: 'More on GitHub',
       openSourceDesc: 'Explore more projects, contributions, and experiments on my GitHub profile.',
@@ -133,7 +133,7 @@ export const translations = {
     work: {
       label: 'Proyek Pilihan',
       title: 'Portofolio & Repositori',
-      desc: 'Portofolio repositori utama yang mencakup infrastruktur skala enterprise, rekayasa produk konsumen, platform agensi kreatif, serta layanan daycare eksklusif.',
+      desc: 'Portofolio repositori utama yang mencakup developer tools, infrastruktur skala enterprise, rekayasa produk konsumen, layanan daycare eksklusif, serta platform agensi kreatif.',
       openSourceLabel: 'Open Source',
       openSourceTitle: 'Lebih Banyak di GitHub',
       openSourceDesc: 'Temukan berbagai proyek lain, kontribusi, serta eksperimen kode di profil GitHub saya.',
