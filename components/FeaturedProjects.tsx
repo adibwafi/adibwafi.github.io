@@ -41,6 +41,18 @@ function FadeUp({
 const projects = [
   {
     index: '01',
+    title: 'Livecode Logic Trainer',
+    tags: ['JavaScript', 'REST API', 'Vercel'],
+    description:
+      'An interactive, timed web application designed for live-code technical interview preparation. Practice JavaScript REST API logic under real interview time constraints (strictly capped at 30 minutes) for Backend, Frontend, Full Stack, and QA roles across Indonesian and global tech companies.',
+    link: 'https://github.com/adibwafi/livecode-logic-trainer',
+    webLink: 'https://livecode-logic-trainer.vercel.app/',
+    imageSrc: '/work/livecode-logic-trainer.webp',
+    gridClass: 'md:col-span-7',
+    imageHeight: 'h-72 md:h-[460px]',
+  },
+  {
+    index: '02',
     title: 'Enterprise LMS Architecture Blueprint',
     tags: ['Laravel 8', 'Vue.js 2', 'System Architecture'],
     description:
@@ -48,11 +60,11 @@ const projects = [
     link: 'https://github.com/adibwafi/laravel-vue-lms-blueprint',
     webLink: 'https://laravel-vue-lms-blueprint.vercel.app/',
     imageSrc: '/work/lms-blueprint-rev.webp',
-    gridClass: 'md:col-span-7',
-    imageHeight: 'h-72 md:h-[460px]',
+    gridClass: 'md:col-span-5',
+    imageHeight: 'h-64 md:h-[380px]',
   },
   {
-    index: '02',
+    index: '03',
     title: 'AI Baby Meal Planner',
     tags: ['PWA', 'AI-Assisted', 'Parenting Tech'],
     description:
@@ -60,18 +72,6 @@ const projects = [
     link: 'https://github.com/adibwafi/ai-baby-meal-planner',
     webLink: 'https://ai-baby-meal-planner-beta.vercel.app/',
     imageSrc: '/work/smart-fridge-mpasi-2.webp',
-    gridClass: 'md:col-span-5',
-    imageHeight: 'h-64 md:h-[380px]',
-  },
-  {
-    index: '03',
-    title: 'Serasa Kreatif Digital Platform',
-    tags: ['Digital Agency', 'Video Production', 'Bintaro'],
-    description:
-      'The digital storefront and operational platform for a Bintaro-based creative agency specializing in social media management, video production, and targeted advertising. The architecture is built with future scalability in mind to support the upcoming launch of their educational seminar arm, Serasa Academy.',
-    link: 'https://github.com/menako-studio/serasa-kreatif',
-    webLink: 'https://serasakreatif.id/',
-    imageSrc: '/work/serasa-kreatif-new.webp',
     gridClass: 'md:col-span-6 md:col-start-4',
     imageHeight: 'h-56 md:h-[400px]',
   },
@@ -84,6 +84,18 @@ const projects = [
     link: 'https://github.com/menako-studio/amana-care',
     webLink: 'https://www.amanacare.id/',
     imageSrc: '/work/amana-care.webp',
+    gridClass: 'md:col-span-6 md:col-start-4',
+    imageHeight: 'h-56 md:h-[400px]',
+  },
+  {
+    index: '05',
+    title: 'Serasa Kreatif Digital Platform',
+    tags: ['Digital Agency', 'Video Production', 'Bintaro'],
+    description:
+      'The digital storefront and operational platform for a Bintaro-based creative agency specializing in social media management, video production, and targeted advertising. The architecture is built with future scalability in mind to support the upcoming launch of their educational seminar arm, Serasa Academy.',
+    link: 'https://github.com/menako-studio/serasa-kreatif',
+    webLink: 'https://serasakreatif.id/',
+    imageSrc: '/work/serasa-kreatif-new.webp',
     gridClass: 'md:col-span-6 md:col-start-4',
     imageHeight: 'h-56 md:h-[400px]',
   },
@@ -237,8 +249,8 @@ export function FeaturedProjects() {
                 className="font-sans text-[#6B6B6B] leading-relaxed"
                 style={{ fontSize: '1.05rem' }}
               >
-                Three selected repositories spanning enterprise infrastructure,
-                consumer product engineering, and creative agency platforms.
+                Five selected repositories spanning developer tooling, enterprise infrastructure,
+                consumer product engineering, daycare platforms, and creative agency systems.
               </p>
             </div>
           </div>
@@ -246,27 +258,15 @@ export function FeaturedProjects() {
 
         {/* Project grid — asymmetric 12-column editorial layout */}
         <div className="grid grid-cols-1 md:grid-cols-12 gap-x-12 gap-y-0 lg:gap-x-16 items-start">
-          {/* Project 01 — spans 7 cols: the masterpiece */}
-          <FadeUp delay={0} className={`${projects[0].gridClass}`}>
-            <ProjectCard project={projects[0]} />
-          </FadeUp>
-
-          {/* Project 02 — spans 5 cols, dropped 96px: offset product solution */}
-          <FadeUp delay={0.12} className={`${projects[1].gridClass} md:mt-24`}>
-            <ProjectCard project={projects[1]} />
-          </FadeUp>
-
-          {/* Project 03 — spans 6 cols, col-start-4, slight offset: creative commerce */}
-          <FadeUp delay={0.08} className={`${projects[2].gridClass} md:mt-10`}>
-            <ProjectCard project={projects[2]} />
-          </FadeUp>
-
-          {/* Project 04 — spans 6 cols, col-start-4: daycare & co-working platform */}
-          {projects[3] && (
-            <FadeUp delay={0.1} className={`${projects[3].gridClass} md:mt-10`}>
-              <ProjectCard project={projects[3]} />
+          {projects.map((project, idx) => (
+            <FadeUp
+              key={project.title}
+              delay={idx * 0.06}
+              className={`${project.gridClass} ${idx === 1 ? 'md:mt-24' : idx > 0 ? 'md:mt-10' : ''}`}
+            >
+              <ProjectCard project={project} />
             </FadeUp>
-          )}
+          ))}
         </div>
 
       </div>
