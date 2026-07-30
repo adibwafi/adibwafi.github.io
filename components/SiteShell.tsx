@@ -5,7 +5,6 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { SiteContext } from '@/lib/site-context';
 import { translations } from '@/lib/translations';
 import { Nav } from '@/components/Nav';
-import { AmbientBackground } from '@/components/AmbientBackground';
 import { trackEvent } from '@/lib/analytics';
 
 /* ─── Client shell: provides shared context, Nav, ambient bg, toast ─────── */
@@ -67,7 +66,6 @@ export default function SiteShell({ children }: { children: React.ReactNode }) {
 
   return (
     <SiteContext.Provider value={{ theme, toggleTheme, handleCopyEmail, lang, changeLang }}>
-      <AmbientBackground />
       <Nav />
 
       <main tabIndex={-1} className="focus:outline-none min-h-screen relative z-10">
