@@ -10,12 +10,12 @@
 High-end personal portfolio for **Muhamad Adibwafi Menako** (Full Stack Software Engineer). Designed with a modern, high-end editorial aesthetic (inspired by Sana Labs / Kinfolk minimalism). Features bilingual support (English & Indonesian), full Dark Mode integration, dynamic impact metrics, project case studies, automated analytics tracking, and production Sentry error reporting. Live site deployed at [adibwafi.com](https://adibwafi.com).
 
 ### Tech Stack Specifications
-* **Core Framework**: Next.js 14.2.5 (App Router, Node `20.x`/`22.x` runtime, `output: 'standalone'`)
+* **Core Framework**: Next.js 15.5.25 (App Router, Node `20.x`/`22.x` runtime, `output: 'standalone'`)
 * **UI Library & Rendering**: React 18.3.1 & React-DOM 18.3.1
 * **Language & Compiler**: TypeScript 5.5.4 (`tsconfig.json` with strict mode and `@/*` path alias to root)
 * **Styling & Design System**:
   * Tailwind CSS 3.4.7 (Custom theme extension: `surface`, `elevated`, `accent`, `ink`, `muted`, `faint`, display font sizes, bento border-radii)
-  * PostCSS 8.4.40 & Autoprefixer 10.4.19
+  * PostCSS 8.5.28 & Autoprefixer 10.4.19
   * Typography: Google Inter (`next/font/google` variable `--font-inter`)
 * **Animation Engine**: Framer Motion 11.3.0 (`AnimatePresence`, `motion.div`, custom spring physics & page transition variants)
 * **Iconography**: Lucide React 0.417.0
@@ -24,7 +24,7 @@ High-end personal portfolio for **Muhamad Adibwafi Menako** (Full Stack Software
   * `@vercel/analytics` v2.0.1 & `@vercel/speed-insights` v2.0.0
   * Google Analytics 4 (`NEXT_PUBLIC_GA_ID`) & Google Tag Manager (`NEXT_PUBLIC_GTM_ID`, default: `GTM-KHMNHQN6`)
   * Virtual SPA pageview tracking via `AnalyticsRouteTracker.tsx` and custom event logger `lib/analytics.ts`
-* **Error Tracking**: `@sentry/nextjs` v8.55.2 with server instrumentation hook enabled (`instrumentationHook: true`)
+* **Error Tracking**: `@sentry/nextjs` v10.74.0 with server instrumentation hook enabled
 * **Containerization & CI/CD**:
   * Docker multi-stage build (Alpine Node 20 runtime, non-root `nextjs` user, standalone output runner)
   * GitHub Actions CI (`.github/workflows/ci.yml` running Node 22.x, `npm ci`, `npm run lint`, `npm run build`, Lighthouse CI audit, `npm audit`)
