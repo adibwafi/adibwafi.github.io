@@ -1,4 +1,4 @@
-import { withSentryConfig } from '@sentry/nextjs'
+import { withSentryConfig } from '@sentry/nextjs/config'
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
@@ -40,19 +40,18 @@ const nextConfig = {
       },
     ];
   },
-
-  experimental: {
-    // Required for Sentry server-side instrumentation in Next.js 14
-    instrumentationHook: true,
-  },
 };
 
-// Sentry webpack plugin configuration
+// Sentry configuration
 const sentryConfig = {
   silent: !process.env.CI,
   hideSourceMaps: true,
-  disableLogger: true,
-  automaticVercelMonitors: false,
+  webpack: {
+    treeshake: {
+      removeDebugLogging: true,
+    },
+    automaticVercelMonitors: false,
+  },
   org: process.env.SENTRY_ORG,
   project: process.env.SENTRY_PROJECT,
 }
