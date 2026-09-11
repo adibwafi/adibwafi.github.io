@@ -2,11 +2,67 @@
 @tailwind components;
 @tailwind utilities;
 
-/* ─── Design Tokens (Sana Labs Edition) ──────────────────────────────────── */
+/* ─── adibwafi.com Design Tokens (Brand Guidelines v1.0) ──────────────────── */
 :root {
-  --font-sans: var(--font-inter), system-ui, sans-serif;
+  /* -- light (default) -- */
+  --paper: #F7F7F7;        /* Snow White — page background */
+  --surface: #FFFFFF;      /* card / panel background */
+  --ink: #1A1A1A;          /* Jet Black — primary text */
+  --ink-soft: #635648;     /* secondary text, warm gray */
+  --ink-faint: #9C9284;    /* captions, disabled, tertiary text */
+  --rule: #E1DAD0;         /* hairlines, borders */
+  --accent: #D4A26A;       /* Taxicab Ochre — the one expressive accent */
+  --accent-ink: #8B6031;   /* ochre, darkened for AA text/link contrast on light */
+  --accent-tint: #F1E1CC;  /* pale ochre fill */
+  --structural: #4A5877;   /* Radio City Blue — technical/construction color */
+  --structural-soft: #7C879D;
+
+  /* -- fixed brand darks: intentional dark sections/surfaces, do NOT theme-swap -- */
+  --surface-dark: #1A1A1A;  /* Jet Black dark-section background */
+  --on-dark: #F5F1EA;
+  --on-dark-soft: #B7AC9C;
+
+  /* -- typography fallbacks (primary fonts configured via next/font/google) -- */
+  --font-serif: 'Cormorant Garamond', 'Iowan Old Style', Georgia, serif;
+  --font-sans: 'Manrope', -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'JetBrains Mono', 'SFMono-Regular', Consolas, monospace;
+
+  /* -- transitions -- */
   --ease-smooth: cubic-bezier(0.25, 0, 0, 1);
   --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* -- dark mode (OS/browser preference) -- */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: #141310;
+    --surface: #1C1B17;
+    --ink: #F2EDE6;
+    --ink-soft: #C9BFAF;
+    --ink-faint: #8A8174;
+    --rule: #332F27;
+    --accent: #E3B583;
+    --accent-ink: #E3B583;
+    --accent-tint: #3A2E1D;
+    --structural: #8895AC;
+    --structural-soft: #5E6A82;
+  }
+}
+
+/* -- dark mode (explicit user toggle, wins either direction) -- */
+:root[data-theme="dark"],
+.dark {
+  --paper: #141310;
+  --surface: #1C1B17;
+  --ink: #F2EDE6;
+  --ink-soft: #C9BFAF;
+  --ink-faint: #8A8174;
+  --rule: #332F27;
+  --accent: #E3B583;
+  --accent-ink: #E3B583;
+  --accent-tint: #3A2E1D;
+  --structural: #8895AC;
+  --structural-soft: #5E6A82;
 }
 
 /* ─── Base Reset ──────────────────────────────────────────────────────────── */
@@ -25,30 +81,31 @@ html {
 }
 
 body {
-  background-color: #FAFAFA;
-  color: #0A0A0A;
+  background-color: var(--paper);
+  color: var(--ink);
   font-family: var(--font-sans);
   font-size: 1rem;
   line-height: 1.75;
   min-height: 100vh;
   overflow-x: hidden;
+  transition: background-color 0.25s ease, color 0.25s ease;
 }
 
 ::selection {
-  background: #0A0A0A;
-  color: #FAFAFA;
+  background: var(--ink);
+  color: var(--paper);
 }
 
 /* ─── Scrollbar ───────────────────────────────────────────────────────────── */
-::-webkit-scrollbar            { width: 3px; }
-::-webkit-scrollbar-track      { background: #FAFAFA; }
-::-webkit-scrollbar-thumb      { background: #D4D4D8; border-radius: 9999px; }
-::-webkit-scrollbar-thumb:hover{ background: #A1A1AA; }
+::-webkit-scrollbar            { width: 4px; }
+::-webkit-scrollbar-track      { background: var(--paper); }
+::-webkit-scrollbar-thumb      { background: var(--rule); border-radius: 9999px; }
+::-webkit-scrollbar-thumb:hover{ background: var(--ink-faint); }
 
 /* ─── Bento Card ──────────────────────────────────────────────────────────── */
 .bento-card {
-  background: #FFFFFF;
-  border: 1px solid #E4E4E7;
+  background: var(--surface);
+  border: 1px solid var(--rule);
   border-radius: 1.5rem;
   transition:
     box-shadow   0.3s var(--ease-smooth),
@@ -57,18 +114,19 @@ body {
 }
 
 .bento-card-hover:hover {
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08), 0 2px 8px rgba(0, 0, 0, 0.04);
-  border-color: #D4D4D8;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.07), 0 2px 8px rgba(0, 0, 0, 0.03);
+  border-color: var(--accent);
   transform: translateY(-2px);
 }
 
 /* ─── Section Label ───────────────────────────────────────────────────────── */
 .section-label {
-  font-size: 0.72rem;
-  font-weight: 600;
-  letter-spacing: 0.12em;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: #A1A1AA;
+  color: var(--ink-faint);
 }
 
 /* ─── Buttons ─────────────────────────────────────────────────────────────── */
@@ -76,110 +134,120 @@ body {
   display: inline-flex;
   align-items: center;
   gap: 0.375rem;
+  font-family: var(--font-sans);
   font-size: 0.875rem;
-  font-weight: 500;
-  background: #0A0A0A;
-  color: #FFFFFF;
+  font-weight: 600;
+  background: var(--ink);
+  color: var(--paper);
   padding: 0.625rem 1.375rem;
   border-radius: 9999px;
-  border: 1px solid #0A0A0A;
+  border: 1px solid var(--ink);
   text-decoration: none;
   cursor: pointer;
   white-space: nowrap;
-  transition: background 0.2s ease, border-color 0.2s ease;
+  transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease, transform 0.15s ease;
 }
 .btn-primary:hover {
-  background: #262626;
-  border-color: #262626;
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #141310;
+  transform: translateY(-1px);
 }
 
 .btn-ghost {
   display: inline-flex;
   align-items: center;
   gap: 0.375rem;
+  font-family: var(--font-sans);
   font-size: 0.875rem;
   font-weight: 500;
   background: transparent;
-  color: #3F3F46;
-  border: 1px solid #E4E4E7;
+  color: var(--ink-soft);
+  border: 1px solid var(--rule);
   padding: 0.625rem 1.375rem;
   border-radius: 9999px;
   text-decoration: none;
   cursor: pointer;
   white-space: nowrap;
-  transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+  transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease, transform 0.15s ease;
 }
 .btn-ghost:hover {
-  background: #F4F4F5;
-  border-color: #D4D4D8;
-  color: #0A0A0A;
+  background: var(--surface);
+  border-color: var(--ink-faint);
+  color: var(--ink);
+  transform: translateY(-1px);
 }
 
 .btn-accent {
   display: inline-flex;
   align-items: center;
   gap: 0.375rem;
+  font-family: var(--font-sans);
   font-size: 0.875rem;
-  font-weight: 500;
-  background: #2563EB;
-  color: #FFFFFF;
+  font-weight: 600;
+  background: var(--accent);
+  color: #141310;
   padding: 0.625rem 1.375rem;
   border-radius: 9999px;
-  border: 1px solid #2563EB;
+  border: 1px solid var(--accent);
   text-decoration: none;
   cursor: pointer;
   white-space: nowrap;
-  transition: background 0.2s ease, border-color 0.2s ease;
+  transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease, transform 0.15s ease;
 }
 .btn-accent:hover {
-  background: #1D4ED8;
-  border-color: #1D4ED8;
+  background: var(--accent-ink);
+  border-color: var(--accent-ink);
+  color: #FFFFFF;
+  transform: translateY(-1px);
 }
 
-/* ─── Tag Chip ────────────────────────────────────────────────────────────── */
+/* ─── Tag Chip & Tech Pill ────────────────────────────────────────────────── */
 .tag-chip {
   display: inline-flex;
   align-items: center;
+  font-family: var(--font-mono);
   font-size: 0.72rem;
   font-weight: 500;
-  color: #71717A;
-  background: #F4F4F5;
-  border: 1px solid #E4E4E7;
+  color: var(--ink-soft);
+  background: var(--surface);
+  border: 1px solid var(--rule);
   padding: 0.2rem 0.65rem;
   border-radius: 9999px;
-  letter-spacing: 0.01em;
+  letter-spacing: 0.02em;
   transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
 }
 .tag-chip:hover {
-  background: #EFF6FF;
-  border-color: #BFDBFE;
-  color: #2563EB;
+  background: var(--accent-tint);
+  border-color: var(--accent);
+  color: var(--accent-ink);
 }
 
-/* Tech pill — bigger for the stack section */
 .tech-pill {
   display: inline-flex;
   align-items: center;
+  font-family: var(--font-mono);
   font-size: 0.8rem;
   font-weight: 500;
-  color: #3F3F46;
-  background: #F4F4F5;
-  border: 1px solid #E4E4E7;
+  color: var(--ink-soft);
+  background: var(--surface);
+  border: 1px solid var(--rule);
   padding: 0.3rem 0.8rem;
   border-radius: 9999px;
   transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
 }
 .tech-pill:hover {
-  background: #EFF6FF;
-  border-color: #BFDBFE;
-  color: #2563EB;
+  background: var(--accent-tint);
+  border-color: var(--accent);
+  color: var(--accent-ink);
 }
 
 /* ─── Nav Link ────────────────────────────────────────────────────────────── */
 .nav-link {
+  font-family: var(--font-sans);
   font-size: 0.875rem;
   font-weight: 500;
-  color: #71717A;
+  color: var(--ink-soft);
   text-decoration: none;
   cursor: pointer;
   transition: color 0.2s ease;
@@ -187,157 +255,58 @@ body {
   border: none;
   padding: 0;
 }
-.nav-link:hover  { color: #0A0A0A; }
-.nav-link.active { color: #0A0A0A; }
+.nav-link:hover  { color: var(--ink); }
+.nav-link.active { color: var(--ink); font-weight: 600; }
 
-/* ─── Experience Card ─────────────────────────────────────────────────────── */
+/* ─── Experience Card & Stack Card ────────────────────────────────────────── */
 .exp-card {
-  background: #FFFFFF;
-  border: 1px solid #E4E4E7;
+  background: var(--surface);
+  border: 1px solid var(--rule);
   border-radius: 1.25rem;
   padding: 1.75rem 2rem;
-  transition: box-shadow 0.3s ease, border-color 0.3s ease;
+  transition: box-shadow 0.3s ease, border-color 0.3s ease, transform 0.2s ease;
 }
 .exp-card:hover {
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
-  border-color: #D4D4D8;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
+  border-color: var(--accent);
 }
 
-/* ─── Stack Group Card ────────────────────────────────────────────────────── */
 .stack-card {
-  background: #FFFFFF;
-  border: 1px solid #E4E4E7;
+  background: var(--surface);
+  border: 1px solid var(--rule);
   border-radius: 1.25rem;
   padding: 1.5rem;
-  transition: box-shadow 0.3s ease;
+  transition: box-shadow 0.3s ease, border-color 0.3s ease;
 }
 .stack-card:hover {
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+  border-color: var(--accent);
 }
 
-/* ─── Dark Mode Extensions (Sana Labs Aesthetic) ────────────────────────── */
-.dark body {
-  background-color: #09090B; /* zinc-950 */
-  color: #F4F4F5; /* zinc-100 */
-}
-
+/* ─── Header & Shell Dark Mode Enhancements ──────────────────────────────── */
 .dark header {
-  background-color: rgba(9, 9, 11, 0.75) !important;
-  border-bottom-color: rgba(39, 39, 42, 0.8) !important;
+  background-color: rgba(20, 19, 16, 0.82) !important;
+  border-bottom-color: var(--rule) !important;
 }
 
 .dark header nav button {
-  color: #A1A1AA !important;
+  color: var(--ink-soft) !important;
 }
 .dark header nav button:hover {
-  color: #F4F4F5 !important;
-  background-color: #18181B !important;
+  color: var(--ink) !important;
+  background-color: var(--surface) !important;
 }
 .dark header nav button[aria-current="page"] {
-  color: #FFFFFF !important;
-  background-color: #27272A !important;
+  color: var(--ink) !important;
+  background-color: var(--rule) !important;
 }
 
-/* Mobile bottom nav on dark mode */
 .dark .md\:hidden.border-t.border-zinc-100 {
-  background-color: rgba(24, 24, 27, 0.95) !important;
-  border-top-color: #27272A !important;
+  background-color: rgba(28, 27, 23, 0.95) !important;
+  border-top-color: var(--rule) !important;
 }
 
-.dark .bento-card {
-  background: #18181B; /* zinc-900 */
-  border-color: #27272A; /* zinc-800 */
-}
-
-.dark .bento-card-hover:hover {
-  border-color: #3F3F46; /* zinc-700 */
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4), 0 4px 12px rgba(0, 0, 0, 0.2);
-}
-
-.dark .exp-card {
-  background: #18181B;
-  border-color: #27272A;
-}
-.dark .exp-card:hover {
-  border-color: #3F3F46;
-  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.25);
-}
-
-.dark .stack-card {
-  background: #18181B;
-  border-color: #27272A;
-}
-.dark .stack-card:hover {
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
-}
-
-.dark .tag-chip,
-.dark .tech-pill {
-  background: #27272A;
-  border-color: #3F3F46;
-  color: #A1A1AA;
-}
-.dark .tag-chip:hover,
-.dark .tech-pill:hover {
-  background: #1E3A8A; /* dark blue */
-  border-color: #3B82F6;
-  color: #EFF6FF;
-}
-
-.dark .btn-ghost {
-  border-color: #27272A;
-  color: #D4D4D8;
-}
-.dark .btn-ghost:hover {
-  background: #27272A;
-  color: #FFFFFF;
-  border-color: #3F3F46;
-}
-
-.dark .text-zinc-900 {
-  color: #FFFFFF !important;
-}
-
-.dark .text-zinc-700 {
-  color: #E4E4E7 !important;
-}
-
-.dark .text-zinc-500 {
-  color: #A1A1AA !important;
-}
-
-.dark .text-zinc-400 {
-  color: #717178 !important;
-}
-
-.dark .bg-white {
-  background-color: #09090B !important;
-}
-
-.dark .border-zinc-100 {
-  border-color: #27272A !important;
-}
-
-.dark .bg-zinc-100 {
-  background-color: #27272A !important;
-}
-
-.dark .bg-zinc-50 {
-  background-color: #18181B !important;
-}
-
-/* Subtle glowing adjustments for dark mode */
-.dark .absolute.bg-gradient-to-t.from-zinc-900\/20 {
-  background-image: linear-gradient(to top, rgba(0, 0, 0, 0.6), transparent, transparent) !important;
-}
-
-/* Selection colors in dark mode */
-.dark ::selection {
-  background: #FFFFFF;
-  color: #09090B;
-}
-
-/* ─── Shimmer Animation for Skeleton Loading ────────────────────────────── */
+/* ─── Brand Loading & Shimmer Animations ─────────────────────────────────── */
 @keyframes shimmer {
   0% {
     background-position: -200% 0;
@@ -348,12 +317,65 @@ body {
 }
 
 .shimmer {
-  background: linear-gradient(90deg, #F4F4F5 25%, #E4E4E7 50%, #F4F4F5 75%);
+  background: linear-gradient(
+    90deg,
+    var(--surface) 25%,
+    var(--rule) 50%,
+    var(--surface) 75%
+  );
   background-size: 200% 100%;
-  animation: shimmer 1.5s infinite linear;
+  animation: shimmer 1.8s infinite ease-in-out;
 }
 
-.dark .shimmer {
-  background: linear-gradient(90deg, #18181B 25%, #27272A 50%, #18181B 75%);
-  background-size: 200% 100%;
+/* Monogram AM SVG Stroke Drawing Animation */
+@keyframes brand-mark-m {
+  0% {
+    stroke-dashoffset: 260;
+    opacity: 0.3;
+  }
+  40% {
+    opacity: 1;
+  }
+  75%, 100% {
+    stroke-dashoffset: 0;
+    opacity: 1;
+  }
+}
+
+@keyframes brand-mark-a {
+  0%, 45% {
+    stroke-dashoffset: 40;
+    opacity: 0;
+  }
+  80%, 100% {
+    stroke-dashoffset: 0;
+    opacity: 1;
+  }
+}
+
+@keyframes brand-pulse-subtle {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.025);
+    opacity: 0.85;
+  }
+}
+
+.brand-animate-m {
+  stroke-dasharray: 260;
+  stroke-dashoffset: 260;
+  animation: brand-mark-m 2.2s cubic-bezier(0.4, 0, 0.2, 1) infinite alternate;
+}
+
+.brand-animate-a {
+  stroke-dasharray: 40;
+  stroke-dashoffset: 40;
+  animation: brand-mark-a 2.2s cubic-bezier(0.4, 0, 0.2, 1) infinite alternate;
+}
+
+.brand-loader-pulse {
+  animation: brand-pulse-subtle 2.2s ease-in-out infinite;
 }

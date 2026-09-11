@@ -26,6 +26,7 @@ export default function SiteShell({ children }: { children: React.ReactNode }) {
     const active      = saved ?? (prefersDark ? 'dark' : 'light');
 
     setTheme(active);
+    document.documentElement.setAttribute('data-theme', active);
     if (active === 'dark') {
       document.documentElement.classList.add('dark');
     } else {
@@ -43,6 +44,7 @@ export default function SiteShell({ children }: { children: React.ReactNode }) {
     const next = theme === 'light' ? 'dark' : 'light';
     setTheme(next);
     localStorage.setItem('theme', next);
+    document.documentElement.setAttribute('data-theme', next);
     document.documentElement.classList.toggle('dark', next === 'dark');
     trackEvent('click', 'Theme Toggle', next);
   };
