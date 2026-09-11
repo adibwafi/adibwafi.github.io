@@ -1,67 +1,128 @@
 # Muhamad Adibwafi Menako — Portfolio
 
 [![Node.js CI](https://github.com/adibwafi/adibwafi.github.io/actions/workflows/ci.yml/badge.svg)](https://github.com/adibwafi/adibwafi.github.io/actions/workflows/ci.yml)
-[![Live Site](https://img.shields.io/badge/Live%20Demo-adibwafi.com-D4A26A?style=flat-square)](https://adibwafi.com)
+[![Live Site](https://img.shields.io/badge/Live%20Site-adibwafi.com-D4A26A?style=flat-square)](https://adibwafi.com)
+[![Next.js](https://img.shields.io/badge/Next.js-15.5.25-000000?style=flat-square&logo=nextdotjs)](https://nextjs.org/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.5.4-3178C6?style=flat-square&logo=typescript)](https://www.typescriptlang.org/)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-3.4.7-38B2AC?style=flat-square&logo=tailwind-css)](https://tailwindcss.com/)
 
-High-end personal portfolio for **Muhamad Adibwafi Menako**, Full Stack Software Engineer. 
+High-end personal portfolio for **Muhamad Adibwafi Menako**, Full Stack Software Engineer. Deployed and served at [adibwafi.com](https://adibwafi.com).
 
-Built with Next.js (App Router, static export), Tailwind CSS, Framer Motion, and Lucide React. Custom deployed at [adibwafi.com](https://adibwafi.com).
+Built with Next.js 15 (App Router), TypeScript, Tailwind CSS, Framer Motion, and Lucide React. Implements bilingual internationalization (EN/ID), 3-state dark mode synchronization, interactive case studies, animated SVG brand identity loaders, and enterprise-grade observability (Sentry, Vercel Analytics, GA4, GTM).
 
-## Design System & Art Direction
-The visual identity follows **High-End Editorial Minimalism** inspired by *Kinfolk Magazine* aesthetics with a New York winter mood palette:
-*   **Primary Background:** Snow-Muted White (`#F7F7F7`)
-*   **Surface Background:** Pure White (`#FFFFFF`)
-*   **Typography:** Cormorant Garamond (Serif for editorial headings) & Manrope (Legible sans-serif for metadata)
-*   **Accent Color:** Taxicab Ochre (`#D4A26A`) & Radio City Blue (`#4A5877`)
-*   **Dark Section Background:** Jet Black (`#1A1A1A`)
+---
 
-## Features & Sections
-1.  **Cover / Hero:** Clean editorial title layout featuring a framed portrait with a subtle ochre outline accent.
-2.  **Cinematic Quote Section:** Floating editorial transition over a desaturated background image (`public/alley-bg-new.webp`).
-3.  **Proof of Impact:** High-contrast typographic columns displaying key database & scaling metrics.
-4.  **The Work (Ledger):** Asymmetric 12-column grid displaying professional chapters with hover backdrop shifts.
-5.  **The Archive (Featured Projects):** A staggered editorial gallery of selected repositories with live WebP mockups and footnote interaction links.
-6.  **Tools of the Craft:** Category-organized technical tags with outlined custom borders on deep charcoal.
+## Brand Identity & Design System (v1.0)
 
-## Local Setup
+The visual identity follows **High-End Editorial Minimalism** specified in the brand design tokens (`public/brandGuideline/brand-package/tokens/` and `AGENTS.md`):
+
+### 1. Dual Color Registers
+- **Expressive Accent (`accent`)**: Taxicab Ochre (`#D4A26A`) — used deliberately and sparingly for focal interactions, primary highlights, and brand emphasis. AA contrast text companion: `#8B6031`. Tint: `#F1E1CC`.
+- **Technical Structural (`structural`)**: Radio City Blue (`#4A5877`) — reserved exclusively for diagrams, architectural construction elements, and dot-grids.
+
+### 2. 3-State Dark Mode Tokens
+Supports system preference (`prefers-color-scheme`), explicit toggle (`data-theme`), and CSS class overrides:
+- **Light Theme**: Paper `#F7F7F7`, Surface `#FFFFFF`, Ink `#1A1A1A`, Ink-Soft `#635648`, Rule `#E1DAD0`
+- **Dark Theme**: Paper `#141310`, Surface `#1C1B17`, Ink `#F2EDE6`, Ink-Soft `#C9BFAF`, Rule `#332F27`
+
+### 3. Typography Hierarchy (Strict 3 Roles)
+- **Serif (`--font-serif`) — Cormorant Garamond**: Editorial headlines (>24px), display titles, and pull-quotes. Never used for body paragraphs.
+- **Sans (`--font-sans`) — Manrope**: Primary body copy, navigation labels, interactive buttons, and interface components.
+- **Mono (`--font-mono`) — JetBrains Mono**: Eyebrow tags, metrics, dates, folio numbering, tech stack pills, and metadata.
+
+### 4. Brandmark & Supergraphic
+- **Monogram "AM" Brandmark**: Linear geometric monogram (`/public/brand/mark-*.svg`) with strict 1u clearspace enforcement.
+- **Animated Brand Loader**: Custom SVG stroke-drawing animation (`components/BrandLoader.tsx` and `app/loading.tsx`) dynamically morphing M contours and A crossbars.
+- **"Frame & Grid" Supergraphic**: Paired ochre bracket and slate blue dot-grid elements for structured editorial accents.
+
+---
+
+## Key Features & Architecture
+
+1. **Editorial Bento Hero**: Concise 6-second recruiter pitch, interactive profile modal, and social verification (`rel="me"`).
+2. **Dynamic Impact Proof**: Typographic metric columns highlighting system performance gains, scaling milestones, and database optimization figures.
+3. **Curated Work & Case Studies**: Asymmetrical card layouts with live WebP mockups, architectural summaries, repository links, and live demo triggers.
+4. **Career Ledger & Tech Stack**: Detailed career timeline detailing software engineering milestones and categorized tool stack.
+5. **Bilingual Support (i18n)**: Seamless English & Indonesian translation switching powered by React Context (`SiteContext`).
+6. **Observability & Analytics**: Integrated Sentry 10 error reporting, Vercel Speed Insights, Google Tag Manager (`GTM-KHMNHQN6`), and custom virtual route pageview tracking.
+
+---
+
+## Local Development
 
 ```bash
+# Install dependencies
 npm install
+
+# Run development server
 npm run dev
 ```
 
-## Build & Static Export
+Open [http://localhost:3000](http://localhost:3000) in your browser.
+
+---
+
+## Build & Validation
 
 ```bash
+# Typecheck and production build
 npm run build
-# The build output is outputted inside the `out/` folder, ready for static deployment.
+
+# Run ESLint validation
+npm run lint
 ```
+
+---
 
 ## Project Structure
 
 ```
 adibwafi.github.io/
+├── AGENTS.md                  # Brand rules & design system guidelines for AI agents
+├── PROJECT_STATE.md           # Single source of truth repository architecture
 ├── app/
-│   ├── layout.tsx             # Root layout, fonts config & canonical SEO metadata
-│   ├── page.tsx               # Primary layout sections (Cover, Impact, Ledger, Stack, Footer)
-│   └── globals.css            # Custom design tokens, transitions & editorial utilities
+│   ├── layout.tsx             # Root HTML shell, brand fonts, metadata & analytics scripts
+│   ├── loading.tsx            # Route loading boundary with animated BrandLoader
+│   ├── page.tsx               # Home route wrapper (<HomePage />)
+│   ├── experience/page.tsx    # Experience & career timeline route (/experience)
+│   ├── work/page.tsx          # Featured portfolio case studies route (/work)
+│   ├── globals.css            # Brand design tokens, CSS variables & animations
+│   ├── sitemap.ts             # Dynamic XML sitemap generator
+│   └── not-found.tsx          # Custom 404 page
 ├── components/
-│   └── FeaturedProjects.tsx   # Asymmetrical grid gallery showing selected repositories
+│   ├── BrandLoader.tsx        # Monogram AM SVG stroke-drawing animated loader
+│   ├── SiteShell.tsx          # Context provider for theme, i18n & toast states
+│   ├── Nav.tsx                # Header navigation & mobile bottom navigation bar
+│   ├── HomePage.tsx           # Home page sections (Hero, Metrics, Previews, CTA)
+│   ├── ExperiencePage.tsx     # Career ledger & tech stack components
+│   ├── WorkPage.tsx           # Project case study cards
+│   ├── FeaturedProjects.tsx   # Asymmetric bento grid gallery
+│   └── SimpleFooter.tsx       # Minimalist footer with brand links
+├── lib/
+│   ├── site-context.tsx       # React Context (`useSite`) for theme & language
+│   ├── translations.ts        # Bilingual dictionary (EN / ID)
+│   ├── data.ts                # Structured portfolio data (projects, metrics, history)
+│   └── analytics.ts           # GA4 and GTM event dispatcher helpers
 ├── public/
-│   ├── portrait.jpg           # Framed hero profile picture
-│   ├── alley-bg-new.webp      # Cinematic background layer
-│   ├── icon-2.png             # Website Favicon asset
-│   └── work/
-│       ├── workspace-hero.webp
-│       ├── lms-blueprint.webp
-│       ├── smart-fridge-mpasi.webp
-│       └── serasa-kreatif.webp
-├── next.config.mjs            # Next.js configurations
-└── tailwind.config.ts         # Tailwind theme & Editorial color mappings
+│   ├── brand/                 # Monogram AM SVG marks & supergraphic assets
+│   ├── brandGuideline/        # Brand guidelines PDF & tokens (JSON / CSS)
+│   ├── cv/                    # Downloadable resume assets
+│   ├── work/                  # Case study preview WebP mockups
+│   ├── favicon.ico            # Brand favicon
+│   ├── apple-touch-icon.png   # iOS home screen touch icon
+│   └── og-image.png           # Social OpenGraph card (1200x630)
+├── tailwind.config.ts         # Tailwind design system mapped to brand tokens
+├── next.config.mjs            # Next.js security headers & Sentry configuration
+└── tsconfig.json              # TypeScript strict configuration
 ```
 
-## SEO Optimization
-Fully configured with Next.js Metadata API in `app/layout.tsx`:
-*   `metadataBase` defined with canonical alternates pointing directly to [adibwafi.com](https://adibwafi.com).
-*   OpenGraph & Twitter Cards setup.
-*   Favicon and Apple Touch icons configured via `/icon-2.png`.
+---
+
+## SEO & Metadata
+
+Fully configured via Next.js Metadata API in `app/layout.tsx`:
+- Canonical URL alternates mapped to [adibwafi.com](https://adibwafi.com)
+- OpenGraph & Twitter Summary Large Image cards (`/og-image.png`)
+- Multi-resolution favicons (`favicon.ico`, `favicon-16.png` through `favicon-512.png`) and Apple Touch icons
+- JSON-LD structured data for Person profile and website identity
+- Identity verification links (`rel="me"`) for LinkedIn and GitHub

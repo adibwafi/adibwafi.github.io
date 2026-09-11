@@ -1,25 +1,34 @@
 # PROJECT_STATE.md — Single Source of Truth
 
-> **System Notice**: This document is generated for AI Coding Agents (such as Claude 4.6 Sonnet) to understand the architecture, tech stack, data model, state management, and guidelines of this repository without needing to re-scan all files.
+> **System Notice**: This document is generated for AI Coding Agents (such as Claude 4.6 Sonnet or Antigravity) to understand the architecture, tech stack, data model, state management, brand rules, and guidelines of this repository without needing to re-scan all files.
 
 ---
 
 ## 1. EXECUTIVE SUMMARY & TECH STACK
 
 ### Core Purpose & Scope
-High-end personal portfolio for **Muhamad Adibwafi Menako** (Full Stack Software Engineer). Designed with a modern, high-end editorial aesthetic (inspired by Sana Labs / Kinfolk minimalism). Features bilingual support (English & Indonesian), full Dark Mode integration, dynamic impact metrics, project case studies, automated analytics tracking, and production Sentry error reporting. Live site deployed at [adibwafi.com](https://adibwafi.com).
+High-end personal portfolio for **Muhamad Adibwafi Menako** (Full Stack Software Engineer). Built upon an editorial design system following Brand Guidelines v1.0. Features bilingual support (English & Indonesian), 3-state Dark Mode integration, dynamic impact metrics, project case studies, animated monogram brand loader, automated analytics tracking, and production Sentry error reporting. Live site deployed at [adibwafi.com](https://adibwafi.com).
 
 ### Tech Stack Specifications
 * **Core Framework**: Next.js 15.5.25 (App Router, Node `20.x`/`22.x` runtime, `output: 'standalone'`)
 * **UI Library & Rendering**: React 18.3.1 & React-DOM 18.3.1
 * **Language & Compiler**: TypeScript 5.5.4 (`tsconfig.json` with strict mode and `@/*` path alias to root)
 * **Styling & Design System**:
-  * Tailwind CSS 3.4.7 (Custom theme extension: `surface`, `elevated`, `accent`, `ink`, `muted`, `faint`, display font sizes, bento border-radii)
+  * Brand & Design System v1.0 (Source of truth: `public/brandGuideline/brand-package/tokens/tokens.json`, `tokens.css`, and `AGENTS.md`)
+  * Color registers:
+    * `accent`: Taxicab Ochre (`#D4A26A`, AA contrast text `#8B6031`, tint `#F1E1CC`) — single expressive accent used deliberately.
+    * `structural`: Radio City Blue (`#4A5877`, soft `#7C879D`) — technical construction, diagrams, and grid accents only.
+    * 3-state dark mode tokens: `paper` (`#F7F7F7` / `#141310`), `surface` (`#FFFFFF` / `#1C1B17`), `ink` (`#1A1A1A` / `#F2EDE6`), `rule` (`#E1DAD0` / `#332F27`).
+  * Tailwind CSS 3.4.7 (Configured with `darkMode: ['class', '[data-theme="dark"]']`, mapped to CSS variables `--paper`, `--surface`, `--ink`, `--accent`, `--rule`, etc.)
   * PostCSS 8.5.28 & Autoprefixer 10.4.19
-  * Typography: Google Inter (`next/font/google` variable `--font-inter`)
+  * Typography: 3 distinct roles configured via `next/font/google`:
+    * `--font-serif`: Cormorant Garamond (headlines >24px, pull-quotes)
+    * `--font-sans`: Manrope (all body, UI, navigation, buttons)
+    * `--font-mono`: JetBrains Mono (data, metrics, eyebrow labels, folio numbers, tech pills)
+  * Brand Loaders: Animated SVG stroke-drawing AM monogram loader (`components/BrandLoader.tsx`), route loading state (`app/loading.tsx`), and token-based shimmer skeleton
 * **Animation Engine**: Framer Motion 11.3.0 (`AnimatePresence`, `motion.div`, custom spring physics & page transition variants)
 * **Iconography**: Lucide React 0.417.0
-* **State Management**: React Context (`SiteContext` in `lib/site-context.tsx`) provided via `SiteShell.tsx`. Manages `theme` ('light' | 'dark'), `lang` ('en' | 'id'), and copy-to-clipboard toast states with `localStorage` persistence.
+* **State Management**: React Context (`SiteContext` in `lib/site-context.tsx`) provided via `SiteShell.tsx`. Manages `theme` ('light' | 'dark'), `lang` ('en' | 'id'), and copy-to-clipboard toast states with `localStorage` persistence and `data-theme` DOM attribute binding.
 * **Analytics & Performance Monitoring**:
   * `@vercel/analytics` v2.0.1 & `@vercel/speed-insights` v2.0.0
   * Google Analytics 4 (`NEXT_PUBLIC_GA_ID`) & Google Tag Manager (`NEXT_PUBLIC_GTM_ID`, default: `GTM-KHMNHQN6`)
@@ -38,20 +47,25 @@ High-end personal portfolio for **Muhamad Adibwafi Menako** (Full Stack Software
 adibwafi.github.io/
 ├── .github/workflows/
 │   └── ci.yml                   # CI pipeline (Lint, Build, Lighthouse CI, Security Audit)
-├── analytics/                    # Exported GA4/GTM CSV analytics reports
-├── app/                          # Next.js 14 App Router routes & layout configuration
+├── AGENTS.md                    # Brand & Design System rules for AI coding agents
+├── PROJECT_STATE.md             # Single source of truth repository architecture
+├── README.md                    # Public documentation and brand overview
+├── analytics/                   # Exported GA4/GTM CSV analytics reports
+├── app/                         # Next.js 15 App Router routes & layout configuration
 │   ├── experience/
 │   │   └── page.tsx             # Career history, tech stack & education route (/experience)
 │   ├── work/
 │   │   └── page.tsx             # Featured repositories & project portfolio route (/work)
-│   ├── globals.css              # Custom design tokens, utilities & dark mode overrides
-│   ├── layout.tsx               # Root HTML shell, canonical metadata, JSON-LD, GTM/GA/Sentry scripts
+│   ├── globals.css              # Brand design tokens, 3-state dark mode & loader animations
+│   ├── layout.tsx               # Root HTML shell, brand fonts (Serif/Sans/Mono), metadata, JSON-LD
+│   ├── loading.tsx              # Route loading boundary with animated BrandLoader
 │   ├── not-found.tsx            # Custom 404 page implementation
 │   ├── page.tsx                 # Home route controller (renders <HomePage />)
 │   └── sitemap.ts               # Dynamic XML sitemap generator
-├── components/                   # Modular React UI components (Client components marked 'use client')
+├── components/                  # Modular React UI components (Client components marked 'use client')
 │   ├── AmbientBackground.tsx    # Decorative radial gradient blur blobs
 │   ├── AnalyticsRouteTracker.tsx# SPA client route transition pageview tracking component
+│   ├── BrandLoader.tsx          # Monogram AM SVG stroke-drawing animated brand loader
 │   ├── ExperiencePage.tsx       # Content module for experience route
 │   ├── FadeSection.tsx          # Framer Motion scroll-reveal animation wrappers
 │   ├── FeaturedProjects.tsx     # Asymmetrical bento grid gallery for home page preview
@@ -62,39 +76,55 @@ adibwafi.github.io/
 │   ├── SimpleFooter.tsx         # Minimalist page footer
 │   ├── SiteShell.tsx            # Context provider shell for theme, i18n, toasts & Nav
 │   └── WorkPage.tsx             # Content module for work route
-├── lib/                          # Data sources, Context definitions & utility functions
+├── lib/                         # Data sources, Context definitions & utility functions
 │   ├── analytics.ts             # Helper functions for GA4 gtag & GTM dataLayer events
 │   ├── animations.ts            # Framer Motion spring transition curves and page variants
 │   ├── data.ts                  # Typed data models & portfolio content (metrics, roles, projects, stack)
 │   ├── site-context.tsx         # React Context interface and custom hook (`useSite`)
 │   └── translations.ts          # i18n dictionary for English and Indonesian translations
-├── public/                       # Static public assets (images, icons, resume PDF)
+├── public/                      # Static public assets (images, icons, brand package)
+│   ├── apple-touch-icon.png     # iOS touch icon
+│   ├── apple-touch-icon-180.png # High-res iOS touch icon
+│   ├── brand/                   # Official AM monogram vector marks & supergraphics
+│   ├── brandGuideline/          # Brand Guidelines PDF & tokens (JSON / CSS)
 │   ├── cv/                      # Downloadable resume assets (`Muhamad_Adibwafi_Menako_Resume.pdf`)
-│   ├── work/                    # WebP project preview mockups
-│   └── portrait-adib.webp       # Profile photo asset
-├── .env.example                  # Environment variables template
-├── .env.local                    # Local environment variables file
-├── .lighthouserc.json            # Lighthouse CI assertion & target configuration
-├── Dockerfile                    # Production multi-stage Docker build configuration
-├── next.config.mjs               # Next.js config (Security headers, Sentry webpack plugin)
-├── package.json                  # Dependencies & execution scripts
-├── tailwind.config.ts            # Tailwind CSS design system tokens
-└── tsconfig.json                 # TypeScript configuration with path aliases
+│   ├── favicon-16.png           # 16x16 Favicon
+│   ├── favicon-32.png           # 32x32 Favicon
+│   ├── favicon-48.png           # 48x48 Favicon
+│   ├── favicon-192.png          # 192x192 Android Chrome icon
+│   ├── favicon-512.png          # 512x512 Android Chrome icon
+│   ├── favicon.ico              # Standard root favicon
+│   ├── og-image.png             # 1200x630 OpenGraph social share card
+│   ├── portrait-adib.webp       # Profile photo asset
+│   └── work/                    # WebP project preview mockups
+├── .env.example                 # Environment variables template
+├── .env.local                   # Local environment variables file
+├── .lighthouserc.json           # Lighthouse CI assertion & target configuration
+├── Dockerfile                   # Production multi-stage Docker build configuration
+├── next.config.mjs              # Next.js config (Security headers, Sentry webpack plugin)
+├── package.json                 # Dependencies & execution scripts
+├── tailwind.config.ts           # Tailwind CSS design system tokens mapped to brand tokens
+└── tsconfig.json                # TypeScript configuration with path aliases
 ```
 
 ### Architectural Patterns
 1. **App Router with Isolated Page Content Modules**: Next.js route files (`app/page.tsx`, `app/experience/page.tsx`, `app/work/page.tsx`) serve strictly as lightweight wrappers, importing client page modules (`components/HomePage.tsx`, `components/ExperiencePage.tsx`, `components/WorkPage.tsx`).
-2. **Context-Driven Shell Provider Pattern**: `app/layout.tsx` wraps children inside `SiteShell.tsx`, creating a single client context boundaries for global state (`theme`, `lang`, `toast`, navigation state) while preserving server-side metadata generation in `layout.tsx`.
+2. **Context-Driven Shell Provider Pattern**: `app/layout.tsx` wraps children inside `SiteShell.tsx`, creating a single client context boundary for global state (`theme`, `lang`, `toast`, navigation state) while preserving server-side metadata generation in `layout.tsx`.
 3. **Decoupled Data Store (Single Source of Truth)**: All textual content, impact statistics, career milestones, project case studies, and stack listings are stored in typed data files (`lib/data.ts` and `lib/translations.ts`), decoupling content updates from JSX UI code.
-4. **Design System & Utility Layer**: Design tokens are declared in `tailwind.config.ts` and utility classes (`.bento-card`, `.btn-primary`, `.btn-ghost`, `.tag-chip`, `.tech-pill`, `.shimmer`) are specified in `app/globals.css`.
+4. **Token-Driven Design System**: Design tokens defined in `public/brandGuideline/brand-package/tokens/` are embedded in `app/globals.css` and mapped to Tailwind utilities in `tailwind.config.ts`.
+5. **3-State Dark Mode Resolution**: Dark mode is managed simultaneously via `:root:not([data-theme="light"])` for system preferences, `[data-theme="dark"]` / `.dark` classes on `<html>` for explicit user toggles, preventing flash of unstyled theme.
 
 ---
 
 ## 3. CURRENT IMPLEMENTATION STATE & DATA FLOW
 
 ### Active Modules & Features
+* **Brand Identity & Typography**:
+  * Strict typography system: `--font-serif` (Cormorant Garamond), `--font-sans` (Manrope), and `--font-mono` (JetBrains Mono).
+  * Monogram "AM" geometric brandmark with vector stroke-drawing animation (`brand-animate-m` & `brand-animate-a`).
+  * Route loading boundary in `app/loading.tsx` using `BrandLoader`.
 * **Home Page (`/`)**:
-  * Editorial Hero section with 6-second recruiter pitch (`3+ yrs experience`, `Startup Campus`, `FastAPI · Next.js · GCP`) and profile photo modal.
+  * Editorial Hero section with 6-second recruiter pitch, profile photo modal, and social verification (`rel="me"`).
   * Impact Metrics grid (40% load time reduction, 10k+ active learners, 5k+ daily data points).
   * Selected Work bento gallery with hover scale interactions.
   * Contact CTA banner with direct email copy action and resume download link.
@@ -109,7 +139,7 @@ adibwafi.github.io/
 * **Global Navigation & Utilities**:
   * Header nav with active indicator pill & mobile bottom navigation bar.
   * EN/ID language switcher pill with instant client translation switching.
-  * Light/Dark theme toggle with CSS `.dark` class injection and `localStorage` syncing.
+  * Light/Dark theme toggle with CSS `.dark` class injection, `data-theme` attribute synchronization, and `localStorage` syncing.
   * Interactive toast notification system for copy-to-clipboard events.
 
 ### Data Flow Architecture
@@ -120,7 +150,7 @@ adibwafi.github.io/
 [SiteShell Context Provider (lib/site-context.tsx)]
          │
          ├─► Updates State & Persists to localStorage ('theme', 'lang')
-         ├─► Injects '.dark' class on <html> & updates lang attribute
+         ├─► Injects '.dark' class and 'data-theme' attribute on <html>
          ├─► Triggers Toast State (copied email notification)
          └─► Invokes trackEvent() -> GA4 (gtag) & GTM (dataLayer)
          │
@@ -139,16 +169,36 @@ adibwafi.github.io/
 1. **Lighthouse CI Route Mismatch [RESOLVED]**: `.lighthouserc.json` previously referenced non-existent route `http://localhost:3000/about`. Updated to audit valid routes `http://localhost:3000`, `http://localhost:3000/experience`, and `http://localhost:3000/work`.
 2. **Missing Unit & Component Testing Setup**: No test framework (Jest or Vitest) or test runner scripts exist in `package.json`.
 3. **No Dynamic API Routes / Backend Endpoints**: Site is currently purely static/client-rendered with static data. Form submissions relying on email copy fallback to `mailto:` protocols.
+4. **Sentry Global Error Handler Warning**: Sentry suggests adding `app/global-error.tsx` for capturing React rendering errors in root layout.
 
 ---
 
 ## 5. AI AGENT CODING GUIDELINES
 
+### Brand & Design System Rules (MUST FOLLOW)
+* **Design Token Authority**:
+  * Source of truth is `public/brandGuideline/brand-package/tokens/tokens.json` and `tokens.css`.
+  * **Never guess or hardcode hex colors** outside the design tokens.
+  * **2 Color Registers Only**:
+    * `accent` (Taxicab Ochre `#D4A26A`): Single expressive color, use sparingly and intentionally.
+    * `structural` (Radio City Blue `#4A5877`): Technical construction color, strictly for grid/diagrams/structural lines.
+    * Never introduce arbitrary accent colors (e.g. random blues, purples, reds).
+* **Strict Typography Rules**:
+  * `--font-serif` (Cormorant Garamond): EXCLUSIVELY for large editorial headlines (>24px) and pull-quotes. NEVER use for paragraph body text.
+  * `--font-sans` (Manrope): Primary font for all body text, UI, navigation, buttons, and form labels.
+  * `--font-mono` (JetBrains Mono): For numbers, hex values, eyebrow labels, tech pills, and metadata.
+* **Brandmark Protection**:
+  * Monogram "AM" at `/public/brand/mark-*.svg`: NEVER recolor, fill solid, rotate, distort, or stretch.
+  * Maintain clearspace minimum of `1u` (stroke width) around mark.
+* **Dark Mode Implementation**:
+  * Follow 3-state dark mode pattern in `tokens.css`: `:root` default, `@media (prefers-color-scheme: dark)`, and `[data-theme="dark"]` / `.dark`.
+  * Update both `.dark` class and `data-theme` attribute on `document.documentElement`.
+
 ### Conventions & Code Rules
 * **File Naming**:
-  * React Components: `PascalCase.tsx` (e.g., `FeaturedProjects.tsx`)
+  * React Components: `PascalCase.tsx` (e.g., `BrandLoader.tsx`, `FeaturedProjects.tsx`)
   * Helper Utilities & Data: `camelCase.ts` (e.g., `analytics.ts`, `data.ts`)
-  * Route Entrypoints: `page.tsx`, `layout.tsx`, `sitemap.ts`
+  * Route Entrypoints: `page.tsx`, `layout.tsx`, `loading.tsx`, `sitemap.ts`
 * **Import Ordering Structure**:
   1. React & Next.js core modules (`react`, `next/link`, `next/navigation`, `next/image`)
   2. Third-party UI & icon packages (`framer-motion`, `lucide-react`)
@@ -164,7 +214,8 @@ adibwafi.github.io/
   * Every interactive CTA button, external link, or tab switcher must invoke `trackEvent('click', 'Category', 'Label')` from `@/lib/analytics`.
 
 ### Step-by-Step Workflow for New Features / Edits
-1. **Update Data Contracts**: If introducing new content, define interfaces and entries in `lib/data.ts` or `lib/translations.ts`.
-2. **Implement Component Layer**: Create or modify the component in `components/`, using design system tokens (`.bento-card`, `.tag-chip`, `.btn-primary`) and ensuring dark mode compatibility via Tailwind `dark:` classes or global CSS tokens.
-3. **Wire Context & Analytics**: Connect component to `useSite()` for i18n/theme if needed, and attach `trackEvent` to click handlers.
-4. **Validate Build & Linting**: Run `npm run lint` and `npm run build` locally to verify clean TypeScript compilation without errors before committing.
+1. **Verify Brand & Token Compliance**: Check `tokens.json` and `AGENTS.md` before applying new styles.
+2. **Update Data Contracts**: If introducing new content, define interfaces and entries in `lib/data.ts` or `lib/translations.ts`.
+3. **Implement Component Layer**: Create or modify the component in `components/`, using brand tokens and ensuring dark mode compatibility via CSS variables or Tailwind tokens.
+4. **Wire Context & Analytics**: Connect component to `useSite()` for i18n/theme if needed, and attach `trackEvent` to click handlers.
+5. **Validate Build & Linting**: Run `npm run lint` and `npm run build` locally to verify clean compilation without errors.
