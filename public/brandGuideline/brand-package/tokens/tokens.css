@@ -1,0 +1,62 @@
+/*
+  adibwafi.com — design tokens
+  Generated from Brand Guidelines v1.0 (Sept 2026)
+  Drop this into globals.css, or map the values into tailwind.config.ts colors.
+*/
+
+:root {
+  /* -- light (default) -- */
+  --paper: #F7F7F7;        /* Snow White — page background */
+  --surface: #FFFFFF;      /* card / panel background */
+  --ink: #1A1A1A;          /* Jet Black — primary text */
+  --ink-soft: #635648;     /* secondary text, warm gray */
+  --ink-faint: #9C9284;    /* captions, disabled, tertiary text */
+  --rule: #E1DAD0;         /* hairlines, borders */
+  --accent: #D4A26A;       /* Taxicab Ochre — the one expressive accent */
+  --accent-ink: #8B6031;   /* ochre, darkened for AA text/link contrast on light */
+  --accent-tint: #F1E1CC;  /* pale ochre fill */
+  --structural: #4A5877;   /* Radio City Blue — technical/construction color */
+  --structural-soft: #7C879D;
+
+  /* -- fixed brand darks: intentional dark sections/surfaces, do NOT theme-swap -- */
+  --surface-dark: #1A1A1A;  /* Jet Black dark-section background */
+  --on-dark: #F5F1EA;
+  --on-dark-soft: #B7AC9C;
+
+  /* -- type -- */
+  --font-serif: 'Cormorant Garamond', 'Iowan Old Style', Georgia, serif;
+  --font-sans: 'Manrope', -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'JetBrains Mono', 'SFMono-Regular', Consolas, monospace;
+}
+
+/* -- dark mode (OS/browser preference) -- */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: #141310;
+    --surface: #1C1B17;
+    --ink: #F2EDE6;
+    --ink-soft: #C9BFAF;
+    --ink-faint: #8A8174;
+    --rule: #332F27;
+    --accent: #E3B583;
+    --accent-ink: #E3B583;
+    --accent-tint: #3A2E1D;
+    --structural: #8895AC;
+    --structural-soft: #5E6A82;
+  }
+}
+
+/* -- dark mode (explicit user toggle, wins either direction) -- */
+:root[data-theme="dark"] {
+  --paper: #141310;
+  --surface: #1C1B17;
+  --ink: #F2EDE6;
+  --ink-soft: #C9BFAF;
+  --ink-faint: #8A8174;
+  --rule: #332F27;
+  --accent: #E3B583;
+  --accent-ink: #E3B583;
+  --accent-tint: #3A2E1D;
+  --structural: #8895AC;
+  --structural-soft: #5E6A82;
+}

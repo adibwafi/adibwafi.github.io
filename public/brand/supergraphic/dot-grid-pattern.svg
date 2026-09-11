@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <defs>
+    <pattern id="adibwafiDotGrid" width="16" height="16" patternUnits="userSpaceOnUse">
+      <circle cx="1" cy="1" r="1" fill="#4A5877" opacity=".55"/>
+    </pattern>
+  </defs>
+  <rect width="64" height="64" fill="url(#adibwafiDotGrid)"/>
+</svg>
