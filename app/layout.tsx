@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
+import { Cormorant_Garamond, Manrope, JetBrains_Mono } from 'next/font/google';
 import Script from 'next/script';
 import { Analytics } from '@vercel/analytics/react';
 import { SpeedInsights } from '@vercel/speed-insights/next';
@@ -7,9 +7,25 @@ import './globals.css';
 import SiteShell from '@/components/SiteShell';
 import AnalyticsRouteTracker from '@/components/AnalyticsRouteTracker';
 
-const inter = Inter({
+const serif = Cormorant_Garamond({
   subsets: ['latin'],
-  variable: '--font-inter',
+  weight: ['300', '400', '500', '600', '700'],
+  style: ['normal', 'italic'],
+  variable: '--font-serif',
+  display: 'swap',
+});
+
+const sans = Manrope({
+  subsets: ['latin'],
+  weight: ['400', '500', '600', '700', '800'],
+  variable: '--font-sans',
+  display: 'swap',
+});
+
+const mono = JetBrains_Mono({
+  subsets: ['latin'],
+  weight: ['400', '500', '700'],
+  variable: '--font-mono',
   display: 'swap',
 });
 
@@ -22,9 +38,9 @@ export const metadata: Metadata = {
   description:
     'Results-driven Full Stack Engineer building scalable backend infrastructure and intuitive frontend experiences. Based in Indonesia.',
   icons: {
-    icon:     '/icon-2.png',
-    shortcut: '/icon-2.png',
-    apple:    '/icon-2.png',
+    icon:     '/favicon.ico',
+    shortcut: '/favicon.ico',
+    apple:    '/apple-touch-icon.png',
   },
   // PRIORITY 4 — Indonesian local recruiter keywords added
   keywords: [
@@ -60,8 +76,7 @@ export const metadata: Metadata = {
     siteName:    'Adibwafi Portfolio',
     images: [
       {
-        // PRIORITY 3 — use portrait photo as OG image
-        url:    '/portrait-adib.webp',
+        url:    '/og-image.png',
         width:  1200,
         height: 630,
         alt:    'Muhamad Adibwafi Menako — Full Stack Engineer',
@@ -74,7 +89,7 @@ export const metadata: Metadata = {
     card:        'summary_large_image',
     title:       'Muhamad Adibwafi Menako — Full Stack Engineer',
     description: 'Results-driven Full Stack Engineer building scalable backend infrastructure and intuitive frontend experiences.',
-    images:      ['/portrait-adib.webp'],
+    images:      ['/og-image.png'],
   },
   robots: {
     index:     true,
@@ -152,11 +167,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   const gtmId = process.env.NEXT_PUBLIC_GTM_ID || 'GTM-KHMNHQN6';
 
   return (
-    <html lang="en" className={`${inter.variable} scroll-smooth`}>
+    <html lang="en" className={`${serif.variable} ${sans.variable} ${mono.variable} scroll-smooth`}>
       <head>
         <link rel="icon"           href="/favicon.ico" sizes="any" />
         <meta name="viewport"      content="width=device-width, initial-scale=1" />
-        <meta name="theme-color"   content="#FAFAFA" />
+        <meta name="theme-color"   content="#F7F7F7" />
         {/* PRIORITY 6 — rel="me" identity verification */}
         <link rel="me" href="https://linkedin.com/in/adibwafi" />
         <link rel="me" href="https://github.com/adibwafi" />
