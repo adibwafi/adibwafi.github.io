@@ -66,6 +66,18 @@ export interface ProjectPreview {
 
 export const projectPreviews: ProjectPreview[] = [
   {
+    title: 'Kinghouse Management',
+    en: {
+      blurb: 'Editorial short-stay property management & 100% free-tier hospitality ERP platform.',
+    },
+    id: {
+      blurb: 'Platform manajemen vila & hospitality ERP 100% free-tier berstandar editorial.',
+    },
+    tags: ['Next.js 16', 'TypeScript', 'Supabase', 'Tailwind v4'],
+    imageSrc: '/work/kinghouse-management.webp',
+    link: 'https://www.kinghousemanagement.com/',
+  },
+  {
     title: 'Livecode Logic Trainer',
     en: {
       blurb: 'Timed web app for live-code technical interview practice under 30-min constraints.',
@@ -250,6 +262,21 @@ export interface Project {
 }
 
 export const projects: Project[] = [
+  {
+    title: 'Kinghouse Management — Short-Stay Property & Hospitality ERP Platform',
+    tags: ['Next.js 16', 'TypeScript', 'Supabase', 'Tailwind CSS v4', 'Hospitality ERP', 'Dynamic Pricing'],
+    link: 'https://github.com/menako-studio/kinghouse-management',
+    webLink: 'https://www.kinghousemanagement.com/',
+    imageSrc: '/work/kinghouse-management.webp',
+    en: {
+      description:
+        'An editorial-grade property management, SEO CMS, and 100% Free-Tier Hospitality ERP/POS platform built with Next.js 16 (App Router, React 19), Tailwind CSS v4, TypeScript, and Supabase PostgreSQL for Greater Jakarta residences. Features real-time 2-way Airbnb iCal calendar synchronization, an AirDNA-grade multi-factor dynamic pricing engine, Little Hotelier visual Gantt turnover timeline, digital guest compendium (/stay), automated owner payout statements, and complete CMS security.',
+    },
+    id: {
+      description:
+        'Platform manajemen properti sewa harian (short-stay), SEO CMS, dan Hospitality ERP/POS 100% Free-Tier berstandar editorial yang dibangun menggunakan Next.js 16 (App Router, React 19), Tailwind CSS v4, TypeScript, dan Supabase PostgreSQL untuk residensi di wilayah Jabodetabek. Dilengkapi sinkronisasi 2 arah Airbnb iCal otomatis, mesin dynamic pricing multi-faktor ala AirDNA, visual Gantt timeline reservasi, digital guest compendium (/stay), laporan bagi hasil pemilik properti otomatis, dan keamanan CMS tingkat produksi.',
+    },
+  },
   {
     title: 'Livecode Logic Trainer',
     tags: ['JavaScript', 'REST API', 'Technical Interview', 'Web App', 'Vercel'],

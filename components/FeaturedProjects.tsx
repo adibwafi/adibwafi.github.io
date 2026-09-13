@@ -99,6 +99,18 @@ const projects = [
     gridClass: 'md:col-span-6 md:col-start-4',
     imageHeight: 'h-56 md:h-[400px]',
   },
+  {
+    index: '06',
+    title: 'Kinghouse Management — Short-Stay Property & Hospitality ERP Platform',
+    tags: ['Next.js 16', 'Tailwind CSS v4', 'Hospitality ERP', 'Supabase'],
+    description:
+      'An editorial-grade property management, SEO CMS, and 100% Free-Tier Hospitality ERP/POS platform built with Next.js 16 (App Router, React 19), Tailwind CSS v4, and Supabase. Features real-time 2-way Airbnb iCal sync, an AirDNA-grade dynamic pricing engine, Little Hotelier visual Gantt timeline, and digital guest compendiums.',
+    link: 'https://github.com/menako-studio/kinghouse-management',
+    webLink: 'https://www.kinghousemanagement.com/',
+    imageSrc: '/work/kinghouse-management.webp',
+    gridClass: 'md:col-span-6 md:col-start-4',
+    imageHeight: 'h-56 md:h-[400px]',
+  },
 ];
 
 /* ─── Editorial Link Component ──────────────────────────────────────────── */
