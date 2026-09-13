@@ -45,6 +45,7 @@ Supports system preference (`prefers-color-scheme`), explicit toggle (`data-them
 4. **Career Ledger & Tech Stack**: Detailed career timeline detailing software engineering milestones and categorized tool stack.
 5. **Bilingual Support (i18n)**: Seamless English & Indonesian translation switching powered by React Context (`SiteContext`).
 6. **Observability & Analytics**: Integrated Sentry 10 error reporting, Vercel Speed Insights, Google Tag Manager (`GTM-KHMNHQN6`), and custom virtual route pageview tracking.
+7. **Official Domain Email Infrastructure**: Centralized email configuration (`hello@adibwafi.com`) powered by Cloudflare Email Routing for inbound forwarding and Brevo SMTP relay for outbound delivery, integrated with copy-to-clipboard toast feedback.
 
 ---
 
@@ -125,4 +126,4 @@ Fully configured via Next.js Metadata API in `app/layout.tsx`:
 - OpenGraph & Twitter Summary Large Image cards (`/og-image.png`)
 - Multi-resolution favicons (`favicon.ico`, `favicon-16.png` through `favicon-512.png`) and Apple Touch icons
 - JSON-LD structured data for Person profile and website identity
-- Identity verification links (`rel="me"`) for LinkedIn and GitHub
+- Identity verification links (`rel="me"`) for LinkedIn, GitHub, and official email (`hello@adibwafi.com`)

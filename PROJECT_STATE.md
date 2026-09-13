@@ -34,6 +34,10 @@ High-end personal portfolio for **Muhamad Adibwafi Menako** (Full Stack Software
   * Google Analytics 4 (`NEXT_PUBLIC_GA_ID`) & Google Tag Manager (`NEXT_PUBLIC_GTM_ID`, default: `GTM-KHMNHQN6`)
   * Virtual SPA pageview tracking via `AnalyticsRouteTracker.tsx` and custom event logger `lib/analytics.ts`
 * **Error Tracking**: `@sentry/nextjs` v10.74.0 with server instrumentation hook enabled
+* **Email & Communication Infrastructure**:
+  * Official Domain Email: `hello@adibwafi.com` centralized as Single Source of Truth via `SITE_EMAIL` & `SITE_MAILTO` in `lib/data.ts`.
+  * Inbound Routing: Cloudflare Email Routing forwarding directly to personal Gmail.
+  * Outbound Relay: Brevo (Sendinblue) SMTP relay integration (`smtp-relay.brevo.com:587`) for authenticated "Send mail as" delivery with SPF/DKIM verification.
 * **Containerization & CI/CD**:
   * Docker multi-stage build (Alpine Node 20 runtime, non-root `nextjs` user, standalone output runner)
   * GitHub Actions CI (`.github/workflows/ci.yml` running Node 22.x, `npm ci`, `npm run lint`, `npm run build`, Lighthouse CI audit, `npm audit`)
@@ -127,7 +131,7 @@ adibwafi.github.io/
   * Editorial Hero section with 6-second recruiter pitch, profile photo modal, and social verification (`rel="me"`).
   * Impact Metrics grid (40% load time reduction, 10k+ active learners, 5k+ daily data points).
   * Selected Work bento gallery with hover scale interactions.
-  * Contact CTA banner with direct email copy action and resume download link.
+  * Contact CTA banner with direct email copy action (`hello@adibwafi.com`) and resume download link.
 * **Experience Page (`/experience`)**:
   * Work history timeline detailing software engineering and previous corporate enterprise roles.
   * Technical stack breakdown categorized into *Languages*, *Frameworks & Libraries*, and *Infrastructure & Tools*.
@@ -137,10 +141,10 @@ adibwafi.github.io/
   * Direct repository links and live website preview triggers.
   * Open source GitHub invitation card.
 * **Global Navigation & Utilities**:
-  * Header nav with active indicator pill & mobile bottom navigation bar.
+  * Header nav with active indicator pill, "Hire Me" mailto link, & mobile bottom navigation bar.
   * EN/ID language switcher pill with instant client translation switching.
   * Light/Dark theme toggle with CSS `.dark` class injection, `data-theme` attribute synchronization, and `localStorage` syncing.
-  * Interactive toast notification system for copy-to-clipboard events.
+  * Interactive toast notification system for copy-to-clipboard events (`hello@adibwafi.com`).
 
 ### Data Flow Architecture
 ```
