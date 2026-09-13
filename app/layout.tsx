@@ -168,7 +168,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   const gtmId = process.env.NEXT_PUBLIC_GTM_ID || 'GTM-KHMNHQN6';
 
   return (
-    <html lang="en" className={`${serif.variable} ${sans.variable} ${mono.variable} scroll-smooth`}>
+    <html
+      lang="en"
+      suppressHydrationWarning
+      className={`${serif.variable} ${sans.variable} ${mono.variable} scroll-smooth`}
+    >
       <head>
         <link rel="icon"           href="/favicon.ico" sizes="any" />
         <meta name="viewport"      content="width=device-width, initial-scale=1" />
@@ -177,8 +181,30 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link rel="me" href="https://linkedin.com/in/adibwafi" />
         <link rel="me" href="https://github.com/adibwafi" />
         <link rel="me" href={SITE_MAILTO} />
+        {/* Prevent theme flash and sync client theme before paint */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              try {
+                var savedTheme = localStorage.getItem('theme');
+                var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+                var theme = savedTheme || (prefersDark ? 'dark' : 'light');
+                document.documentElement.setAttribute('data-theme', theme);
+                if (theme === 'dark') {
+                  document.documentElement.classList.add('dark');
+                } else {
+                  document.documentElement.classList.remove('dark');
+                }
+                var savedLang = localStorage.getItem('lang');
+                if (savedLang) {
+                  document.documentElement.setAttribute('lang', savedLang);
+                }
+              } catch (e) {}
+            `,
+          }}
+        />
       </head>
-      <body className="antialiased">
+      <body className="antialiased" suppressHydrationWarning>
         {/* Google Tag Manager (noscript) */}
         {gtmId && (
           <noscript>
