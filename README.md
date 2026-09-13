@@ -17,13 +17,13 @@ Built with Next.js 15 (App Router), TypeScript, Tailwind CSS, Framer Motion, and
 The visual identity follows **High-End Editorial Minimalism** specified in the brand design tokens (`public/brandGuideline/brand-package/tokens/` and `AGENTS.md`):
 
 ### 1. Dual Color Registers
-- **Expressive Accent (`accent`)**: Taxicab Ochre (`#D4A26A`) — used deliberately and sparingly for focal interactions, primary highlights, and brand emphasis. AA contrast text companion: `#8B6031`. Tint: `#F1E1CC`.
+- **Expressive Accent (`accent`)**: Doraemon Blue (`#00A0E9`) in Light mode (AA contrast text `#0066CC`, tint `#E6F4FE`, on-accent `#FFFFFF`); Electric Neon Lime (`#CDFE00`) in Dark mode — no gold/brown in either mode.
 - **Technical Structural (`structural`)**: Radio City Blue (`#4A5877`) — reserved exclusively for diagrams, architectural construction elements, and dot-grids.
 
 ### 2. 3-State Dark Mode Tokens
 Supports system preference (`prefers-color-scheme`), explicit toggle (`data-theme`), and CSS class overrides:
-- **Light Theme**: Paper `#F7F7F7`, Surface `#FFFFFF`, Ink `#1A1A1A`, Ink-Soft `#635648`, Rule `#E1DAD0`
-- **Dark Theme**: Paper `#000000`, Surface `#121212`, Ink `#FFFFFF`, Ink-Soft `#A2A2A2`, Rule `#222222`, Accent `#CDFE00` (Sana Labs AI Agents palette)
+- **Light Theme**: Paper `#F8FAFC`, Surface `#FFFFFF`, Ink `#0F172A`, Ink-Soft `#475569`, Rule `#E2E8F0`, Accent `#00A0E9`
+- **Dark Theme**: Paper `#000000`, Surface `#121212`, Ink `#FFFFFF`, Ink-Soft `#A2A2A2`, Rule `#222222`, Accent `#CDFE00`
 
 ### 3. Typography Hierarchy (Strict 3 Roles)
 - **Serif (`--font-serif`) — Cormorant Garamond**: Editorial headlines (>24px), display titles, and pull-quotes. Never used for body paragraphs.

@@ -24,6 +24,8 @@ const config: Config = {
         accentInk:        'var(--accent-ink)',
         'accent-tint':    'var(--accent-tint)',
         accentTint:       'var(--accent-tint)',
+        'on-accent':      'var(--on-accent)',
+        onAccent:         'var(--on-accent)',
         structural:       'var(--structural)',
         'structural-soft':'var(--structural-soft)',
         structuralSoft:   'var(--structural-soft)',

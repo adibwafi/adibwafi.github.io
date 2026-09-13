@@ -5,22 +5,23 @@
 /* ─── adibwafi.com Design Tokens (Brand Guidelines v1.0) ──────────────────── */
 :root {
   /* -- light (default) -- */
-  --paper: #F7F7F7;        /* Snow White — page background */
+  --paper: #F8FAFC;        /* Crisp Snow Paper — page background without warm yellow/brown cast */
   --surface: #FFFFFF;      /* card / panel background */
-  --ink: #1A1A1A;          /* Jet Black — primary text */
-  --ink-soft: #635648;     /* secondary text, warm gray */
-  --ink-faint: #9C9284;    /* captions, disabled, tertiary text */
-  --rule: #E1DAD0;         /* hairlines, borders */
-  --accent: #D4A26A;       /* Taxicab Ochre — the one expressive accent */
-  --accent-ink: #8B6031;   /* ochre, darkened for AA text/link contrast on light */
-  --accent-tint: #F1E1CC;  /* pale ochre fill */
+  --ink: #0F172A;          /* Slate Black — primary text */
+  --ink-soft: #475569;     /* secondary text, cool neutral slate */
+  --ink-faint: #94A3B8;    /* captions, disabled, tertiary text */
+  --rule: #E2E8F0;         /* crisp hairlines, borders */
+  --accent: #00A0E9;       /* Doraemon Blue — clean, vibrant sky/cerulean accent */
+  --accent-ink: #0066CC;   /* Doraemon blue deepened for AA text/link contrast on light */
+  --accent-tint: #E6F4FE;  /* pale Doraemon blue fill */
+  --on-accent: #FFFFFF;    /* text on accent in light mode */
   --structural: #4A5877;   /* Radio City Blue — technical/construction color */
   --structural-soft: #7C879D;
 
   /* -- fixed brand darks: intentional dark sections/surfaces, do NOT theme-swap -- */
-  --surface-dark: #1A1A1A;  /* Jet Black dark-section background */
-  --on-dark: #F5F1EA;
-  --on-dark-soft: #B7AC9C;
+  --surface-dark: #121212;  /* Carbon Slate dark-section background */
+  --on-dark: #FFFFFF;
+  --on-dark-soft: #94A3B8;
 
   /* -- typography fallbacks (primary fonts configured via next/font/google) -- */
   --font-serif: 'Cormorant Garamond', 'Iowan Old Style', Georgia, serif;
@@ -44,6 +45,7 @@
     --accent: #CDFE00;
     --accent-ink: #CDFE00;
     --accent-tint: rgba(205, 254, 0, 0.12);
+    --on-accent: #000000;
     --structural: #7C8BA1;
     --structural-soft: #4A5877;
   }
@@ -61,6 +63,7 @@
   --accent: #CDFE00;
   --accent-ink: #CDFE00;
   --accent-tint: rgba(205, 254, 0, 0.12);
+  --on-accent: #000000;
   --structural: #7C8BA1;
   --structural-soft: #4A5877;
 }
@@ -150,7 +153,7 @@ body {
 .btn-primary:hover {
   background: var(--accent);
   border-color: var(--accent);
-  color: #000000;
+  color: var(--on-accent);
   transform: translateY(-1px);
 }
 
@@ -186,7 +189,7 @@ body {
   font-size: 0.875rem;
   font-weight: 600;
   background: var(--accent);
-  color: #000000;
+  color: var(--on-accent);
   padding: 0.625rem 1.375rem;
   border-radius: 9999px;
   border: 1px solid var(--accent);
@@ -199,7 +202,7 @@ body {
   background: var(--accent);
   border-color: var(--accent);
   opacity: 0.88;
-  color: #000000;
+  color: var(--on-accent);
   transform: translateY(-1px);
 }
 
