@@ -25,7 +25,7 @@ export function ProjectCard({
     <div className="bento-card bento-card-hover overflow-hidden group">
       <div className={`flex flex-col ${isEven ? 'lg:flex-row-reverse' : 'lg:flex-row'}`}>
         {/* Image */}
-        <div className="w-full lg:w-1/2 h-[280px] lg:h-auto relative overflow-hidden bg-zinc-100">
+        <div className="w-full lg:w-1/2 h-[280px] lg:h-auto relative overflow-hidden bg-rule">
           <div
             className={`relative w-full h-full ${
               isEven ? 'lg:rounded-r-[1.4rem]' : 'lg:rounded-l-[1.4rem]'
@@ -46,17 +46,17 @@ export function ProjectCard({
         <div className="lg:w-1/2 p-7 md:p-10 flex flex-col justify-between gap-6">
           <div>
             <div className="flex items-center gap-3 mb-4">
-              <span className="text-xs font-bold text-zinc-300 tabular-nums">
+              <span className="text-xs font-bold text-ink-faint tabular-nums">
                 {String(index).padStart(2, '0')}
               </span>
-              <div className="h-px flex-1 bg-zinc-100" />
+              <div className="h-px flex-1 bg-rule" />
             </div>
 
-            <h3 className="text-title font-extrabold text-zinc-900 tracking-tight leading-tight mb-4">
+            <h3 className="text-title font-extrabold text-ink tracking-tight leading-tight mb-4">
               {title}
             </h3>
 
-            <p className="text-sm text-zinc-500 leading-relaxed mb-5">{project[lang].description}</p>
+            <p className="text-sm text-ink-soft leading-relaxed mb-5">{project[lang].description}</p>
 
             <div className="flex flex-wrap gap-1.5">
               {tags.map((t) => (

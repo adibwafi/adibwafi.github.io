@@ -45,8 +45,8 @@ export default function HomePage() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, ease, delay: 0.1 }}
               >
-                <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-50 border border-blue-100 text-blue-700 text-xs font-semibold tracking-wide">
-                  <span className="w-1.5 h-1.5 rounded-full bg-blue-500 animate-pulse" />
+                <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-accent-tint border border-accent text-accent-ink text-xs font-semibold tracking-wide">
+                  <span className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse" />
                   {translations[lang].hero.badge}
                 </span>
               </motion.div>
@@ -56,10 +56,10 @@ export default function HomePage() {
                 initial={{ opacity: 0, y: 18 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.75, ease, delay: 0.2 }}
-                className="text-display font-extrabold text-zinc-900 leading-[1.03] tracking-tight"
+                className="text-display font-extrabold text-ink leading-[1.03] tracking-tight"
               >
                 Muhamad{' '}
-                <span className="text-zinc-400">Adibwafi</span>{' '}
+                <span className="text-ink-faint">Adibwafi</span>{' '}
                 Menako.
               </motion.h1>
 
@@ -77,9 +77,9 @@ export default function HomePage() {
                 ] as const).map(
                   (item, i, arr) => (
                     <React.Fragment key={item}>
-                      <span className="text-sm font-medium text-zinc-500">{item}</span>
+                      <span className="text-sm font-medium text-ink-soft">{item}</span>
                       {i < arr.length - 1 && (
-                        <span className="text-zinc-300 select-none" aria-hidden="true">·</span>
+                        <span className="text-ink-faint select-none" aria-hidden="true">·</span>
                       )}
                     </React.Fragment>
                   )
@@ -91,7 +91,7 @@ export default function HomePage() {
                 initial={{ opacity: 0, y: 14 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.7, ease, delay: 0.37 }}
-                className="text-zinc-500 leading-[1.75] max-w-[52ch] text-base md:text-lg"
+                className="text-ink-soft leading-[1.75] max-w-[52ch] text-base md:text-lg"
               >
                 {translations[lang].hero.desc}
               </motion.p>
@@ -113,7 +113,7 @@ export default function HomePage() {
                     href={href}
                     target={href.startsWith('mailto') ? undefined : '_blank'}
                     rel="noopener noreferrer"
-                    className="flex items-center gap-1.5 text-sm font-medium text-zinc-500 hover:text-zinc-900 transition-colors"
+                    className="flex items-center gap-1.5 text-sm font-medium text-ink-soft hover:text-ink transition-colors"
                     onClick={(e) => {
                       if (href.startsWith('mailto')) {
                         handleCopyEmail(e);
@@ -178,17 +178,17 @@ export default function HomePage() {
                     style={{ filter: 'saturate(0.95) contrast(1.02)' }}
                     sizes="280px"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-zinc-900/20 via-transparent to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent" />
                 </div>
                 <div className="p-3 flex items-center justify-between">
                   <div>
-                    <p className="text-xs font-semibold text-zinc-900">Muhamad Adibwafi</p>
-                    <p className="text-[0.7rem] text-zinc-400 flex items-center gap-1 mt-0.5">
+                    <p className="text-xs font-semibold text-ink">Muhamad Adibwafi</p>
+                    <p className="text-[0.7rem] text-ink-faint flex items-center gap-1 mt-0.5">
                       <MapPin size={10} strokeWidth={2} /> Depok, Indonesia
                     </p>
                   </div>
-                  <span className="inline-flex items-center gap-1 px-2 py-1 rounded-full bg-emerald-50 border border-emerald-100 text-emerald-700 text-[0.65rem] font-semibold">
-                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
+                  <span className="inline-flex items-center gap-1 px-2 py-1 rounded-full bg-accent-tint border border-accent text-accent-ink text-[0.65rem] font-semibold">
+                    <span className="w-1.5 h-1.5 rounded-full bg-accent" />
                     {translations[lang].hero.status}
                   </span>
                 </div>
@@ -213,11 +213,11 @@ export default function HomePage() {
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
               {metrics.map((m, i) => (
                 <FadeItem key={i} delay={i * 0.1} className="bento-card bento-card-hover p-6">
-                  <p className="text-5xl font-extrabold text-zinc-900 tracking-tight leading-none mb-3">
+                  <p className="text-5xl font-extrabold text-ink tracking-tight leading-none mb-3">
                     {m.value}
                   </p>
-                  <p className="text-sm font-semibold text-zinc-700 mb-1">{m[lang].label}</p>
-                  <p className="text-xs text-zinc-400 leading-relaxed">{m[lang].detail}</p>
+                  <p className="text-sm font-semibold text-ink-soft mb-1">{m[lang].label}</p>
+                  <p className="text-xs text-ink-faint leading-relaxed">{m[lang].detail}</p>
                 </FadeItem>
               ))}
             </div>
@@ -238,7 +238,7 @@ export default function HomePage() {
               <Link
                 href="/work"
                 onClick={() => trackEvent('click', 'Navigation', 'View All Projects')}
-                className="flex items-center gap-1 text-sm font-medium text-zinc-500 hover:text-zinc-900 transition-colors"
+                className="flex items-center gap-1 text-sm font-medium text-ink-soft hover:text-ink transition-colors"
               >
                 {translations[lang].featuredWork.link} <ArrowRight size={14} strokeWidth={1.75} />
               </Link>
@@ -255,7 +255,7 @@ export default function HomePage() {
                     onClick={() => trackEvent('click', 'Project Preview', p.title)}
                   >
                     <div
-                      className="relative overflow-hidden rounded-[1.1rem] m-2 bg-zinc-100"
+                      className="relative overflow-hidden rounded-[1.1rem] m-2 bg-rule"
                       style={{ height: '180px' }}
                     >
                       <ShimmerImage
@@ -266,8 +266,8 @@ export default function HomePage() {
                         style={{ filter: 'saturate(0.88) contrast(1.02)' }}
                         sizes="(max-width: 768px) 100vw, 33vw"
                       />
-                      <div className="absolute top-3 right-3 w-8 h-8 rounded-full bg-white/90 backdrop-blur-sm flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 shadow-sm">
-                        <ArrowUpRight size={14} strokeWidth={2} className="text-zinc-700" />
+                      <div className="absolute top-3 right-3 w-8 h-8 rounded-full bg-surface-dark flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 shadow-sm">
+                        <ArrowUpRight size={14} strokeWidth={2} className="text-on-dark" />
                       </div>
                     </div>
                     <div className="px-4 pb-4 pt-3">
@@ -276,10 +276,10 @@ export default function HomePage() {
                           <span key={t} className="tag-chip">{t}</span>
                         ))}
                       </div>
-                      <h3 className="text-sm font-semibold text-zinc-900 leading-snug mb-1">
+                      <h3 className="text-sm font-semibold text-ink leading-snug mb-1">
                         {p.title}
                       </h3>
-                      <p className="text-xs text-zinc-500 leading-relaxed">{p[lang].blurb}</p>
+                      <p className="text-xs text-ink-soft leading-relaxed">{p[lang].blurb}</p>
                     </div>
                   </a>
                 </FadeItem>
@@ -293,17 +293,17 @@ export default function HomePage() {
       <motion.section
         onViewportEnter={() => trackEvent('view', 'Section', 'CTA Section')}
         viewport={{ once: true, amount: 0.2 }}
-        className="relative z-10 border-t border-zinc-100"
+        className="relative z-10 border-t border-rule"
       >
         <div className="max-w-layout mx-auto px-5 md:px-10 lg:px-16 py-24">
           <FadeSection>
             <div className="bento-card p-10 md:p-14 flex flex-col md:flex-row items-start md:items-end justify-between gap-8">
               <div>
                 <p className="section-label mb-4">{translations[lang].ctaSection.label}</p>
-                <h2 className="text-hero font-extrabold text-zinc-900 tracking-tight leading-tight whitespace-pre-line">
+                <h2 className="text-hero font-extrabold text-ink tracking-tight leading-tight whitespace-pre-line">
                   {translations[lang].ctaSection.title}
                 </h2>
-                <p className="text-zinc-500 mt-4 max-w-[44ch] leading-relaxed">
+                <p className="text-ink-soft mt-4 max-w-[44ch] leading-relaxed">
                   {translations[lang].ctaSection.desc}
                 </p>
               </div>
@@ -339,7 +339,7 @@ export default function HomePage() {
 
             {/* Footer note — PRIORITY 5: © 2026 */}
             <div className="flex flex-col sm:flex-row justify-between items-center gap-3 mt-8 px-1">
-              <span className="text-xs text-zinc-400">© 2026 Muhamad Adibwafi Menako</span>
+              <span className="text-xs text-ink-faint">© 2026 Muhamad Adibwafi Menako</span>
               <div className="flex items-center gap-5">
                 {[
                   { href: 'https://github.com/adibwafi',      label: 'GitHub',   icon: Github },
@@ -350,7 +350,7 @@ export default function HomePage() {
                     href={href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center gap-1.5 text-xs text-zinc-400 hover:text-zinc-700 transition-colors"
+                    className="flex items-center gap-1.5 text-xs text-ink-faint hover:text-ink-soft transition-colors"
                     onClick={() => trackEvent('click', 'Social Link', `Footer Minimal ${label}`)}
                   >
                     <Icon size={13} strokeWidth={1.75} /> {label}

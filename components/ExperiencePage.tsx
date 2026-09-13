@@ -39,10 +39,10 @@ export default function ExperiencePage() {
         <FadeSection>
           <FadeItem>
             <span className="section-label block mb-5">{translations[lang].experience.label}</span>
-            <h1 className="text-hero font-extrabold text-zinc-900 tracking-tight leading-[1.08] mb-4">
+            <h1 className="text-hero font-extrabold text-ink tracking-tight leading-[1.08] mb-4">
               {translations[lang].experience.title}
             </h1>
-            <p className="text-zinc-500 max-w-[52ch] leading-relaxed">
+            <p className="text-ink-soft max-w-[52ch] leading-relaxed">
               {translations[lang].experience.desc}
             </p>
           </FadeItem>
@@ -70,24 +70,24 @@ export default function ExperiencePage() {
                   <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3 mb-4">
                     <div>
                       {exp.type === 'previous' && (
-                        <span className="inline-block px-2.5 py-0.5 rounded-full bg-zinc-100 text-zinc-500 text-[0.65rem] font-semibold tracking-wide uppercase mb-2">
+                        <span className="inline-block px-2.5 py-0.5 rounded-full bg-rule text-ink-soft text-[0.65rem] font-semibold tracking-wide uppercase mb-2">
                           {translations[lang].experience.prevCareer}
                         </span>
                       )}
-                      <h3 className="text-base font-semibold text-zinc-900">{exp[lang].role}</h3>
-                      <p className="text-sm text-zinc-500 mt-0.5">
+                      <h3 className="text-base font-semibold text-ink">{exp[lang].role}</h3>
+                      <p className="text-sm text-ink-soft mt-0.5">
                         {exp.company} · {exp.location}
                       </p>
                     </div>
-                    <span className="text-xs text-zinc-400 font-medium shrink-0 mt-1">
+                    <span className="text-xs text-ink-faint font-medium shrink-0 mt-1">
                       {exp.period}
                     </span>
                   </div>
 
                   <ul className="space-y-2 mb-4">
                     {exp[lang].bullets.map((b, bi) => (
-                      <li key={bi} className="flex gap-3 text-sm text-zinc-600 leading-relaxed">
-                        <span className="mt-2 w-1 h-1 rounded-full bg-zinc-300 flex-shrink-0" />
+                      <li key={bi} className="flex gap-3 text-sm text-ink-soft leading-relaxed">
+                        <span className="mt-2 w-1 h-1 rounded-full bg-ink-faint flex-shrink-0" />
                         {b}
                       </li>
                     ))}
@@ -109,13 +109,13 @@ export default function ExperiencePage() {
       <motion.div
         onViewportEnter={() => trackEvent('view', 'Section', 'Tech Stack Full')}
         viewport={{ once: true, amount: 0.2 }}
-        className="bg-white border-t border-zinc-100"
+        className="bg-surface border-t border-rule"
       >
         <div className="max-w-layout mx-auto px-5 md:px-10 lg:px-16 py-20">
           <FadeSection>
             <FadeItem className="mb-10">
               <span className="section-label block mb-4">{translations[lang].experience.techLabel}</span>
-              <h2 className="text-title font-extrabold text-zinc-900 tracking-tight">
+              <h2 className="text-title font-extrabold text-ink tracking-tight">
                 {translations[lang].experience.techTitle}
               </h2>
             </FadeItem>
@@ -123,7 +123,7 @@ export default function ExperiencePage() {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               {techStack.map((group, gi) => (
                 <FadeItem key={group.category} delay={gi * 0.1} className="stack-card">
-                  <h3 className="text-xs font-semibold text-zinc-400 uppercase tracking-widest mb-4">
+                  <h3 className="text-xs font-semibold text-ink-faint uppercase tracking-widest mb-4">
                     {getCategoryLabel(group.category, lang)}
                   </h3>
                   <div className="flex flex-wrap gap-2">
@@ -152,8 +152,8 @@ export default function ExperiencePage() {
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             {translations[lang].experience.education.map((edu, idx) => {
               const accent = idx === 0
-                ? 'bg-blue-50 border-blue-100 text-blue-700'
-                : 'bg-violet-50 border-violet-100 text-violet-700';
+                ? 'bg-accent-tint border-accent text-accent-ink'
+                : 'bg-surface border-rule text-structural';
               const period = idx === 0 ? '2022' : '2012 – 2017';
               return (
                 <FadeItem key={edu.school} className="bento-card p-6">
@@ -162,9 +162,9 @@ export default function ExperiencePage() {
                   >
                     {period}
                   </span>
-                  <h3 className="text-base font-semibold text-zinc-900 mb-1">{edu.school}</h3>
-                  <p className="text-sm text-zinc-500 mb-3">{edu.degree}</p>
-                  <p className="text-xs text-zinc-400 leading-relaxed">{edu.detail}</p>
+                  <h3 className="text-base font-semibold text-ink mb-1">{edu.school}</h3>
+                  <p className="text-sm text-ink-soft mb-3">{edu.degree}</p>
+                  <p className="text-xs text-ink-faint leading-relaxed">{edu.detail}</p>
                 </FadeItem>
               );
             })}

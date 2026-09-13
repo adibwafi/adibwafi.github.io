@@ -33,10 +33,10 @@ export default function WorkPage() {
         <FadeSection>
           <FadeItem>
             <span className="section-label block mb-5">{translations[lang].work.label}</span>
-            <h1 className="text-hero font-extrabold text-zinc-900 tracking-tight leading-[1.08] mb-4">
+            <h1 className="text-hero font-extrabold text-ink tracking-tight leading-[1.08] mb-4">
               {translations[lang].work.title}
             </h1>
-            <p className="text-zinc-500 max-w-[52ch] leading-relaxed">
+            <p className="text-ink-soft max-w-[52ch] leading-relaxed">
               {translations[lang].work.desc}
             </p>
           </FadeItem>
@@ -64,17 +64,17 @@ export default function WorkPage() {
       <motion.div
         onViewportEnter={() => trackEvent('view', 'Section', 'GitHub CTA Band')}
         viewport={{ once: true, amount: 0.3 }}
-        className="border-t border-zinc-100 bg-white"
+        className="border-t border-rule bg-surface"
       >
         <div className="max-w-layout mx-auto px-5 md:px-10 lg:px-16 py-16">
           <FadeSection>
             <FadeItem className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
               <div>
                 <h2 className="section-label mb-3">{translations[lang].work.openSourceLabel}</h2>
-                <h3 className="text-xl font-bold text-zinc-900 tracking-tight mb-1">
+                <h3 className="text-xl font-bold text-ink tracking-tight mb-1">
                   {translations[lang].work.openSourceTitle}
                 </h3>
-                <p className="text-sm text-zinc-500 max-w-[40ch]">
+                <p className="text-sm text-ink-soft max-w-[40ch]">
                   {translations[lang].work.openSourceDesc}
                 </p>
               </div>

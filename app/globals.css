@@ -283,27 +283,15 @@ body {
   border-color: var(--accent);
 }
 
-/* ─── Header & Shell Dark Mode Enhancements ──────────────────────────────── */
-.dark header {
-  background-color: rgba(20, 19, 16, 0.82) !important;
-  border-bottom-color: var(--rule) !important;
-}
-
-.dark header nav button {
-  color: var(--ink-soft) !important;
-}
-.dark header nav button:hover {
-  color: var(--ink) !important;
-  background-color: var(--surface) !important;
-}
-.dark header nav button[aria-current="page"] {
-  color: var(--ink) !important;
-  background-color: var(--rule) !important;
-}
-
-.dark .md\:hidden.border-t.border-zinc-100 {
-  background-color: rgba(28, 27, 23, 0.95) !important;
-  border-top-color: var(--rule) !important;
+/* ─── Site Header ─────────────────────────────────────────────────────────── */
+/* Translucent header background, theme-reactive via color-mix() so it works
+   correctly in both light and dark mode without a dark: override — the old
+   approach targeted "header nav button" but Nav.tsx renders <Link> (<a>)
+   elements, so those !important overrides never actually matched anything
+   and the header (and its text) stayed light-mode-colored in dark mode. */
+.site-header {
+  background-color: color-mix(in srgb, var(--paper) 78%, transparent);
+  border-bottom: 1px solid var(--rule);
 }
 
 /* ─── Brand Loading & Shimmer Animations ─────────────────────────────────── */
