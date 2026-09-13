@@ -1,8 +1,8 @@
-// sentry.client.config.ts
-// Sentry client-side initialization for adibwafi.github.io (TypeScript)
-// https://docs.sentry.io/platforms/javascript/guides/nextjs/
+// instrumentation-client.ts
+// Sentry client-side initialization & routing transition instrumentation for adibwafi.github.io
+// https://nextjs.org/docs/app/api-reference/file-conventions/instrumentation-client
 
-import * as Sentry from '@sentry/nextjs'
+import * as Sentry from '@sentry/nextjs';
 
 Sentry.init({
   dsn: process.env.NEXT_PUBLIC_SENTRY_DSN,
@@ -25,4 +25,6 @@ Sentry.init({
   ],
 
   debug: false,
-})
+});
+
+export const onRouterTransitionStart = Sentry.captureRouterTransitionStart;
