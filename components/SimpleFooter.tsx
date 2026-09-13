@@ -4,6 +4,7 @@ import React from 'react';
 import { Mail, Github, Linkedin } from 'lucide-react';
 import { useSite } from '@/lib/site-context';
 import { trackEvent } from '@/lib/analytics';
+import { SITE_MAILTO } from '@/lib/data';
 
 /* ─── Shared footer used on Experience and Work pages ────────────────────── */
 
@@ -11,7 +12,7 @@ export function SimpleFooter() {
   const { handleCopyEmail } = useSite();
 
   const links = [
-    { href: 'mailto:adibwafi@gmail.com', label: 'Email',    icon: Mail },
+    { href: SITE_MAILTO, label: 'Email',    icon: Mail },
     { href: 'https://github.com/adibwafi',         label: 'GitHub',   icon: Github },
     { href: 'https://linkedin.com/in/adibwafi',    label: 'LinkedIn', icon: Linkedin },
   ] as const;

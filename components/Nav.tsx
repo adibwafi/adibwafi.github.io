@@ -9,6 +9,7 @@ import { useSite } from '@/lib/site-context';
 import { translations } from '@/lib/translations';
 import { trackEvent } from '@/lib/analytics';
 import { ease } from '@/lib/animations';
+import { SITE_MAILTO } from '@/lib/data';
 
 /* ─── Navigation — reads active route via usePathname ─────────────────────── */
 
@@ -114,7 +115,7 @@ export function Nav() {
           </button>
 
           <a
-            href="mailto:adibwafi@gmail.com"
+            href={SITE_MAILTO}
             className="btn-primary text-xs hidden sm:inline-flex"
             aria-label={translations[lang].nav.hireMeAria}
             onClick={(e) => {

@@ -1,5 +1,8 @@
 /* ─── All static data for the portfolio ──────────────────────────────────── */
 
+export const SITE_EMAIL = 'hello@adibwafi.com';
+export const SITE_MAILTO = `mailto:${SITE_EMAIL}`;
+
 export interface Metric {
   value: string;
   en: {

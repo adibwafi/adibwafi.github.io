@@ -10,7 +10,7 @@ import { useSite } from '@/lib/site-context';
 import { translations } from '@/lib/translations';
 import { trackEvent } from '@/lib/analytics';
 import { ease, pageAnim } from '@/lib/animations';
-import { metrics, projectPreviews } from '@/lib/data';
+import { metrics, projectPreviews, SITE_EMAIL, SITE_MAILTO } from '@/lib/data';
 
 /* ════════════════════════════════════════════════════════════════════════════
    HOME PAGE CONTENT
@@ -104,7 +104,7 @@ export default function HomePage() {
                 className="flex flex-wrap gap-4"
               >
                 {[
-                  { href: 'mailto:adibwafi@gmail.com', label: 'adibwafi@gmail.com', icon: Mail },
+                  { href: SITE_MAILTO, label: SITE_EMAIL, icon: Mail },
                   { href: 'https://linkedin.com/in/adibwafi',  label: 'LinkedIn', icon: Linkedin },
                   { href: 'https://github.com/adibwafi',       label: 'GitHub',   icon: Github },
                 ].map(({ href, label, icon: Icon }) => (
@@ -136,7 +136,7 @@ export default function HomePage() {
                 className="flex flex-wrap gap-3"
               >
                 <a
-                  href="mailto:adibwafi@gmail.com"
+                  href={SITE_MAILTO}
                   className="btn-primary"
                   onClick={handleCopyEmail}
                 >
@@ -309,7 +309,7 @@ export default function HomePage() {
               </div>
               <div className="flex flex-col sm:flex-row gap-3 flex-shrink-0">
                 <a
-                  href="mailto:adibwafi@gmail.com"
+                  href={SITE_MAILTO}
                   className="btn-primary"
                   onClick={handleCopyEmail}
                 >

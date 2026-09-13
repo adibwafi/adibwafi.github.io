@@ -6,6 +6,7 @@ import { SpeedInsights } from '@vercel/speed-insights/next';
 import './globals.css';
 import SiteShell from '@/components/SiteShell';
 import AnalyticsRouteTracker from '@/components/AnalyticsRouteTracker';
+import { SITE_MAILTO } from '@/lib/data';
 
 const serif = Cormorant_Garamond({
   subsets: ['latin'],
@@ -175,7 +176,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         {/* PRIORITY 6 — rel="me" identity verification */}
         <link rel="me" href="https://linkedin.com/in/adibwafi" />
         <link rel="me" href="https://github.com/adibwafi" />
-        <link rel="me" href="mailto:adibwafi@gmail.com" />
+        <link rel="me" href={SITE_MAILTO} />
       </head>
       <body className="antialiased">
         {/* Google Tag Manager (noscript) */}

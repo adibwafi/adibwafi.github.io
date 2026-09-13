@@ -6,6 +6,7 @@ import { SiteContext } from '@/lib/site-context';
 import { translations } from '@/lib/translations';
 import { Nav } from '@/components/Nav';
 import { trackEvent } from '@/lib/analytics';
+import { SITE_EMAIL } from '@/lib/data';
 
 /* ─── Client shell: provides shared context, Nav, ambient bg, toast ─────── */
 // This is rendered by layout.tsx around all page content. It manages:
@@ -60,7 +61,7 @@ export default function SiteShell({ children }: { children: React.ReactNode }) {
   /* ── Copy email to clipboard + show toast ────────────────────────────── */
   const handleCopyEmail = (e: React.MouseEvent) => {
     e.preventDefault();
-    navigator.clipboard.writeText('adibwafi@gmail.com');
+    navigator.clipboard.writeText(SITE_EMAIL);
     setToast(translations[lang].toast.copied);
     trackEvent('click', 'Copy Email', 'Success');
     setTimeout(() => setToast(null), 2500);
