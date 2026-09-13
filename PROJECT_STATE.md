@@ -20,6 +20,7 @@ High-end personal portfolio for **Muhamad Adibwafi Menako** (Full Stack Software
     * `structural`: Radio City Blue (`#4A5877`, soft `#7C879D`) — technical construction, diagrams, and grid accents only.
     * 3-state dark mode tokens: `paper` (`#F7F7F7` / `#141310`), `surface` (`#FFFFFF` / `#1C1B17`), `ink` (`#1A1A1A` / `#F2EDE6`), `rule` (`#E1DAD0` / `#332F27`).
   * Tailwind CSS 3.4.7 (Configured with `darkMode: ['class', '[data-theme="dark"]']`, mapped to CSS variables `--paper`, `--surface`, `--ink`, `--accent`, `--rule`, etc.)
+  * **Dark Mode Text Contrast**: All page components consume the `ink` / `ink-soft` / `ink-faint` / `paper` / `surface` / `rule` Tailwind color tokens directly (never raw `zinc-*`/`gray-*`/`blue-*`/`emerald-*` classes) so every text and surface color is theme-reactive by construction — no per-component `dark:` overrides needed. The header's translucent background uses a `.site-header` class (`color-mix(in srgb, var(--paper) 78%, transparent)`) rather than a Tailwind opacity modifier, since Tailwind cannot apply `/alpha` to a CSS-variable-backed color. `app/not-found.tsx` is the one deliberate exception: it runs its own standalone theme state (not `SiteContext`) with an independent `zinc-*` + explicit `dark:` palette — leave it as-is rather than migrating it to tokens.
   * PostCSS 8.5.28 & Autoprefixer 10.4.19
   * Typography: 3 distinct roles configured via `next/font/google`:
     * `--font-serif`: Cormorant Garamond (headlines >24px, pull-quotes)
@@ -60,6 +61,8 @@ adibwafi.github.io/
 │   │   └── page.tsx             # Career history, tech stack & education route (/experience)
 │   ├── work/
 │   │   └── page.tsx             # Featured repositories & project portfolio route (/work)
+│   ├── videography/
+│   │   └── page.tsx             # Video production portfolio route (/videography)
 │   ├── globals.css              # Brand design tokens, 3-state dark mode & loader animations
 │   ├── layout.tsx               # Root HTML shell, brand fonts (Serif/Sans/Mono), metadata, JSON-LD
 │   ├── loading.tsx              # Route loading boundary with animated BrandLoader
@@ -79,13 +82,19 @@ adibwafi.github.io/
 │   ├── ShimmerImage.tsx         # Next.js Image with animated CSS skeleton shimmer placeholder
 │   ├── SimpleFooter.tsx         # Minimalist page footer
 │   ├── SiteShell.tsx            # Context provider shell for theme, i18n, toasts & Nav
-│   └── WorkPage.tsx             # Content module for work route
+│   ├── WorkPage.tsx             # Content module for work route
+│   ├── VideographyPage.tsx      # Content module for videography route (hero, carousel, archive, principles, CTA)
+│   ├── VideoStoriesCarousel.tsx # Sana Learn "customer stories"-style auto-advancing scroll-snap carousel
+│   ├── VideographyCard.tsx      # Landscape archive-grid card with "Coming Soon" state for unreleased cuts
+│   └── VideoLightbox.tsx        # Modal YouTube-nocookie embed player with role/tagline/BTS panel
 ├── lib/                         # Data sources, Context definitions & utility functions
 │   ├── analytics.ts             # Helper functions for GA4 gtag & GTM dataLayer events
 │   ├── animations.ts            # Framer Motion spring transition curves and page variants
 │   ├── data.ts                  # Typed data models & portfolio content (metrics, roles, projects, stack)
 │   ├── site-context.tsx         # React Context interface and custom hook (`useSite`)
-│   └── translations.ts          # i18n dictionary for English and Indonesian translations
+│   ├── translations.ts          # i18n dictionary for English and Indonesian translations
+│   ├── videographyProjects.ts   # Typed data model for the 11 videography productions
+│   └── youtube.ts               # YouTube URL → id/thumbnail/nocookie-embed parsing helpers
 ├── public/                      # Static public assets (images, icons, brand package)
 │   ├── apple-touch-icon.png     # iOS touch icon
 │   ├── apple-touch-icon-180.png # High-res iOS touch icon
@@ -140,8 +149,15 @@ adibwafi.github.io/
   * Comprehensive project case study list (Enterprise LMS Blueprint, AI Baby Meal Planner, Serasa Kreatif, Amana Care).
   * Direct repository links and live website preview triggers.
   * Open source GitHub invitation card.
+* **Videography Page (`/videography`)**:
+  * Editorial hero with a rotated photo collage built from production thumbnails (adapts the Sana Labs careers-page collage motif without stock team photography).
+  * "Selected Productions" carousel (`VideoStoriesCarousel.tsx`) adapting the Sana Learn "customer stories" pattern: native scroll-snap auto-advance (no added dependency), pause on hover/touch/manual toggle, a scrub-style progress bar, and `prefers-reduced-motion` support. Framed by the "Frame & Grid" supergraphic (ochre corner brackets + structural-color dot-grid veil), always paired per `AGENTS.md`.
+  * Full archive grid (`VideographyCard.tsx`) of all 11 productions with category filter tabs; productions without an uploaded cut render a disabled "Coming Soon" state instead of a broken thumbnail.
+  * Click-to-play modal (`VideoLightbox.tsx`) embedding via `youtube-nocookie.com`, showing role, tagline, and a behind-the-scenes note per production.
+  * Principles band on the fixed `surface-dark`/`on-dark` tokens (reserved for "intentional dark sections" regardless of site theme) — echoes the Sana careers "Principles we live by" block without introducing a new accent color.
+  * Data lives in `lib/videographyProjects.ts` (`VideographyProject[]`); YouTube id/thumbnail/embed parsing in `lib/youtube.ts`.
 * **Global Navigation & Utilities**:
-  * Header nav with active indicator pill, "Hire Me" mailto link, & mobile bottom navigation bar.
+  * Header nav (Home, Experience, Work, Videography) with active indicator pill, "Hire Me" mailto link, & mobile bottom navigation bar.
   * EN/ID language switcher pill with instant client translation switching.
   * Light/Dark theme toggle with CSS `.dark` class injection, `data-theme` attribute synchronization, and `localStorage` syncing.
   * Interactive toast notification system for copy-to-clipboard events (`hello@adibwafi.com`).
@@ -171,9 +187,10 @@ adibwafi.github.io/
 
 ### Identified Technical Debt & Configuration Bugs
 1. **Lighthouse CI Route Mismatch [RESOLVED]**: `.lighthouserc.json` previously referenced non-existent route `http://localhost:3000/about`. Updated to audit valid routes `http://localhost:3000`, `http://localhost:3000/experience`, and `http://localhost:3000/work`.
-2. **Missing Unit & Component Testing Setup**: No test framework (Jest or Vitest) or test runner scripts exist in `package.json`.
-3. **No Dynamic API Routes / Backend Endpoints**: Site is currently purely static/client-rendered with static data. Form submissions relying on email copy fallback to `mailto:` protocols.
-4. **Sentry Global Error Handler Warning**: Sentry suggests adding `app/global-error.tsx` for capturing React rendering errors in root layout.
+2. **Dark Mode Text Contrast [RESOLVED]**: `HomePage.tsx`, `ExperiencePage.tsx`, `WorkPage.tsx`, `ProjectCard.tsx`, and `SimpleFooter.tsx` used hardcoded `zinc-*`/`blue-*`/`emerald-*`/`violet-*`/`bg-white` Tailwind classes with no `dark:` variants, so headings and body text rendered in their light-mode color regardless of theme. Separately, `Nav.tsx`'s dark-mode CSS override in `globals.css` targeted `header nav button`, but `Nav.tsx` renders `<Link>` (`<a>`) elements — the override never matched, so the header stayed light-mode-colored (and largely unreadable) in dark mode. Fixed by migrating every affected component to the `ink`/`ink-soft`/`ink-faint`/`paper`/`surface`/`rule`/`accent` design tokens and replacing the broken override with a token-driven `.site-header` class. See the Dark Mode Text Contrast note under §1 for the rule going forward.
+3. **Missing Unit & Component Testing Setup**: No test framework (Jest or Vitest) or test runner scripts exist in `package.json`.
+4. **No Dynamic API Routes / Backend Endpoints**: Site is currently purely static/client-rendered with static data. Form submissions relying on email copy fallback to `mailto:` protocols.
+5. **Sentry Global Error Handler Warning**: Sentry suggests adding `app/global-error.tsx` for capturing React rendering errors in root layout.
 
 ---
 
@@ -197,6 +214,9 @@ adibwafi.github.io/
 * **Dark Mode Implementation**:
   * Follow 3-state dark mode pattern in `tokens.css`: `:root` default, `@media (prefers-color-scheme: dark)`, and `[data-theme="dark"]` / `.dark`.
   * Update both `.dark` class and `data-theme` attribute on `document.documentElement`.
+  * **Never style text/backgrounds/borders with raw Tailwind palette classes** (`zinc-*`, `gray-*`, `blue-*`, `emerald-*`, `violet-*`, bare `white`/`black` fills) in a page component — they do not react to `.dark`/`[data-theme]` and are how the dark-mode contrast bug happened. Use the token classes instead: `text-ink` / `text-ink-soft` / `text-ink-faint`, `bg-paper` / `bg-surface`, `border-rule`, `bg-accent` / `text-accent-ink` / `bg-accent-tint`, `text-structural`. Plain `black`/`white` with an opacity modifier (e.g. `bg-black/70`) is still fine for neutral scrims/glass badges — that's a UI mechanic, not a brand-color decision — but never for headings or body copy.
+  * A CSS-variable-backed color (`ink`, `paper`, `accent`, etc.) cannot take a Tailwind `/alpha` opacity modifier (`bg-ink/80` silently drops the alpha) — for a translucent tinted surface, add a small dedicated class using `color-mix(in srgb, var(--token) X%, transparent)` (see `.site-header` in `globals.css`) instead.
+  * `app/not-found.tsx` is an intentional exception: it manages its own theme state independently of `SiteContext` with a `zinc-*` + explicit `dark:` palette that already works correctly — leave it as-is rather than migrating it to tokens.
 
 ### Conventions & Code Rules
 * **File Naming**:

@@ -8,7 +8,7 @@
 
 High-end personal portfolio for **Muhamad Adibwafi Menako**, Full Stack Software Engineer. Deployed and served at [adibwafi.com](https://adibwafi.com).
 
-Built with Next.js 15 (App Router), TypeScript, Tailwind CSS, Framer Motion, and Lucide React. Implements bilingual internationalization (EN/ID), 3-state dark mode synchronization, interactive case studies, animated SVG brand identity loaders, and enterprise-grade observability (Sentry, Vercel Analytics, GA4, GTM).
+Built with Next.js 15 (App Router), TypeScript, Tailwind CSS, Framer Motion, and Lucide React. Implements bilingual internationalization (EN/ID), 3-state dark mode synchronization, interactive case studies, a videography portfolio with an auto-advancing production carousel, animated SVG brand identity loaders, and enterprise-grade observability (Sentry, Vercel Analytics, GA4, GTM).
 
 ---
 
@@ -43,9 +43,10 @@ Supports system preference (`prefers-color-scheme`), explicit toggle (`data-them
 2. **Dynamic Impact Proof**: Typographic metric columns highlighting system performance gains, scaling milestones, and database optimization figures.
 3. **Curated Work & Case Studies**: Asymmetrical card layouts with live WebP mockups, architectural summaries, repository links, and live demo triggers.
 4. **Career Ledger & Tech Stack**: Detailed career timeline detailing software engineering milestones and categorized tool stack.
-5. **Bilingual Support (i18n)**: Seamless English & Indonesian translation switching powered by React Context (`SiteContext`).
-6. **Observability & Analytics**: Integrated Sentry 10 error reporting, Vercel Speed Insights, Google Tag Manager (`GTM-KHMNHQN6`), and custom virtual route pageview tracking.
-7. **Official Domain Email Infrastructure**: Centralized email configuration (`hello@adibwafi.com`) powered by Cloudflare Email Routing for inbound forwarding and Brevo SMTP relay for outbound delivery, integrated with copy-to-clipboard toast feedback.
+5. **Videography Portfolio**: `/videography` showcases 11 selected video productions (commercial campaigns, aviation heritage films, automotive culture documentaries, motion graphics) through a Sana Learn-inspired "customer stories" auto-advancing carousel, a filterable full archive grid, and a click-to-play modal player.
+6. **Bilingual Support (i18n)**: Seamless English & Indonesian translation switching powered by React Context (`SiteContext`).
+7. **Observability & Analytics**: Integrated Sentry 10 error reporting, Vercel Speed Insights, Google Tag Manager (`GTM-KHMNHQN6`), and custom virtual route pageview tracking.
+8. **Official Domain Email Infrastructure**: Centralized email configuration (`hello@adibwafi.com`) powered by Cloudflare Email Routing for inbound forwarding and Brevo SMTP relay for outbound delivery, integrated with copy-to-clipboard toast feedback.
 
 ---
 
@@ -87,6 +88,7 @@ adibwafi.github.io/
 │   ├── page.tsx               # Home route wrapper (<HomePage />)
 │   ├── experience/page.tsx    # Experience & career timeline route (/experience)
 │   ├── work/page.tsx          # Featured portfolio case studies route (/work)
+│   ├── videography/page.tsx   # Video production portfolio route (/videography)
 │   ├── globals.css            # Brand design tokens, CSS variables & animations
 │   ├── sitemap.ts             # Dynamic XML sitemap generator
 │   └── not-found.tsx          # Custom 404 page
@@ -98,11 +100,17 @@ adibwafi.github.io/
 │   ├── ExperiencePage.tsx     # Career ledger & tech stack components
 │   ├── WorkPage.tsx           # Project case study cards
 │   ├── FeaturedProjects.tsx   # Asymmetric bento grid gallery
-│   └── SimpleFooter.tsx       # Minimalist footer with brand links
+│   ├── SimpleFooter.tsx       # Minimalist footer with brand links
+│   ├── VideographyPage.tsx    # Videography portfolio route content
+│   ├── VideoStoriesCarousel.tsx # Auto-advancing "customer stories"-style carousel
+│   ├── VideographyCard.tsx    # Archive grid card with "Coming Soon" state
+│   └── VideoLightbox.tsx      # Modal YouTube player with production details
 ├── lib/
 │   ├── site-context.tsx       # React Context (`useSite`) for theme & language
 │   ├── translations.ts        # Bilingual dictionary (EN / ID)
 │   ├── data.ts                # Structured portfolio data (projects, metrics, history)
+│   ├── videographyProjects.ts # Video production data model
+│   ├── youtube.ts             # YouTube URL/thumbnail/embed helpers
 │   └── analytics.ts           # GA4 and GTM event dispatcher helpers
 ├── public/
 │   ├── brand/                 # Monogram AM SVG marks & supergraphic assets
