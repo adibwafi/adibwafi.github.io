@@ -157,6 +157,7 @@ adibwafi.github.io/
   * Click-to-play modal (`VideoLightbox.tsx`) embedding via `youtube-nocookie.com`, showing role, tagline, and a behind-the-scenes note per production.
   * Principles band on the fixed `surface-dark`/`on-dark` tokens (reserved for "intentional dark sections" regardless of site theme) — echoes the Sana careers "Principles we live by" block without introducing a new accent color.
   * Data lives in `lib/videographyProjects.ts` (`VideographyProject[]`); YouTube id/thumbnail/embed parsing in `lib/youtube.ts`.
+  * Official YouTube Channel: Direct integration with `https://www.youtube.com/@Setipiskumis` wired into hero action buttons, bottom CTA card, route metadata, and author identity verification (`rel="me"` / `sameAs`).
 * **Global Navigation & Utilities**:
   * Header nav (Home, Experience, Work, Videography) with active indicator pill, "Hire Me" mailto link, & mobile bottom navigation bar.
   * EN/ID language switcher pill with instant client translation switching.
