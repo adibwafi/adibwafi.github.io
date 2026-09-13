@@ -18,10 +18,10 @@ export function SimpleFooter() {
   ] as const;
 
   return (
-    <footer className="border-t border-zinc-100 bg-white">
+    <footer className="border-t border-rule bg-surface">
       <div className="max-w-layout mx-auto px-5 md:px-10 lg:px-16 py-8 flex flex-col sm:flex-row justify-between items-center gap-4">
         {/* Priority 5 — © 2026 */}
-        <span className="text-xs text-zinc-400">© 2026 Muhamad Adibwafi Menako</span>
+        <span className="text-xs text-ink-faint">© 2026 Muhamad Adibwafi Menako</span>
         <div className="flex items-center gap-5">
           {links.map(({ href, label, icon: Icon }) => (
             <a
@@ -29,7 +29,7 @@ export function SimpleFooter() {
               href={href}
               target={href.startsWith('mailto') ? undefined : '_blank'}
               rel="noopener noreferrer"
-              className="flex items-center gap-1.5 text-xs text-zinc-400 hover:text-zinc-700 transition-colors"
+              className="flex items-center gap-1.5 text-xs text-ink-faint hover:text-ink-soft transition-colors"
               onClick={(e) => {
                 if (href.startsWith('mailto')) {
                   handleCopyEmail(e as React.MouseEvent);

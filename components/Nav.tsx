@@ -14,9 +14,10 @@ import { SITE_MAILTO } from '@/lib/data';
 /* ─── Navigation — reads active route via usePathname ─────────────────────── */
 
 const navItems = [
-  { label: 'Home',       href: '/'           },
-  { label: 'Experience', href: '/experience' },
-  { label: 'Work',       href: '/work'       },
+  { label: 'Home',        href: '/'            },
+  { label: 'Experience',  href: '/experience'  },
+  { label: 'Work',        href: '/work'        },
+  { label: 'Videography', href: '/videography' },
 ] as const;
 
 export function Nav() {
@@ -31,6 +32,7 @@ export function Nav() {
     if (label === 'Home') return t.home;
     if (label === 'Experience') return t.experience;
     if (label === 'Work') return t.work;
+    if (label === 'Videography') return t.videography;
     return label;
   };
 

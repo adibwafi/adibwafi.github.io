@@ -6,6 +6,17 @@ const nextConfig = {
   // Vercel deployment is unaffected by this setting
   output: 'standalone',
 
+  // YouTube thumbnail host for the /videography page (next/image requires
+  // an explicit allowlist for any remote image domain).
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'i.ytimg.com',
+      },
+    ],
+  },
+
   // Security headers for production grade A+ security score on Vercel
   async headers() {
     return [
