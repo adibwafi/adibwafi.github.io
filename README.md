@@ -41,11 +41,11 @@ Supports system preference (`prefers-color-scheme`), explicit toggle (`data-them
 
 1. **Editorial Bento Hero**: Concise 6-second recruiter pitch, interactive profile modal, and social verification (`rel="me"`).
 2. **Dynamic Impact Proof**: Typographic metric columns highlighting system performance gains, scaling milestones, and database optimization figures.
-3. **Curated Work & Case Studies**: Asymmetrical card layouts with live WebP mockups, architectural summaries, repository links, and live demo triggers.
+3. **Curated Work & Case Studies**: Asymmetrical card layouts with live WebP mockups, architectural summaries, repository links, and live demo triggers for production systems including **Kinghouse Management** (Short-Stay Hospitality ERP & Dynamic Pricing), **Enterprise LMS Architecture Blueprint**, **AI Baby Meal Planner**, **Amana Care**, and **Livecode Logic Trainer**.
 4. **Career Ledger & Tech Stack**: Detailed career timeline detailing software engineering milestones and categorized tool stack.
 5. **Videography Portfolio**: `/videography` showcases 11 selected video productions (commercial campaigns, aviation heritage films, automotive culture documentaries, motion graphics) through a Sana Learn-inspired "customer stories" auto-advancing carousel, a filterable full archive grid, and a click-to-play modal player.
 6. **Bilingual Support (i18n)**: Seamless English & Indonesian translation switching powered by React Context (`SiteContext`).
-7. **Observability & Analytics**: Integrated Sentry 10 error reporting, Vercel Speed Insights, Google Tag Manager (`GTM-KHMNHQN6`), and custom virtual route pageview tracking.
+7. **Observability & Analytics**: Integrated Sentry 10 error reporting (`instrumentation.ts`, `instrumentation-client.ts`, and `app/global-error.tsx`), Vercel Speed Insights, Google Tag Manager (`GTM-KHMNHQN6`), and custom virtual route pageview tracking.
 8. **Official Domain Email Infrastructure**: Centralized email configuration (`hello@adibwafi.com`) powered by Cloudflare Email Routing for inbound forwarding and Brevo SMTP relay for outbound delivery, integrated with copy-to-clipboard toast feedback.
 
 ---
@@ -58,6 +58,9 @@ npm install
 
 # Run development server
 npm run dev
+
+# Build for production
+npm run build
 ```
 
 Open [http://localhost:3000](http://localhost:3000) in your browser.
@@ -76,7 +79,7 @@ npm run lint
 
 ---
 
-## Project Structure
+## Directory Structure
 
 ```
 adibwafi.github.io/
@@ -85,6 +88,7 @@ adibwafi.github.io/
 ├── app/
 │   ├── layout.tsx             # Root HTML shell, brand fonts, metadata & analytics scripts
 │   ├── loading.tsx            # Route loading boundary with animated BrandLoader
+│   ├── global-error.tsx       # Sentry root error boundary and error capture handler
 │   ├── page.tsx               # Home route wrapper (<HomePage />)
 │   ├── experience/page.tsx    # Experience & career timeline route (/experience)
 │   ├── work/page.tsx          # Featured portfolio case studies route (/work)
@@ -122,6 +126,8 @@ adibwafi.github.io/
 │   └── og-image.png           # Social OpenGraph card (1200x630)
 ├── tailwind.config.ts         # Tailwind design system mapped to brand tokens
 ├── next.config.mjs            # Next.js security headers & Sentry configuration
+├── instrumentation.ts         # Server-side instrumentation & Sentry request error handler
+├── instrumentation-client.ts  # Client-side instrumentation & Sentry router transition tracking
 └── tsconfig.json              # TypeScript strict configuration
 ```
 

@@ -34,7 +34,7 @@ High-end personal portfolio for **Muhamad Adibwafi Menako** (Full Stack Software
   * `@vercel/analytics` v2.0.1 & `@vercel/speed-insights` v2.0.0
   * Google Analytics 4 (`NEXT_PUBLIC_GA_ID`) & Google Tag Manager (`NEXT_PUBLIC_GTM_ID`, default: `GTM-KHMNHQN6`)
   * Virtual SPA pageview tracking via `AnalyticsRouteTracker.tsx` and custom event logger `lib/analytics.ts`
-* **Error Tracking**: `@sentry/nextjs` v10.74.0 with server instrumentation hook enabled
+* **Error Tracking & Observability**: `@sentry/nextjs` v10.74.0 with server-side hook (`instrumentation.ts`), modern client-side routing transition instrumentation (`instrumentation-client.ts`), and global React error boundary (`app/global-error.tsx`).
 * **Email & Communication Infrastructure**:
   * Official Domain Email: `hello@adibwafi.com` centralized as Single Source of Truth via `SITE_EMAIL` & `SITE_MAILTO` in `lib/data.ts`.
   * Inbound Routing: Cloudflare Email Routing forwarding directly to personal Gmail.
@@ -64,6 +64,7 @@ adibwafi.github.io/
 │   ├── videography/
 │   │   └── page.tsx             # Video production portfolio route (/videography)
 │   ├── globals.css              # Brand design tokens, 3-state dark mode & loader animations
+│   ├── global-error.tsx         # Sentry root error boundary and error capture component
 │   ├── layout.tsx               # Root HTML shell, brand fonts (Serif/Sans/Mono), metadata, JSON-LD
 │   ├── loading.tsx              # Route loading boundary with animated BrandLoader
 │   ├── not-found.tsx            # Custom 404 page implementation
@@ -146,7 +147,7 @@ adibwafi.github.io/
   * Technical stack breakdown categorized into *Languages*, *Frameworks & Libraries*, and *Infrastructure & Tools*.
   * Educational background (Hacktiv8 JS Immersive & Padjadjaran University Economics).
 * **Work Page (`/work`)**:
-  * Comprehensive project case study list (Enterprise LMS Blueprint, AI Baby Meal Planner, Serasa Kreatif, Amana Care).
+  * Comprehensive project case study list (Kinghouse Management, Enterprise LMS Blueprint, AI Baby Meal Planner, Serasa Kreatif, Amana Care, Livecode Logic Trainer).
   * Direct repository links and live website preview triggers.
   * Open source GitHub invitation card.
 * **Videography Page (`/videography`)**:
@@ -187,10 +188,11 @@ adibwafi.github.io/
 
 ### Identified Technical Debt & Configuration Bugs
 1. **Lighthouse CI Route Mismatch [RESOLVED]**: `.lighthouserc.json` previously referenced non-existent route `http://localhost:3000/about`. Updated to audit valid routes `http://localhost:3000`, `http://localhost:3000/experience`, and `http://localhost:3000/work`.
-2. **Dark Mode Text Contrast [RESOLVED]**: `HomePage.tsx`, `ExperiencePage.tsx`, `WorkPage.tsx`, `ProjectCard.tsx`, and `SimpleFooter.tsx` used hardcoded `zinc-*`/`blue-*`/`emerald-*`/`violet-*`/`bg-white` Tailwind classes with no `dark:` variants, so headings and body text rendered in their light-mode color regardless of theme. Separately, `Nav.tsx`'s dark-mode CSS override in `globals.css` targeted `header nav button`, but `Nav.tsx` renders `<Link>` (`<a>`) elements — the override never matched, so the header stayed light-mode-colored (and largely unreadable) in dark mode. Fixed by migrating every affected component to the `ink`/`ink-soft`/`ink-faint`/`paper`/`surface`/`rule`/`accent` design tokens and replacing the broken override with a token-driven `.site-header` class. See the Dark Mode Text Contrast note under §1 for the rule going forward.
+2. **Dark Mode Text Contrast [RESOLVED]**: `HomePage.tsx`, `ExperiencePage.tsx`, `WorkPage.tsx`, `ProjectCard.tsx`, and `SimpleFooter.tsx` used hardcoded `zinc-*`/`blue-*`/`emerald-*`/`violet-*`/`bg-white` Tailwind classes with no `dark:` variants. Migrated every affected component to design tokens.
 3. **Missing Unit & Component Testing Setup**: No test framework (Jest or Vitest) or test runner scripts exist in `package.json`.
 4. **No Dynamic API Routes / Backend Endpoints**: Site is currently purely static/client-rendered with static data. Form submissions relying on email copy fallback to `mailto:` protocols.
-5. **Sentry Global Error Handler Warning**: Sentry suggests adding `app/global-error.tsx` for capturing React rendering errors in root layout.
+5. **Sentry v10 Modernization & Global Error Boundary [RESOLVED]**: Added `app/global-error.tsx` with Sentry exception capture for root App Router crashes, migrated `sentry.client.config.ts` to `instrumentation-client.ts` with `onRouterTransitionStart` export per Next.js 15 / Turbopack specification.
+6. **HTML/Body Hydration Mismatch [RESOLVED]**: Added `suppressHydrationWarning` to `<html>` and `<body>` in `app/layout.tsx` along with an inline pre-paint theme script to avoid client attribute mismatch errors and flash of unstyled theme (FOUC).
 
 ---
 
