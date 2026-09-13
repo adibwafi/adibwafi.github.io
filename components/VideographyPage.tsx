@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
-import { Mail, ArrowRight } from 'lucide-react';
+import { Mail, ArrowRight, Youtube, ArrowUpRight } from 'lucide-react';
 import { FadeSection, FadeItem } from '@/components/FadeSection';
 import { ShimmerImage } from '@/components/ShimmerImage';
 import { SimpleFooter } from '@/components/SimpleFooter';
@@ -79,7 +79,11 @@ function HeroCollage() {
   );
 }
 
-export default function VideographyPage() {
+export default function VideographyPage({
+  channelUrl = 'https://www.youtube.com/@Setipiskumis',
+}: {
+  channelUrl?: string;
+}) {
   const { lang, handleCopyEmail } = useSite();
   const t = translations[lang].videography;
 
@@ -138,6 +142,17 @@ export default function VideographyPage() {
                   onClick={() => trackEvent('click', 'CTA', 'Videography Watch Reel')}
                 >
                   {t.ctaWatch} <ArrowRight size={14} strokeWidth={1.75} />
+                </a>
+                <a
+                  href={channelUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn-ghost"
+                  onClick={() => trackEvent('click', 'CTA', 'Videography YouTube Channel')}
+                >
+                  <Youtube size={14} strokeWidth={1.75} className="text-[#FF0000]" />
+                  {t.ctaChannel}
+                  <ArrowUpRight size={13} strokeWidth={2} />
                 </a>
                 <Link
                   href="/work"
@@ -281,7 +296,18 @@ export default function VideographyPage() {
                 <p className="text-ink-soft mt-4 max-w-[46ch] leading-relaxed">{t.ctaDesc}</p>
               </div>
               <div className="flex flex-col sm:flex-row gap-3 flex-shrink-0">
-                <a href={SITE_MAILTO} className="btn-primary" onClick={handleCopyEmail}>
+                <a
+                  href={channelUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn-primary"
+                  onClick={() => trackEvent('click', 'CTA', 'Videography Footer YouTube Channel')}
+                >
+                  <Youtube size={14} strokeWidth={1.75} />
+                  {t.ctaChannel}
+                  <ArrowUpRight size={13} strokeWidth={2} />
+                </a>
+                <a href={SITE_MAILTO} className="btn-ghost" onClick={handleCopyEmail}>
                   <Mail size={14} strokeWidth={1.75} />
                   {t.ctaEmail}
                 </a>

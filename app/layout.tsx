@@ -120,6 +120,7 @@ const jsonLd = {
   sameAs: [
     'https://github.com/adibwafi',
     'https://linkedin.com/in/adibwafi',
+    'https://www.youtube.com/@Setipiskumis',
   ],
   address: {
     '@type':         'PostalAddress',
@@ -180,6 +181,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         {/* PRIORITY 6 — rel="me" identity verification */}
         <link rel="me" href="https://linkedin.com/in/adibwafi" />
         <link rel="me" href="https://github.com/adibwafi" />
+        <link rel="me" href="https://www.youtube.com/@Setipiskumis" />
         <link rel="me" href={SITE_MAILTO} />
         {/* Prevent theme flash and sync client theme before paint */}
         <script
