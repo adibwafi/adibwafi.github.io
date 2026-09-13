@@ -72,7 +72,7 @@ export const translations = {
     videography: {
       label: 'Videography & Visual Storytelling',
       title: 'The Other Craft.',
-      desc: 'Before backend systems and clean architecture, I told stories through a lens — national commercial campaigns, aviation heritage films, automotive culture documentaries, and motion graphics. Eleven productions, one obsession with craft.',
+      desc: 'Before backend systems and clean architecture, I directed visual stories for some of Indonesia’s largest brands — national commercial campaigns, aviation heritage films, automotive culture documentaries, and motion graphics. Eleven productions, each held to the same standard I bring to every build today: precision, restraint, and craft that holds up in front of an audience.',
       pitch1: '4+ yrs in production',
       pitch2: 'Garuda Indonesia · Bank Mandiri · Shopee',
       pitch3: '11 selected productions',
@@ -80,7 +80,7 @@ export const translations = {
       ctaWork: 'See Engineering Work',
       storiesLabel: 'Selected Productions',
       storiesTitle: 'Eleven stories, one lens.',
-      storiesDesc: 'From national commercial campaigns to a viral flight-etiquette short — a reel of the work I’m proudest of. Press play on any story.',
+      storiesDesc: 'From national commercial campaigns to a flight-etiquette short recognized by the Ministry of Tourism — the productions that best represent the range and craft behind the work. Press play on any story.',
       pause: 'Pause autoplay',
       play: 'Resume autoplay',
       prevSlide: 'Previous story',
@@ -106,7 +106,7 @@ export const translations = {
       principles: [
         {
           title: 'Story before spectacle',
-          desc: 'Every frame serves the narrative first — technique is in service of the story, never the other way around.',
+          desc: 'Technique serves the story — never the other way around.',
         },
         {
           title: 'Trust is built in pre-production',
@@ -121,8 +121,8 @@ export const translations = {
           desc: 'A cut that reaches an audience beats a perfect edit that never leaves the timeline — the same bias for shipping that drives every release.',
         },
       ],
-      ctaLabel: 'Open for new work',
-      ctaTitle: 'Need a story told\nwell?',
+      ctaLabel: 'Available for new productions',
+      ctaTitle: 'Let’s tell a story\nworth watching.',
       ctaDesc: 'Open to commercial video direction, brand documentaries, and motion graphic collaborations — alongside full-stack engineering work.',
       ctaEmail: 'Send an email',
       ctaAllWork: 'View Engineering Work',
@@ -203,8 +203,8 @@ export const translations = {
     },
     videography: {
       label: 'Videografi & Penceritaan Visual',
-      title: 'Keahlian Satunya Lagi.',
-      desc: 'Sebelum menekuni sistem backend dan arsitektur kode yang bersih, saya bercerita lewat lensa kamera — kampanye komersial nasional, film warisan aviasi, dokumenter budaya otomotif, hingga motion graphic. Sebelas produksi, satu obsesi yang sama: kualitas.',
+      title: 'Keahlian Kedua.',
+      desc: 'Sebelum menekuni sistem backend dan arsitektur kode yang bersih, saya mengarahkan cerita visual untuk sejumlah brand terbesar di Indonesia — kampanye komersial nasional, film warisan aviasi, dokumenter budaya otomotif, hingga motion graphic. Sebelas produksi, masing-masing dikerjakan dengan standar yang sama seperti saya terapkan pada setiap baris kode hari ini: presisi, ketelitian, dan kualitas yang teruji di depan audiens.',
       pitch1: 'Pengalaman produksi 4+ tahun',
       pitch2: 'Garuda Indonesia · Bank Mandiri · Shopee',
       pitch3: '11 produksi pilihan',
@@ -212,7 +212,7 @@ export const translations = {
       ctaWork: 'Lihat Karya Engineering',
       storiesLabel: 'Produksi Pilihan',
       storiesTitle: 'Sebelas cerita, satu lensa.',
-      storiesDesc: 'Dari kampanye komersial nasional hingga video singkat etika penerbangan yang viral — kumpulan karya yang paling saya banggakan. Putar salah satu ceritanya.',
+      storiesDesc: 'Dari kampanye komersial nasional hingga video etika penerbangan yang diapresiasi Kementerian Pariwisata — kumpulan karya yang paling merepresentasikan jangkauan dan kualitas kerja saya. Putar salah satu ceritanya.',
       pause: 'Jeda putar otomatis',
       play: 'Lanjutkan putar otomatis',
       prevSlide: 'Cerita sebelumnya',
@@ -238,7 +238,7 @@ export const translations = {
       principles: [
         {
           title: 'Cerita dulu, baru spektakel',
-          desc: 'Setiap frame melayani narasi lebih dulu — teknik hanyalah alat, bukan tujuan.',
+          desc: 'Teknik melayani cerita — bukan sebaliknya.',
         },
         {
           title: 'Kepercayaan dibangun di pra-produksi',
@@ -253,8 +253,8 @@ export const translations = {
           desc: 'Potongan video yang sampai ke penonton lebih berharga daripada edit sempurna yang tak pernah tayang — bias yang sama dengan setiap rilis kode.',
         },
       ],
-      ctaLabel: 'Terbuka untuk proyek baru',
-      ctaTitle: 'Butuh cerita yang\ndikemas dengan baik?',
+      ctaLabel: 'Terbuka untuk produksi baru',
+      ctaTitle: 'Mari ceritakan kisah\nyang layak ditonton.',
       ctaDesc: 'Terbuka untuk proyek arahan video komersial, dokumenter brand, dan kolaborasi motion graphic — berdampingan dengan pekerjaan full-stack engineering.',
       ctaEmail: 'Kirim Email',
       ctaAllWork: 'Lihat Karya Engineering',
