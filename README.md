@@ -23,7 +23,7 @@ The visual identity follows **High-End Editorial Minimalism** specified in the b
 ### 2. 3-State Dark Mode Tokens
 Supports system preference (`prefers-color-scheme`), explicit toggle (`data-theme`), and CSS class overrides:
 - **Light Theme**: Paper `#F7F7F7`, Surface `#FFFFFF`, Ink `#1A1A1A`, Ink-Soft `#635648`, Rule `#E1DAD0`
-- **Dark Theme**: Paper `#141310`, Surface `#1C1B17`, Ink `#F2EDE6`, Ink-Soft `#C9BFAF`, Rule `#332F27`
+- **Dark Theme**: Paper `#000000`, Surface `#121212`, Ink `#FFFFFF`, Ink-Soft `#A2A2A2`, Rule `#222222`, Accent `#CDFE00` (Sana Labs AI Agents palette)
 
 ### 3. Typography Hierarchy (Strict 3 Roles)
 - **Serif (`--font-serif`) — Cormorant Garamond**: Editorial headlines (>24px), display titles, and pull-quotes. Never used for body paragraphs.

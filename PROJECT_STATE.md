@@ -16,9 +16,9 @@ High-end personal portfolio for **Muhamad Adibwafi Menako** (Full Stack Software
 * **Styling & Design System**:
   * Brand & Design System v1.0 (Source of truth: `public/brandGuideline/brand-package/tokens/tokens.json`, `tokens.css`, and `AGENTS.md`)
   * Color registers:
-    * `accent`: Taxicab Ochre (`#D4A26A`, AA contrast text `#8B6031`, tint `#F1E1CC`) — single expressive accent used deliberately.
-    * `structural`: Radio City Blue (`#4A5877`, soft `#7C879D`) — technical construction, diagrams, and grid accents only.
-    * 3-state dark mode tokens: `paper` (`#F7F7F7` / `#141310`), `surface` (`#FFFFFF` / `#1C1B17`), `ink` (`#1A1A1A` / `#F2EDE6`), `rule` (`#E1DAD0` / `#332F27`).
+    * `accent`: Taxicab Ochre (`#D4A26A`) in Light mode; Sana Labs AI Agents Electric Neon Lime (`#CDFE00`, AA text `#000000`, glow tint `rgba(205, 254, 0, 0.12)`) in Dark mode — no brown/golden accents in dark mode.
+    * `structural`: Radio City Blue (`#4A5877`, soft `#7C879D` in light mode; `#7C8BA1`, soft `#4A5877` in dark mode) — technical construction, diagrams, and grid accents only.
+    * 3-state dark mode tokens: `paper` (`#F7F7F7` / `#000000`), `surface` (`#FFFFFF` / `#121212`), `ink` (`#1A1A1A` / `#FFFFFF`), `ink-soft` (`#635648` / `#A2A2A2`), `ink-faint` (`#9C9284` / `#666666`), `rule` (`#E1DAD0` / `#222222`), `accent` (`#D4A26A` / `#CDFE00`).
   * Tailwind CSS 3.4.7 (Configured with `darkMode: ['class', '[data-theme="dark"]']`, mapped to CSS variables `--paper`, `--surface`, `--ink`, `--accent`, `--rule`, etc.)
   * **Dark Mode Text Contrast**: All page components consume the `ink` / `ink-soft` / `ink-faint` / `paper` / `surface` / `rule` Tailwind color tokens directly (never raw `zinc-*`/`gray-*`/`blue-*`/`emerald-*` classes) so every text and surface color is theme-reactive by construction — no per-component `dark:` overrides needed. The header's translucent background uses a `.site-header` class (`color-mix(in srgb, var(--paper) 78%, transparent)`) rather than a Tailwind opacity modifier, since Tailwind cannot apply `/alpha` to a CSS-variable-backed color. `app/not-found.tsx` is the one deliberate exception: it runs its own standalone theme state (not `SiteContext`) with an independent `zinc-*` + explicit `dark:` palette — leave it as-is rather than migrating it to tokens.
   * PostCSS 8.5.28 & Autoprefixer 10.4.19
