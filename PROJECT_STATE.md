@@ -7,7 +7,7 @@
 ## 1. EXECUTIVE SUMMARY & TECH STACK
 
 ### Core Purpose & Scope
-High-end personal portfolio for **Muhamad Adibwafi Menako** (Full Stack Software Engineer). Built upon an editorial design system following Brand Guidelines v1.0. Features bilingual support (English & Indonesian), 3-state Dark Mode integration, dynamic impact metrics, project case studies, animated monogram brand loader, automated analytics tracking, and production Sentry error reporting. Live site deployed at [adibwafi.com](https://adibwafi.com).
+High-end personal portfolio and software engineering studio for **Muhamad Adibwafi Menako** (Full Stack Software Engineer), fully committed under the **Menako Studio** brand identity. Features the Menako Studio **Twin Frame System** (Frame A Blue `#1C7FC7` / Frame B Peach `#F0A27A` / The Seam `#4C707E`) as the primary site brandmark and favicon suite across [adibwafi.com](https://adibwafi.com), paired with **Menako Films** for freelance videography. Features bilingual support (English & Indonesian), 3-state Dark Mode integration, dynamic impact metrics, project case studies, ambient supergraphics, automated analytics tracking, and production Sentry error reporting.
 
 ### Tech Stack Specifications
 * **Core Framework**: Next.js 15.5.25 (App Router, Node `20.x`/`22.x` runtime, `output: 'standalone'`)
@@ -146,19 +146,27 @@ adibwafi.github.io/
   * Work history timeline detailing software engineering and previous corporate enterprise roles.
   * Technical stack breakdown categorized into *Languages*, *Frameworks & Libraries*, and *Infrastructure & Tools*.
   * Educational background (Hacktiv8 JS Immersive & Padjadjaran University Economics).
-* **Work Page (`/work`)**:
+* **Work Page (`/work`) — Menako Studio**:
+  * Independent software engineering practice imprint: **Menako Studio**.
+  * Brandmark: **Twin Frame** lockup (`MenakoStudioLogo`) combining Frame A (The Eye / `#1C7FC7`), Frame B (The System / `#F0A27A`), and The Seam (`#4C707E`).
+  * Supergraphic: Ambient scattered twin frames pattern (`MenakoStudioSupergraphic.tsx`) at 12% opacity per Brand Guidelines Page 12.
+  * Brand Philosophy card: "Two Crafts, One Frame." articulating the intersection of visual composition and resilient engineering.
   * Comprehensive project case study list (Kinghouse Management, Enterprise LMS Blueprint, AI Baby Meal Planner, Serasa Kreatif, Amana Care, Livecode Logic Trainer).
   * Direct repository links and live website preview triggers.
-  * Open source GitHub invitation card.
-* **Videography Page (`/videography`)**:
-  * Editorial hero with a rotated photo collage built from production thumbnails (adapts the Sana Labs careers-page collage motif without stock team photography).
-  * "Selected Productions" carousel (`VideoStoriesCarousel.tsx`) adapting the Sana Learn "customer stories" pattern: native scroll-snap auto-advance (no added dependency), pause on hover/touch/manual toggle, a scrub-style progress bar, and `prefers-reduced-motion` support. Framed by the "Frame & Grid" supergraphic (ochre corner brackets + structural-color dot-grid veil), always paired per `AGENTS.md`.
-  * Full archive grid (`VideographyCard.tsx`) of all 11 productions with category filter tabs; productions without an uploaded cut render a disabled "Coming Soon" state instead of a broken thumbnail.
-  * Click-to-play modal (`VideoLightbox.tsx`) embedding via `youtube-nocookie.com`, showing role, tagline, and a behind-the-scenes note per production.
-  * Principles band on the fixed `surface-dark`/`on-dark` tokens (reserved for "intentional dark sections" regardless of site theme) — echoes the Sana careers "Principles we live by" block without introducing a new accent color.
-  * Data lives in `lib/videographyProjects.ts` (`VideographyProject[]`); YouTube id/thumbnail/embed parsing in `lib/youtube.ts`.
-  * Official YouTube Channel: Direct integration with `https://www.youtube.com/@Setipiskumis` wired into hero action buttons, bottom CTA card, route metadata, and author identity verification (`rel="me"` / `sameAs`).
+  * Studio Open Source GitHub CTA card.
+* **Videography Page (`/videography`) — Menako Films**:
+  * Independent freelance videography imprint: **Menako Films**.
+  * Brandmark: Official clapperboard logo (`MenakoFilmsLogo`) with signature gold diagonal stripes and recording dot, theme-reactive (light/dark mode).
+  * Brand Narrative: Establishes Menako Films as Adibwafi's visual direction practice for national commercial campaigns (Bank Mandiri, Garuda Indonesia, Shopee), aviation films, and automotive documentaries.
+  * Editorial hero with a rotated photo collage built from production thumbnails.
+  * "Selected Productions" carousel (`VideoStoriesCarousel.tsx`) adapting the Sana Learn "customer stories" pattern: native scroll-snap auto-advance, pause on hover/touch/manual toggle, and scrub-style progress bar.
+  * Full archive grid (`VideographyCard.tsx`) of all 11 productions with category filter tabs.
+  * Click-to-play modal (`VideoLightbox.tsx`) embedding via `youtube-nocookie.com`.
+  * Principles band: "The Menako Films Standard — Behind the lens at Menako Films".
+  * CTA card: "Direct with Menako Films" with YouTube @Setipiskumis integration and inquiry mailto link.
 * **Global Navigation & Utilities**:
+  * Primary brandmark: Official Menako Studio Twin Frame logo in header nav (`components/Nav.tsx`) and footer (`components/SimpleFooter.tsx`).
+  * Favicon suite: Multi-resolution Twin Frame favicons (`favicon.ico`, `favicon-16/32/48/192/512.png`, `apple-touch-icon.png`).
   * Header nav (Home, Experience, Work, Videography) with active indicator pill, "Hire Me" mailto link, & mobile bottom navigation bar.
   * EN/ID language switcher pill with instant client translation switching.
   * Light/Dark theme toggle with CSS `.dark` class injection, `data-theme` attribute synchronization, and `localStorage` syncing.

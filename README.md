@@ -1,39 +1,55 @@
-# Muhamad Adibwafi Menako — Portfolio
+# Muhamad Adibwafi Menako — Menako Studio
 
 [![Node.js CI](https://github.com/adibwafi/adibwafi.github.io/actions/workflows/ci.yml/badge.svg)](https://github.com/adibwafi/adibwafi.github.io/actions/workflows/ci.yml)
-[![Live Site](https://img.shields.io/badge/Live%20Site-adibwafi.com-D4A26A?style=flat-square)](https://adibwafi.com)
+[![Live Site](https://img.shields.io/badge/Live%20Site-adibwafi.com-1C7FC7?style=flat-square)](https://adibwafi.com)
 [![Next.js](https://img.shields.io/badge/Next.js-15.5.25-000000?style=flat-square&logo=nextdotjs)](https://nextjs.org/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.5.4-3178C6?style=flat-square&logo=typescript)](https://www.typescriptlang.org/)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-3.4.7-38B2AC?style=flat-square&logo=tailwind-css)](https://tailwindcss.com/)
 
-High-end personal portfolio for **Muhamad Adibwafi Menako**, Full Stack Software Engineer. Deployed and served at [adibwafi.com](https://adibwafi.com).
+High-end personal portfolio and software engineering studio for **Muhamad Adibwafi Menako**, operating under the **Menako Studio** imprint. Deployed and served at [adibwafi.com](https://adibwafi.com).
 
-Built with Next.js 15 (App Router), TypeScript, Tailwind CSS, Framer Motion, and Lucide React. Implements bilingual internationalization (EN/ID), 3-state dark mode synchronization, interactive case studies, a videography portfolio with an auto-advancing production carousel, animated SVG brand identity loaders, and enterprise-grade observability (Sentry, Vercel Analytics, GA4, GTM).
+Built with Next.js 15 (App Router), TypeScript, Tailwind CSS, Framer Motion, and Lucide React. Powered by the **Menako Studio Twin Frame System** with full site-wide brand integration, bilingual internationalization (EN/ID), 3-state dark mode synchronization, interactive case studies, ambient geometric supergraphics, a dedicated freelance videography portfolio for **Menako Films**, and enterprise-grade observability (Sentry, Vercel Analytics, GA4, GTM).
 
 ---
 
-## Brand Identity & Design System (v1.0)
+## Brand Architecture & Design System
 
-The visual identity follows **High-End Editorial Minimalism** specified in the brand design tokens (`public/brandGuideline/brand-package/tokens/` and `AGENTS.md`):
+The platform serves as the unified digital hub for two distinct craft practices:
 
-### 1. Dual Color Registers
-- **Expressive Accent (`accent`)**: Doraemon Blue (`#00A0E9`) in Light mode (AA contrast text `#0066CC`, tint `#E6F4FE`, on-accent `#FFFFFF`); Electric Neon Lime (`#CDFE00`) in Dark mode — no gold/brown in either mode.
-- **Technical Structural (`structural`)**: Radio City Blue (`#4A5877`) — reserved exclusively for diagrams, architectural construction elements, and dot-grids.
+```
+                       adibwafi.com
+          (Muhamad Adibwafi Menako Portfolio)
+                      │
+        ┌─────────────┴─────────────┐
+        ▼                           ▼
+  Menako Studio               Menako Films
+  Software Engineering        Freelance Videography
+  Primary Site Brand & /work  Route: /videography
+  Mark: Twin Frame System     Mark: Clapperboard System
+  Palette: Blue & Peach       Palette: Gold, Olive & Terracotta
+```
 
-### 2. 3-State Dark Mode Tokens
-Supports system preference (`prefers-color-scheme`), explicit toggle (`data-theme`), and CSS class overrides:
-- **Light Theme**: Paper `#F8FAFC`, Surface `#FFFFFF`, Ink `#0F172A`, Ink-Soft `#475569`, Rule `#E2E8F0`, Accent `#00A0E9`
-- **Dark Theme**: Paper `#000000`, Surface `#121212`, Ink `#FFFFFF`, Ink-Soft `#A2A2A2`, Rule `#222222`, Accent `#CDFE00`
+### 1. Menako Studio — Primary Website Brandmark & Twin Frame System
+- **Twin Frame System**: Two intersecting rounded frames embodying the studio philosophy — *"Two Crafts, One Frame"*:
+  - **Frame A — Blue (`#1C7FC7`)**: The Eye (composition, visual storytelling, human interaction).
+  - **Frame B — Peach (`#F0A27A`)**: The System (logic, data models, clean distributed architecture).
+  - **The Seam (`#4C707E`)**: The exact measured geometric intersection where both crafts merge.
+- **Site-Wide Brandmark**: Official Menako Studio logo in global navigation header (`components/Nav.tsx`), footer (`components/SimpleFooter.tsx`), and multi-resolution favicons (`favicon.ico`, `favicon-16/32/48/192/512.png`, `apple-touch-icon.png`).
+- **Ambient Supergraphic**: Scattered twin frames pattern at 12% opacity per Brand Guidelines (p. 12) rendered dynamically in `components/MenakoStudioSupergraphic.tsx`.
 
-### 3. Typography Hierarchy (Strict 3 Roles)
-- **Serif (`--font-serif`) — Cormorant Garamond**: Editorial headlines (>24px), display titles, and pull-quotes. Never used for body paragraphs.
-- **Sans (`--font-sans`) — Manrope**: Primary body copy, navigation labels, interactive buttons, and interface components.
-- **Mono (`--font-mono`) — JetBrains Mono**: Eyebrow tags, metrics, dates, folio numbering, tech stack pills, and metadata.
+### 2. Menako Films — Freelance Videography Practice (`/videography`)
+- **Clapperboard System**: Signature clapperboard logo with gold diagonal stripes and recording dot (`components/MenakoFilmsLogo.tsx`).
+- **Production Standard**: Showcases 11 selected productions (Bank Mandiri, Garuda Indonesia, Shopee, aviation heritage, automotive culture documentaries) with a native auto-advancing carousel, filterable archive, and modal lightbox player.
 
-### 4. Brandmark & Supergraphic
-- **Monogram "AM" Brandmark**: Linear geometric monogram (`/public/brand/mark-*.svg`) with strict 1u clearspace enforcement.
-- **Animated Brand Loader**: Custom SVG stroke-drawing animation (`components/BrandLoader.tsx` and `app/loading.tsx`) dynamically morphing M contours and A crossbars.
-- **"Frame & Grid" Supergraphic**: Paired ochre bracket and slate blue dot-grid elements for structured editorial accents.
+### 3. Dual Color Registers & 3-State Dark Mode
+- **Expressive Accent (`accent`)**: Doraemon Blue (`#00A0E9`) in Light mode; Electric Neon Lime (`#CDFE00`) in Dark mode.
+- **Technical Structural (`structural`)**: Radio City Blue (`#4A5877` / `#7C8BA1`) for construction geometry and dot grids.
+- **3-State Theme Tokens**: Reactive variables (`paper`, `surface`, `ink`, `rule`, `accent`) synchronized across OS preferences and manual toggles.
+
+### 4. Typography Hierarchy
+- **Serif (`--font-serif`) — Cormorant Garamond**: Editorial headlines (>24px), display titles, and pull-quotes.
+- **Sans (`--font-sans`) — Manrope**: Primary body copy, navigation labels, and UI components.
+- **Mono (`--font-mono`) — JetBrains Mono**: Eyebrow tags, metrics, folio numbers, and metadata.
 
 ---
 
