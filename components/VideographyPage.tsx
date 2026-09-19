@@ -16,6 +16,7 @@ import { trackEvent } from '@/lib/analytics';
 import { pageAnim } from '@/lib/animations';
 import { SITE_MAILTO } from '@/lib/data';
 import { getYouTubeThumbnail } from '@/lib/youtube';
+import { MenakoFilmsLogo } from '@/components/MenakoFilmsLogo';
 import {
   videographyProjects,
   featuredVideographyProjects,
@@ -24,9 +25,9 @@ import {
 } from '@/lib/videographyProjects';
 
 /* ════════════════════════════════════════════════════════════════════════════
-   VIDEOGRAPHY PAGE CONTENT
-   Sections: Hero (with photo collage) · Selected Productions carousel
-   (Sana Learn "customer stories" pattern) · Full archive w/ category filter ·
+   VIDEOGRAPHY PAGE CONTENT — MENAKO FILMS
+   Sections: Hero (with Menako Films brandmark & photo collage) · Selected Productions
+   carousel (Sana Learn "customer stories" pattern) · Full archive w/ category filter ·
    Principles dark band (surface-dark/on-dark fixed tokens) · CTA
    ════════════════════════════════════════════════════════════════════════════ */
 
@@ -109,9 +110,24 @@ export default function VideographyPage({
         viewport={{ once: true, amount: 0.3 }}
         className="max-w-layout mx-auto px-5 md:px-10 lg:px-16 pb-16 md:pb-20"
       >
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
-          <div className="lg:col-span-7">
-            <FadeSection>
+        <FadeSection>
+          <FadeItem className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8 border-b border-rule pb-6">
+            <div className="flex items-center gap-3.5">
+              <MenakoFilmsLogo width={40} height={53} className="flex-shrink-0" />
+              <div>
+                <span className="text-xs font-mono uppercase tracking-[0.14em] text-ink-faint block">
+                  Freelance Production Imprint
+                </span>
+                <span className="text-sm font-bold text-ink">
+                  Menako Films
+                </span>
+              </div>
+            </div>
+            <span className="section-label !mb-0">{t.brandEyebrow}</span>
+          </FadeItem>
+
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+            <div className="lg:col-span-7">
               <FadeItem>
                 <span className="section-label block mb-5">{t.label}</span>
               </FadeItem>
@@ -162,13 +178,13 @@ export default function VideographyPage({
                   {t.ctaWork}
                 </Link>
               </FadeItem>
-            </FadeSection>
-          </div>
+            </div>
 
-          <div className="hidden lg:flex lg:col-span-5 justify-center">
-            <HeroCollage />
+            <div className="hidden lg:flex lg:col-span-5 justify-center">
+              <HeroCollage />
+            </div>
           </div>
-        </div>
+        </FadeSection>
       </motion.div>
 
       {/* ── Selected Productions — Sana Learn "customer stories" pattern ────── */}
@@ -289,7 +305,10 @@ export default function VideographyPage({
           <FadeSection>
             <div className="bento-card p-10 md:p-14 flex flex-col md:flex-row items-start md:items-end justify-between gap-8">
               <div>
-                <p className="section-label mb-4">{t.ctaLabel}</p>
+                <div className="flex items-center gap-3 mb-4">
+                  <MenakoFilmsLogo width={32} height={43} className="flex-shrink-0" />
+                  <p className="section-label !mb-0">{t.ctaLabel}</p>
+                </div>
                 <h2 className="text-hero font-extrabold text-ink tracking-tight leading-tight whitespace-pre-line">
                   {t.ctaTitle}
                 </h2>
