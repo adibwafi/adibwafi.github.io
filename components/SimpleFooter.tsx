@@ -5,6 +5,7 @@ import { Mail, Github, Linkedin } from 'lucide-react';
 import { useSite } from '@/lib/site-context';
 import { trackEvent } from '@/lib/analytics';
 import { SITE_MAILTO } from '@/lib/data';
+import { MenakoStudioLogo } from '@/components/MenakoStudioLogo';
 
 /* ─── Shared footer used on Experience and Work pages ────────────────────── */
 
@@ -20,8 +21,11 @@ export function SimpleFooter() {
   return (
     <footer className="border-t border-rule bg-surface">
       <div className="max-w-layout mx-auto px-5 md:px-10 lg:px-16 py-8 flex flex-col sm:flex-row justify-between items-center gap-4">
-        {/* Priority 5 — © 2026 */}
-        <span className="text-xs text-ink-faint">© 2026 Muhamad Adibwafi Menako</span>
+        {/* Priority 5 — © 2026 Menako Studio */}
+        <div className="flex items-center gap-2.5">
+          <MenakoStudioLogo variant="horizontal" height={18} />
+          <span className="text-xs text-ink-faint">· © 2026 Muhamad Adibwafi Menako</span>
+        </div>
         <div className="flex items-center gap-5">
           {links.map(({ href, label, icon: Icon }) => (
             <a

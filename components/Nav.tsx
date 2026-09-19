@@ -11,6 +11,8 @@ import { trackEvent } from '@/lib/analytics';
 import { ease } from '@/lib/animations';
 import { SITE_MAILTO } from '@/lib/data';
 
+import { MenakoStudioLogo } from '@/components/MenakoStudioLogo';
+
 /* ─── Navigation — reads active route via usePathname ─────────────────────── */
 
 const navItems = [
@@ -45,13 +47,13 @@ export function Nav() {
     >
       <div className="max-w-layout mx-auto px-5 md:px-10 lg:px-16 h-16 flex items-center justify-between">
 
-        {/* Logo */}
+        {/* Logo — Menako Studio Brandmark */}
         <Link
           href="/"
-          className="text-sm font-semibold text-ink tracking-tight hover:text-ink-soft transition-colors"
-          aria-label="Muhamad Adibwafi Menako Portfolio Home"
+          className="flex items-center gap-2 transition-opacity hover:opacity-80"
+          aria-label="Menako Studio — Muhamad Adibwafi Menako"
         >
-          Adibwafi
+          <MenakoStudioLogo variant="horizontal" height={26} />
         </Link>
 
         {/* Desktop nav */}
