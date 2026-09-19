@@ -165,7 +165,7 @@ adibwafi.github.io/
   * Principles band: "The Menako Films Standard — Behind the lens at Menako Films".
   * CTA card: "Direct with Menako Films" with YouTube @Setipiskumis integration and inquiry mailto link.
 * **Global Navigation & Utilities**:
-  * Primary brandmark: Official Menako Studio Twin Frame logo in header nav (`components/Nav.tsx`) and footer (`components/SimpleFooter.tsx`).
+  * Primary brandmark: Menako Studio Twin Frame icon paired with Adibwafi branding text in header nav (`components/Nav.tsx`) and footer (`components/SimpleFooter.tsx`), matching the `adibwafi.com` domain.
   * Favicon suite: Multi-resolution Twin Frame favicons (`favicon.ico`, `favicon-16/32/48/192/512.png`, `apple-touch-icon.png`).
   * Header nav (Home, Experience, Work, Videography) with active indicator pill, "Hire Me" mailto link, & mobile bottom navigation bar.
   * EN/ID language switcher pill with instant client translation switching.

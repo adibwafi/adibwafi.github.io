@@ -7,18 +7,33 @@ import { useSite } from '@/lib/site-context';
 /**
  * MenakoStudioLogo
  * Official Twin Frame lockup for Menako Studio
- * Supports 'horizontal' (secondary) and 'stacked' (primary) layout variants.
+ * Supports 'horizontal' (secondary), 'stacked' (primary), and 'icon' variants.
  */
 export function MenakoStudioLogo({
   variant = 'horizontal',
   height = 36,
   className = '',
 }: {
-  variant?: 'horizontal' | 'stacked';
+  variant?: 'horizontal' | 'stacked' | 'icon';
   height?: number;
   className?: string;
 }) {
   const { theme } = useSite();
+
+  if (variant === 'icon') {
+    return (
+      <div className={`relative inline-block select-none ${className}`} style={{ width: height, height }}>
+        <Image
+          src="/brand/menako-studio/menako-studio-icon.svg"
+          alt="Menako Studio Twin Frame"
+          width={height}
+          height={height}
+          className="w-full h-full object-contain"
+          priority
+        />
+      </div>
+    );
+  }
 
   if (variant === 'stacked') {
     // Aspect ratio 640x356 (~1.798)

@@ -47,13 +47,16 @@ export function Nav() {
     >
       <div className="max-w-layout mx-auto px-5 md:px-10 lg:px-16 h-16 flex items-center justify-between">
 
-        {/* Logo — Menako Studio Brandmark */}
+        {/* Logo — Menako Studio Twin Frame Icon + Adibwafi Branding */}
         <Link
           href="/"
-          className="flex items-center gap-2 transition-opacity hover:opacity-80"
-          aria-label="Menako Studio — Muhamad Adibwafi Menako"
+          className="flex items-center gap-2.5 group transition-opacity hover:opacity-85"
+          aria-label="Adibwafi — Muhamad Adibwafi Menako"
         >
-          <MenakoStudioLogo variant="horizontal" height={26} />
+          <MenakoStudioLogo variant="icon" height={24} className="flex-shrink-0" />
+          <span className="text-sm font-semibold text-ink tracking-tight group-hover:text-ink-soft transition-colors">
+            Adibwafi
+          </span>
         </Link>
 
         {/* Desktop nav */}
