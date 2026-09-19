@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512" fill="none">
+  <defs>
+    <clipPath id="clipB_icon">
+      <rect x="46" y="34" width="60" height="60" rx="18"/>
+    </clipPath>
+  </defs>
+  <g transform="scale(4.266666666666667)">
+    <rect x="14" y="26" width="60" height="60" rx="18" fill="#1C7FC7" fill-opacity="1.0" />
+    <rect x="46" y="34" width="60" height="60" rx="18" fill="#F0A27A" fill-opacity="1.0" />
+    <rect x="14" y="26" width="60" height="60" rx="18" fill="#4C707E" fill-opacity="1.0" clip-path="url(#clipB_icon)"/>
+  </g>
+</svg>

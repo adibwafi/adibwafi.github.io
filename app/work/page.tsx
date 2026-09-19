@@ -4,13 +4,13 @@ import WorkPage from '@/components/WorkPage';
 /* ─── Work route — /work ─────────────────────────────────────────────────── */
 
 export const metadata: Metadata = {
-  title:       'Projects & Work — Muhamad Adibwafi Menako',
+  title:       'Menako Studio — Software Engineering Practice | Muhamad Adibwafi Menako',
   description:
-    'Selected engineering projects: Kinghouse Management, Livecode Logic Trainer, Enterprise LMS Architecture (10k+ users), AI Baby Meal Planner, Amana Care Website, and Serasa Kreatif Platform.',
+    'Menako Studio is the independent software engineering practice of Muhamad Adibwafi Menako. Production-grade systems, developer tooling, and distributed architectures engineered with the Twin Frame system.',
   alternates:  { canonical: '/work' },
   openGraph: {
-    title:       'Projects & Work — Muhamad Adibwafi Menako',
-    description: 'Production-grade engineering projects spanning hospitality ERP platforms, live-code developer tools, enterprise infrastructure, consumer apps, daycare platforms, and agency websites.',
+    title:       'Menako Studio — Software Engineering Practice | Muhamad Adibwafi Menako',
+    description: 'Production-grade engineering projects and systems spanning hospitality ERP platforms, live-code developer tools, enterprise infrastructure, consumer apps, and agency platforms under the Menako Studio imprint.',
     url:         'https://www.adibwafi.com/work',
   },
 };

@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 356" width="640" height="356" fill="none">
+  <defs>
+    <clipPath id="clipB_pri_light">
+      <rect x="46" y="34" width="60" height="60" rx="18"/>
+    </clipPath>
+  </defs>
+  <g transform="translate(220.0,50) scale(1.6666666666666667)">
+    <rect x="14" y="26" width="60" height="60" rx="18" fill="#1C7FC7" fill-opacity="1.0" />
+    <rect x="46" y="34" width="60" height="60" rx="18" fill="#F0A27A" fill-opacity="1.0" />
+    <rect x="14" y="26" width="60" height="60" rx="18" fill="#4C707E" fill-opacity="1.0" clip-path="url(#clipB_pri_light)"/>
+  </g>
+  <text x="146.58" y="326" font-family="Montserrat, var(--font-sans), sans-serif" font-weight="500" font-size="46" letter-spacing="-0.4px" fill="#18181F">menako<tspan fill="#8C8779" dx="12.88">studio</tspan></text>
+</svg>
