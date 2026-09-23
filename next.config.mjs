@@ -17,6 +17,22 @@ const nextConfig = {
     ],
   },
 
+  // Redirect erroneous or crawled junk paths to canonical locations
+  async redirects() {
+    return [
+      {
+        source: '/$',
+        destination: '/',
+        permanent: true,
+      },
+      {
+        source: '/\\$',
+        destination: '/',
+        permanent: true,
+      },
+    ];
+  },
+
   // Security headers for production grade A+ security score on Vercel
   async headers() {
     return [
@@ -46,6 +62,15 @@ const nextConfig = {
           {
             key: 'Permissions-Policy',
             value: 'camera=(), microphone=(), geolocation=()',
+          },
+        ],
+      },
+      {
+        source: '/_next/static/:path*',
+        headers: [
+          {
+            key: 'X-Robots-Tag',
+            value: 'noindex',
           },
         ],
       },
