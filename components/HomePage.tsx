@@ -255,8 +255,7 @@ export default function HomePage() {
                     onClick={() => trackEvent('click', 'Project Preview', p.title)}
                   >
                     <div
-                      className="relative overflow-hidden rounded-[1.1rem] m-2 bg-rule"
-                      style={{ height: '180px' }}
+                      className="relative overflow-hidden rounded-[1.1rem] m-2 bg-rule aspect-[16/10]"
                     >
                       <ShimmerImage
                         src={p.imageSrc}

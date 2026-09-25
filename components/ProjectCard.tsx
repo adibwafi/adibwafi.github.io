@@ -25,7 +25,7 @@ export function ProjectCard({
     <div className="bento-card bento-card-hover overflow-hidden group">
       <div className={`flex flex-col ${isEven ? 'lg:flex-row-reverse' : 'lg:flex-row'}`}>
         {/* Image */}
-        <div className="w-full lg:w-1/2 h-[280px] lg:h-auto relative overflow-hidden bg-rule">
+        <div className="w-full lg:w-1/2 aspect-[16/10] sm:aspect-[16/10] lg:aspect-auto min-h-[260px] sm:min-h-[320px] lg:min-h-[380px] relative overflow-hidden bg-rule">
           <div
             className={`relative w-full h-full ${
               isEven ? 'lg:rounded-r-[1.4rem]' : 'lg:rounded-l-[1.4rem]'
