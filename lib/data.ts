@@ -78,40 +78,16 @@ export const projectPreviews: ProjectPreview[] = [
     link: 'https://www.kinghousemanagement.com/',
   },
   {
-    title: 'Livecode Logic Trainer',
+    title: 'Lotus Semarang',
     en: {
-      blurb: 'Timed web app for live-code technical interview practice under 30-min constraints.',
+      blurb: 'Modern wellness clinic web app with Turborepo monorepo & 4-step WhatsApp booking wizard.',
     },
     id: {
-      blurb: 'Aplikasi web interaktif berdurasi terbatas untuk simulasi wawancara live-coding.',
+      blurb: 'Web app klinik terapi terpadu dengan Turborepo monorepo & wizard reservasi WhatsApp 4 langkah.',
     },
-    tags: ['JavaScript', 'REST API', 'Vercel'],
-    imageSrc: '/work/livecode-logic-trainer.webp',
-    link: 'https://github.com/adibwafi/livecode-logic-trainer',
-  },
-  {
-    title: 'Enterprise LMS Architecture',
-    en: {
-      blurb: 'Production-ready LMS blueprint with 40% load time reduction & live demo.',
-    },
-    id: {
-      blurb: 'Cetak biru LMS skala produksi dengan optimasi load time 40% & demo langsung.',
-    },
-    tags: ['Laravel 8', 'Vue.js 2', 'MySQL'],
-    imageSrc: '/work/lms-blueprint.webp',
-    link: 'https://github.com/adibwafi/laravel-vue-lms-blueprint',
-  },
-  {
-    title: 'AI Baby Meal Planner',
-    en: {
-      blurb: 'Mobile-first PWA for automated baby weaning menus and smart fridge inventory.',
-    },
-    id: {
-      blurb: 'PWA mobile-first untuk menyusun menu MPASI otomatis dan manajemen inventaris kulkas pintar.',
-    },
-    tags: ['Next.js', 'TypeScript', 'PWA', 'AI'],
-    imageSrc: '/work/smart-fridge-mpasi.webp',
-    link: 'https://github.com/adibwafi/ai-baby-meal-planner',
+    tags: ['Next.js 14', 'Turborepo', 'TypeScript', 'Tailwind CSS'],
+    imageSrc: '/work/lotus-semarang.webp',
+    link: 'https://www.lotussemarang.com/',
   },
   {
     title: 'Amana Care Website',
@@ -136,6 +112,30 @@ export const projectPreviews: ProjectPreview[] = [
     tags: ['Next.js', 'CMS', 'Agency'],
     imageSrc: '/work/serasa-kreatif.webp',
     link: 'https://serasakreatif.id/',
+  },
+  {
+    title: 'Livecode Logic Trainer',
+    en: {
+      blurb: 'Timed web app for live-code technical interview practice under 30-min constraints.',
+    },
+    id: {
+      blurb: 'Aplikasi web interaktif berdurasi terbatas untuk simulasi wawancara live-coding.',
+    },
+    tags: ['JavaScript', 'REST API', 'Vercel'],
+    imageSrc: '/work/livecode-logic-trainer.webp',
+    link: 'https://github.com/adibwafi/livecode-logic-trainer',
+  },
+  {
+    title: 'Enterprise LMS Architecture',
+    en: {
+      blurb: 'Production-ready LMS blueprint with 40% load time reduction & live demo.',
+    },
+    id: {
+      blurb: 'Cetak biru LMS skala produksi dengan optimasi load time 40% & demo langsung.',
+    },
+    tags: ['Laravel 8', 'Vue.js 2', 'MySQL'],
+    imageSrc: '/work/lms-blueprint.webp',
+    link: 'https://github.com/adibwafi/laravel-vue-lms-blueprint',
   },
 ];
 
@@ -275,6 +275,21 @@ export const projects: Project[] = [
     id: {
       description:
         'Platform manajemen properti sewa harian (short-stay), SEO CMS, dan Hospitality ERP/POS 100% Free-Tier berstandar editorial yang dibangun menggunakan Next.js 16 (App Router, React 19), Tailwind CSS v4, TypeScript, dan Supabase PostgreSQL untuk residensi di wilayah Jabodetabek. Dilengkapi sinkronisasi 2 arah Airbnb iCal otomatis, mesin dynamic pricing multi-faktor ala AirDNA, visual Gantt timeline reservasi, digital guest compendium (/stay), laporan bagi hasil pemilik properti otomatis, dan keamanan CMS tingkat produksi.',
+    },
+  },
+  {
+    title: 'Lotus Semarang — Accessible Modern Wellness & Clinical Therapy Web App',
+    tags: ['Next.js 14', 'TypeScript', 'Turborepo', 'Tailwind CSS', 'WhatsApp Wizard', 'Bilingual ID/EN'],
+    link: 'https://github.com/menako-studio/lotus-semarang',
+    webLink: 'https://www.lotussemarang.com/',
+    imageSrc: '/work/lotus-semarang.webp',
+    en: {
+      description:
+        'A high-performance modern wellness and integrated clinical therapy web application engineered for Lotus Semarang under a Turborepo monorepo architecture (Next.js 14 App Router, pnpm workspaces, and shared @lotus/ui component library). Benchmarked against visual aesthetics of WTHN and Amana Care, the platform features a streamlined 4-step WhatsApp appointment booking wizard, bilingual localization (Indonesian & English), dynamic clinical service showcases for Acupuncture, Hydrotherapy, and Physiotherapy, YouTube Shorts reel lightbox players, interactive photo galleries, and production GA4/GTM dataLayer tracking.',
+    },
+    id: {
+      description:
+        'Platform web klinik terapi kesehatan modern dan privat terpadu untuk Lotus Semarang yang dibangun dengan arsitektur Turborepo monorepo (Next.js 14 App Router, pnpm workspaces, dan shared package @lotus/ui). Mengadaptasi estetika visual WTHN dan Amana Care berkonsep Accessible Modern Wellness, platform ini menghadirkan wizard reservasi jadwal 4 langkah langsung ke WhatsApp admin, sistem lokalisasi bilingual (ID/EN), showcase layanan komprehensif (Akupunktur, Hidroterapi privat 1:1, Fisioterapi, Swim Course), lightbox interaktif Reels YouTube, galeri foto terkurasi, dan pelacakan event GA4/GTM.',
     },
   },
   {
