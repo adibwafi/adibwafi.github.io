@@ -140,7 +140,7 @@ adibwafi.github.io/
 * **Home Page (`/`)**:
   * Editorial Hero section with 6-second recruiter pitch, profile photo modal, and social verification (`rel="me"`).
   * Impact Metrics grid (40% load time reduction, 10k+ active learners, 5k+ daily data points).
-  * Selected Work bento gallery with hover scale interactions.
+  * Selected Work bento gallery (balanced 2x3 grid, responsive aspect-[16/10] safe-padded cards with hover scale interactions).
   * Contact CTA banner with direct email copy action (`hello@adibwafi.com`) and resume download link.
 * **Experience Page (`/experience`)**:
   * Work history timeline detailing software engineering and previous corporate enterprise roles.
@@ -151,7 +151,7 @@ adibwafi.github.io/
   * Brandmark: **Twin Frame** lockup (`MenakoStudioLogo`) combining Frame A (The Eye / `#1C7FC7`), Frame B (The System / `#F0A27A`), and The Seam (`#4C707E`).
   * Supergraphic: Ambient scattered twin frames pattern (`MenakoStudioSupergraphic.tsx`) at 12% opacity per Brand Guidelines Page 12.
   * Brand Philosophy card: "Two Crafts, One Frame." articulating the intersection of visual composition and resilient engineering.
-  * Comprehensive project case study list (Kinghouse Management, Enterprise LMS Blueprint, AI Baby Meal Planner, Serasa Kreatif, Amana Care, Livecode Logic Trainer).
+  * Comprehensive project case study list (Kinghouse Management, Lotus Semarang, Amana Care, Livecode Logic Trainer, Enterprise LMS Architecture Blueprint, AI Baby Meal Planner, Serasa Kreatif) with responsive aspect-[16/10] containers, authentic retina captures, and seamless safe padding.
   * Direct repository links and live website preview triggers.
   * Studio Open Source GitHub CTA card.
 * **Videography Page (`/videography`) — Menako Films**:
