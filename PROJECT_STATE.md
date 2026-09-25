@@ -22,7 +22,7 @@ High-end personal portfolio and software engineering studio for **Muhamad Adibwa
   * Tailwind CSS 3.4.7 (Configured with `darkMode: ['class', '[data-theme="dark"]']`, mapped to CSS variables `--paper`, `--surface`, `--ink`, `--accent`, `--rule`, etc.)
   * **Dark Mode Text Contrast**: All page components consume the `ink` / `ink-soft` / `ink-faint` / `paper` / `surface` / `rule` Tailwind color tokens directly (never raw `zinc-*`/`gray-*`/`blue-*`/`emerald-*` classes) so every text and surface color is theme-reactive by construction — no per-component `dark:` overrides needed. The header's translucent background uses a `.site-header` class (`color-mix(in srgb, var(--paper) 78%, transparent)`) rather than a Tailwind opacity modifier, since Tailwind cannot apply `/alpha` to a CSS-variable-backed color. `app/not-found.tsx` is the one deliberate exception: it runs its own standalone theme state (not `SiteContext`) with an independent `zinc-*` + explicit `dark:` palette — leave it as-is rather than migrating it to tokens.
   * PostCSS 8.5.28 & Autoprefixer 10.4.19
-  * Typography: 3 distinct roles configured via `next/font/google`:
+  * Typography: 3 distinct roles configured via `next/font/local` (self-hosted WOFF2, replacing `next/font/google` to eliminate upstream CI build failures and ensure deterministic builds):
     * `--font-serif`: Cormorant Garamond (headlines >24px, pull-quotes)
     * `--font-sans`: Manrope (all body, UI, navigation, buttons)
     * `--font-mono`: JetBrains Mono (data, metrics, eyebrow labels, folio numbers, tech pills)
