@@ -23,7 +23,7 @@
   --on-dark: #FFFFFF;
   --on-dark-soft: #94A3B8;
 
-  /* -- typography fallbacks (primary fonts configured via next/font/google) -- */
+  /* -- typography fallbacks (primary fonts configured via next/font/local) -- */
   --font-serif: 'Cormorant Garamond', 'Iowan Old Style', Georgia, serif;
   --font-sans: 'Manrope', -apple-system, 'Segoe UI', Roboto, sans-serif;
   --font-mono: 'JetBrains Mono', 'SFMono-Regular', Consolas, monospace;

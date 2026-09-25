@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { Cormorant_Garamond, Manrope, JetBrains_Mono } from 'next/font/google';
+import localFont from 'next/font/local';
 import Script from 'next/script';
 import { Analytics } from '@vercel/analytics/react';
 import { SpeedInsights } from '@vercel/speed-insights/next';
@@ -8,24 +8,35 @@ import SiteShell from '@/components/SiteShell';
 import AnalyticsRouteTracker from '@/components/AnalyticsRouteTracker';
 import { SITE_MAILTO } from '@/lib/data';
 
-const serif = Cormorant_Garamond({
-  subsets: ['latin'],
-  weight: ['300', '400', '500', '600', '700'],
-  style: ['normal', 'italic'],
+const serif = localFont({
+  src: [
+    {
+      path: './fonts/cormorant-garamond-normal.woff2',
+      weight: '300 700',
+      style: 'normal',
+    },
+    {
+      path: './fonts/cormorant-garamond-italic.woff2',
+      weight: '300 700',
+      style: 'italic',
+    },
+  ],
   variable: '--font-serif',
   display: 'swap',
 });
 
-const sans = Manrope({
-  subsets: ['latin'],
-  weight: ['400', '500', '600', '700', '800'],
+const sans = localFont({
+  src: './fonts/manrope.woff2',
+  weight: '200 800',
+  style: 'normal',
   variable: '--font-sans',
   display: 'swap',
 });
 
-const mono = JetBrains_Mono({
-  subsets: ['latin'],
-  weight: ['400', '500', '700'],
+const mono = localFont({
+  src: './fonts/jetbrains-mono.woff2',
+  weight: '400 700',
+  style: 'normal',
   variable: '--font-mono',
   display: 'swap',
 });
