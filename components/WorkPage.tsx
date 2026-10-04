@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Github, ArrowUpRight } from 'lucide-react';
+import { Github, ArrowUpRight, FileDown } from 'lucide-react';
 import { FadeSection, FadeItem } from '@/components/FadeSection';
 import { ProjectCard } from '@/components/ProjectCard';
 import { SimpleFooter } from '@/components/SimpleFooter';
@@ -17,7 +17,7 @@ import { MenakoStudioSupergraphic } from '@/components/MenakoStudioSupergraphic'
 
 /* ════════════════════════════════════════════════════════════════════════════
    WORK PAGE CONTENT — MENAKO STUDIO
-   Sections: Twin Frame Hero · Supergraphic · Project case studies · GitHub CTA
+   Sections: Twin Frame Hero · Supergraphic · Project case studies · Pricelist Deck CTA · GitHub CTA
    ════════════════════════════════════════════════════════════════════════════ */
 
 export default function WorkPage() {
@@ -54,6 +54,31 @@ export default function WorkPage() {
               <p className="text-ink-soft text-base md:text-lg leading-relaxed max-w-[56ch] mb-6">
                 {t.desc}
               </p>
+
+              {/* Quick Pricelist / Deck Download Action Group */}
+              <div className="flex flex-wrap items-center gap-3 pt-1">
+                <a
+                  href="/pitchDeck/Menako_Studio_Pitch_Deck_ID.pdf"
+                  download="Menako_Studio_Pitch_Deck_ID.pdf"
+                  className="btn-primary"
+                  onClick={() => trackEvent('click', 'CTA', 'Download Pricelist ID - Hero')}
+                >
+                  <FileDown size={14} strokeWidth={2} />
+                  <span>{t.heroPricelistId}</span>
+                </a>
+                <a
+                  href="/pitchDeck/Menako_Studio_Pitch_Deck_EN.pdf"
+                  download="Menako_Studio_Pitch_Deck_EN.pdf"
+                  className="btn-ghost"
+                  onClick={() => trackEvent('click', 'CTA', 'Download Pricelist EN - Hero')}
+                >
+                  <FileDown size={14} strokeWidth={2} />
+                  <span>{t.heroPricelistEn}</span>
+                </a>
+                <span className="text-xs font-mono text-ink-faint tracking-wider pl-1">
+                  PDF · 414 KB
+                </span>
+              </div>
             </FadeItem>
 
             {/* Twin Frame System interactive philosophy card */}
@@ -122,6 +147,96 @@ export default function WorkPage() {
             </FadeSection>
           ))}
         </div>
+      </motion.div>
+
+      {/* ── Menako Studio Pricelist & Pitch Deck Section ────────────── */}
+      <motion.div
+        onViewportEnter={() => trackEvent('view', 'Section', 'Pricelist CTA Section')}
+        viewport={{ once: true, amount: 0.2 }}
+        className="max-w-layout mx-auto px-5 md:px-10 lg:px-16 pb-20"
+      >
+        <FadeSection>
+          <FadeItem>
+            <div className="bento-card p-7 md:p-10 border border-rule relative overflow-hidden bg-surface">
+              {/* Subtle top accent bar matching Twin Frame */}
+              <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#1C7FC7] via-[#4C707E] to-[#F0A27A]" />
+
+              <div className="flex flex-col lg:flex-row lg:items-start justify-between gap-8 mb-8">
+                <div className="max-w-2xl">
+                  <div className="flex flex-wrap items-center gap-2 mb-3">
+                    <span className="section-label !mb-0">{t.pricelistSectionLabel}</span>
+                    <span className="text-xs font-mono px-2.5 py-0.5 rounded-full border border-rule text-ink-soft bg-paper">
+                      {t.fileBadge}
+                    </span>
+                  </div>
+                  <h2 className="text-2xl md:text-3xl font-bold text-ink tracking-tight mb-3">
+                    {t.pricelistSectionTitle}
+                  </h2>
+                  <p className="text-sm md:text-base text-ink-soft leading-relaxed">
+                    {t.pricelistSectionDesc}
+                  </p>
+                </div>
+              </div>
+
+              {/* Grid of the two download options */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+                {/* ID Version Card */}
+                <div className="p-5 md:p-6 rounded-xl border border-rule bg-paper hover:border-ink-faint transition-all flex flex-col justify-between">
+                  <div>
+                    <div className="flex items-center justify-between gap-2 mb-3">
+                      <span className="text-xs font-mono font-semibold uppercase tracking-wider text-[#1C7FC7] px-2.5 py-1 rounded border border-[#1C7FC7]/20">
+                        Bahasa Indonesia · IDR
+                      </span>
+                      <span className="text-xs font-mono text-ink-faint">414 KB</span>
+                    </div>
+                    <h3 className="text-lg font-bold text-ink mb-1.5">
+                      {t.cardIdTitle}
+                    </h3>
+                    <p className="text-xs md:text-sm text-ink-soft leading-relaxed mb-6">
+                      {t.cardIdDesc}
+                    </p>
+                  </div>
+                  <a
+                    href="/pitchDeck/Menako_Studio_Pitch_Deck_ID.pdf"
+                    download="Menako_Studio_Pitch_Deck_ID.pdf"
+                    className="btn-primary w-full justify-center"
+                    onClick={() => trackEvent('click', 'CTA', 'Download Pricelist ID - Deck Section')}
+                  >
+                    <FileDown size={15} strokeWidth={2} />
+                    <span>{t.cardIdBtn}</span>
+                  </a>
+                </div>
+
+                {/* EN Version Card */}
+                <div className="p-5 md:p-6 rounded-xl border border-rule bg-paper hover:border-ink-faint transition-all flex flex-col justify-between">
+                  <div>
+                    <div className="flex items-center justify-between gap-2 mb-3">
+                      <span className="text-xs font-mono font-semibold uppercase tracking-wider text-[#F0A27A] px-2.5 py-1 rounded border border-[#F0A27A]/20">
+                        English · Global USD
+                      </span>
+                      <span className="text-xs font-mono text-ink-faint">414 KB</span>
+                    </div>
+                    <h3 className="text-lg font-bold text-ink mb-1.5">
+                      {t.cardEnTitle}
+                    </h3>
+                    <p className="text-xs md:text-sm text-ink-soft leading-relaxed mb-6">
+                      {t.cardEnDesc}
+                    </p>
+                  </div>
+                  <a
+                    href="/pitchDeck/Menako_Studio_Pitch_Deck_EN.pdf"
+                    download="Menako_Studio_Pitch_Deck_EN.pdf"
+                    className="btn-primary w-full justify-center"
+                    onClick={() => trackEvent('click', 'CTA', 'Download Pricelist EN - Deck Section')}
+                  >
+                    <FileDown size={15} strokeWidth={2} />
+                    <span>{t.cardEnBtn}</span>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </FadeItem>
+        </FadeSection>
       </motion.div>
 
       {/* GitHub CTA */}
