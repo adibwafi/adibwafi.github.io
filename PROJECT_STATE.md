@@ -154,6 +154,7 @@ adibwafi.github.io/
   * Brand Philosophy card: "Two Crafts, One Frame." articulating the intersection of visual composition and resilient engineering.
   * Comprehensive project case study list (Kinghouse Management, Lotus Semarang, Amana Care, Livecode Logic Trainer, Enterprise LMS Architecture Blueprint, AI Baby Meal Planner, Serasa Kreatif) with responsive aspect-[16/10] containers, authentic retina captures, and seamless safe padding.
   * Direct repository links and live website preview triggers.
+  * **Pricelist & Pitch Deck CTA**: Bilingual CTA buttons in the hero section and a dedicated Rate Card & Pitch Deck bento section allowing downloads for Indonesian (`/pitchDeck/Menako_Studio_Pitch_Deck_ID.pdf`) and English (`/pitchDeck/Menako_Studio_Pitch_Deck_EN.pdf`) versions with GA4 event tracking.
   * Studio Open Source GitHub CTA card.
 * **Videography Page (`/videography`) — Menako Films**:
   * Independent freelance videography imprint: **Menako Films**.
