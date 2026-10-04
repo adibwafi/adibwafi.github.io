@@ -6,11 +6,11 @@ import ExperiencePage from '@/components/ExperiencePage';
 export const metadata: Metadata = {
   title:       'Experience & Stack — Muhamad Adibwafi Menako',
   description:
-    '3+ years of full-stack engineering at Startup Campus and Politeknik Digital Indonesia. FastAPI, GCP, PostgreSQL, Next.js, React — full technical stack and career timeline.',
+    'Full-stack engineering at Fortu Digital, Startup Campus, and Politeknik Digital Indonesia. Vue 3, Next.js, FastAPI, GCP, TypeScript — full technical stack and career timeline.',
   alternates:  { canonical: '/experience' },
   openGraph: {
     title:       'Experience & Stack — Muhamad Adibwafi Menako',
-    description: '3+ years of full-stack engineering. See work history, technical stack, and education.',
+    description: 'Full-stack engineering career and technical stack at Fortu Digital, Startup Campus, and beyond.',
     url:         'https://www.adibwafi.com/experience',
   },
 };

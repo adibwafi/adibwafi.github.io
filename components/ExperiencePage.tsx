@@ -26,6 +26,16 @@ export default function ExperiencePage() {
     return category;
   };
 
+  const formatPeriod = (period: string, activeLang: 'en' | 'id') => {
+    if (activeLang === 'en') return period;
+    return period
+      .replace('Present', 'Sekarang')
+      .replace('May', 'Mei')
+      .replace('Aug', 'Agu')
+      .replace('Oct', 'Okt')
+      .replace('Dec', 'Des');
+  };
+
   return (
     <motion.div
       key="experience"
@@ -74,13 +84,19 @@ export default function ExperiencePage() {
                           {translations[lang].experience.prevCareer}
                         </span>
                       )}
+                      {exp.period.includes('Present') && (
+                        <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-accent-tint border border-accent/20 text-accent-ink text-[0.65rem] font-semibold tracking-wide uppercase mb-2">
+                          <span className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse" />
+                          {translations[lang].experience.currentRole}
+                        </span>
+                      )}
                       <h3 className="text-base font-semibold text-ink">{exp[lang].role}</h3>
                       <p className="text-sm text-ink-soft mt-0.5">
                         {exp.company} · {exp.location}
                       </p>
                     </div>
                     <span className="text-xs text-ink-faint font-medium shrink-0 mt-1">
-                      {exp.period}
+                      {formatPeriod(exp.period, lang)}
                     </span>
                   </div>
 
