@@ -143,7 +143,8 @@ adibwafi.github.io/
   * Selected Work bento gallery (balanced 2x3 grid, responsive aspect-[16/10] safe-padded cards with hover scale interactions).
   * Contact CTA banner with direct email copy action (`hello@adibwafi.com`) and resume download link.
 * **Experience Page (`/experience`)**:
-  * Work history timeline detailing software engineering and previous corporate enterprise roles.
+  * Work history timeline detailing active software engineering (Full Stack Engineer at Fortu Digital · Marien digital signage platform, company web, documentation), past software roles (Startup Campus, Politeknik Digital Indonesia), and previous corporate enterprise roles.
+  * Active role badge ("Current Role" / "Peran Saat Ini") with pulse indicator and localized dates.
   * Technical stack breakdown categorized into *Languages*, *Frameworks & Libraries*, and *Infrastructure & Tools*.
   * Educational background (Hacktiv8 JS Immersive & Padjadjaran University Economics).
 * **Work Page (`/work`) — Menako Studio**:
