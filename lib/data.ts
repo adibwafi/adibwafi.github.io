@@ -160,6 +160,31 @@ export interface Role {
 export const roles: Role[] = [
   {
     type: 'primary',
+    company: 'Fortu Digital',
+    period: 'Oct 2026 – Present',
+    location: 'Jakarta, Indonesia',
+    tags: ['Vue 3', 'TypeScript', 'Tailwind CSS', 'Sanity CMS', 'MkDocs', 'CI/CD'],
+    en: {
+      role: 'Full Stack Engineer',
+      bullets: [
+        'Build web products for Fortu Digital, including Marien, an enterprise digital signage (screen management) platform with a web CMS and Android player.',
+        'Develop and maintain CMS features: playlists, campaigns, and device pairing, turning client feedback into scoped, shippable tasks.',
+        'Build and maintain the company website using Vue 3, TypeScript, Tailwind CSS, and Sanity headless CMS, deployed on Vercel.',
+        'Own the platform documentation site (MkDocs, GitHub Actions auto-deploy) covering device setup, playlists, campaigns, and player releases.',
+      ],
+    },
+    id: {
+      role: 'Full Stack Engineer',
+      bullets: [
+        'Membangun dan mengembangkan produk web Fortu Digital, termasuk Marien, platform digital signage (screen management) dengan web CMS dan Android player.',
+        'Mengembangkan dan memelihara fitur CMS: playlist, campaign, dan device pairing, serta menerjemahkan masukan klien menjadi tugas siap rilis.',
+        'Membangun dan mengelola situs web perusahaan menggunakan Vue 3, TypeScript, Tailwind CSS, dan Sanity headless CMS yang di-deploy di Vercel.',
+        'Mengelola situs dokumentasi platform (MkDocs, auto-deploy GitHub Actions) yang mencakup panduan setup perangkat, playlist, campaign, dan rilis player.',
+      ],
+    },
+  },
+  {
+    type: 'primary',
     company: 'Startup Campus',
     period: 'Jan 2023 – Dec 2025',
     location: 'Jakarta, Indonesia',
