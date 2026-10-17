@@ -86,7 +86,7 @@ export default function WorkPage() {
               <div className="bento-card p-6 md:p-7 border border-rule shadow-sm relative overflow-hidden">
                 <div className="flex items-center justify-between gap-3 mb-4">
                   <span className="text-xs font-mono uppercase tracking-[0.14em] text-ink-faint">
-                    Brand Philosophy
+                    {t.philosophyLabel}
                   </span>
                   <div className="flex items-center gap-1.5" aria-hidden="true">
                     <span className="w-2.5 h-2.5 rounded-full bg-[#1C7FC7]" title="Frame A: The Eye" />
@@ -95,9 +95,9 @@ export default function WorkPage() {
                   </div>
                 </div>
 
-                <h3 className="text-base font-bold text-ink mb-2">
+                <h2 className="text-base font-bold text-ink mb-2">
                   {t.philosophyTitle}
-                </h3>
+                </h2>
                 <p className="text-xs md:text-sm text-ink-soft leading-relaxed mb-5">
                   {t.philosophyDesc}
                 </p>
@@ -138,6 +138,11 @@ export default function WorkPage() {
         viewport={{ once: true, amount: 0.1 }}
         className="max-w-layout mx-auto px-5 md:px-10 lg:px-16 pb-24"
       >
+        <FadeSection>
+          <FadeItem className="mb-8">
+            <h2 className="section-label">{t.caseStudiesLabel}</h2>
+          </FadeItem>
+        </FadeSection>
         <div className="space-y-6">
           {projects.map((project, i) => (
             <FadeSection key={i}>

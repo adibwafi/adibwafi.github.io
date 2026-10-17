@@ -259,7 +259,7 @@ export default function HomePage() {
                     >
                       <ShimmerImage
                         src={p.imageSrc}
-                        alt={`Thumbnail for ${p.title}`}
+                        alt={`${p.title} — Software Engineering Project by Muhamad Adibwafi Menako`}
                         fill
                         className="object-cover object-center transition-transform duration-700 group-hover:scale-[1.04]"
                         style={{ filter: 'saturate(0.88) contrast(1.02)' }}

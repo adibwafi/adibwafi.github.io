@@ -5,25 +5,25 @@ export default function sitemap(): MetadataRoute.Sitemap {
     {
       url:             'https://www.adibwafi.com',
       lastModified:    new Date(),
-      changeFrequency: 'monthly',
+      changeFrequency: 'weekly',
       priority:        1.0,
     },
     {
       url:             'https://www.adibwafi.com/experience',
       lastModified:    new Date(),
-      changeFrequency: 'monthly',
+      changeFrequency: 'weekly',
       priority:        0.9,
     },
     {
       url:             'https://www.adibwafi.com/work',
       lastModified:    new Date(),
-      changeFrequency: 'monthly',
+      changeFrequency: 'weekly',
       priority:        0.8,
     },
     {
       url:             'https://www.adibwafi.com/videography',
       lastModified:    new Date(),
-      changeFrequency: 'monthly',
+      changeFrequency: 'weekly',
       priority:        0.7,
     },
   ];

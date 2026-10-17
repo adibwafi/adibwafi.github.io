@@ -45,10 +45,12 @@ const mono = localFont({
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://www.adibwafi.com'),
-  alternates: { canonical: '/' },
-  title: 'Muhamad Adibwafi Menako — Full Stack Engineer',
+  title: {
+    default: 'Muhamad Adibwafi Menako — Full Stack Software Engineer',
+    template: '%s | Muhamad Adibwafi Menako',
+  },
   description:
-    'Results-driven Full Stack Engineer building scalable backend infrastructure and intuitive frontend experiences. Based in Indonesia.',
+    'Full Stack Software Engineer building scalable backend systems, high-performance web applications, and resilient cloud architectures. Based in Indonesia.',
   icons: {
     icon: [
       { url: '/favicon.ico' },
@@ -61,44 +63,49 @@ export const metadata: Metadata = {
       { url: '/apple-touch-icon.png', sizes: '180x180', type: 'image/png' },
     ],
   },
-  // PRIORITY 4 — Indonesian local recruiter keywords added
   keywords: [
     'Muhamad Adibwafi Menako',
     'Adibwafi Menako',
     'Adibwafi',
-    'Full Stack Engineer',
-    'Software Engineer',
-    'Next.js',
-    'React',
-    'FastAPI',
-    'TypeScript',
-    'Indonesia',
-    'Backend Engineer',
-    'Frontend Engineer',
+    'Full Stack Software Engineer',
+    'Software Engineer Indonesia',
+    'Senior Full Stack Developer',
+    'Next.js Developer',
+    'React Developer',
+    'FastAPI Engineer',
+    'Vue 3 Developer',
+    'TypeScript Engineer',
+    'Indonesia Software Engineer',
+    'Backend Engineer Jakarta',
+    'Frontend Engineer Jakarta',
     'Menako Studio',
-    'Web Developer Portfolio',
-    // Local Indonesia keywords
+    'System Architecture',
+    'Web Performance Optimization',
     'Software Engineer Jakarta',
     'Web Developer Indonesia',
     'Full Stack Developer Depok',
     'engineer Indonesia hire',
-    'mid level engineer Indonesia',
     'remote engineer Indonesia',
-    'developer Indonesia',
-    'Startup Campus engineer',
   ],
   authors: [{ name: 'Muhamad Adibwafi Menako', url: 'https://www.adibwafi.com' }],
+  creator: 'Muhamad Adibwafi Menako',
+  publisher: 'Menako Studio',
+  formatDetection: {
+    email: false,
+    address: false,
+    telephone: false,
+  },
   openGraph: {
-    title:       'Muhamad Adibwafi Menako — Full Stack Engineer',
-    description: 'Results-driven Full Stack Engineer building scalable backend infrastructure and intuitive frontend experiences.',
+    title:       'Muhamad Adibwafi Menako — Full Stack Software Engineer',
+    description: 'Full Stack Software Engineer building scalable backend systems, high-performance web applications, and resilient cloud architectures.',
     url:         'https://www.adibwafi.com',
-    siteName:    'Adibwafi Portfolio',
+    siteName:    'Muhamad Adibwafi Menako Portfolio',
     images: [
       {
         url:    '/og-image.png',
         width:  1200,
         height: 630,
-        alt:    'Muhamad Adibwafi Menako — Full Stack Engineer',
+        alt:    'Muhamad Adibwafi Menako — Full Stack Software Engineer',
       },
     ],
     locale: 'en_US',
@@ -106,9 +113,10 @@ export const metadata: Metadata = {
   },
   twitter: {
     card:        'summary_large_image',
-    title:       'Muhamad Adibwafi Menako — Full Stack Engineer',
-    description: 'Results-driven Full Stack Engineer building scalable backend infrastructure and intuitive frontend experiences.',
+    title:       'Muhamad Adibwafi Menako — Full Stack Software Engineer',
+    description: 'Full Stack Software Engineer building scalable backend systems, high-performance web applications, and resilient cloud architectures.',
     images:      ['/og-image.png'],
+    creator:     '@adibwafi',
   },
   robots: {
     index:     true,
@@ -118,6 +126,7 @@ export const metadata: Metadata = {
       follow:              true,
       'max-snippet':       -1,
       'max-image-preview': 'large',
+      'max-video-preview': -1,
     },
   },
   verification: {
@@ -125,57 +134,63 @@ export const metadata: Metadata = {
   },
 };
 
-/* ─── JSON-LD structured data ─────────────────────────────────────────────── */
+/* ─── JSON-LD structured data (Schema.org Graph) ─────────────────────────── */
 
 const jsonLd = {
   '@context': 'https://schema.org',
-  '@type':    'Person',
-  name:       'Muhamad Adibwafi Menako',
-  // Updated to reflect mid-level seniority signal
-  jobTitle:   'Mid-Level Full Stack Software Engineer',
-  url:        'https://www.adibwafi.com',
-  image:      'https://www.adibwafi.com/portrait-adib.webp',
-  sameAs: [
-    'https://github.com/adibwafi',
-    'https://linkedin.com/in/adibwafi',
-    'https://www.youtube.com/@Setipiskumis',
-  ],
-  address: {
-    '@type':         'PostalAddress',
-    addressLocality: 'Depok',
-    addressRegion:   'West Java',
-    addressCountry:  'ID',
-  },
-  description:
-    'Results-driven Full Stack Engineer building scalable backend infrastructure and intuitive frontend experiences.',
-  knowsAbout: [
-    'TypeScript', 'JavaScript', 'Python', 'PHP',
-    'React.js', 'Next.js', 'Node.js', 'FastAPI',
-    'Laravel', 'PostgreSQL', 'GCP', 'Docker', 'System Architecture',
-  ],
-  publishingPrinciples: [
+  '@graph': [
     {
-      '@type':             'CreativeWork',
-      name:                'Enterprise LMS Architecture Blueprint',
-      description:         'A structural, sanitized blueprint demonstrating scalable backend architecture for high-traffic Learning Management Systems.',
-      programmingLanguage: 'PHP',
-      codeRepository:      'https://github.com/adibwafi/laravel-vue-lms-blueprint',
-      url:                 'https://laravel-vue-lms-blueprint.vercel.app/',
+      '@type': 'WebSite',
+      '@id': 'https://www.adibwafi.com/#website',
+      url: 'https://www.adibwafi.com',
+      name: 'Muhamad Adibwafi Menako — Full Stack Software Engineer',
+      description: 'Official portfolio and software engineering practice of Muhamad Adibwafi Menako.',
+      publisher: { '@id': 'https://www.adibwafi.com/#person' },
+      inLanguage: ['en', 'id'],
     },
     {
-      '@type':             'CreativeWork',
-      name:                'AI Baby Meal Planner',
-      description:         'A mobile-first Progressive Web App (PWA) designed to help parents plan nutrient-dense complementary feeding (weaning) menus in seconds using fridge inventory and AI.',
-      programmingLanguage: 'TypeScript',
-      codeRepository:      'https://github.com/adibwafi/ai-baby-meal-planner',
-      url:                 'https://ai-baby-meal-planner-beta.vercel.app/',
-    },
-    {
-      '@type':             'CreativeWork',
-      name:                'Serasa Kreatif Digital Platform',
-      description:         'Digital storefront and operations platform for a Bintaro-based creative agency specialising in social media management, video production, and targeted advertising.',
-      programmingLanguage: 'JavaScript',
-      url:                 'https://serasakreatif.id/',
+      '@type': 'Person',
+      '@id': 'https://www.adibwafi.com/#person',
+      name: 'Muhamad Adibwafi Menako',
+      alternateName: ['Adibwafi', 'Adibwafi Menako'],
+      jobTitle: 'Full Stack Software Engineer',
+      url: 'https://www.adibwafi.com',
+      image: 'https://www.adibwafi.com/portrait-adib.webp',
+      email: 'hello@adibwafi.com',
+      sameAs: [
+        'https://github.com/adibwafi',
+        'https://linkedin.com/in/adibwafi',
+        'https://www.youtube.com/@Setipiskumis',
+      ],
+      address: {
+        '@type': 'PostalAddress',
+        addressLocality: 'Depok',
+        addressRegion: 'West Java',
+        addressCountry: 'ID',
+      },
+      worksFor: {
+        '@type': 'Organization',
+        name: 'Fortu Digital',
+      },
+      alumniOf: [
+        {
+          '@type': 'EducationalOrganization',
+          name: 'Hacktiv8 Indonesia',
+        },
+        {
+          '@type': 'EducationalOrganization',
+          name: 'Universitas Padjadjaran',
+        },
+      ],
+      knowsAbout: [
+        'TypeScript', 'JavaScript', 'Python', 'PHP',
+        'React', 'Next.js', 'Vue.js', 'Node.js', 'FastAPI',
+        'Laravel', 'PostgreSQL', 'Docker', 'Google Cloud Platform (GCP)',
+        'Supabase', 'Tailwind CSS', 'Distributed Systems', 'Software Architecture',
+        'Web Performance Optimization',
+      ],
+      description:
+        'Full Stack Software Engineer building scalable backend systems, high-performance web applications, and resilient cloud architectures.',
     },
   ],
 };
@@ -195,8 +210,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <head>
         <link rel="icon"           href="/favicon.ico" sizes="any" />
         <meta name="viewport"      content="width=device-width, initial-scale=1" />
-        <meta name="theme-color"   content="#F7F7F7" />
-        {/* PRIORITY 6 — rel="me" identity verification */}
+        <meta name="theme-color"   content="#F8FAFC" />
+        {/* Preconnect & DNS prefetch for performance */}
+        <link rel="preconnect" href="https://www.googletagmanager.com" crossOrigin="anonymous" />
+        <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
+        <link rel="preconnect" href="https://i.ytimg.com" crossOrigin="anonymous" />
+        <link rel="dns-prefetch" href="https://i.ytimg.com" />
+        {/* Identity verification */}
         <link rel="me" href="https://linkedin.com/in/adibwafi" />
         <link rel="me" href="https://github.com/adibwafi" />
         <link rel="me" href="https://www.youtube.com/@Setipiskumis" />
@@ -253,9 +273,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Analytics />
         <SpeedInsights />
 
-        {/* Google Tag Manager */}
+        {/* Google Tag Manager — lazyOnload avoids blocking initial mobile paint */}
         {gtmId && (
-          <Script id="google-tag-manager" strategy="afterInteractive">
+          <Script id="google-tag-manager" strategy="lazyOnload">
             {`
               (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
               new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
@@ -266,14 +286,14 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           </Script>
         )}
 
-        {/* Google Analytics */}
+        {/* Google Analytics — lazyOnload executes after critical resources */}
         {gaId && (
           <>
             <Script
               src={`https://www.googletagmanager.com/gtag/js?id=${gaId}`}
-              strategy="afterInteractive"
+              strategy="lazyOnload"
             />
-            <Script id="google-analytics" strategy="afterInteractive">
+            <Script id="google-analytics" strategy="lazyOnload">
               {`
                 window.dataLayer = window.dataLayer || [];
                 function gtag(){dataLayer.push(arguments);}
