@@ -33,8 +33,9 @@ export function ProjectCard({
           >
             <ShimmerImage
               src={imageSrc}
-              alt={`Mockup image of project ${title}`}
+              alt={`${title} — Software engineering project by Muhamad Adibwafi Menako`}
               fill
+              priority={index === 1}
               className="object-cover object-center transition-transform duration-700 group-hover:scale-[1.03]"
               style={{ filter: 'saturate(0.9) contrast(1.02)' }}
               sizes="(max-width: 1024px) 100vw, 50vw"

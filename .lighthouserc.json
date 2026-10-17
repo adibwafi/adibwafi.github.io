@@ -4,7 +4,8 @@
       "url": [
         "http://localhost:3000",
         "http://localhost:3000/experience",
-        "http://localhost:3000/work"
+        "http://localhost:3000/work",
+        "http://localhost:3000/videography"
       ],
       "numberOfRuns": 1,
       "settings": {

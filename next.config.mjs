@@ -6,9 +6,12 @@ const nextConfig = {
   // Vercel deployment is unaffected by this setting
   output: 'standalone',
 
-  // YouTube thumbnail host for the /videography page (next/image requires
-  // an explicit allowlist for any remote image domain).
+  // High-performance image optimization (AVIF + WebP next-gen formats)
   images: {
+    formats: ['image/avif', 'image/webp'],
+    minimumCacheTTL: 31536000,
+    deviceSizes: [640, 750, 828, 1080, 1200, 1920],
+    imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
     remotePatterns: [
       {
         protocol: 'https',
@@ -16,6 +19,14 @@ const nextConfig = {
       },
     ],
   },
+
+  // Production compiler optimizations (tree-shaking and console stripping)
+  compiler: {
+    removeConsole: process.env.NODE_ENV === 'production' ? { exclude: ['error', 'warn'] } : false,
+  },
+
+  // Enable gzip/brotli compression
+  compress: true,
 
   // Redirect erroneous or crawled junk paths to canonical locations
   async redirects() {
@@ -33,7 +44,7 @@ const nextConfig = {
     ];
   },
 
-  // Security headers for production grade A+ security score on Vercel
+  // Security & HTTP caching headers for production performance
   async headers() {
     return [
       {
@@ -66,11 +77,33 @@ const nextConfig = {
         ],
       },
       {
+        source: '/fonts/:path*',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=31536000, immutable',
+          },
+        ],
+      },
+      {
+        source: '/:asset(portrait-adib\\.webp|favicon.*|apple-touch-icon.*|og-image\\.png|brand/.*|work/.*|pitchDeck/.*)',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=86400, stale-while-revalidate=604800',
+          },
+        ],
+      },
+      {
         source: '/_next/static/:path*',
         headers: [
           {
             key: 'X-Robots-Tag',
             value: 'noindex',
+          },
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=31536000, immutable',
           },
         ],
       },
