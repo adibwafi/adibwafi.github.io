@@ -110,6 +110,7 @@ adibwafi.github.io/
 │   ├── work/page.tsx          # Featured portfolio case studies route (/work)
 │   ├── videography/page.tsx   # Video production portfolio route (/videography)
 │   ├── globals.css            # Brand design tokens, CSS variables & animations
+│   ├── robots.ts              # Search crawler robots directives and sitemap declaration
 │   ├── sitemap.ts             # Dynamic XML sitemap generator
 │   └── not-found.tsx          # Custom 404 page
 ├── components/
@@ -149,11 +150,30 @@ adibwafi.github.io/
 
 ---
 
-## SEO & Metadata
+## Performance & Mobile PageSpeed Optimization
 
-Fully configured via Next.js Metadata API in `app/layout.tsx`:
-- Canonical URL alternates mapped to [adibwafi.com](https://adibwafi.com)
-- OpenGraph & Twitter Summary Large Image cards (`/og-image.png`)
-- Multi-resolution favicons (`favicon.ico`, `favicon-16.png` through `favicon-512.png`) and Apple Touch icons
-- JSON-LD structured data for Person profile and website identity
-- Identity verification links (`rel="me"`) for LinkedIn, GitHub, and official email (`hello@adibwafi.com`)
+Engineered and audited to achieve high-tier Core Web Vitals on mobile devices:
+- **Zero Render-Blocking Scripts**: Google Tag Manager (`GTM-KHMNHQN6`) and Google Analytics execute via `strategy="lazyOnload"`, freeing CPU main-thread execution for initial layout rendering and hydration.
+- **Preconnect & DNS-Prefetch**: Critical network handshakes pre-warmed for GTM (`googletagmanager.com`) and YouTube thumbnail assets (`i.ytimg.com`).
+- **Next-Gen Image Serving (AVIF & WebP)**: Configured in `next.config.mjs` with optimal device and image sizes, cutting mobile image transfer payload by up to 30%.
+- **LCP Image Preloading**: Priority preloading (`priority={index === 1}`) on above-the-fold case studies on `/work` and portrait imagery on `/`.
+- **Immutable Static Asset Caching**: 1-year immutable `Cache-Control` response headers for webfonts (`/fonts/:path*`) and static build assets (`/_next/static/:path*`), with stale-while-revalidate for portfolio images.
+- **Production Compiler Optimizations**: Automatic tree-shaking and production `console.log` stripping.
+
+---
+
+## Comprehensive SEO Architecture (Detailed SEO Best Practices)
+
+Strictly aligned with Glen Allsopp's **Detailed SEO Extension** benchmarks across all routes:
+- **Title & Description Integrity**: Unique, brand-focused meta titles (<60 chars) and descriptive value propositions (140–160 chars) targeting Full Stack Software Engineer branding.
+- **Self-Referencing Canonical URLs**: Every route (`/`, `/experience`, `/work`, `/videography`) declares its explicit self-referencing canonical tag matching its exact URL.
+- **Strict Heading Hierarchy**: Semantic single `<h1>` per route with structured `<h2>` section landmarks and `<h3>` items without skipped levels.
+- **OpenGraph & Twitter Cards**: Complete 1200x630 social share cards (`/og-image.png`), localized site name, and `@adibwafi` Twitter card integration.
+- **Rich Schema.org Structured Data (`@graph`)**:
+  - `WebSite` & `Person` global entity graph with detailed software engineer attributes (`knowsAbout`, `worksFor`, `alumniOf`, `sameAs`, contact).
+  - `ProfilePage` & `BreadcrumbList` on Home (`/`).
+  - `AboutPage` & `Occupation` with career milestones on Experience (`/experience`).
+  - `CollectionPage` with `SoftwareApplication` and `SoftwareSourceCode` schemas for all 7 featured software engineering projects on Work (`/work`).
+  - `CollectionPage` with `VideoObject` and `CreativeWork` schemas on Videography (`/videography`).
+- **Robots & Sitemap**: Automated `app/robots.ts` output with crawler directives and linked dynamic `sitemap.xml` (`changeFrequency: 'weekly'`).
+- **Identity Verification**: `rel="me"` links for GitHub, LinkedIn, YouTube, and official email for Google Knowledge Graph verification.

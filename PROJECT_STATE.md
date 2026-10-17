@@ -69,6 +69,7 @@ adibwafi.github.io/
 │   ├── loading.tsx              # Route loading boundary with animated BrandLoader
 │   ├── not-found.tsx            # Custom 404 page implementation
 │   ├── page.tsx                 # Home route controller (renders <HomePage />)
+│   ├── robots.ts                # Search crawler robots directives and sitemap declaration
 │   └── sitemap.ts               # Dynamic XML sitemap generator
 ├── components/                  # Modular React UI components (Client components marked 'use client')
 │   ├── AmbientBackground.tsx    # Decorative radial gradient blur blobs
@@ -204,6 +205,8 @@ adibwafi.github.io/
 4. **No Dynamic API Routes / Backend Endpoints**: Site is currently purely static/client-rendered with static data. Form submissions relying on email copy fallback to `mailto:` protocols.
 5. **Sentry v10 Modernization & Global Error Boundary [RESOLVED]**: Added `app/global-error.tsx` with Sentry exception capture for root App Router crashes, migrated `sentry.client.config.ts` to `instrumentation-client.ts` with `onRouterTransitionStart` export per Next.js 15 / Turbopack specification.
 6. **HTML/Body Hydration Mismatch [RESOLVED]**: Added `suppressHydrationWarning` to `<html>` and `<body>` in `app/layout.tsx` along with an inline pre-paint theme script to avoid client attribute mismatch errors and flash of unstyled theme (FOUC).
+7. **Mobile PageSpeed & Core Web Vitals Optimization [RESOLVED]**: Resolved third-party main-thread contention by changing Google Tag Manager and Google Analytics strategy from `afterInteractive` to `lazyOnload`, pre-warming connections via `dns-prefetch` and `preconnect` for `googletagmanager.com` and `i.ytimg.com`. Configured AVIF/WebP image formats and responsive sizes in `next.config.mjs`, enabled production compiler `removeConsole`, added 1-year immutable `Cache-Control` headers for webfonts and static assets, and added priority preloading to above-the-fold case study media.
+8. **Comprehensive SEO Architecture & Branding Alignment [RESOLVED]**: Implemented complete Glen Allsopp Detailed SEO extension best practices across all routes: generated `app/robots.ts` with sitemap directives, updated dynamic `sitemap.xml` with weekly cadence, declared explicit self-referencing canonical URLs per route, enforced strict H1 -> H2 -> H3 heading hierarchies without skipped levels, and injected comprehensive Schema.org JSON-LD graphs (`WebSite`, `Person`, `ProfilePage`, `AboutPage`, `Occupation`, and `SoftwareApplication`/`SoftwareSourceCode` for all 7 engineering projects).
 
 ---
 
