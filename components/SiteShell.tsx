@@ -1,12 +1,30 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
+import { usePathname, useRouter } from 'next/navigation';
 import { AnimatePresence, motion } from 'framer-motion';
 import { SiteContext } from '@/lib/site-context';
 import { translations } from '@/lib/translations';
 import { Nav } from '@/components/Nav';
 import { trackEvent } from '@/lib/analytics';
 import { SITE_EMAIL } from '@/lib/data';
+
+/** Current locale is derived from the URL: /id* is Indonesian, everything
+ *  else is English. This keeps server render, crawlers, and the client in
+ *  agreement (no localStorage flip that only applies after hydration). */
+function localeFromPath(pathname: string | null): 'en' | 'id' {
+  return pathname === '/id' || pathname?.startsWith('/id/') ? 'id' : 'en';
+}
+
+/** Map the current path to its counterpart in the other locale. */
+function pathForLocale(pathname: string | null, target: 'en' | 'id'): string {
+  const current = pathname || '/';
+  const bare = current === '/id' || current.startsWith('/id/')
+    ? current.slice(3) || '/'
+    : current;
+  if (target === 'en') return bare;
+  return bare === '/' ? '/id' : `/id${bare}`;
+}
 
 /* ─── Client shell: provides shared context, Nav, ambient bg, toast ─────── */
 // This is rendered by layout.tsx around all page content. It manages:
@@ -16,11 +34,14 @@ import { SITE_EMAIL } from '@/lib/data';
 // Both are exposed via SiteContext so any child page can consume them.
 
 export default function SiteShell({ children }: { children: React.ReactNode }) {
-  const [theme, setTheme]  = useState<'light' | 'dark'>('light');
-  const [lang, setLang]    = useState<'en' | 'id'>('en');
-  const [toast, setToast]  = useState<string | null>(null);
+  const pathname = usePathname();
+  const router   = useRouter();
+  const lang     = localeFromPath(pathname);
 
-  /* ── Restore theme and language from localStorage on first paint ───────── */
+  const [theme, setTheme] = useState<'light' | 'dark'>('light');
+  const [toast, setToast] = useState<string | null>(null);
+
+  /* ── Restore theme from localStorage on first paint ────────────────────── */
   useEffect(() => {
     const saved       = localStorage.getItem('theme') as 'light' | 'dark' | null;
     const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
@@ -33,12 +54,12 @@ export default function SiteShell({ children }: { children: React.ReactNode }) {
     } else {
       document.documentElement.classList.remove('dark');
     }
-
-    const savedLang  = localStorage.getItem('lang') as 'en' | 'id' | null;
-    const activeLang = savedLang ?? 'en';
-    setLang(activeLang);
-    document.documentElement.setAttribute('lang', activeLang);
   }, []);
+
+  /* ── Keep the <html lang> attribute in sync with the active route ──────── */
+  useEffect(() => {
+    document.documentElement.setAttribute('lang', lang);
+  }, [lang]);
 
   /* ── Toggle between light / dark ─────────────────────────────────────── */
   const toggleTheme = () => {
@@ -50,12 +71,11 @@ export default function SiteShell({ children }: { children: React.ReactNode }) {
     trackEvent('click', 'Theme Toggle', next);
   };
 
-  /* ── Change language ─────────────────────────────────────────────────── */
+  /* ── Change language by navigating to the localized URL ────────────────── */
   const changeLang = (nextLang: 'en' | 'id') => {
-    setLang(nextLang);
-    localStorage.setItem('lang', nextLang);
-    document.documentElement.setAttribute('lang', nextLang);
+    if (nextLang === lang) return;
     trackEvent('click', 'Language Switch', nextLang);
+    router.push(pathForLocale(pathname, nextLang));
   };
 
   /* ── Copy email to clipboard + show toast ────────────────────────────── */

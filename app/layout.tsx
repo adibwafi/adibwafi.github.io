@@ -235,10 +235,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 } else {
                   document.documentElement.classList.remove('dark');
                 }
-                var savedLang = localStorage.getItem('lang');
-                if (savedLang) {
-                  document.documentElement.setAttribute('lang', savedLang);
-                }
+                // Language is derived from the URL (/id = Indonesian), handled
+                // by SiteShell — not from localStorage.
               } catch (e) {}
             `,
           }}
