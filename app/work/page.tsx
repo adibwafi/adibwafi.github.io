@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { localeAlternates } from '@/lib/i18n';
 import WorkPage from '@/components/WorkPage';
 
 /* ─── Work route — /work ─────────────────────────────────────────────────── */
@@ -7,9 +8,7 @@ export const metadata: Metadata = {
   title: 'Software Engineering Work & Projects — Menako Studio',
   description:
     'Production-grade software engineering projects, system architectures, and developer tools built by Muhamad Adibwafi Menako under the Menako Studio imprint.',
-  alternates: {
-    canonical: 'https://www.adibwafi.com/work',
-  },
+  alternates: localeAlternates('/work', 'en'),
   keywords: [
     'Menako Studio',
     'Muhamad Adibwafi Menako Projects',

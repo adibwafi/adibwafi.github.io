@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { localeAlternates } from '@/lib/i18n';
 import ExperiencePage from '@/components/ExperiencePage';
 
 /* ─── Experience route — /experience ─────────────────────────────────────── */
@@ -7,9 +8,7 @@ export const metadata: Metadata = {
   title: 'Experience & Tech Stack — Full Stack Engineer',
   description:
     'Career timeline and full technical stack of Muhamad Adibwafi Menako. Proven software engineering experience in TypeScript, React, Next.js, Vue 3, FastAPI, PostgreSQL, and GCP.',
-  alternates: {
-    canonical: 'https://www.adibwafi.com/experience',
-  },
+  alternates: localeAlternates('/experience', 'en'),
   keywords: [
     'Muhamad Adibwafi Menako Experience',
     'Full Stack Engineer Career',

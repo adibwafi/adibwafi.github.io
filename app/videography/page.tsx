@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { localeAlternates } from '@/lib/i18n';
 import VideographyPage from '@/components/VideographyPage';
 
 /* ─── Videography route — /videography ───────────────────────────────────── */
@@ -9,9 +10,7 @@ export const metadata: Metadata = {
   title: 'Commercial Videography & Visual Storytelling — Menako Films',
   description:
     'Commercial videography and visual storytelling practice of Muhamad Adibwafi Menako (Menako Films). Commercials for Bank Mandiri, Garuda Indonesia, and Shopee. Official YouTube: @Setipiskumis.',
-  alternates: {
-    canonical: 'https://www.adibwafi.com/videography',
-  },
+  alternates: localeAlternates('/videography', 'en'),
   keywords: [
     'Menako Films',
     'Muhamad Adibwafi Menako Videography',
