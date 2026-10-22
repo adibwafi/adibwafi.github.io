@@ -251,7 +251,9 @@ adibwafi.github.io/
 * **Client Directives & Hooks**:
   * Explicitly place `'use client';` at the top of any file consuming React hooks (`useState`, `useEffect`, `useContext`, `usePathname`), Framer Motion, or DOM events.
 * **Analytics Event Instrumentation**:
-  * Every interactive CTA button, external link, or tab switcher must invoke `trackEvent('click', 'Category', 'Label')` from `@/lib/analytics`.
+  * Behavioural / granular interactions (external links, tab switchers, section views) use `trackEvent('click' | 'view', 'Category', 'Label')` from `@/lib/analytics`. These share coarse event names and must NOT be marked as GA4 Key events.
+  * Conversions (anything worth counting as a goal — email contact, CV / pitch-deck downloads) use `trackConversion('<distinct_event_name>', { ...params })`. GA4 matches Key events by event NAME, so each conversion needs its own name. Current conversion events: `contact_email`, `cv_download`, `pitchdeck_download`. Mark these as Key events in GA4 → Admin → Events.
+  * Analytics is GA4-only (gtag). There is no active GTM container; `AnalyticsRouteTracker` + the GA config call are the single source of page views (config sends the first view, the tracker sends subsequent SPA route changes). Disable GA4 Enhanced Measurement's "page changes based on browser history events" to avoid double-counting SPA navigations.
 
 ### Step-by-Step Workflow for New Features / Edits
 1. **Verify Brand & Token Compliance**: Check `tokens.json` and `AGENTS.md` before applying new styles.
