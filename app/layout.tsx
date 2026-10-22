@@ -23,6 +23,8 @@ const serif = localFont({
   ],
   variable: '--font-serif',
   display: 'swap',
+  // Not the LCP font — don't let it compete with Manrope for preload bandwidth.
+  preload: false,
 });
 
 const sans = localFont({
@@ -31,6 +33,8 @@ const sans = localFont({
   style: 'normal',
   variable: '--font-sans',
   display: 'swap',
+  // Body + hero H1 (the mobile LCP element) — the only font worth preloading.
+  preload: true,
 });
 
 const mono = localFont({
@@ -39,6 +43,7 @@ const mono = localFont({
   style: 'normal',
   variable: '--font-mono',
   display: 'swap',
+  preload: false,
 });
 
 /* ─── Site-wide metadata ─────────────────────────────────────────────────── */

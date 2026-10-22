@@ -51,17 +51,15 @@ export default function HomePage() {
                 </span>
               </motion.div>
 
-              {/* H1 */}
-              <motion.h1
-                initial={{ opacity: 0, y: 18 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.75, ease, delay: 0.2 }}
-                className="text-display font-extrabold text-ink leading-[1.03] tracking-tight"
-              >
+              {/* H1 — the LCP element. Rendered statically (no entrance
+                  animation) so it paints at first contentful paint instead of
+                  waiting for hydration + framer-motion, which pushed mobile LCP
+                  to ~4.9s. */}
+              <h1 className="text-display font-extrabold text-ink leading-[1.03] tracking-tight">
                 Muhamad{' '}
                 <span className="text-ink-faint">Adibwafi</span>{' '}
                 Menako.
-              </motion.h1>
+              </h1>
 
               {/* PRIORITY 2 — 6-Second recruiter pitch */}
               <motion.div
@@ -173,7 +171,6 @@ export default function HomePage() {
                     src="/portrait-adib.webp"
                     alt="Portrait of Muhamad Adibwafi Menako, Full Stack Software Engineer"
                     fill
-                    priority
                     className="object-cover object-top"
                     style={{ filter: 'saturate(0.95) contrast(1.02)' }}
                     sizes="280px"
