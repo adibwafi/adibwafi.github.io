@@ -8,7 +8,7 @@ import { FadeSection, FadeItem } from '@/components/FadeSection';
 import { ShimmerImage } from '@/components/ShimmerImage';
 import { useSite } from '@/lib/site-context';
 import { translations } from '@/lib/translations';
-import { trackEvent } from '@/lib/analytics';
+import { trackEvent, trackConversion } from '@/lib/analytics';
 import { ease, pageAnim } from '@/lib/animations';
 import { metrics, projectPreviews, SITE_EMAIL, SITE_MAILTO } from '@/lib/data';
 
@@ -146,7 +146,7 @@ export default function HomePage() {
                   href="/cv/Muhamad_Adibwafi_Menako_Resume.pdf"
                   download="Muhamad_Adibwafi_Menako_Resume.pdf"
                   className="btn-ghost"
-                  onClick={() => trackEvent('click', 'CTA', 'Download CV Hero')}
+                  onClick={() => trackConversion('cv_download', { source: 'hero' })}
                 >
                   {translations[lang].hero.cta.cv}
                 </a>
@@ -319,7 +319,7 @@ export default function HomePage() {
                   href="/cv/Muhamad_Adibwafi_Menako_Resume.pdf"
                   download="Muhamad_Adibwafi_Menako_Resume.pdf"
                   className="btn-ghost"
-                  onClick={() => trackEvent('click', 'CTA', 'Download CV Footer Banner')}
+                  onClick={() => trackConversion('cv_download', { source: 'cta_banner' })}
                 >
                   {translations[lang].ctaSection.cv}
                 </a>

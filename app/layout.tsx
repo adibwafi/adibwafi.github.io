@@ -199,7 +199,6 @@ const jsonLd = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   const gaId = process.env.NEXT_PUBLIC_GA_ID;
-  const gtmId = process.env.NEXT_PUBLIC_GTM_ID || 'GTM-KHMNHQN6';
 
   return (
     <html
@@ -245,18 +244,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         />
       </head>
       <body className="antialiased" suppressHydrationWarning>
-        {/* Google Tag Manager (noscript) */}
-        {gtmId && (
-          <noscript>
-            <iframe
-              src={`https://www.googletagmanager.com/ns.html?id=${gtmId}`}
-              height="0"
-              width="0"
-              style={{ display: 'none', visibility: 'hidden' }}
-            />
-          </noscript>
-        )}
-
         {/* Structured data */}
         <script
           type="application/ld+json"
@@ -273,20 +260,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Analytics />
         <SpeedInsights />
 
-        {/* Google Tag Manager — lazyOnload avoids blocking initial mobile paint */}
-        {gtmId && (
-          <Script id="google-tag-manager" strategy="lazyOnload">
-            {`
-              (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-              new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-              j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-              'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-              })(window,document,'script','dataLayer','${gtmId}');
-            `}
-          </Script>
-        )}
-
-        {/* Google Analytics — lazyOnload executes after critical resources */}
+        {/* Google Analytics 4 — lazyOnload executes after critical resources.
+            The config call sends the initial page view (reliable even though
+            gtag loads lazily). AnalyticsRouteTracker then fires one page_view
+            per subsequent SPA route change only, so views are never
+            double-counted. NOTE: disable GA4 Enhanced Measurement's "Page
+            changes based on browser history events" so it doesn't also fire on
+            SPA navigation. */}
         {gaId && (
           <>
             <Script
@@ -298,7 +278,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 window.dataLayer = window.dataLayer || [];
                 function gtag(){dataLayer.push(arguments);}
                 gtag('js', new Date());
-                gtag('config', '${gaId}', { page_path: window.location.pathname });
+                gtag('config', '${gaId}');
               `}
             </Script>
           </>
