@@ -21,7 +21,7 @@ export function ProjectCard({
   const { lang } = useSite();
   const { slug, title, tags, link, webLink, imageSrc } = project;
   const isEven = index % 2 === 0;
-  const detailHref = `/work/${slug}`;
+  const detailHref = `${lang === 'id' ? '/id' : ''}/work/${slug}`;
 
   return (
     <div className="bento-card bento-card-hover overflow-hidden group">

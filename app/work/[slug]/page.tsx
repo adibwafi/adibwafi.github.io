@@ -28,6 +28,7 @@ export async function generateMetadata({
   if (!project) return {};
 
   const url = `${SITE}/work/${project.slug}`;
+  const idUrl = `${SITE}/id/work/${project.slug}`;
   const description = metaDescription(project.en.description);
   const image = `${SITE}${project.imageSrc}`;
 
@@ -35,7 +36,10 @@ export async function generateMetadata({
     title: `${project.title} — Case Study`,
     description,
     keywords: [...project.tags, 'Menako Studio', 'Muhamad Adibwafi Menako'],
-    alternates: { canonical: url },
+    alternates: {
+      canonical: url,
+      languages: { 'en-US': url, 'id-ID': idUrl, 'x-default': url },
+    },
     openGraph: {
       title: `${project.title} — Case Study`,
       description,

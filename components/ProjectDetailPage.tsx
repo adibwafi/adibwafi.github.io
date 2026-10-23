@@ -20,6 +20,10 @@ export default function ProjectDetailPage({ project }: { project: Project }) {
   const { lang, handleCopyEmail } = useSite();
   const t = translations[lang].work;
   const { title, tags, link, webLink, imageSrc } = project;
+  // Keep internal links within the active locale (/id on Indonesian pages).
+  const prefix = lang === 'id' ? '/id' : '';
+  const homeHref = prefix || '/';
+  const workHref = `${prefix}/work`;
 
   return (
     <motion.div
@@ -36,13 +40,13 @@ export default function ProjectDetailPage({ project }: { project: Project }) {
             <nav aria-label="Breadcrumb" className="mb-8">
               <ol className="flex flex-wrap items-center gap-1.5 text-xs font-mono text-ink-faint">
                 <li>
-                  <Link href="/" className="hover:text-ink transition-colors">
+                  <Link href={homeHref} className="hover:text-ink transition-colors">
                     {translations[lang].nav.home}
                   </Link>
                 </li>
                 <ChevronRight size={12} strokeWidth={2} aria-hidden="true" />
                 <li>
-                  <Link href="/work" className="hover:text-ink transition-colors">
+                  <Link href={workHref} className="hover:text-ink transition-colors">
                     {translations[lang].nav.work}
                   </Link>
                 </li>
@@ -139,7 +143,7 @@ export default function ProjectDetailPage({ project }: { project: Project }) {
           <FadeItem delay={0.2}>
             <div className="mt-12 pt-8 border-t border-rule">
               <Link
-                href="/work"
+                href={workHref}
                 className="inline-flex items-center gap-1.5 text-sm font-medium text-ink-soft hover:text-ink transition-colors"
                 onClick={() => trackEvent('click', 'Navigation', `Back to Work from ${title}`)}
               >
