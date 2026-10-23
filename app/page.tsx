@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { localeAlternates } from '@/lib/i18n';
 import HomePage from '@/components/HomePage';
 
 /* ─── Home route — / ─────────────────────────────────────────────────────── */
@@ -7,9 +8,7 @@ export const metadata: Metadata = {
   title: 'Muhamad Adibwafi Menako — Full Stack Software Engineer',
   description:
     'Full Stack Software Engineer building scalable backend systems, high-performance web applications, and resilient cloud architectures. Based in Indonesia.',
-  alternates: {
-    canonical: 'https://www.adibwafi.com',
-  },
+  alternates: localeAlternates('', 'en'),
   openGraph: {
     title: 'Muhamad Adibwafi Menako — Full Stack Software Engineer',
     description:

@@ -26,8 +26,17 @@ export function Nav() {
   const pathname  = usePathname();
   const { theme, toggleTheme, handleCopyEmail, lang, changeLang } = useSite();
 
+  // Locale-aware links: English at root, Indonesian under /id.
+  const prefix = lang === 'id' ? '/id' : '';
+  const barePath =
+    pathname === '/id' || pathname?.startsWith('/id/')
+      ? pathname.slice(3) || '/'
+      : pathname || '/';
+  const localeHref = (href: string) =>
+    href === '/' ? prefix || '/' : `${prefix}${href}`;
+
   const isActive = (href: string) =>
-    href === '/' ? pathname === '/' : pathname?.startsWith(href) ?? false;
+    href === '/' ? barePath === '/' : barePath.startsWith(href);
 
   const getNavLabel = (label: string, activeLang: 'en' | 'id') => {
     const t = translations[activeLang].nav;
@@ -49,7 +58,7 @@ export function Nav() {
 
         {/* Logo — Menako Studio Twin Frame Icon + Adibwafi Branding */}
         <Link
-          href="/"
+          href={localeHref('/')}
           className="flex items-center gap-2.5 group transition-opacity hover:opacity-85"
           aria-label="Adibwafi — Muhamad Adibwafi Menako"
         >
@@ -69,7 +78,7 @@ export function Nav() {
             <Link
               key={item.href}
               id={`nav-${item.label.toLowerCase()}`}
-              href={item.href}
+              href={localeHref(item.href)}
               aria-current={isActive(item.href) ? 'page' : undefined}
               onClick={() => trackEvent('click', 'Navigation', item.label)}
               className={`relative px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 ${
@@ -144,7 +153,7 @@ export function Nav() {
         {navItems.map((item) => (
           <Link
             key={item.href}
-            href={item.href}
+            href={localeHref(item.href)}
             aria-current={isActive(item.href) ? 'page' : undefined}
             onClick={() => trackEvent('click', 'Mobile Navigation', item.label)}
             className={`flex-1 py-2.5 text-[0.7rem] font-medium tracking-wide transition-colors text-center ${
