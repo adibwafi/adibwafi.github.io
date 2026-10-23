@@ -1,11 +1,12 @@
 import { MetadataRoute } from 'next';
 import { SITE } from '@/lib/i18n';
+import { projects } from '@/lib/data';
 
 // Stable last-modified date. Bump when content meaningfully changes — avoid
 // `new Date()`, which falsely signals every page changed on every deploy.
 const lastModified = new Date('2026-10-22');
 
-// Each route exists in English (root) and Indonesian (/id) with hreflang
+// Core routes exist in English (root) and Indonesian (/id) with hreflang
 // alternates so Google serves the right language per searcher.
 const routes: { path: string; priority: number }[] = [
   { path: '',             priority: 1.0 },
@@ -15,7 +16,7 @@ const routes: { path: string; priority: number }[] = [
 ];
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  return routes.flatMap(({ path, priority }) => {
+  const localized = routes.flatMap(({ path, priority }) => {
     const languages = {
       en: `${SITE}${path}`,
       id: `${SITE}/id${path}`,
@@ -37,4 +38,15 @@ export default function sitemap(): MetadataRoute.Sitemap {
       },
     ];
   });
+
+  // Per-project case studies (English). Indonesian /id/work/[slug] will join
+  // once those pages exist.
+  const projectRoutes: MetadataRoute.Sitemap = projects.map((project) => ({
+    url:             `${SITE}/work/${project.slug}`,
+    lastModified,
+    changeFrequency: 'monthly' as const,
+    priority:        0.6,
+  }));
+
+  return [...localized, ...projectRoutes];
 }

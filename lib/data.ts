@@ -273,6 +273,7 @@ export const techStack: TechStackGroup[] = [
 ];
 
 export interface Project {
+  slug: string;
   title: string;
   tags: string[];
   link: string;
@@ -286,8 +287,13 @@ export interface Project {
   };
 }
 
+/** Lookup a single project by its URL slug (for /work/[slug] routes). */
+export const getProjectBySlug = (slug: string): Project | undefined =>
+  projects.find((p) => p.slug === slug);
+
 export const projects: Project[] = [
   {
+    slug: 'kinghouse-management',
     title: 'Kinghouse Management — Short-Stay Property & Hospitality ERP Platform',
     tags: ['Next.js 16', 'TypeScript', 'Supabase', 'Tailwind CSS v4', 'Hospitality ERP', 'Dynamic Pricing'],
     link: 'https://github.com/menako-studio/kinghouse-management',
@@ -303,6 +309,7 @@ export const projects: Project[] = [
     },
   },
   {
+    slug: 'lotus-semarang',
     title: 'Lotus Semarang — Accessible Modern Wellness & Clinical Therapy Web App',
     tags: ['Next.js 14', 'TypeScript', 'Turborepo', 'Tailwind CSS', 'WhatsApp Wizard', 'Bilingual ID/EN'],
     link: 'https://github.com/menako-studio/lotus-semarang',
@@ -318,6 +325,7 @@ export const projects: Project[] = [
     },
   },
   {
+    slug: 'livecode-logic-trainer',
     title: 'Livecode Logic Trainer',
     tags: ['JavaScript', 'REST API', 'Technical Interview', 'Web App', 'Vercel'],
     link: 'https://github.com/adibwafi/livecode-logic-trainer',
@@ -333,6 +341,7 @@ export const projects: Project[] = [
     },
   },
   {
+    slug: 'enterprise-lms-architecture',
     title: 'Enterprise LMS Architecture Blueprint',
     tags: ['Laravel 8', 'Vue.js 2', 'MySQL', 'Redis', 'Docker', 'REST API'],
     link: 'https://github.com/adibwafi/laravel-vue-lms-blueprint',
@@ -348,6 +357,7 @@ export const projects: Project[] = [
     },
   },
   {
+    slug: 'ai-baby-meal-planner',
     title: 'AI Baby Meal Planner',
     tags: ['Next.js', 'TypeScript', 'PWA', 'Parenting Tech', 'AI'],
     link: 'https://github.com/adibwafi/ai-baby-meal-planner',
@@ -363,6 +373,7 @@ export const projects: Project[] = [
     },
   },
   {
+    slug: 'amana-care',
     title: 'Amana Care — Daycare & Parents\' Working Space Website',
     tags: ['Next.js 15', 'TypeScript', 'Lenis Scroll', 'Supabase', 'Cal.com'],
     link: 'https://github.com/menako-studio/amana-care',
@@ -378,6 +389,7 @@ export const projects: Project[] = [
     },
   },
   {
+    slug: 'serasa-kreatif',
     title: 'Serasa Kreatif Digital Platform',
     tags: ['Next.js', 'Digital Agency', 'Video Production', 'CMS'],
     link: 'https://github.com/menako-studio/serasa-kreatif',

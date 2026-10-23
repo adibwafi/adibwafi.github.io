@@ -8,7 +8,7 @@ import { FadeSection, FadeItem } from '@/components/FadeSection';
 import { ShimmerImage } from '@/components/ShimmerImage';
 import { useSite } from '@/lib/site-context';
 import { translations } from '@/lib/translations';
-import { trackEvent } from '@/lib/analytics';
+import { trackEvent, trackConversion } from '@/lib/analytics';
 import { ease, pageAnim } from '@/lib/animations';
 import { metrics, projectPreviews, SITE_EMAIL, SITE_MAILTO } from '@/lib/data';
 
@@ -51,17 +51,15 @@ export default function HomePage() {
                 </span>
               </motion.div>
 
-              {/* H1 */}
-              <motion.h1
-                initial={{ opacity: 0, y: 18 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.75, ease, delay: 0.2 }}
-                className="text-display font-extrabold text-ink leading-[1.03] tracking-tight"
-              >
+              {/* H1 — the LCP element. Rendered statically (no entrance
+                  animation) so it paints at first contentful paint instead of
+                  waiting for hydration + framer-motion, which pushed mobile LCP
+                  to ~4.9s. */}
+              <h1 className="text-display font-extrabold text-ink leading-[1.03] tracking-tight">
                 Muhamad{' '}
                 <span className="text-ink-faint">Adibwafi</span>{' '}
                 Menako.
-              </motion.h1>
+              </h1>
 
               {/* PRIORITY 2 — 6-Second recruiter pitch */}
               <motion.div
@@ -146,7 +144,7 @@ export default function HomePage() {
                   href="/cv/Muhamad_Adibwafi_Menako_Resume.pdf"
                   download="Muhamad_Adibwafi_Menako_Resume.pdf"
                   className="btn-ghost"
-                  onClick={() => trackEvent('click', 'CTA', 'Download CV Hero')}
+                  onClick={() => trackConversion('cv_download', { source: 'hero' })}
                 >
                   {translations[lang].hero.cta.cv}
                 </a>
@@ -173,7 +171,6 @@ export default function HomePage() {
                     src="/portrait-adib.webp"
                     alt="Portrait of Muhamad Adibwafi Menako, Full Stack Software Engineer"
                     fill
-                    priority
                     className="object-cover object-top"
                     style={{ filter: 'saturate(0.95) contrast(1.02)' }}
                     sizes="280px"
@@ -319,7 +316,7 @@ export default function HomePage() {
                   href="/cv/Muhamad_Adibwafi_Menako_Resume.pdf"
                   download="Muhamad_Adibwafi_Menako_Resume.pdf"
                   className="btn-ghost"
-                  onClick={() => trackEvent('click', 'CTA', 'Download CV Footer Banner')}
+                  onClick={() => trackConversion('cv_download', { source: 'cta_banner' })}
                 >
                   {translations[lang].ctaSection.cv}
                 </a>

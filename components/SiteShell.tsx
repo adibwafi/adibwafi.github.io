@@ -6,7 +6,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { SiteContext } from '@/lib/site-context';
 import { translations } from '@/lib/translations';
 import { Nav } from '@/components/Nav';
-import { trackEvent } from '@/lib/analytics';
+import { trackEvent, trackConversion } from '@/lib/analytics';
 import { SITE_EMAIL } from '@/lib/data';
 
 /** Current locale is derived from the URL: /id* is Indonesian, everything
@@ -83,7 +83,8 @@ export default function SiteShell({ children }: { children: React.ReactNode }) {
     e.preventDefault();
     navigator.clipboard.writeText(SITE_EMAIL);
     setToast(translations[lang].toast.copied);
-    trackEvent('click', 'Copy Email', 'Success');
+    // Named conversion event — mark `contact_email` as a Key event in GA4.
+    trackConversion('contact_email', { method: 'email' });
     setTimeout(() => setToast(null), 2500);
   };
 
