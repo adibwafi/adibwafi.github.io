@@ -1,7 +1,8 @@
 'use client';
 
 import React from 'react';
-import { Github, ExternalLink } from 'lucide-react';
+import Link from 'next/link';
+import { Github, ExternalLink, ArrowRight } from 'lucide-react';
 import { ShimmerImage } from '@/components/ShimmerImage';
 import { useSite } from '@/lib/site-context';
 import { translations } from '@/lib/translations';
@@ -18,8 +19,9 @@ export function ProjectCard({
   index: number;
 }) {
   const { lang } = useSite();
-  const { title, tags, link, webLink, imageSrc } = project;
+  const { slug, title, tags, link, webLink, imageSrc } = project;
   const isEven = index % 2 === 0;
+  const detailHref = `/work/${slug}`;
 
   return (
     <div className="bento-card bento-card-hover overflow-hidden group">
@@ -54,7 +56,13 @@ export function ProjectCard({
             </div>
 
             <h3 className="text-title font-extrabold text-ink tracking-tight leading-tight mb-4">
-              {title}
+              <Link
+                href={detailHref}
+                className="hover:text-accent-ink transition-colors"
+                onClick={() => trackEvent('click', 'Project Case Study', title)}
+              >
+                {title}
+              </Link>
             </h3>
 
             <p className="text-sm text-ink-soft leading-relaxed mb-5">{project[lang].description}</p>
@@ -68,11 +76,19 @@ export function ProjectCard({
 
           {/* Links */}
           <div className="flex flex-wrap gap-3 pt-2">
+            <Link
+              href={detailHref}
+              className="btn-primary text-xs"
+              onClick={() => trackEvent('click', 'Project Case Study', `CTA: ${title}`)}
+            >
+              {translations[lang].work.viewCaseStudy}
+              <ArrowRight size={13} strokeWidth={1.75} />
+            </Link>
             <a
               href={link}
               target="_blank"
               rel="noopener noreferrer"
-              className="btn-primary text-xs"
+              className="btn-ghost text-xs"
               onClick={() => trackEvent('click', 'Project Link', `GitHub: ${title}`)}
             >
               <Github size={13} strokeWidth={1.75} />
