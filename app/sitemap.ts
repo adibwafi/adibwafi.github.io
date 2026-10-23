@@ -39,14 +39,29 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ];
   });
 
-  // Per-project case studies (English). Indonesian /id/work/[slug] will join
-  // once those pages exist.
-  const projectRoutes: MetadataRoute.Sitemap = projects.map((project) => ({
-    url:             `${SITE}/work/${project.slug}`,
-    lastModified,
-    changeFrequency: 'monthly' as const,
-    priority:        0.6,
-  }));
+  // Per-project case studies in both locales, cross-linked with hreflang.
+  const projectRoutes: MetadataRoute.Sitemap = projects.flatMap((project) => {
+    const languages = {
+      en: `${SITE}/work/${project.slug}`,
+      id: `${SITE}/id/work/${project.slug}`,
+    };
+    return [
+      {
+        url:             `${SITE}/work/${project.slug}`,
+        lastModified,
+        changeFrequency: 'monthly' as const,
+        priority:        0.6,
+        alternates:      { languages },
+      },
+      {
+        url:             `${SITE}/id/work/${project.slug}`,
+        lastModified,
+        changeFrequency: 'monthly' as const,
+        priority:        0.5,
+        alternates:      { languages },
+      },
+    ];
+  });
 
   return [...localized, ...projectRoutes];
 }
