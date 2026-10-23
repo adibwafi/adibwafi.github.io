@@ -8,7 +8,7 @@ import { ProjectCard } from '@/components/ProjectCard';
 import { SimpleFooter } from '@/components/SimpleFooter';
 import { useSite } from '@/lib/site-context';
 import { translations } from '@/lib/translations';
-import { trackEvent } from '@/lib/analytics';
+import { trackEvent, trackConversion } from '@/lib/analytics';
 import { pageAnim } from '@/lib/animations';
 import { projects } from '@/lib/data';
 
@@ -61,7 +61,7 @@ export default function WorkPage() {
                   href="/pitchDeck/Menako_Studio_Pitch_Deck_ID.pdf"
                   download="Menako_Studio_Pitch_Deck_ID.pdf"
                   className="btn-primary"
-                  onClick={() => trackEvent('click', 'CTA', 'Download Pricelist ID - Hero')}
+                  onClick={() => trackConversion('pitchdeck_download', { lang: 'id', source: 'hero' })}
                 >
                   <FileDown size={14} strokeWidth={2} />
                   <span>{t.heroPricelistId}</span>
@@ -70,7 +70,7 @@ export default function WorkPage() {
                   href="/pitchDeck/Menako_Studio_Pitch_Deck_EN.pdf"
                   download="Menako_Studio_Pitch_Deck_EN.pdf"
                   className="btn-ghost"
-                  onClick={() => trackEvent('click', 'CTA', 'Download Pricelist EN - Hero')}
+                  onClick={() => trackConversion('pitchdeck_download', { lang: 'en', source: 'hero' })}
                 >
                   <FileDown size={14} strokeWidth={2} />
                   <span>{t.heroPricelistEn}</span>
@@ -205,7 +205,7 @@ export default function WorkPage() {
                     href="/pitchDeck/Menako_Studio_Pitch_Deck_ID.pdf"
                     download="Menako_Studio_Pitch_Deck_ID.pdf"
                     className="btn-primary w-full justify-center"
-                    onClick={() => trackEvent('click', 'CTA', 'Download Pricelist ID - Deck Section')}
+                    onClick={() => trackConversion('pitchdeck_download', { lang: 'id', source: 'deck_section' })}
                   >
                     <FileDown size={15} strokeWidth={2} />
                     <span>{t.cardIdBtn}</span>
@@ -232,7 +232,7 @@ export default function WorkPage() {
                     href="/pitchDeck/Menako_Studio_Pitch_Deck_EN.pdf"
                     download="Menako_Studio_Pitch_Deck_EN.pdf"
                     className="btn-primary w-full justify-center"
-                    onClick={() => trackEvent('click', 'CTA', 'Download Pricelist EN - Deck Section')}
+                    onClick={() => trackConversion('pitchdeck_download', { lang: 'en', source: 'deck_section' })}
                   >
                     <FileDown size={15} strokeWidth={2} />
                     <span>{t.cardEnBtn}</span>
