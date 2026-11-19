@@ -47,6 +47,24 @@ export function getYouTubeThumbnail(url: string): string | null {
 }
 
 /**
+ * Sharpest-first thumbnail candidates for large, full-bleed use (the
+ * /videography film slider). Pair with ShimmerImage `fallbackSrcs`.
+ *  · landscape: maxresdefault (1280×720, missing on some uploads) →
+ *    sddefault (640×480) → hqdefault (480×360)
+ *  · Shorts: sddefault → hqdefault. Both are 4:3 with the 9:16 picture in
+ *    the centre ~42%, which the slider's crop relies on; maxresdefault is
+ *    16:9 with a different crop, so it is skipped.
+ */
+export function getYouTubeThumbnailCandidates(url: string, isShort = false): string[] {
+  const id = getYouTubeId(url);
+  if (!id) return [];
+  const base = `https://i.ytimg.com/vi/${id}`;
+  return isShort
+    ? [`${base}/sddefault.jpg`, `${base}/hqdefault.jpg`]
+    : [`${base}/maxresdefault.jpg`, `${base}/sddefault.jpg`, `${base}/hqdefault.jpg`];
+}
+
+/**
  * Privacy-enhanced (youtube-nocookie.com) embed URL for the lightbox player.
  */
 export function getYouTubeEmbedUrl(url: string, autoplay = true): string | null {

@@ -549,19 +549,221 @@ body {
   .gallery-dot { transition: none; }
 }
 
-/* Video variant of the gallery media frame (used on /videography) */
-.gallery-media[data-portrait='true'] {
-  right: 6%;
-  width: 38%;
-  border-top-right-radius: 1.1rem;
-  border-right: 1px solid var(--rule);
+/* ─── Film variant of the gallery card (/videography) ─────────────────────
+   Each slide reads as a film frame, not a website: the still fills the card
+   on the fixed brand dark, with a viewfinder HUD and an end-card caption.
+   4:5 on phones (no empty band between text and picture), widescreen on
+   desktop. */
+.gallery-card--film {
+  height: auto;
+  aspect-ratio: 4 / 5;
+  background: var(--surface-dark);
+  border-color: transparent;
+  isolation: isolate;
 }
 @media (min-width: 768px) {
-  .gallery-media[data-portrait='true'] { width: 22%; right: 8%; }
+  .gallery-card--film { aspect-ratio: 16 / 9; max-height: 74vh; }
 }
-.gallery-video-thumb { cursor: pointer; background: var(--rule); }
-.gallery-play { transition: transform 0.35s var(--ease-spring); }
-.gallery-video-thumb:hover .gallery-play { transform: scale(1.1); }
+.gallery-card--film[data-active='true']:hover { border-color: var(--accent); }
+
+.film-still {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  transition: opacity 0.6s ease, filter 0.6s ease;
+}
+.gallery-card--film[data-active='false'] .film-still { opacity: 0.45; filter: grayscale(0.35); }
+
+/* Slow push-in on the active still — the "camera is rolling" feel. */
+.gallery-card--film[data-active='true'] .film-kenburns {
+  animation: film-kenburns 9s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+@keyframes film-kenburns {
+  from { transform: scale(1.09); }
+  to   { transform: scale(1); }
+}
+
+/* Bottom-heavy scrim for the caption, light top shade for the HUD. */
+.film-scrim {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(to top, rgba(0, 0, 0, 0.92) 0%, rgba(0, 0, 0, 0.75) 32%, rgba(0, 0, 0, 0.35) 52%, rgba(0, 0, 0, 0) 70%),
+    linear-gradient(to bottom, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0) 22%);
+}
+@media (min-width: 768px) {
+  .film-scrim {
+    background:
+      linear-gradient(to top, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.35) 38%, rgba(0, 0, 0, 0) 65%),
+      linear-gradient(to right, rgba(0, 0, 0, 0.45) 0%, rgba(0, 0, 0, 0) 55%),
+      linear-gradient(to bottom, rgba(0, 0, 0, 0.45) 0%, rgba(0, 0, 0, 0) 18%);
+  }
+}
+
+/* YouTube Shorts thumbnails are 4:3 with the 9:16 picture in the middle
+   ~42% of the width (blurred fill either side). Scaling the image to 238%
+   width (1 / 0.42) makes the 9:16 picture exactly fill its box. */
+.film-short-backdrop { position: absolute; inset: -10%; filter: blur(28px) brightness(0.55); }
+.film-short-frame {
+  display: none;
+  position: absolute;
+  top: 7%;
+  right: 9%;
+  height: 86%;
+  aspect-ratio: 9 / 16;
+  border-radius: 1rem;
+  overflow: hidden;
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.5);
+}
+.film-short-crop,
+.film-short-fill {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 238%;
+  aspect-ratio: 4 / 3;
+  transform: translate(-50%, -50%);
+}
+.film-short-fill { width: 238%; }
+@media (min-width: 768px) {
+  .film-short-frame { display: block; }
+  .film-short-fill { display: none; }
+}
+@media (max-width: 767px) {
+  .film-short-backdrop { display: none; }
+}
+
+/* Viewfinder HUD */
+.film-hud {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 10;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.1rem 1.25rem;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--on-dark);
+  transition: opacity 0.5s ease;
+}
+@media (min-width: 768px) { .film-hud { padding: 1.75rem 2.25rem; } }
+.gallery-card--film[data-active='false'] .film-hud { opacity: 0; }
+
+.film-rec-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 9999px;
+  background: var(--accent);
+  animation: film-rec-blink 1.4s steps(1, end) infinite;
+}
+.gallery-card--film[data-active='false'] .film-rec-dot { animation: none; }
+@keyframes film-rec-blink {
+  0%, 60% { opacity: 1; }
+  61%, 100% { opacity: 0.15; }
+}
+.film-shorts-chip {
+  border-radius: 9999px;
+  background: var(--accent);
+  color: var(--on-accent);
+  padding: 0.2rem 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+}
+
+/* Centre play: the whole still is the click target. */
+.film-play-target {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-bottom: 18%;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+@media (min-width: 768px) { .film-play-target { padding-bottom: 0; } }
+.gallery-card--film[data-active='false'] .film-play-target { pointer-events: none; }
+.film-play {
+  width: 4rem;
+  height: 4rem;
+  border-radius: 9999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--on-dark);
+  background: rgba(255, 255, 255, 0.14);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+  transition: transform 0.35s var(--ease-spring), background-color 0.25s ease, opacity 0.5s ease;
+}
+@media (min-width: 768px) { .film-play { width: 5rem; height: 5rem; } }
+.film-play-target:hover .film-play { transform: scale(1.08); background: rgba(255, 255, 255, 0.24); }
+.gallery-card--film[data-active='false'] .film-play { opacity: 0; }
+.gallery-card--film[data-active='true'] .film-play-target:hover .film-play { transform: scale(1.08); }
+/* Shorts on desktop: centre the play button on the 9:16 frame (right 9%,
+   ~27% of the card width wide → its centre sits ~22.6% from the right). */
+@media (min-width: 768px) {
+  .film-play-target[data-short='true'] { justify-content: flex-end; padding-right: calc(22.6% - 2.5rem); }
+}
+
+/* End-card caption sits over the bottom scrim. */
+.film-caption {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 10;
+  padding: 1.25rem;
+}
+@media (min-width: 768px) {
+  .film-caption { padding: 2.25rem 2.5rem; right: auto; max-width: 60%; }
+}
+
+.film-meta {
+  /* Small mono lines over photography: on-dark softened, but not slate-grey,
+     so they stay readable on bright stills. */
+  color: color-mix(in srgb, var(--on-dark) 82%, transparent);
+  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.55);
+}
+
+.btn-film {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-family: var(--font-sans);
+  font-size: 0.875rem;
+  font-weight: 600;
+  background: var(--on-dark);
+  color: var(--surface-dark);
+  padding: 0.625rem 1.25rem;
+  border-radius: 9999px;
+  border: 1px solid var(--on-dark);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease, transform 0.15s ease;
+}
+.btn-film:hover {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--on-accent);
+  transform: translateY(-1px);
+}
+.btn-film:focus-visible,
+.film-play-target:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
 @media (prefers-reduced-motion: reduce) {
-  .gallery-play { transition: none; }
+  .gallery-card--film[data-active='true'] .film-kenburns,
+  .film-rec-dot { animation: none; }
+  .film-play { transition: none; }
 }

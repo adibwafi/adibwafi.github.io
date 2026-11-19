@@ -151,4 +151,11 @@ export const videographyCategories: VideographyProject['category'][] = [
   'Narrative & Lifestyle',
 ];
 
-export const featuredVideographyProjects = videographyProjects.filter((p) => p.featured);
+/** A project is shown on the site only once its video is uploaded; entries
+ *  with an empty `videoUrl` ("pending upload") stay in the data but are
+ *  hidden instead of rendering as "Coming Soon" placeholders. */
+export const isPublished = (p: VideographyProject) => p.videoUrl.trim() !== '';
+
+export const publishedVideographyProjects = videographyProjects.filter(isPublished);
+
+export const featuredVideographyProjects = publishedVideographyProjects.filter((p) => p.featured);
