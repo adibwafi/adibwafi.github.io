@@ -53,10 +53,15 @@ export const metrics: Metric[] = [
 
 export interface ProjectPreview {
   title: string;
+  /** Slug of the matching /work/[slug] case study, when one exists. */
+  slug?: string;
   en: {
+    /** Short punchy lead shown as the slide headline in the highlights gallery. */
+    lead: string;
     blurb: string;
   };
   id: {
+    lead: string;
     blurb: string;
   };
   tags: string[];
@@ -67,10 +72,13 @@ export interface ProjectPreview {
 export const projectPreviews: ProjectPreview[] = [
   {
     title: 'Kinghouse Management',
+    slug: 'kinghouse-management',
     en: {
+      lead: 'Hospitality ERP. Zero hosting bill.',
       blurb: 'Editorial short-stay property management & 100% free-tier hospitality ERP platform.',
     },
     id: {
+      lead: 'ERP hospitality. Tanpa biaya hosting.',
       blurb: 'Platform manajemen vila & hospitality ERP 100% free-tier berstandar editorial.',
     },
     tags: ['Next.js 16', 'TypeScript', 'Supabase', 'Tailwind v4'],
@@ -79,10 +87,13 @@ export const projectPreviews: ProjectPreview[] = [
   },
   {
     title: 'Lotus Semarang',
+    slug: 'lotus-semarang',
     en: {
+      lead: 'Booking therapy in four taps.',
       blurb: 'Modern wellness clinic web app with Turborepo monorepo & 4-step WhatsApp booking wizard.',
     },
     id: {
+      lead: 'Reservasi terapi dalam empat ketukan.',
       blurb: 'Web app klinik terapi terpadu dengan Turborepo monorepo & wizard reservasi WhatsApp 4 langkah.',
     },
     tags: ['Next.js 14', 'Turborepo', 'TypeScript', 'Tailwind CSS'],
@@ -91,10 +102,13 @@ export const projectPreviews: ProjectPreview[] = [
   },
   {
     title: 'Amana Care Website',
+    slug: 'amana-care',
     en: {
+      lead: 'Silky 60fps. Built for parents.',
       blurb: 'High-end profile & booking platform for Bintaro daycare & parents working space.',
     },
     id: {
+      lead: 'Mulus 60fps. Dibuat untuk orang tua.',
       blurb: 'Platform profil & pendaftaran eksklusif untuk daycare & parents working space di Bintaro.',
     },
     tags: ['Next.js 15', 'TypeScript', 'Supabase', 'Lenis'],
@@ -103,10 +117,13 @@ export const projectPreviews: ProjectPreview[] = [
   },
   {
     title: 'Serasa Kreatif Platform',
+    slug: 'serasa-kreatif',
     en: {
+      lead: 'A storefront that scales with the studio.',
       blurb: 'Full-stack storefront for a Bintaro creative agency.',
     },
     id: {
+      lead: 'Storefront yang tumbuh bersama studio.',
       blurb: 'Platform storefront full-stack yang dikembangkan khusus untuk agensi kreatif di Bintaro.',
     },
     tags: ['Next.js', 'CMS', 'Agency'],
@@ -115,10 +132,13 @@ export const projectPreviews: ProjectPreview[] = [
   },
   {
     title: 'Livecode Logic Trainer',
+    slug: 'livecode-logic-trainer',
     en: {
+      lead: 'Thirty minutes. One shot. Practice it.',
       blurb: 'Timed web app for live-code technical interview practice under 30-min constraints.',
     },
     id: {
+      lead: 'Tiga puluh menit. Satu kesempatan. Latih di sini.',
       blurb: 'Aplikasi web interaktif berdurasi terbatas untuk simulasi wawancara live-coding.',
     },
     tags: ['JavaScript', 'REST API', 'Vercel'],
@@ -127,10 +147,13 @@ export const projectPreviews: ProjectPreview[] = [
   },
   {
     title: 'Enterprise LMS Architecture',
+    slug: 'enterprise-lms-architecture',
     en: {
+      lead: '10,000 learners. 40% faster.',
       blurb: 'Production-ready LMS blueprint with 40% load time reduction & live demo.',
     },
     id: {
+      lead: '10.000 pengguna. 40% lebih cepat.',
       blurb: 'Cetak biru LMS skala produksi dengan optimasi load time 40% & demo langsung.',
     },
     tags: ['Laravel 8', 'Vue.js 2', 'MySQL'],
