@@ -428,3 +428,140 @@ body {
   opacity: 0.07;
   pointer-events: none;
 }
+
+/* ─── Highlights Gallery (Apple "highlights" timed card slider pattern) ───── */
+.gallery-card {
+  position: relative;
+  width: min(1180px, calc(100vw - 2.5rem));
+  height: clamp(560px, 72vh, 700px);
+  border-radius: 1.75rem;
+  overflow: hidden;
+  background: var(--surface);
+  border: 1px solid var(--rule);
+  transition: border-color 0.4s ease;
+}
+@media (min-width: 768px) {
+  .gallery-card { width: min(1180px, calc(100vw - 8rem)); border-radius: 2rem; }
+}
+.gallery-card[data-active='false'] { cursor: pointer; }
+.gallery-card[data-active='true']:hover { border-color: var(--accent); }
+
+/* Caption: only the current card speaks. */
+.gallery-caption {
+  transition: opacity 0.6s var(--ease-smooth), transform 0.8s var(--ease-smooth);
+}
+.gallery-card[data-active='false'] .gallery-caption {
+  opacity: 0;
+  transform: translateY(16px);
+}
+.gallery-card[data-active='true'] .gallery-caption {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 0.35s;
+}
+
+/* Media: framed screenshot that bleeds off the bottom-right edge. */
+.gallery-media {
+  position: absolute;
+  right: -1px;
+  bottom: -1px;
+  width: 92%;
+  border-top-left-radius: 1.1rem;
+  overflow: hidden;
+  background: var(--surface);
+  border: 1px solid var(--rule);
+  border-right: none;
+  border-bottom: none;
+  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.12);
+  transform-origin: bottom right;
+  transition: transform 1.1s var(--ease-smooth), opacity 0.6s ease;
+}
+@media (min-width: 768px) {
+  .gallery-media { width: 56%; }
+}
+.gallery-card[data-active='false'] .gallery-media { transform: scale(0.94) translateY(24px); opacity: 0.55; }
+.gallery-card[data-active='true'] .gallery-media  { transform: none; opacity: 1; }
+.gallery-card[data-active='true']:hover .gallery-media { transform: translate(-6px, -6px); }
+
+.gallery-media-bar {
+  display: flex;
+  gap: 6px;
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--rule);
+  background: var(--paper);
+}
+.gallery-media-bar span {
+  width: 8px;
+  height: 8px;
+  border-radius: 9999px;
+  background: var(--rule);
+}
+
+/* Glass control capsule */
+.gallery-glass {
+  border-radius: 9999px;
+  background-color: color-mix(in srgb, var(--surface) 72%, transparent);
+  border: 1px solid var(--rule);
+  -webkit-backdrop-filter: blur(20px) saturate(1.6);
+  backdrop-filter: blur(20px) saturate(1.6);
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.06);
+}
+.gallery-toggle {
+  transition: transform 0.2s var(--ease-smooth), background-color 0.2s ease;
+}
+.gallery-toggle:hover { transform: scale(1.06); }
+.gallery-toggle:active { transform: scale(0.96); }
+.gallery-toggle:focus-visible,
+.gallery-dot-hit:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+/* Dots: a hit-area wrapper (≥24px) around an 8px dot that stretches into a pill. */
+.gallery-dot-hit {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 24px;
+  min-width: 12px;
+  background: transparent;
+  border: none;
+  border-radius: 9999px;
+  cursor: pointer;
+  padding: 0;
+}
+.gallery-dot {
+  position: relative;
+  display: block;
+  width: 8px;
+  height: 8px;
+  border-radius: 9999px;
+  background: var(--ink-faint);
+  overflow: hidden;
+  transition: width 0.5s var(--ease-smooth), background-color 0.3s ease;
+}
+.gallery-dot-hit:hover .gallery-dot[data-active='false'] { background: var(--ink-soft); }
+.gallery-dot[data-active='true'] {
+  width: 48px;
+  background: var(--rule);
+}
+.gallery-dot-fill {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: var(--ink);
+  transform-origin: left center;
+  animation-name: story-progress-fill;
+  animation-timing-function: linear;
+  animation-fill-mode: forwards;
+}
+.gallery-dot-fill[data-static='true'] {
+  animation: none;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .gallery-caption,
+  .gallery-media,
+  .gallery-dot { transition: none; }
+}

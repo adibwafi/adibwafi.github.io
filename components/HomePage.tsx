@@ -6,11 +6,13 @@ import { motion } from 'framer-motion';
 import { Mail, Linkedin, Github, ArrowUpRight, ArrowRight, MapPin } from 'lucide-react';
 import { FadeSection, FadeItem } from '@/components/FadeSection';
 import { ShimmerImage } from '@/components/ShimmerImage';
+import HighlightsGallery from '@/components/HighlightsGallery';
+import { CountUp } from '@/components/CountUp';
 import { useSite } from '@/lib/site-context';
 import { translations } from '@/lib/translations';
 import { trackEvent, trackConversion } from '@/lib/analytics';
 import { ease, pageAnim } from '@/lib/animations';
-import { metrics, projectPreviews, SITE_EMAIL, SITE_MAILTO } from '@/lib/data';
+import { metrics, SITE_EMAIL, SITE_MAILTO } from '@/lib/data';
 
 /* ════════════════════════════════════════════════════════════════════════════
    HOME PAGE CONTENT
@@ -211,7 +213,7 @@ export default function HomePage() {
               {metrics.map((m, i) => (
                 <FadeItem key={i} delay={i * 0.1} className="bento-card bento-card-hover p-6">
                   <p className="text-5xl font-extrabold text-ink tracking-tight leading-none mb-3">
-                    {m.value}
+                    <CountUp value={m.value} />
                   </p>
                   <p className="text-sm font-semibold text-ink-soft mb-1">{m[lang].label}</p>
                   <p className="text-xs text-ink-faint leading-relaxed">{m[lang].detail}</p>
@@ -222,67 +224,37 @@ export default function HomePage() {
         </div>
       </motion.section>
 
-      {/* ── Featured Work Preview ─────────────────────────────────────────── */}
+      {/* ── Featured Work — Apple-style highlights gallery ────────────────── */}
       <motion.section
         onViewportEnter={() => trackEvent('view', 'Section', 'Featured Work')}
         viewport={{ once: true, amount: 0.2 }}
-        className="relative z-10 px-5 md:px-10 lg:px-16 pb-24"
+        className="relative z-10 pb-24"
       >
-        <div className="max-w-layout mx-auto">
+        <div className="max-w-layout mx-auto px-5 md:px-10 lg:px-16">
           <FadeSection>
-            <FadeItem className="flex items-center justify-between mb-8">
+            <FadeItem className="flex items-center justify-between mb-4">
               <h2 className="section-label">{translations[lang].featuredWork.title}</h2>
               <Link
-                href="/work"
+                href={lang === 'id' ? '/id/work' : '/work'}
                 onClick={() => trackEvent('click', 'Navigation', 'View All Projects')}
                 className="flex items-center gap-1 text-sm font-medium text-ink-soft hover:text-ink transition-colors"
               >
                 {translations[lang].featuredWork.link} <ArrowRight size={14} strokeWidth={1.75} />
               </Link>
             </FadeItem>
-
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              {projectPreviews.map((p, i) => (
-                <FadeItem key={i} delay={i * 0.08}>
-                  <a
-                    href={p.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="block bento-card bento-card-hover overflow-hidden group"
-                    onClick={() => trackEvent('click', 'Project Preview', p.title)}
-                  >
-                    <div
-                      className="relative overflow-hidden rounded-[1.1rem] m-2 bg-rule aspect-[16/10]"
-                    >
-                      <ShimmerImage
-                        src={p.imageSrc}
-                        alt={`${p.title} — Software Engineering Project by Muhamad Adibwafi Menako`}
-                        fill
-                        className="object-cover object-center transition-transform duration-700 group-hover:scale-[1.04]"
-                        style={{ filter: 'saturate(0.88) contrast(1.02)' }}
-                        sizes="(max-width: 768px) 100vw, 33vw"
-                      />
-                      <div className="absolute top-3 right-3 w-8 h-8 rounded-full bg-surface-dark flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 shadow-sm">
-                        <ArrowUpRight size={14} strokeWidth={2} className="text-on-dark" />
-                      </div>
-                    </div>
-                    <div className="px-4 pb-4 pt-3">
-                      <div className="flex flex-wrap gap-1.5 mb-2.5">
-                        {p.tags.map((t) => (
-                          <span key={t} className="tag-chip">{t}</span>
-                        ))}
-                      </div>
-                      <h3 className="text-sm font-semibold text-ink leading-snug mb-1">
-                        {p.title}
-                      </h3>
-                      <p className="text-xs text-ink-soft leading-relaxed">{p[lang].blurb}</p>
-                    </div>
-                  </a>
-                </FadeItem>
-              ))}
-            </div>
+            <FadeItem delay={0.08} className="mb-10 md:mb-14">
+              <p className="text-hero font-extrabold text-ink tracking-tight leading-tight max-w-[18ch]">
+                {translations[lang].featuredWork.headline}
+              </p>
+            </FadeItem>
           </FadeSection>
         </div>
+
+        <FadeSection>
+          <FadeItem delay={0.12}>
+            <HighlightsGallery />
+          </FadeItem>
+        </FadeSection>
       </motion.section>
 
       {/* ── CTA Section ───────────────────────────────────────────────────── */}

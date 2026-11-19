@@ -28,6 +28,13 @@ export const translations = {
     featuredWork: {
       title: 'Featured Work',
       link: 'All projects',
+      headline: 'Shipped, not just sketched.',
+      play: 'Play highlights',
+      pause: 'Pause highlights',
+      replay: 'Replay highlights',
+      tablist: 'Featured project highlights',
+      slideOf: 'of',
+      open: 'Open',
     },
     ctaSection: {
       label: 'Available for new opportunities',
@@ -198,6 +205,13 @@ export const translations = {
     featuredWork: {
       title: 'Proyek Pilihan',
       link: 'Lihat semua proyek',
+      headline: 'Bukan sekadar konsep. Sudah rilis.',
+      play: 'Putar sorotan',
+      pause: 'Jeda sorotan',
+      replay: 'Putar ulang sorotan',
+      tablist: 'Daftar sorotan proyek pilihan',
+      slideOf: 'dari',
+      open: 'Buka',
     },
     ctaSection: {
       label: 'Terbuka untuk peluang baru',
