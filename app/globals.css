@@ -381,23 +381,6 @@ body {
   display: none;              /* Chrome / Safari */
 }
 
-.story-progress-track {
-  position: relative;
-  height: 3px;
-  border-radius: 9999px;
-  background: var(--rule);
-  overflow: hidden;
-}
-.story-progress-fill {
-  position: absolute;
-  inset: 0;
-  transform-origin: left center;
-  background: var(--ink);
-  border-radius: 9999px;
-  animation-name: story-progress-fill;
-  animation-timing-function: linear;
-  animation-fill-mode: forwards;
-}
 @keyframes story-progress-fill {
   from { transform: scaleX(0); }
   to   { transform: scaleX(1); }
@@ -564,4 +547,21 @@ body {
   .gallery-caption,
   .gallery-media,
   .gallery-dot { transition: none; }
+}
+
+/* Video variant of the gallery media frame (used on /videography) */
+.gallery-media[data-portrait='true'] {
+  right: 6%;
+  width: 38%;
+  border-top-right-radius: 1.1rem;
+  border-right: 1px solid var(--rule);
+}
+@media (min-width: 768px) {
+  .gallery-media[data-portrait='true'] { width: 22%; right: 8%; }
+}
+.gallery-video-thumb { cursor: pointer; background: var(--rule); }
+.gallery-play { transition: transform 0.35s var(--ease-spring); }
+.gallery-video-thumb:hover .gallery-play { transform: scale(1.1); }
+@media (prefers-reduced-motion: reduce) {
+  .gallery-play { transition: none; }
 }

@@ -1,7 +1,8 @@
 'use client';
 
-import React, { useEffect, useRef, useState } from 'react';
-import { Pause, Play, ChevronLeft, ChevronRight } from 'lucide-react';
+import React from 'react';
+import { Play } from 'lucide-react';
+import GalleryCarousel from '@/components/GalleryCarousel';
 import { ShimmerImage } from '@/components/ShimmerImage';
 import { useSite } from '@/lib/site-context';
 import { translations } from '@/lib/translations';
@@ -10,87 +11,15 @@ import { getYouTubeThumbnail } from '@/lib/youtube';
 import type { VideographyProject } from '@/lib/videographyProjects';
 
 /* ════════════════════════════════════════════════════════════════════════════
-   VIDEO STORIES CAROUSEL
-   Sana Labs "Customer stories" pattern, adapted: an auto-advancing, peek-edge
-   row of portrait cards with a single scrub-style progress bar underneath.
-   Built on native scroll-snap (no new dependency) so it stays swipeable and
-   responsive without JS breakpoint tracking. Pauses on hover/touch/manual
-   toggle, and respects prefers-reduced-motion. The lightbox itself is owned
-   by the parent page so the carousel and archive grid share one modal.
+   VIDEO STORIES CAROUSEL — /videography
+   Same highlights slider as the landing page (see GalleryCarousel): one big
+   centred card, peeking neighbours, glass dotnav + play/pause. This file only
+   supplies the slide content: client + title + tagline on the left, and the
+   video thumbnail framed like the landing page's project screenshots, with a
+   play button that opens the page's shared lightbox.
+   Landscape productions use a 16:9 frame; YouTube Shorts get a portrait frame
+   so the vertical video is not squeezed into a wide crop.
    ════════════════════════════════════════════════════════════════════════════ */
-
-const AUTOPLAY_MS = 4800;
-const RESUME_DELAY_MS = 700;
-
-function StoryCard({
-  project,
-  onSelect,
-}: {
-  project: VideographyProject;
-  onSelect: (p: VideographyProject) => void;
-}) {
-  const { lang } = useSite();
-  const t = translations[lang].videography;
-  const thumbnail = getYouTubeThumbnail(project.videoUrl);
-
-  return (
-    <button
-      type="button"
-      onClick={() => {
-        onSelect(project);
-        trackEvent('click', 'Videography Story', project.title);
-      }}
-      className="group relative flex-none w-[220px] sm:w-[260px] lg:w-[280px] snap-start text-left rounded-bento overflow-hidden bg-surface border border-rule transition-all duration-300 hover:-translate-y-1 hover:shadow-lift hover:border-accent"
-      aria-label={`${t.watchTrailer}: ${project.title}`}
-    >
-      <div className="relative w-full aspect-[3/4] bg-rule overflow-hidden">
-        {thumbnail ? (
-          <ShimmerImage
-            src={thumbnail}
-            alt={`Thumbnail for ${project.title}`}
-            fill
-            className="object-cover object-center transition-transform duration-700 group-hover:scale-[1.05]"
-            sizes="(max-width: 640px) 220px, (max-width: 1024px) 260px, 280px"
-          />
-        ) : (
-          <div className="absolute inset-0 bg-gradient-to-br from-structural to-surface-dark" />
-        )}
-
-        {/* Permanent soft gradient — keeps the client pill legible on any thumbnail */}
-        <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-black/15 pointer-events-none" />
-        {/* Hover darken, lets the play glyph pop */}
-        <div className="absolute inset-0 bg-black/0 group-hover:bg-black/15 transition-colors duration-300 pointer-events-none" />
-
-        {/* Fixed dark "sticker" badges — intentionally not theme-reactive, same
-            surface-dark/on-dark pair the design tokens reserve for chips that
-            sit on top of imagery in either light or dark mode. */}
-        <span className="absolute top-3 left-3 inline-flex items-center rounded-full bg-surface-dark px-3 py-1 text-[11px] font-semibold text-on-dark shadow-sm max-w-[75%] truncate">
-          {project.client}
-        </span>
-
-        {project.isShort && (
-          <span className="absolute top-3 right-3 inline-flex items-center rounded-full bg-accent px-2.5 py-1 text-[10px] font-bold uppercase tracking-wide text-surface-dark shadow-sm">
-            {t.shortsBadge}
-          </span>
-        )}
-
-        <span className="absolute inset-0 flex items-center justify-center opacity-0 scale-90 group-hover:opacity-100 group-hover:scale-100 transition-all duration-300 pointer-events-none">
-          <span className="w-12 h-12 rounded-full bg-surface-dark flex items-center justify-center shadow-lift">
-            <Play size={18} strokeWidth={0} fill="currentColor" className="ml-0.5 text-on-dark" />
-          </span>
-        </span>
-      </div>
-
-      <div className="p-4">
-        <p className="text-sm leading-snug line-clamp-2 mb-1.5">
-          <span className="font-semibold text-ink">{project.client}</span>
-          <span className="text-ink-soft"> — {project.title}</span>
-        </p>
-        <p className="text-xs text-ink-faint">{t.categories[project.category]}</p>
-      </div>
-    </button>
-  );
-}
 
 export function VideoStoriesCarousel({
   projects,
@@ -102,140 +31,97 @@ export function VideoStoriesCarousel({
   const { lang } = useSite();
   const t = translations[lang].videography;
 
-  const trackRef = useRef<HTMLDivElement>(null);
-  const scrollDebounce = useRef<ReturnType<typeof setTimeout> | null>(null);
-  const resumeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
-
-  const [activeIndex, setActiveIndex] = useState(0);
-  const [isInteracting, setIsInteracting] = useState(false);
-  const [isManuallyPaused, setIsManuallyPaused] = useState(false);
-  const [reducedMotion, setReducedMotion] = useState(false);
-
-  useEffect(() => {
-    setReducedMotion(window.matchMedia('(prefers-reduced-motion: reduce)').matches);
-  }, []);
-
-  const autoplayEnabled = !isInteracting && !isManuallyPaused && !reducedMotion;
-
-  const scrollToIndex = (index: number) => {
-    const track = trackRef.current;
-    if (!track) return;
-    const wrapped = ((index % projects.length) + projects.length) % projects.length;
-    const card = track.children[wrapped] as HTMLElement | undefined;
-    if (card) {
-      track.scrollTo({ left: card.offsetLeft, behavior: 'smooth' });
-    }
-    setActiveIndex(wrapped);
-  };
-
-  // Autoplay — restarts its clock whenever the active slide changes for any
-  // reason (timer tick, manual click, or user swipe detected via onScroll).
-  useEffect(() => {
-    if (!autoplayEnabled) return;
-    const id = setTimeout(() => scrollToIndex(activeIndex + 1), AUTOPLAY_MS);
-    return () => clearTimeout(id);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [autoplayEnabled, activeIndex, projects.length]);
-
-  // Detect manual/swipe scrolling and sync activeIndex to the nearest card.
-  const handleScroll = () => {
-    if (scrollDebounce.current) clearTimeout(scrollDebounce.current);
-    scrollDebounce.current = setTimeout(() => {
-      const track = trackRef.current;
-      if (!track) return;
-      const children = Array.from(track.children) as HTMLElement[];
-      let closest = 0;
-      let minDist = Infinity;
-      children.forEach((child, i) => {
-        const dist = Math.abs(child.offsetLeft - track.scrollLeft);
-        if (dist < minDist) {
-          minDist = dist;
-          closest = i;
-        }
-      });
-      setActiveIndex((prev) => (prev === closest ? prev : closest));
-    }, 120);
-  };
-
-  const pauseForInteraction = () => {
-    if (resumeTimer.current) clearTimeout(resumeTimer.current);
-    setIsInteracting(true);
-  };
-  const resumeAfterInteraction = () => {
-    if (resumeTimer.current) clearTimeout(resumeTimer.current);
-    resumeTimer.current = setTimeout(() => setIsInteracting(false), RESUME_DELAY_MS);
-  };
-
-  useEffect(() => () => {
-    if (scrollDebounce.current) clearTimeout(scrollDebounce.current);
-    if (resumeTimer.current) clearTimeout(resumeTimer.current);
-  }, []);
-
   return (
-    <div
-      onMouseEnter={pauseForInteraction}
-      onMouseLeave={resumeAfterInteraction}
-      onPointerDown={pauseForInteraction}
-      onPointerUp={resumeAfterInteraction}
-      onPointerCancel={resumeAfterInteraction}
-    >
-      <div
-        ref={trackRef}
-        onScroll={handleScroll}
-        role="region"
-        aria-roledescription="carousel"
-        aria-label={t.storiesTitle}
-        className="relative flex gap-4 overflow-x-auto no-scrollbar snap-x snap-mandatory pb-1 -mx-5 px-5 md:-mx-10 md:px-10 lg:-mx-16 lg:px-16"
-      >
-        {projects.map((project) => (
-          <StoryCard key={project.id} project={project} onSelect={onSelect} />
-        ))}
-      </div>
+    <GalleryCarousel
+      count={projects.length}
+      framed
+      label={t.storiesTitle}
+      slideLabel={(i) =>
+        `${i + 1} ${t.slideOf} ${projects.length}: ${projects[i].client} — ${projects[i].title}`
+      }
+      slideTitle={(i) => projects[i].title}
+      labels={{ play: t.play, pause: t.pause, replay: t.replay }}
+      trackingCategory="Videography Story"
+      renderSlide={({ index, active, wasDragged }) => {
+        const project = projects[index];
+        const thumbnail = getYouTubeThumbnail(project.videoUrl);
+        const open = () => {
+          if (wasDragged()) return;
+          onSelect(project);
+          trackEvent('click', 'Videography Story', project.title);
+        };
 
-      {/* Scrub bar + transport controls, echoing the Sana Learn customer-stories UI */}
-      <div className="flex items-center gap-3 mt-6">
-        <button
-          type="button"
-          onClick={() => scrollToIndex(activeIndex - 1)}
-          aria-label={t.prevSlide}
-          className="w-8 h-8 shrink-0 rounded-full border border-rule hover:border-accent hover:bg-surface flex items-center justify-center transition-colors"
-        >
-          <ChevronLeft size={14} strokeWidth={2} className="text-ink-soft" />
-        </button>
+        return (
+          <>
+            {/* Caption */}
+            <div className="gallery-caption relative z-10 p-6 md:p-12 md:max-w-[44%]">
+              <p className="font-mono text-[0.7rem] tracking-[0.14em] uppercase text-ink-faint mb-3">
+                {String(index + 1).padStart(2, '0')} — {project.client}
+              </p>
+              <h3 className="text-[1.45rem] md:text-[2rem] leading-[1.15] font-bold tracking-tight text-ink">
+                {project.title}
+              </h3>
+              <p className="hidden md:block text-base leading-relaxed text-ink-soft mt-3">
+                {project.tagline}
+              </p>
+              <div className="flex flex-wrap items-center gap-2 mt-4">
+                <span className="tag-chip">{t.categories[project.category]}</span>
+                {project.isShort && (
+                  <span className="inline-flex items-center rounded-full bg-accent px-2.5 py-1 text-[10px] font-bold uppercase tracking-wide text-surface-dark">
+                    {t.shortsBadge}
+                  </span>
+                )}
+              </div>
+              <div className="flex flex-wrap items-center gap-2 mt-5">
+                <button
+                  type="button"
+                  tabIndex={active ? 0 : -1}
+                  onClick={open}
+                  className="btn-primary"
+                  aria-label={`${t.watchTrailer}: ${project.title}`}
+                >
+                  <Play size={13} strokeWidth={0} fill="currentColor" />
+                  {t.watchTrailer}
+                </button>
+              </div>
+            </div>
 
-        <div className="story-progress-track flex-1">
-          <div
-            key={activeIndex}
-            className="story-progress-fill"
-            style={{
-              animationDuration: `${AUTOPLAY_MS}ms`,
-              animationPlayState: autoplayEnabled ? 'running' : 'paused',
-            }}
-          />
-        </div>
-
-        <button
-          type="button"
-          onClick={() => setIsManuallyPaused((v) => !v)}
-          aria-label={isManuallyPaused ? t.play : t.pause}
-          className="w-8 h-8 shrink-0 rounded-full border border-rule hover:border-accent hover:bg-surface flex items-center justify-center transition-colors"
-        >
-          {isManuallyPaused ? (
-            <Play size={13} strokeWidth={2} className="text-ink-soft ml-0.5" />
-          ) : (
-            <Pause size={13} strokeWidth={2} className="text-ink-soft" />
-          )}
-        </button>
-
-        <button
-          type="button"
-          onClick={() => scrollToIndex(activeIndex + 1)}
-          aria-label={t.nextSlide}
-          className="w-8 h-8 shrink-0 rounded-full border border-rule hover:border-accent hover:bg-surface flex items-center justify-center transition-colors"
-        >
-          <ChevronRight size={14} strokeWidth={2} className="text-ink-soft" />
-        </button>
-      </div>
-    </div>
+            {/* Media — framed thumbnail bleeding off the bottom-right, opens the lightbox */}
+            <div className="gallery-media" data-portrait={project.isShort ? 'true' : undefined}>
+              <div className="gallery-media-bar" aria-hidden="true">
+                <span /><span /><span />
+              </div>
+              <button
+                type="button"
+                tabIndex={-1}
+                aria-hidden="true"
+                onClick={open}
+                className={`gallery-video-thumb group relative block w-full ${
+                  project.isShort ? 'aspect-[9/16]' : 'aspect-video'
+                }`}
+              >
+                {thumbnail ? (
+                  <ShimmerImage
+                    src={thumbnail}
+                    alt=""
+                    fill
+                    className="object-cover object-center pointer-events-none"
+                    sizes="(max-width: 768px) 90vw, 760px"
+                  />
+                ) : (
+                  <span className="absolute inset-0 bg-gradient-to-br from-structural to-surface-dark" />
+                )}
+                <span className="absolute inset-0 bg-black/10 group-hover:bg-black/20 transition-colors duration-300" />
+                <span className="absolute inset-0 flex items-center justify-center">
+                  <span className="gallery-play w-14 h-14 rounded-full bg-surface-dark flex items-center justify-center shadow-lift">
+                    <Play size={20} strokeWidth={0} fill="currentColor" className="ml-0.5 text-on-dark" />
+                  </span>
+                </span>
+              </button>
+            </div>
+          </>
+        );
+      }}
+    />
   );
 }

@@ -205,15 +205,16 @@ export default function VideographyPage({
               </h2>
               <p className="text-ink-soft leading-relaxed">{t.storiesDesc}</p>
             </FadeItem>
+          </FadeSection>
+        </div>
 
+        {/* Full-bleed, same slider as the landing page. The Frame brackets are
+            drawn around the active card by the carousel; the dot-grid veil
+            above is their paired half of the supergraphic. */}
+        <div className="relative">
+          <FadeSection>
             <FadeItem>
-              <div className="corner-frame">
-                <span className="corner-frame-mark corner-frame-tl" aria-hidden="true" />
-                <span className="corner-frame-mark corner-frame-tr" aria-hidden="true" />
-                <span className="corner-frame-mark corner-frame-br" aria-hidden="true" />
-                <span className="corner-frame-mark corner-frame-bl" aria-hidden="true" />
-                <VideoStoriesCarousel projects={featuredVideographyProjects} onSelect={setSelected} />
-              </div>
+              <VideoStoriesCarousel projects={featuredVideographyProjects} onSelect={setSelected} />
             </FadeItem>
           </FadeSection>
         </div>
