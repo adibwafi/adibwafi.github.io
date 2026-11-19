@@ -174,6 +174,7 @@ export const translations = {
     },
     toast: {
       copied: 'Email copied to clipboard! 📋',
+      copiedShort: 'Copied',
     }
   },
   id: {
@@ -350,6 +351,7 @@ export const translations = {
     },
     toast: {
       copied: 'Email berhasil disalin! 📋',
+      copiedShort: 'Tersalin',
     }
   }
 };

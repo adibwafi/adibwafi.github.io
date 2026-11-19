@@ -4,7 +4,7 @@ import React from 'react';
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
 import { Sun, Moon, ArrowUpRight } from 'lucide-react';
-import { motion } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
 import { useSite } from '@/lib/site-context';
 import { translations } from '@/lib/translations';
 import { trackEvent } from '@/lib/analytics';
@@ -81,53 +81,78 @@ export function Nav() {
               href={localeHref(item.href)}
               aria-current={isActive(item.href) ? 'page' : undefined}
               onClick={() => trackEvent('click', 'Navigation', item.label)}
-              className={`relative px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 ${
-                isActive(item.href)
-                  ? 'text-ink bg-surface'
-                  : 'text-ink-soft hover:text-ink hover:bg-surface'
+              className={`relative px-4 py-2 rounded-full text-sm font-medium transition-colors duration-200 ${
+                isActive(item.href) ? 'text-ink' : 'text-ink-soft hover:text-ink'
               }`}
             >
-              {getNavLabel(item.label, lang)}
+              {isActive(item.href) && (
+                <motion.span
+                  layoutId="nav-active-pill"
+                  className="absolute inset-0 rounded-full bg-surface"
+                  transition={{ type: 'spring', stiffness: 420, damping: 34 }}
+                />
+              )}
+              <span className="relative">{getNavLabel(item.label, lang)}</span>
             </Link>
           ))}
         </nav>
 
         {/* CTA & Theme Toggle */}
         <div className="flex items-center gap-3">
-          {/* Language toggle pill */}
-          <div className="flex items-center rounded-full border border-rule p-0.5 bg-surface">
-            <button
-              onClick={() => changeLang('en')}
-              className={`px-2 py-0.5 rounded-full text-[10px] font-bold transition-all ${
-                lang === 'en'
-                  ? 'bg-ink text-paper shadow-sm'
-                  : 'text-ink-faint hover:text-ink-soft'
-              }`}
-            >
-              EN
-            </button>
-            <button
-              onClick={() => changeLang('id')}
-              className={`px-2 py-0.5 rounded-full text-[10px] font-bold transition-all ${
-                lang === 'id'
-                  ? 'bg-ink text-paper shadow-sm'
-                  : 'text-ink-faint hover:text-ink-soft'
-              }`}
-            >
-              ID
-            </button>
+          {/* Language toggle — segmented control with a sliding thumb */}
+          <div
+            role="radiogroup"
+            aria-label="Language"
+            className="relative flex items-center rounded-full border border-rule p-0.5 bg-surface"
+          >
+            {(['en', 'id'] as const).map((code) => {
+              const active = lang === code;
+              return (
+                <button
+                  key={code}
+                  role="radio"
+                  aria-checked={active}
+                  onClick={() => changeLang(code)}
+                  className={`relative px-2 py-0.5 rounded-full text-[10px] font-bold transition-colors duration-200 ${
+                    active ? 'text-paper' : 'text-ink-faint hover:text-ink-soft'
+                  }`}
+                >
+                  {active && (
+                    <motion.span
+                      layoutId="lang-thumb"
+                      className="absolute inset-0 rounded-full bg-ink shadow-sm"
+                      transition={{ type: 'spring', stiffness: 500, damping: 34 }}
+                    />
+                  )}
+                  <span className="relative">{code.toUpperCase()}</span>
+                </button>
+              );
+            })}
           </div>
 
           <button
             onClick={toggleTheme}
-            className="p-2 rounded-full border border-rule hover:bg-surface transition-colors flex items-center justify-center"
+            className="p-2 rounded-full border border-rule hover:bg-surface transition-colors flex items-center justify-center overflow-hidden"
             aria-label={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
           >
-            {theme === 'dark' ? (
-              <Sun size={15} className="text-ink-faint hover:text-ink" />
-            ) : (
-              <Moon size={15} className="text-ink-soft hover:text-ink" />
-            )}
+            <span className="relative w-[15px] h-[15px]">
+              <AnimatePresence initial={false} mode="popLayout">
+                <motion.span
+                  key={theme}
+                  className="absolute inset-0 flex items-center justify-center"
+                  initial={{ y: 16, rotate: -90, opacity: 0, scale: 0.5 }}
+                  animate={{ y: 0, rotate: 0, opacity: 1, scale: 1 }}
+                  exit={{ y: -16, rotate: 90, opacity: 0, scale: 0.5 }}
+                  transition={{ type: 'spring', stiffness: 420, damping: 26 }}
+                >
+                  {theme === 'dark' ? (
+                    <Sun size={15} className="text-ink-faint hover:text-ink" />
+                  ) : (
+                    <Moon size={15} className="text-ink-soft hover:text-ink" />
+                  )}
+                </motion.span>
+              </AnimatePresence>
+            </span>
           </button>
 
           <a

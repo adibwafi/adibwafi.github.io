@@ -81,7 +81,7 @@ export default function SiteShell({ children }: { children: React.ReactNode }) {
   /* ── Copy email to clipboard + show toast ────────────────────────────── */
   const handleCopyEmail = (e: React.MouseEvent) => {
     e.preventDefault();
-    navigator.clipboard.writeText(SITE_EMAIL);
+    navigator.clipboard?.writeText(SITE_EMAIL).catch(() => {});
     setToast(translations[lang].toast.copied);
     // Named conversion event — mark `contact_email` as a Key event in GA4.
     trackConversion('contact_email', { method: 'email' });
