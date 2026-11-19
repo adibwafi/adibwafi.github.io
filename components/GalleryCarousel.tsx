@@ -54,6 +54,8 @@ export interface GalleryCarouselProps {
   dwellMs?: number;
   /** Draw the Frame supergraphic brackets around the active card. */
   framed?: boolean;
+  /** Extra class on every card, e.g. a visual variant like "gallery-card--film". */
+  cardClassName?: string;
 }
 
 export default function GalleryCarousel({
@@ -66,6 +68,7 @@ export default function GalleryCarousel({
   trackingCategory,
   dwellMs = DEFAULT_DWELL_MS,
   framed = false,
+  cardClassName = '',
 }: GalleryCarouselProps) {
   const reduceMotion = useReducedMotion();
   const last = count - 1;
@@ -236,7 +239,7 @@ export default function GalleryCarousel({
                   aria-roledescription="slide"
                   aria-label={slideLabel(i)}
                   aria-hidden={!active}
-                  className="gallery-card shrink-0"
+                  className={`gallery-card shrink-0 ${cardClassName}`}
                   data-active={active}
                   onClick={() => {
                     if (!active && !draggedRef.current) goTo(i, 'Peek');

@@ -13,6 +13,8 @@ interface ShimmerImageProps {
   className?: string;
   style?: React.CSSProperties;
   sizes?: string;
+  /** Tried in order if `src` (or the previous fallback) fails to load. */
+  fallbackSrcs?: string[];
 }
 
 export function ShimmerImage({
@@ -23,8 +25,12 @@ export function ShimmerImage({
   className = '',
   style,
   sizes,
+  fallbackSrcs = [],
 }: ShimmerImageProps) {
   const [isLoaded, setIsLoaded] = useState(false);
+  const [attempt, setAttempt] = useState(0);
+  const candidates = [src, ...fallbackSrcs];
+  const currentSrc = candidates[Math.min(attempt, candidates.length - 1)];
 
   return (
     <div className="relative w-full h-full">
@@ -32,7 +38,7 @@ export function ShimmerImage({
         <div className="absolute inset-0 shimmer rounded-[inherit]" aria-hidden="true" />
       )}
       <Image
-        src={src}
+        src={currentSrc}
         alt={alt}
         fill={fill}
         priority={priority}
@@ -42,6 +48,9 @@ export function ShimmerImage({
         style={style}
         sizes={sizes}
         onLoad={() => setIsLoaded(true)}
+        onError={() => {
+          if (attempt < candidates.length - 1) setAttempt((a) => a + 1);
+        }}
       />
     </div>
   );

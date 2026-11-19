@@ -7,19 +7,37 @@ import { ShimmerImage } from '@/components/ShimmerImage';
 import { useSite } from '@/lib/site-context';
 import { translations } from '@/lib/translations';
 import { trackEvent } from '@/lib/analytics';
-import { getYouTubeThumbnail } from '@/lib/youtube';
+import { getYouTubeThumbnailCandidates } from '@/lib/youtube';
 import type { VideographyProject } from '@/lib/videographyProjects';
 
 /* ════════════════════════════════════════════════════════════════════════════
    VIDEO STORIES CAROUSEL — /videography
-   Same highlights slider as the landing page (see GalleryCarousel): one big
-   centred card, peeking neighbours, glass dotnav + play/pause. This file only
-   supplies the slide content: client + title + tagline on the left, and the
-   video thumbnail framed like the landing page's project screenshots, with a
-   play button that opens the page's shared lightbox.
-   Landscape productions use a 16:9 frame; YouTube Shorts get a portrait frame
-   so the vertical video is not squeezed into a wide crop.
+   Same slider mechanics as the landing page (GalleryCarousel: centred card,
+   peeking neighbours, glass dotnav + play/pause), but each slide is styled
+   as a film frame rather than a website card:
+   · the video still fills the whole card on a dark ground, with a slow
+     Ken Burns push-in while the slide is on screen
+   · a camera-viewfinder HUD: blinking record dot + shot counter top-left,
+     category / Shorts top-right
+   · title, role and "Watch" sit over a bottom scrim like an end-card
+   · YouTube Shorts: blurred still behind a 9:16 frame on desktop; on
+     mobile the vertical video fills the card
+   The card is 4:5 on phones and widescreen on desktop, so there is no
+   empty space between the text and the picture.
    ════════════════════════════════════════════════════════════════════════════ */
+
+function Still({ srcs, className = '' }: { srcs: string[]; className?: string }) {
+  return (
+    <ShimmerImage
+      src={srcs[0]}
+      fallbackSrcs={srcs.slice(1)}
+      alt=""
+      fill
+      className={`object-cover object-center pointer-events-none ${className}`}
+      sizes="(max-width: 768px) 100vw, 1180px"
+    />
+  );
+}
 
 export function VideoStoriesCarousel({
   projects,
@@ -30,11 +48,13 @@ export function VideoStoriesCarousel({
 }) {
   const { lang } = useSite();
   const t = translations[lang].videography;
+  const total = String(projects.length).padStart(2, '0');
 
   return (
     <GalleryCarousel
       count={projects.length}
       framed
+      cardClassName="gallery-card--film"
       label={t.storiesTitle}
       slideLabel={(i) =>
         `${i + 1} ${t.slideOf} ${projects.length}: ${projects[i].client} — ${projects[i].title}`
@@ -44,7 +64,7 @@ export function VideoStoriesCarousel({
       trackingCategory="Videography Story"
       renderSlide={({ index, active, wasDragged }) => {
         const project = projects[index];
-        const thumbnail = getYouTubeThumbnail(project.videoUrl);
+        const thumbs = getYouTubeThumbnailCandidates(project.videoUrl, project.isShort);
         const open = () => {
           if (wasDragged()) return;
           onSelect(project);
@@ -53,71 +73,85 @@ export function VideoStoriesCarousel({
 
         return (
           <>
-            {/* Caption */}
-            <div className="gallery-caption relative z-10 p-6 md:p-12 md:max-w-[44%]">
-              <p className="font-mono text-[0.7rem] tracking-[0.14em] uppercase text-ink-faint mb-3">
-                {String(index + 1).padStart(2, '0')} — {project.client}
+            {/* Picture */}
+            <div className="film-still" aria-hidden="true">
+              {thumbs.length > 0 &&
+                (project.isShort ? (
+                  <>
+                    {/* desktop: blurred still + 9:16 frame */}
+                    <div className="film-short-backdrop">
+                      <Still srcs={thumbs} />
+                    </div>
+                    <div className="film-short-frame">
+                      <div className="film-short-crop">
+                        <Still srcs={thumbs} />
+                      </div>
+                    </div>
+                    {/* mobile: vertical video fills the card */}
+                    <div className="film-short-fill">
+                      <Still srcs={thumbs} />
+                    </div>
+                  </>
+                ) : (
+                  <div className="film-kenburns absolute inset-0">
+                    <Still srcs={thumbs} />
+                  </div>
+                ))}
+              <div className="film-scrim" />
+            </div>
+
+            {/* Viewfinder HUD */}
+            <div className="film-hud" aria-hidden="true">
+              <span className="flex items-center gap-2">
+                <span className="film-rec-dot" />
+                {String(index + 1).padStart(2, '0')} / {total}
+              </span>
+              <span className="flex items-center gap-2">
+                <span className="hidden sm:inline">{t.categories[project.category]}</span>
+                {project.isShort && <span className="film-shorts-chip">{t.shortsBadge}</span>}
+              </span>
+            </div>
+
+            {/* Big play — whole still is the target on desktop */}
+            <button
+              type="button"
+              tabIndex={-1}
+              aria-hidden="true"
+              onClick={open}
+              className="film-play-target"
+              data-short={project.isShort ? 'true' : undefined}
+            >
+              <span className="film-play">
+                <Play size={22} strokeWidth={0} fill="currentColor" className="ml-1" />
+              </span>
+            </button>
+
+            {/* End-card caption */}
+            <div className="gallery-caption film-caption">
+              <p className="font-mono text-[0.68rem] tracking-[0.14em] uppercase film-meta mb-2">
+                {project.client}
               </p>
-              <h3 className="text-[1.45rem] md:text-[2rem] leading-[1.15] font-bold tracking-tight text-ink">
+              <h3 className="text-[1.35rem] md:text-[2.25rem] leading-[1.12] font-bold tracking-tight text-on-dark">
                 {project.title}
               </h3>
-              <p className="hidden md:block text-base leading-relaxed text-ink-soft mt-3">
+              <p className="hidden md:block text-[0.95rem] leading-relaxed text-on-dark-soft mt-3 max-w-[52ch]">
                 {project.tagline}
               </p>
-              <div className="flex flex-wrap items-center gap-2 mt-4">
-                <span className="tag-chip">{t.categories[project.category]}</span>
-                {project.isShort && (
-                  <span className="inline-flex items-center rounded-full bg-accent px-2.5 py-1 text-[10px] font-bold uppercase tracking-wide text-surface-dark">
-                    {t.shortsBadge}
-                  </span>
-                )}
-              </div>
-              <div className="flex flex-wrap items-center gap-2 mt-5">
+              <div className="flex flex-wrap items-center gap-x-4 gap-y-3 mt-4 md:mt-5">
                 <button
                   type="button"
                   tabIndex={active ? 0 : -1}
                   onClick={open}
-                  className="btn-primary"
+                  className="btn-film"
                   aria-label={`${t.watchTrailer}: ${project.title}`}
                 >
                   <Play size={13} strokeWidth={0} fill="currentColor" />
                   {t.watchTrailer}
                 </button>
-              </div>
-            </div>
-
-            {/* Media — framed thumbnail bleeding off the bottom-right, opens the lightbox */}
-            <div className="gallery-media" data-portrait={project.isShort ? 'true' : undefined}>
-              <div className="gallery-media-bar" aria-hidden="true">
-                <span /><span /><span />
-              </div>
-              <button
-                type="button"
-                tabIndex={-1}
-                aria-hidden="true"
-                onClick={open}
-                className={`gallery-video-thumb group relative block w-full ${
-                  project.isShort ? 'aspect-[9/16]' : 'aspect-video'
-                }`}
-              >
-                {thumbnail ? (
-                  <ShimmerImage
-                    src={thumbnail}
-                    alt=""
-                    fill
-                    className="object-cover object-center pointer-events-none"
-                    sizes="(max-width: 768px) 90vw, 760px"
-                  />
-                ) : (
-                  <span className="absolute inset-0 bg-gradient-to-br from-structural to-surface-dark" />
-                )}
-                <span className="absolute inset-0 bg-black/10 group-hover:bg-black/20 transition-colors duration-300" />
-                <span className="absolute inset-0 flex items-center justify-center">
-                  <span className="gallery-play w-14 h-14 rounded-full bg-surface-dark flex items-center justify-center shadow-lift">
-                    <Play size={20} strokeWidth={0} fill="currentColor" className="ml-0.5 text-on-dark" />
-                  </span>
+                <span className="font-mono text-[0.68rem] tracking-[0.12em] uppercase film-meta">
+                  {project.role}
                 </span>
-              </button>
+              </div>
             </div>
           </>
         );

@@ -19,6 +19,7 @@ import { getYouTubeThumbnail } from '@/lib/youtube';
 import { MenakoFilmsLogo } from '@/components/MenakoFilmsLogo';
 import {
   videographyProjects,
+  publishedVideographyProjects,
   featuredVideographyProjects,
   videographyCategories,
   type VideographyProject,
@@ -93,8 +94,13 @@ export default function VideographyPage({
 
   const filteredProjects =
     activeCategory === 'all'
-      ? videographyProjects
-      : videographyProjects.filter((p) => p.category === activeCategory);
+      ? publishedVideographyProjects
+      : publishedVideographyProjects.filter((p) => p.category === activeCategory);
+
+  // Only offer filter tabs for categories that have at least one published video.
+  const visibleCategories = videographyCategories.filter((cat) =>
+    publishedVideographyProjects.some((p) => p.category === cat),
+  );
 
   return (
     <motion.div
@@ -237,7 +243,7 @@ export default function VideographyPage({
             </FadeItem>
 
             <FadeItem className="flex flex-wrap gap-2 mb-10">
-              {(['all', ...videographyCategories] as const).map((cat) => (
+              {(['all', ...visibleCategories] as const).map((cat) => (
                 <button
                   key={cat}
                   type="button"
