@@ -3,11 +3,13 @@
 import React from 'react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
-import { Mail, Linkedin, Github, ArrowUpRight, ArrowRight, MapPin } from 'lucide-react';
+import { Linkedin, Github, ArrowUpRight, ArrowRight, MapPin } from 'lucide-react';
 import { FadeSection, FadeItem } from '@/components/FadeSection';
 import { ShimmerImage } from '@/components/ShimmerImage';
 import HighlightsGallery from '@/components/HighlightsGallery';
-import { CountUp } from '@/components/CountUp';
+import { RollingNumber } from '@/components/alive/RollingNumber';
+import { RevealText } from '@/components/alive/RevealText';
+import { CopyEmailButton } from '@/components/alive/CopyEmailButton';
 import { useSite } from '@/lib/site-context';
 import { translations } from '@/lib/translations';
 import { trackEvent, trackConversion } from '@/lib/analytics';
@@ -103,24 +105,21 @@ export default function HomePage() {
                 transition={{ duration: 0.6, ease, delay: 0.46 }}
                 className="flex flex-wrap gap-4"
               >
+                <CopyEmailButton
+                  label={SITE_EMAIL}
+                  className="flex items-center gap-1.5 text-sm font-medium text-ink-soft hover:text-ink transition-colors"
+                />
                 {[
-                  { href: SITE_MAILTO, label: SITE_EMAIL, icon: Mail },
                   { href: 'https://linkedin.com/in/adibwafi',  label: 'LinkedIn', icon: Linkedin },
                   { href: 'https://github.com/adibwafi',       label: 'GitHub',   icon: Github },
                 ].map(({ href, label, icon: Icon }) => (
                   <a
                     key={href}
                     href={href}
-                    target={href.startsWith('mailto') ? undefined : '_blank'}
+                    target="_blank"
                     rel="noopener noreferrer"
                     className="flex items-center gap-1.5 text-sm font-medium text-ink-soft hover:text-ink transition-colors"
-                    onClick={(e) => {
-                      if (href.startsWith('mailto')) {
-                        handleCopyEmail(e);
-                      } else {
-                        trackEvent('click', 'Social Link', `Hero ${label}`);
-                      }
-                    }}
+                    onClick={() => trackEvent('click', 'Social Link', `Hero ${label}`)}
                   >
                     <Icon size={14} strokeWidth={1.75} />
                     {label}
@@ -213,7 +212,7 @@ export default function HomePage() {
               {metrics.map((m, i) => (
                 <FadeItem key={i} delay={i * 0.1} className="bento-card bento-card-hover p-6">
                   <p className="text-5xl font-extrabold text-ink tracking-tight leading-none mb-3">
-                    <CountUp value={m.value} />
+                    <RollingNumber value={m.value} />
                   </p>
                   <p className="text-sm font-semibold text-ink-soft mb-1">{m[lang].label}</p>
                   <p className="text-xs text-ink-faint leading-relaxed">{m[lang].detail}</p>
@@ -243,9 +242,12 @@ export default function HomePage() {
               </Link>
             </FadeItem>
             <FadeItem delay={0.08} className="mb-10 md:mb-14">
-              <p className="text-hero font-extrabold text-ink tracking-tight leading-tight max-w-[18ch]">
-                {translations[lang].featuredWork.headline}
-              </p>
+              <RevealText
+                key={lang}
+                as="p"
+                text={translations[lang].featuredWork.headline}
+                className="text-hero font-extrabold text-ink tracking-tight leading-tight max-w-[18ch]"
+              />
             </FadeItem>
           </FadeSection>
         </div>
@@ -268,22 +270,20 @@ export default function HomePage() {
             <div className="bento-card p-10 md:p-14 flex flex-col md:flex-row items-start md:items-end justify-between gap-8">
               <div>
                 <p className="section-label mb-4">{translations[lang].ctaSection.label}</p>
-                <h2 className="text-hero font-extrabold text-ink tracking-tight leading-tight whitespace-pre-line">
-                  {translations[lang].ctaSection.title}
-                </h2>
+                <RevealText
+                  key={lang}
+                  text={translations[lang].ctaSection.title}
+                  className="text-hero font-extrabold text-ink tracking-tight leading-tight"
+                />
                 <p className="text-ink-soft mt-4 max-w-[44ch] leading-relaxed">
                   {translations[lang].ctaSection.desc}
                 </p>
               </div>
               <div className="flex flex-col sm:flex-row gap-3 flex-shrink-0">
-                <a
-                  href={SITE_MAILTO}
+                <CopyEmailButton
+                  label={translations[lang].ctaSection.email}
                   className="btn-primary"
-                  onClick={handleCopyEmail}
-                >
-                  <Mail size={14} strokeWidth={1.75} />
-                  {translations[lang].ctaSection.email}
-                </a>
+                />
                 <a
                   href="/cv/Muhamad_Adibwafi_Menako_Resume.pdf"
                   download="Muhamad_Adibwafi_Menako_Resume.pdf"
