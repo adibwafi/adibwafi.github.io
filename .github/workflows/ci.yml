@@ -6,11 +6,17 @@ on:
   pull_request:
     branches: [main, master]
 
+# Least privilege: this workflow only reads the repo. (Repo-wide default is
+# also read-only; this keeps it that way even if that setting changes.)
+permissions:
+  contents: read
+
 jobs:
   # Single consolidated pipeline job
   pipeline:
     name: 🚀 Build, Test & Audit
     runs-on: ubuntu-latest
+    timeout-minutes: 20
 
     steps:
       - name: Checkout repository

@@ -1,0 +1,29 @@
+version: 2
+
+# Keeps dependencies patched without a flood of PRs: one grouped PR per week
+# for npm (minor + patch only; majors stay a deliberate manual upgrade) and
+# one for GitHub Actions. Security updates are separate and still open
+# immediately when an advisory lands.
+updates:
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+    open-pull-requests-limit: 3
+    groups:
+      npm-minor-patch:
+        update-types: [minor, patch]
+    ignore:
+      - dependency-name: '*'
+        update-types: ['version-update:semver-major']
+
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+    open-pull-requests-limit: 2
+    groups:
+      actions:
+        patterns: ['*']
